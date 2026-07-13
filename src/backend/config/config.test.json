@@ -1,0 +1,16 @@
+{
+  "shops": [
+    {
+      "url": "https://www.mock-bazos.cz",
+      "name": "mock-bazos"
+    },
+    {
+      "url": "https://www.mock-sbazar.cz",
+      "name": "mock-sbazar"
+    },
+    {
+      "url": "https://www.mock-avizo.cz",
+      "name": "mock-avizo"
+    }
+  ]
+}

@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<title>Hemingway bazar - Bazos.cz</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Bezplatná inzerce na internetu - vyhledávání inzerátů na Bazoš.cz.">
+<meta name="google-play-app" content="app-id=cz.ackee.bazos">
+<meta name="apple-itunes-app" content="app-id=1195042966">
+<meta property="fb:admins" content="1055875657">
+<meta property="og:image" content="https://www.bazos.cz/obrazky/bazoslogoface.png">
+<meta name="ROBOTS" content="NOINDEX">
+<link rel="stylesheet" href="https://www.bazos.cz/bazos66s.css" type="text/css"><link rel="preload" as="image" href="https://www.bazos.cz/obrazky/bazos.svg">
+<link rel="icon" href="https://www.bazos.cz/favicon.svg" type="image/svg+xml">
+<link rel="icon" HREF="https://www.bazos.cz/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="https://www.bazos.cz/apple-touch-icon.png">
+<link rel="search" type="application/opensearchdescription+xml" href="https://www.bazos.cz/search.xml" title="Bazoš.cz">
+<script async="async" src="https://www.google.com/adsense/search/ads.js"></script>
+<script type="text/javascript" charset="utf-8">
+(function(g,o){g[o]=g[o]||function(){(g[o]['q']=g[o]['q']||[]).push(
+  arguments)},g[o]['t']=1*new Date})(window,'_googCsa');
+</script><script>
+var xhr = new XMLHttpRequest();
+var naseptavac_value = '';
+function naseptavac(value) {
+  if (value=='')  {
+  	naseptavac_value = '';
+  	document.getElementById('vysledek').innerHTML='';
+  	}
+else {
+	if (naseptavac_value == value) {
+		return false;
+	}
+	naseptavac_value = value;
+	setTimeout(function () {
+		if (naseptavac_value != value) {
+			return false;
+		}
+		xhr.onreadystatechange = function() {
+ 		 if (this.readyState == 4 && naseptavac_value == value){
+				document.getElementById('vysledek').innerHTML = this.responseText;
+			}
+ 		 };
+		xhr.open("POST", '/suggest.php');
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.send('rubnas=HP&qnas='+encodeURIComponent(naseptavac_value));
+	}, 250);
+}
+}
+
+var naseptavacpsc_value = '';
+function naseptavacpsc(value) {
+  if (value=='')  {
+  	naseptavacpsc_value = '';
+  	document.getElementById('vysledekpsc').innerHTML='<table cellpadding=\"3\" cellspacing=\"0\" class=\"tablenaspsc\"><tr><td class=\"act\" onclick=\"getLocation();\"><b>Inzeráty v okolí</b></td></tr></table>';
+  	}
+else {
+	if (naseptavacpsc_value == value) {
+		return false;
+	}
+	naseptavacpsc_value = value;
+	setTimeout(function () {
+		if (naseptavacpsc_value != value) {
+			return false;
+		}
+		xhr.onreadystatechange = function() {
+ 		 if (this.readyState == 4 && naseptavacpsc_value == value){
+				document.getElementById('vysledekpsc').innerHTML = this.responseText;
+			}
+ 		 };
+		xhr.open("POST", '/suggestpsc.php');
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.send('qnaspsc='+encodeURIComponent(naseptavacpsc_value));
+	}, 250);
+}
+}
+
+function getLocation() {
+if (navigator.geolocation) {navigator.geolocation.getCurrentPosition(showPosition);}
+else {document.getElementById('hlokalita').value = '';}
+}
+function showPosition(position) {
+		xhr.onreadystatechange = function() {
+ 		 if (this.readyState == 4){
+				document.getElementById('hlokalita').value = this.responseText;
+				document.forms['formt'].submit();
+			}
+ 		 };
+		xhr.open("POST", '/zip.php');
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.send('latitude='+encodeURIComponent(position.coords.latitude)+'&longitude='+encodeURIComponent(position.coords.longitude));
+}
+
+var agent_value = '';
+function agentclick() {
+  if (document.getElementById('agentmail').value=='')  {
+  	document.getElementById("agentmail").focus();
+    return false;
+  	}
+else {
+agent_value = document.getElementById('agentmail').value;
+xhr.onreadystatechange = function() {
+  if (this.readyState == 4){
+				document.getElementById('overlay').innerHTML = this.responseText;
+			}
+  };
+xhr.open("POST", '/agent.php');
+xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+xhr.send('hledat=hemingway&rubrikav=&hlokalita=&humkreis=0&cenaod=&cenado=&cat=&typ=&agentmail='+encodeURIComponent(agent_value));
+}
+}
+
+function odeslatrequest(value,params) {
+xhr.onreadystatechange = function() {
+  if (this.readyState == 4){
+				document.getElementById('overlay').innerHTML = this.responseText;
+			}
+  };
+xhr.open("POST", value);
+xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+xhr.send(params);
+}
+function overlay() {
+	el = document.getElementById("overlay");
+	el.style.display = (el.style.display == "inline") ? "none" : "inline";
+}
+function odeslatakci(postaction,value1,value2,value3) {
+document.getElementById('postaction').value = postaction;
+document.getElementById("postv1").value = value1;
+document.getElementById("postv2").value = value2;
+document.getElementById("postv3").value = value3;
+document.formaction.submit();
+}
+</script>
+</head>
+
+<body>
+
+<div class="sirka">
+
+
+<div class="listalogor">
+<div class="listalogol"><a href="https://www.bazos.cz/" title="Bazos.cz - Inzerce, bazar"><img src="https://www.bazos.cz/obrazky/bazos.svg" width="199" height="34" alt="Bazos.cz - Inzerce, inzeráty"></a></div>
+<div class="listalogom"> <b>... inzerce pro každého</b></div>
+<div class="listalogop"><a href="https://www.bazos.cz/oblibene.php"><b>Oblíbené inzeráty</b></a> <a href="https://www.bazos.cz/moje-inzeraty.php"><b>Moje inzeráty</b></a> <a href="/pridat-inzerat.php"><b><span class=pridati>Přidat inzerát</span></b></a></div>
+</div>
+
+<form name="formt" id="formt" method=get action="/search.php">
+<div class="listah">
+<div class="rubriky">
+<b>
+Co: <span class=vysokoli><span id="vysledek"></span><input type="search" onkeyup="naseptavac(this.value);" id=hledat name=hledat size="17" maxlength="256" value="hemingway" autocomplete="off" title="Co? Vyhledávaný výraz" ></span>
+
+<select name="rubriky" onchange='this.form.submit();' title="Vyber rubriku">
+<option value="www" selected>Všechny rubriky</option>
+<option value="auto">Auto</option>
+<option value="deti">Děti</option>
+<option value="dum">Dům a zahrada</option>
+<option value="elektro">Elektro</option>
+<option value="foto">Foto</option>
+<option value="hudba">Hudba</option>
+<option value="knihy">Knihy</option>
+<option value="mobil">Mobily</option>
+<option value="motorky">Motorky</option>
+<option value="nabytek">Nábytek</option>
+<option value="obleceni">Oblečení</option>
+<option value="pc">PC</option>
+<option value="prace">Práce</option>
+<option value="reality">Reality</option>
+<option value="sluzby">Služby</option>
+<option value="sport">Sport</option>
+<option value="stroje">Stroje</option>
+<option value="vstupenky">Vstupenky</option>
+<option value="zvirata">Zvířata</option>
+<option value="ostatni">Ostatní</option>
+</select>
+
+Lokalita: <span class=vysokolipsc><span id="vysledekpsc"></span><input type="search" name="hlokalita" id="hlokalita" onkeyup="naseptavacpsc(this.value);" onclick="naseptavacpsc(this.value);" value="" size="4" maxlength="25" autocomplete="off" title="Kde? PSČ (místo)" style="-webkit-appearance: none;"></span>
+Okolí: <input name="humkreis" title="Okolí v km" value="0" size="3" style="width: 25px;"> km
+Cena od: <input name=cenaod title="Cena od Kč" maxlength="12" size="5" value=""> - do: <input name=cenado title="Cena do Kč" maxlength="12" size="5" value=""> Kč <input type="submit" name="Submit" value="Hledat">
+<input type="hidden" name="order" id="order"><input type="hidden" name="kitx" value="ano"></b>
+</div>
+</div>
+</form>
+<div class="drobky"><a href="https://www.bazos.cz/" title="Inzerce Bazoš">Hlavní stránka</a> > <b>Vyhledávání</b> > <h1 class="nadpiskategorie">hemingway</h1></div><br>
+
+
+
+<div class="flexmain"><div class="menuleft"><div class="nadpismenu">Inzerce</div>
+<div class="barvalmenu">
+<div class="barvaleva">
+<div align="center">
+
+<br>
+<a href="https://auto.bazos.cz/"><b>Auto</b></a>
+Inzeráty Celkem: 393741<br>
+Za 24 hodin: 21636<br><br>
+
+<br>
+<a href="https://deti.bazos.cz/"><b>Děti</b></a>
+Inzeráty Celkem: 167458<br>
+Za 24 hodin: 3332<br><br>
+
+<br>
+<a href="https://dum.bazos.cz/"><b>Dům a zahrada</b></a>
+Inzeráty Celkem: 109528<br>
+Za 24 hodin: 3294<br><br>
+
+<br>
+<a href="https://elektro.bazos.cz/"><b>Elektro</b></a>
+Inzeráty Celkem: 76663<br>
+Za 24 hodin: 2563<br><br>
+
+<br>
+<a href="https://foto.bazos.cz/"><b>Foto</b></a>
+Inzeráty Celkem: 13180<br>
+Za 24 hodin: 542<br><br>
+
+<br>
+<a href="https://hudba.bazos.cz/"><b>Hudba</b></a>
+Inzeráty Celkem: 20639<br>
+Za 24 hodin: 712<br><br>
+
+<br>
+<a href="https://knihy.bazos.cz/"><b>Knihy</b></a>
+Inzeráty Celkem: 42690<br>
+Za 24 hodin: 944<br><br>
+
+<br>
+<a href="https://mobil.bazos.cz/"><b>Mobily</b></a>
+Inzeráty Celkem: 26749<br>
+Za 24 hodin: 1386<br><br>
+
+<br>
+<a href="https://motorky.bazos.cz/"><b>Motorky</b></a>
+Inzeráty Celkem: 65346<br>
+Za 24 hodin: 2257<br><br>
+
+<br>
+<a href="https://nabytek.bazos.cz/"><b>Nábytek</b></a>
+Inzeráty Celkem: 70049<br>
+Za 24 hodin: 2615<br><br>
+
+<br>
+<a href="https://obleceni.bazos.cz/"><b>Oblečení</b></a>
+Inzeráty Celkem: 109399<br>
+Za 24 hodin: 2640<br><br>
+
+<br>
+<a href="https://pc.bazos.cz/"><b>PC</b></a>
+Inzeráty Celkem: 48738<br>
+Za 24 hodin: 2192<br><br>
+
+<br>
+<a href="https://prace.bazos.cz/"><b>Práce</b></a>
+Inzeráty Celkem: 4901<br>
+Za 24 hodin: 801<br><br>
+
+<br>
+<a href="https://reality.bazos.cz/"><b>Reality</b></a>
+Inzeráty Celkem: 41086<br>
+Za 24 hodin: 2712<br><br>
+
+<br>
+<a href="https://sluzby.bazos.cz/"><b>Služby</b></a>
+Inzeráty Celkem: 6688<br>
+Za 24 hodin: 881<br><br>
+
+<br>
+<a href="https://sport.bazos.cz/"><b>Sport</b></a>
+Inzeráty Celkem: 97171<br>
+Za 24 hodin: 3198<br><br>
+
+<br>
+<a href="https://stroje.bazos.cz/"><b>Stroje</b></a>
+Inzeráty Celkem: 70082<br>
+Za 24 hodin: 3732<br><br>
+
+<br>
+<a href="https://vstupenky.bazos.cz/"><b>Vstupenky</b></a>
+Inzeráty Celkem: 2237<br>
+Za 24 hodin: 153<br><br>
+
+<br>
+<a href="https://zvirata.bazos.cz/"><b>Zvířata</b></a>
+Inzeráty Celkem: 37875<br>
+Za 24 hodin: 1910<br><br>
+
+<br>
+<a href="https://ostatni.bazos.cz/"><b>Ostatní</b></a>
+Inzeráty Celkem: 162617<br>
+Za 24 hodin: 4035<br><br>
+
+
+
+</div>
+</div></div>
+<br><br>
+
+
+
+<br><div class="mobilskryt" style="text-align: center;">
+<a style="font-size: 13px;text-decoration: none;color:#000000;" href="https://www.jasminka.cz/kniha/clemens-kuby-na-ceste-do-sousedni-dimenze.html" target="_blank" rel=”nofollow”><b>Knihkupectví Jasmínka</b><br>
+<span style="font-size: 13px;text-decoration: none;color:#ff6600;">
+<span style="color:#000000;">Clemens Kuby:</span> Na cestě do sousední dimenze<br><img src="https://www.jasminka.cz/images/v/dimenzev.jpg" width="100" alt="Knihkupectví Jasmínka" title="Knihkupectví Jasmínka" style="border: 1px solid Black;margin: 4px;">
+<br>
+<img src="https://www.bazos.cz/kosik.svg" alt="Jasminka" height="22" style="border: 0px;"> koupit</span></a></div>
+
+</div><div class="maincontent">
+
+
+<div class="listainzerat inzeratyflex">
+<div class="inzeratynadpis"><img src="https://www.bazos.cz/obrazky/list.gif" width="18" height="16" alt="List inzerátů" class=gallerylista> <form name="formgal" id="formgal" method="post" style="display: inline;"><input type="hidden" name="gal" value="g"><input type="image" alt="Submit" src="https://www.bazos.cz/obrazky/gallery.gif" width="18" height="16" class="gallerylist inputgal"></form> Zobrazeno 1-20 inzerátů z 29</div>
+<div class="inzeratycena"><b><span onclick="document.getElementById('order').value=1;document.forms['formt'].submit();" class="paction">Cena</span></b></div>
+<div class="inzeratylok">Lokalita</div>
+<div class="inzeratyview"><span onclick="document.getElementById('order').value=3;document.forms['formt'].submit();" class="paction">Zobrazeno</span></div>
+</div><form name="formaction" method="post" style="display: inline;"><input type="hidden" id="postaction" name="postaction" value=""><input type="hidden" id="postv1" name="postv1" value=""><input type="hidden" id="postv2" name="postv2" value=""><input type="hidden" id="postv3" name="postv3" value=""></form><button type="button" onclick="odeslatrequest('/agent.php','teloverit=');overlay();">Nové inzeráty e-mailem</button>
+	<div id="overlay">
+     <div></div>
+</div>
+
+<div id="container_one"></div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/214456837/starsi-knihy.php"><img src="https://www.bazos.cz/img/1t/837/214456837.jpg" class="obrazek" alt="starší knihy" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/214456837/starsi-knihy.php">starší knihy</a></h2><span class=velikost10> - [3.2. 2026]</span><br>
+<div class=popis>prodám různé knihy - ideálně vše dohromady nebo po větších svazcích. Jedná se o starší beletrii a populárně-naučné knihy ve starších vydáních (cca 1930–1970).
+
+Charles Dickens – David Copperfield
+
+André Maurois – Olympio aneb život Victora Huga
+
+François Mauriac – Romány lásky a nenávisti
+
+A ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">Dohodou</span></b></div>
+<div class="inzeratylok">Brno<br>603 00</div>
+<div class="inzeratyview">13 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214456837');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214456837');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','7801018','5696942','Michal');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214456837','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/214446105/povinna-cetba-k-maturite-rozbory.php"><img src="https://www.bazos.cz/img/1t/105/214446105.jpg" class="obrazek" alt="Povinná četba k maturitě - rozbory" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/214446105/povinna-cetba-k-maturite-rozbory.php">Povinná četba k maturitě - rozbory</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>Rozbory k maturitě:
+
+Bílá nemoc - Karel Čapek
+Bylo nás pět - Karel Poláček
+Farma zvířat - George Orwell
+Kytice - K. J. Erben
+Krysař - V. Dyk
+Lakomec - Moliere
+Malý princ - Exupéry
+Máj - K. H. Mácha
+Modlitba pro Kateřinu Horovitzovou - A. Lustig
+Na západní frontě klid - E. Remarque
+Nikola ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   40 Kč</span></b></div>
+<div class="inzeratylok">Zlín<br>760 01</div>
+<div class="inzeratyview">9 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214446105');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214446105');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','3799114','675867','Maturita');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214446105','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/214250817/cizojazycna-literatura-v-aj.php"><img src="https://www.bazos.cz/img/1t/817/214250817.jpg" class="obrazek" alt="Cizojazyčná literatura v AJ" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/214250817/cizojazycna-literatura-v-aj.php">Cizojazyčná literatura v AJ</a></h2><span class=velikost10> - [29.1. 2026]</span><br>
+<div class=popis>Prodám knihy v anglickém jazyce, seznam viz níže, cena dohodou:
+
+Three Men in a Boat - Jerome Klapka Jeroma
+The Old Man and the Sea - Ernest <b>hemingway</b>
+Pickwick Club - Charles Dickens
+The World at War - David Low
+Around the World in Eighty Days - Jules Verne
+The Man in the Passage and other st ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">Dohodou</span></b></div>
+<div class="inzeratylok">Zlín<br>763 31</div>
+<div class="inzeratyview">21 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214250817');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214250817');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','8149308','5630081','J.');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214250817','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/214221932/Maturitni-otazky-z-literatury.php"><img src="https://www.bazos.cz/img/1t/932/214221932.jpg" class="obrazek" alt="Maturitní otázky z ČJ (literatury) - 20 knih" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/214221932/Maturitni-otazky-z-literatury.php">Maturitní otázky z ČJ (literatury) - 20 knih</a></h2><span class=velikost10> - [29.1. 2026]</span><br>
+<div class=popis>Prodám vypracované rozbory níže uvedených děl:
+
+C. Goldoni - Sluha dvou pánů
+Moliére - Lakomec
+Moliére - Zdravý nemocný
+E. A. Poe - Havran
+E. A. Poe - Jáma a kyvadlo
+ N. V. Gogol - Revizor
+K. H. Borovský - Král Lávra
+K. H. Borovský - Tyrolské elegie
+Mrštíkové -  Maryša
+R. Rolland - Petr a ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   300 Kč</span></b></div>
+<div class="inzeratylok">Žďár nad Sázavou<br>591 01</div>
+<div class="inzeratyview">164 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214221932');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214221932');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','3075614','72984','Terezie');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214221932','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/213715824/maturitni-otazky-z-cj-lit-rozbory.php"><img src="https://www.bazos.cz/img/1t/824/213715824.jpg" class="obrazek" alt="Maturitní otázky z ČJ - Lit. rozbory" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/213715824/maturitni-otazky-z-cj-lit-rozbory.php">Maturitní otázky z ČJ - Lit. rozbory</a></h2><span class=velikost10> - [18.1. 2026]</span><br>
+<div class=popis>Prodám vlastnoručně vypracované rozbory knižních děl z českého jazyka. Každé dílo je zpracované podle maturitní osnovy na 1 A4 (velmi snadné na naučení) a zároveň i přehledné. Otázky prodávám v elektronické podobě ve wordu. Cena za kus 15Kč
+
+Seznam děl:
+1.Romeo a Julie - William Shakespeare
+2.Mo ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   15 Kč</span></b></div>
+<div class="inzeratylok">Praha 5<br>156 00</div>
+<div class="inzeratyview">136 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','213715824');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','213715824');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','368840','776','D');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','213715824','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/213710691/maturitni-otazky-z-cestiny-knihy.php"><img src="https://www.bazos.cz/img/1t/691/213710691.jpg" class="obrazek" alt="Maturitní otázky z češtiny (=knihy)" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/213710691/maturitni-otazky-z-cestiny-knihy.php">Maturitní otázky z češtiny (=knihy)</a></h2><span class=velikost10> - [18.1. 2026]</span><br>
+<div class=popis>Nabízím maturitní otázky do češtiny v elektronické podobě, tzn. že Vám své vypracované otázky zašlu e-mailem. Jedná se o přehledně zpracované knihy k maturitě, kde najdete popis a děj samotného díla, charakteristiku postav, jazykové prostředky, popřípadě také životopis konkrétního autora a další zaj ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   7 Kč</span></b></div>
+<div class="inzeratylok">Vsetín<br>756 03</div>
+<div class="inzeratyview">137 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','213710691');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','213710691');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','3345313','317290','Martin+P%C5%99iv%C5%99el');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','213710691','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/213710656/maturitni-otazky-z-anglictiny.php"><img src="https://www.bazos.cz/img/1t/656/213710656.jpg" class="obrazek" alt="Maturitní otázky z angličtiny" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/213710656/maturitni-otazky-z-anglictiny.php">Maturitní otázky z angličtiny</a></h2><span class=velikost10> - [18.1. 2026]</span><br>
+<div class=popis>Nabízím maturitní otázky do angličtiny v elektronické podobě, tzn. že Vám své vypracované otázky zašlu e-mailem. Jedná se o otázky:
+
+1. The United Kingdom of Great Britain and Northern Ireland
+2. The United States of America + New York
+3. Canada, Australia
+4. The Czech Republic
+5. My hometown  ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   5 Kč</span></b></div>
+<div class="inzeratylok">Vsetín<br>756 03</div>
+<div class="inzeratyview">137 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','213710656');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','213710656');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','3345313','317290','Martin+P%C5%99iv%C5%99el');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','213710656','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/213691085/knihy-za-20kc.php"><img src="https://www.bazos.cz/img/1t/085/213691085.jpg" class="obrazek" alt="Knihy za 20Kč" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/213691085/knihy-za-20kc.php">Knihy za 20Kč</a></h2><span class=velikost10> - [18.1. 2026]</span><br>
+<div class=popis>Prodám knihy:
+John Galsworthy - Moderní komedie, Sága rodu Forsytů
+Mario Puzo - Blázni umírají
+Ernest <b>hemingway</b> - Ostrovy uprostřed proudu
+Scortia Robinson - Ponorka
+Zdeněk Pluhař - Opustíš-li mne
+Cena za ks 20Kč</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   20 Kč</span></b></div>
+<div class="inzeratylok">Praha 10<br>100 00</div>
+<div class="inzeratyview">210 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','213691085');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','213691085');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','3501661','34060','Lucie');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','213691085','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/213679390/maturitni-otazky-z-literatury.php"><img src="https://www.bazos.cz/img/1t/390/213679390.jpg" class="obrazek" alt="Maturitní otázky z literatury" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/213679390/maturitni-otazky-z-literatury.php">Maturitní otázky z literatury</a></h2><span class=velikost10> - [18.1. 2026]</span><br>
+<div class=popis>Otázky mají vždy 2 strany.
+
+Mohu zaslat formou PDF/Goodnotes.
+
+Na druhé a třetí fotografii můžete vidět zpětnou vazbu na mé otázky.
+
+Cena: 
+1ks 30 Kč 
+Vše 250 Kč
+
+Můžete si zažádat o zaslání ukázky jedné otázky za 30 Kč, částka bude poté odečtena z celkové ceny a doplatíte pouze zbytek:)!
+
+Seznam: 
+ ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   30 Kč</span></b></div>
+<div class="inzeratylok">Ostrava<br>700 30</div>
+<div class="inzeratyview">305 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','213679390');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','213679390');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','6834059','4563299','Juli');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','213679390','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/213618327/knihy.php"><img src="https://www.bazos.cz/img/1t/327/213618327.jpg" class="obrazek" alt="Knihy" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/213618327/knihy.php">Knihy</a></h2><span class=velikost10> - [16.1. 2026]</span><br>
+<div class=popis>Muž a žena, Michal Viewegh, Ikar, 2018, nová, 100,- Kč
+Můj život po životě, Michal Viewegh, Druhé město, 2013, 50,- Kč
+Miluji kávu, Ryan Soeder, Kohei Matsuno, Mladá fronta, 2017, nová, 100,- Kč
+Arsène Wenger, John Cross, Mladá fronta, 2015, nová, 100,- Kč
+Bosé běhání, Michael Sandler a Jessica  ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">V textu</span></b></div>
+<div class="inzeratylok">Brno<br>624 00</div>
+<div class="inzeratyview">36 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','213618327');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','213618327');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','5531696','2986509','Ren%C3%A1ta+Klus%C3%A1kov%C3%A1');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','213618327','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/213363074/ernest-hemingway-rajska-zahrada.php"><img src="https://www.bazos.cz/img/1t/074/213363074.jpg" class="obrazek" alt="Ernest Hemingway - Rajská zahrada" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/213363074/ernest-hemingway-rajska-zahrada.php">Ernest Hemingway - Rajská zahrada</a></h2><span class=velikost10> - [12.1. 2026]</span><br>
+<div class=popis>Román vydaný posmrtně <b>hemingway</b>ovou ženou, plný autobiografických prvků o mladém spisovateli a jeho netradičním manželství.
+Vydáno: 1991 , Práce
+Překlad: Jitka Beránková
+Počet stran: 192
+Jazyk vydání: český
+Edice: Erb
+Ilustrace/foto: Zdeněk Netopil
+Autor obálky: Ivan Kincl
+Vazba knihy: pevná ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   77 Kč</span></b></div>
+<div class="inzeratylok">Bruntál<br>792 01</div>
+<div class="inzeratyview">214 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','213363074');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','213363074');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','5026688','5378248','Jara');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','213363074','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/213257957/e-hemingway-e-m-remarque-slovensky.php"><img src="https://www.bazos.cz/img/1t/957/213257957.jpg" class="obrazek" alt="E. Hemingway, E. M. Remarque - slovensky" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/213257957/e-hemingway-e-m-remarque-slovensky.php">E. Hemingway, E. M. Remarque - slovensky</a></h2><span class=velikost10> - [10.1. 2026]</span><br>
+<div class=popis>Slnko aj vychádza, Nebo pozná oblúbencov, Na západe nič nového. Cena za kus. Za všechny 50 Kč.</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   20 Kč</span></b></div>
+<div class="inzeratylok">Blansko<br>680 01</div>
+<div class="inzeratyview">261 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','213257957');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','213257957');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','844181','1940','Veronika');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','213257957','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/213216889/kniha-velky-gatsby-francis-scott-fitzgerald.php"><img src="https://www.bazos.cz/img/1t/889/213216889.jpg" class="obrazek" alt="Kniha Velký Gatsby (Francis Scott Fitzgerald)" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/213216889/kniha-velky-gatsby-francis-scott-fitzgerald.php">Kniha Velký Gatsby (Francis Scott Fitzgerald)</a></h2><span class=velikost10> - [9.1. 2026]</span><br>
+<div class=popis>Bouřlivá dvacátá! Věk ženských lýtek zadýchaných jazzem, věk technického pokroku a propastných sociálních rozdílů, léta uvolněných mravů a prohibice. O Americe paradoxů začal Francis Scott Fitzgerald psát v polovině roku 1924. Pobýval tehdy na Francouzské riviéře nebo v Paříži, kde se scházel s Erns ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   100 Kč</span></b></div>
+<div class="inzeratylok">Chrudim<br>537 01</div>
+<div class="inzeratyview">264 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','213216889');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','213216889');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','2222267','209317','Kamil');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','213216889','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/213209521/honba-za-hemingwayem-diane-gilbert-madsen.php"><img src="https://www.bazos.cz/img/1t/521/213209521.jpg" class="obrazek" alt="Honba za Hemingwayem - Diane Gilbert Madsen" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/213209521/honba-za-hemingwayem-diane-gilbert-madsen.php">Honba za Hemingwayem - Diane Gilbert Madsen</a></h2><span class=velikost10> - [9.1. 2026]</span><br>
+<div class=popis>Osobní předání Brno - nebo pošotovné/zásilkovna
+
+Kufřík s částí <b>hemingway</b>ova díla zmizel už za autorova mládí a již nikdy se neobjevil. Nebo ano? Profesor David Barnes si to rozhodně myslí a má proč. Poštou mu totiž přišel balík s rukopisy, které vypadají jako pravé. Chystá se dražba, jenže ještě  ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   50 Kč</span></b></div>
+<div class="inzeratylok">Brno<br>602 00</div>
+<div class="inzeratyview">324 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','213209521');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','213209521');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','4657376','1522393','Barbora');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','213209521','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/213182268/ernest-hemingway-mit-a-nemit.php"><img src="https://www.bazos.cz/img/1t/268/213182268.jpg" class="obrazek" alt="Ernest Hemingway - Mít a nemít" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/213182268/ernest-hemingway-mit-a-nemit.php">Ernest Hemingway - Mít a nemít</a></h2><span class=velikost10> - [8.1. 2026]</span><br>
+<div class=popis>Prodám, posílám zásilkovnou nebo balíkovnou.</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   50 Kč</span></b></div>
+<div class="inzeratylok">Šumperk<br>789 01</div>
+<div class="inzeratyview">154 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','213182268');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','213182268');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','3286015','243689','Michal+');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','213182268','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/213004627/2-knihy.php"><img src="https://www.bazos.cz/img/1t/627/213004627.jpg" class="obrazek" alt="2 knihy" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/213004627/2-knihy.php">2 knihy</a></h2><span class=velikost10> - [4.1. 2026]</span><br>
+<div class=popis>A. de Saint-Exupéry: CITADELA
+Er. <b>hemingway</b>: ZELENÉ PAHORKY AFRICKÉ, MÍT A NEMÍT, PÁTÁ KOLONA
+</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   100 Kč</span></b></div>
+<div class="inzeratylok">Praha 2<br>120 00</div>
+<div class="inzeratyview">92 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','213004627');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','213004627');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','6219912','3853886','Zden%C4%9Bk');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','213004627','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/212971650/ctenarsky-denik-vypracovany.php"><img src="https://www.bazos.cz/img/1t/650/212971650.jpg" class="obrazek" alt="Čtenářský deník vypracovaný" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/212971650/ctenarsky-denik-vypracovany.php">Čtenářský deník vypracovaný</a></h2><span class=velikost10> - [4.1. 2026]</span><br>
+<div class=popis>Prodám mnou vypracovaný čtenářský deník, vhodný k maturitě. Literatura je mým koníčkem.
+
+V PŘÍPADĚ, že své dílo nenajdete a chcete vypracovat stačí mne kontaktovat a domluvíme detaily :) 
+
+Souhrn děl:
+
+Jean Giono- Muž, který sázel stromy
+
+Karel Čapek - Výlet do Španěl
+
+K. Čapek - Továrna n ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   300 Kč</span></b></div>
+<div class="inzeratylok">Ostrava<br>700 30</div>
+<div class="inzeratyview">275 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','212971650');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','212971650');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','4911961','1907980','NN');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','212971650','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://ostatni.bazos.cz/inzerat/212906491/knizky-pro-sberatele.php"><img src="https://www.bazos.cz/img/1t/491/212906491.jpg?t=1767616835" class="obrazek" alt="Knížky pro sběratele" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://ostatni.bazos.cz/inzerat/212906491/knizky-pro-sberatele.php">Knížky pro sběratele</a></h2><span class=velikost10> - [2.1. 2026]</span><br>
+<div class=popis>Malá knížečka pro sběratele Stařec a moře, Ernest <b>hemingway</b>, Odeon, 1972, je za 320,-Kč.  Dále prodáme knížku Babička 1941 osmé vydání Mazáč, stav viz foto, je za 100,-Kč. Stará knížečka Velký Gratulant – soubor přání, asi první republika. Za 180,-Kč. Knížky Magnet 1968 jsou po 50,-Kč. Marbulínek a  ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">V textu</span></b></div>
+<div class="inzeratylok">Karviná<br>735 81</div>
+<div class="inzeratyview">34 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','212906491');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','212906491');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','13116','45717','mirek');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','212906491','ostatni');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/212801683/ucebnice-cj-a-literatury-rozbory.php"><img src="https://www.bazos.cz/img/1t/683/212801683.jpg" class="obrazek" alt="Učebnice ČJ a literatury + rozbory" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/212801683/ucebnice-cj-a-literatury-rozbory.php">Učebnice ČJ a literatury + rozbory</a></h2><span class=velikost10> - [30.12. 2025]</span><br>
+<div class=popis>Prodám:
+a) učebnici Literatura pro I. ročník gymnázií - minimální zvýraznění textu po předchozím majiteli - 150 Kč
+b) učebnici Literatura v kostce - zvýraznění a minimální vpisky po předchozím majiteli - 100 Kč
+c) učebnici Odmaturuj z literatury 2 - obalená, jako nová - 150 Kč
+d) učebnici Odmatu ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">V textu</span></b></div>
+<div class="inzeratylok">Praha 1<br>110 00</div>
+<div class="inzeratyview">46 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','212801683');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','212801683');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','9028729','7073312','Martina+Hojs%C3%A1kov%C3%A1');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','212801683','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/212740874/zelene-pahorky-africke-mit-a-nemit-pata-kolona.php"><img src="https://www.bazos.cz/img/1t/874/212740874.jpg" class="obrazek" alt="Zelené pahorky africké / Mít a nemít / Pátá kolona" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/212740874/zelene-pahorky-africke-mit-a-nemit-pata-kolona.php">Zelené pahorky africké / Mít a nemít / Pátá kolona</a></h2><span class=velikost10> - [29.12. 2025]</span><br>
+<div class=popis>Ernest <b>hemingway</b>  1968   Zelené pahorky africké (1935) jsou knihou, v níž velký romanopisec zachytil dojmy a zážitky ze své lovecké výpravy do Afriky. Prokládaje barvitá líčení africké přírody a loveckých příhod zamyšleními nad životem, člověkem, světem a úvahami o literatuře a literátech, vtělil do ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   100 Kč</span></b></div>
+<div class="inzeratylok">Hodonín<br>696 42</div>
+<div class="inzeratyview">228 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','212740874');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','212740874');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','2384776','57316','dal%C5%A1%C3%AD+inzer%C3%A1ty');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','212740874','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+<div id="container_two"></div><br>
+<br><div class="strankovani">Stránka: <b><span class=cisla>1</span></b> <a href="search.php?hledat=hemingway&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=20" rel="nofollow">2</a> <a href="search.php?hledat=hemingway&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=20" rel="nofollow"><b>Další</b></a></div><br><br><br>
+
+
+</div></div><script type="text/javascript" charset="utf-8">
+var pageOptions = {
+  'pubId': 'pub-3645948300403337',
+  'query' : 'hemingway',
+  'channel': '4719857758',
+  'linkTarget' : '_blank',
+  'personalizedAds' : 'false',
+  'ivt': false,
+  'styleId' : '6171314811',  'hl': 'cs'
+};
+
+
+var adblock1 = {
+  'container': 'container_one',
+  'width': 'auto',
+  'maxTop' : 2
+};
+
+var adblock2 = {
+  'container': 'container_two',
+  'width': 'auto',
+  'number' : 2
+};
+
+_googCsa('ads', pageOptions, adblock2);</script>
+<br>
+
+&copy;2026 Bazoš -  <b>Inzerce, Bazar</b><br>
+<a href="https://www.bazos.cz/napoveda.php">Nápověda</a>, <a href="https://www.bazos.cz/dotazy.php">Dotazy</a>, <a href="https://www.bazos.cz/hodnoceni.php">Hodnocení</a>, <a href="https://www.bazos.cz/kontakt.php">Kontakt</a>, <a href="https://www.bazos.cz/reklama.php">Reklama</a>, <a href="https://www.bazos.cz/podminky.php">Podmínky</a>, <a href="https://www.bazos.cz/ochrana-udaju.php">Ochrana údajů</a>, <a href="https://www.bazos.cz/rss.php?humkreis=0&hledat=hemingway">RSS</a>, <form name="formvkm" id="formvkm" method="post" style="display: inline;"><input type="hidden" name="vkm" value="m"><input type="submit" class="vkm" value="Mobilní verze"></form><br>
+Inzeráty celkem:<b>
+1566837</b>, inzerce za 24 hodin: <b>61535</b><br><br>
+<a href="https://www.bazos.cz/mapa-kategorie.php">Mapa kategorií</a>, <a href="https://www.bazos.cz/mapa-search.php">Nejvyhledávanější výrazy</a>, Tmavý motiv: <form name="formdark" action="https://www.bazos.cz" method="post" style="display: inline;"><input type="hidden" name="darkmode" value="1"><input type="submit" class="vkm" value="Vypnuto"></form><br>
+Země: <a href="https://www.bazos.cz">Česká republika</a>, <a href="https://www.bazos.sk">Slovensko</a>, <a href="https://www.bazos.pl">Polsko</a>, <a href="https://www.bazos.at">Rakousko</a>
+<br>
+<br>
+</div>
+
+<script src="https://www.bazos.cz/cookie-consent.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","palette":"light","language":"cs","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false,"cookie_domain": "bazos.cz"});
+});
+</script>
+<a href="#" id="open_preferences_center"> </a>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZW1QTHKBB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', {
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+});
+
+  gtag('config', 'G-NZW1QTHKBB');
+</script>
+</body>
+</html>

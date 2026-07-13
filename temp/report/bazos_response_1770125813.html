@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<title>Gameboy bazar - Bazos.cz</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Bezplatná inzerce na internetu - vyhledávání inzerátů na Bazoš.cz.">
+<meta name="google-play-app" content="app-id=cz.ackee.bazos">
+<meta name="apple-itunes-app" content="app-id=1195042966">
+<meta property="fb:admins" content="1055875657">
+<meta property="og:image" content="https://www.bazos.cz/obrazky/bazoslogoface.png">
+<meta name="ROBOTS" content="NOINDEX">
+<link rel="stylesheet" href="https://www.bazos.cz/bazos66s.css" type="text/css"><link rel="preload" as="image" href="https://www.bazos.cz/obrazky/bazos.svg">
+<link rel="icon" href="https://www.bazos.cz/favicon.svg" type="image/svg+xml">
+<link rel="icon" HREF="https://www.bazos.cz/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="https://www.bazos.cz/apple-touch-icon.png">
+<link rel="search" type="application/opensearchdescription+xml" href="https://www.bazos.cz/search.xml" title="Bazoš.cz">
+<script async="async" src="https://www.google.com/adsense/search/ads.js"></script>
+<script type="text/javascript" charset="utf-8">
+(function(g,o){g[o]=g[o]||function(){(g[o]['q']=g[o]['q']||[]).push(
+  arguments)},g[o]['t']=1*new Date})(window,'_googCsa');
+</script><script>
+var xhr = new XMLHttpRequest();
+var naseptavac_value = '';
+function naseptavac(value) {
+  if (value=='')  {
+  	naseptavac_value = '';
+  	document.getElementById('vysledek').innerHTML='';
+  	}
+else {
+	if (naseptavac_value == value) {
+		return false;
+	}
+	naseptavac_value = value;
+	setTimeout(function () {
+		if (naseptavac_value != value) {
+			return false;
+		}
+		xhr.onreadystatechange = function() {
+ 		 if (this.readyState == 4 && naseptavac_value == value){
+				document.getElementById('vysledek').innerHTML = this.responseText;
+			}
+ 		 };
+		xhr.open("POST", '/suggest.php');
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.send('rubnas=HP&qnas='+encodeURIComponent(naseptavac_value));
+	}, 250);
+}
+}
+
+var naseptavacpsc_value = '';
+function naseptavacpsc(value) {
+  if (value=='')  {
+  	naseptavacpsc_value = '';
+  	document.getElementById('vysledekpsc').innerHTML='<table cellpadding=\"3\" cellspacing=\"0\" class=\"tablenaspsc\"><tr><td class=\"act\" onclick=\"getLocation();\"><b>Inzeráty v okolí</b></td></tr></table>';
+  	}
+else {
+	if (naseptavacpsc_value == value) {
+		return false;
+	}
+	naseptavacpsc_value = value;
+	setTimeout(function () {
+		if (naseptavacpsc_value != value) {
+			return false;
+		}
+		xhr.onreadystatechange = function() {
+ 		 if (this.readyState == 4 && naseptavacpsc_value == value){
+				document.getElementById('vysledekpsc').innerHTML = this.responseText;
+			}
+ 		 };
+		xhr.open("POST", '/suggestpsc.php');
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.send('qnaspsc='+encodeURIComponent(naseptavacpsc_value));
+	}, 250);
+}
+}
+
+function getLocation() {
+if (navigator.geolocation) {navigator.geolocation.getCurrentPosition(showPosition);}
+else {document.getElementById('hlokalita').value = '';}
+}
+function showPosition(position) {
+		xhr.onreadystatechange = function() {
+ 		 if (this.readyState == 4){
+				document.getElementById('hlokalita').value = this.responseText;
+				document.forms['formt'].submit();
+			}
+ 		 };
+		xhr.open("POST", '/zip.php');
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.send('latitude='+encodeURIComponent(position.coords.latitude)+'&longitude='+encodeURIComponent(position.coords.longitude));
+}
+
+var agent_value = '';
+function agentclick() {
+  if (document.getElementById('agentmail').value=='')  {
+  	document.getElementById("agentmail").focus();
+    return false;
+  	}
+else {
+agent_value = document.getElementById('agentmail').value;
+xhr.onreadystatechange = function() {
+  if (this.readyState == 4){
+				document.getElementById('overlay').innerHTML = this.responseText;
+			}
+  };
+xhr.open("POST", '/agent.php');
+xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+xhr.send('hledat=gameboy&rubrikav=&hlokalita=&humkreis=0&cenaod=&cenado=&cat=&typ=&agentmail='+encodeURIComponent(agent_value));
+}
+}
+
+function odeslatrequest(value,params) {
+xhr.onreadystatechange = function() {
+  if (this.readyState == 4){
+				document.getElementById('overlay').innerHTML = this.responseText;
+			}
+  };
+xhr.open("POST", value);
+xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+xhr.send(params);
+}
+function overlay() {
+	el = document.getElementById("overlay");
+	el.style.display = (el.style.display == "inline") ? "none" : "inline";
+}
+function odeslatakci(postaction,value1,value2,value3) {
+document.getElementById('postaction').value = postaction;
+document.getElementById("postv1").value = value1;
+document.getElementById("postv2").value = value2;
+document.getElementById("postv3").value = value3;
+document.formaction.submit();
+}
+</script>
+</head>
+
+<body>
+
+<div class="sirka">
+
+
+<div class="listalogor">
+<div class="listalogol"><a href="https://www.bazos.cz/" title="Bazos.cz - Inzerce, bazar"><img src="https://www.bazos.cz/obrazky/bazos.svg" width="199" height="34" alt="Bazos.cz - Inzerce, inzeráty"></a></div>
+<div class="listalogom"> <b>... inzerce pro každého</b></div>
+<div class="listalogop"><a href="https://www.bazos.cz/oblibene.php"><b>Oblíbené inzeráty</b></a> <a href="https://www.bazos.cz/moje-inzeraty.php"><b>Moje inzeráty</b></a> <a href="/pridat-inzerat.php"><b><span class=pridati>Přidat inzerát</span></b></a></div>
+</div>
+
+<form name="formt" id="formt" method=get action="/search.php">
+<div class="listah">
+<div class="rubriky">
+<b>
+Co: <span class=vysokoli><span id="vysledek"></span><input type="search" onkeyup="naseptavac(this.value);" id=hledat name=hledat size="17" maxlength="256" value="gameboy" autocomplete="off" title="Co? Vyhledávaný výraz" ></span>
+
+<select name="rubriky" onchange='this.form.submit();' title="Vyber rubriku">
+<option value="www" selected>Všechny rubriky</option>
+<option value="auto">Auto</option>
+<option value="deti">Děti</option>
+<option value="dum">Dům a zahrada</option>
+<option value="elektro">Elektro</option>
+<option value="foto">Foto</option>
+<option value="hudba">Hudba</option>
+<option value="knihy">Knihy</option>
+<option value="mobil">Mobily</option>
+<option value="motorky">Motorky</option>
+<option value="nabytek">Nábytek</option>
+<option value="obleceni">Oblečení</option>
+<option value="pc">PC</option>
+<option value="prace">Práce</option>
+<option value="reality">Reality</option>
+<option value="sluzby">Služby</option>
+<option value="sport">Sport</option>
+<option value="stroje">Stroje</option>
+<option value="vstupenky">Vstupenky</option>
+<option value="zvirata">Zvířata</option>
+<option value="ostatni">Ostatní</option>
+</select>
+
+Lokalita: <span class=vysokolipsc><span id="vysledekpsc"></span><input type="search" name="hlokalita" id="hlokalita" onkeyup="naseptavacpsc(this.value);" onclick="naseptavacpsc(this.value);" value="" size="4" maxlength="25" autocomplete="off" title="Kde? PSČ (místo)" style="-webkit-appearance: none;"></span>
+Okolí: <input name="humkreis" title="Okolí v km" value="0" size="3" style="width: 25px;"> km
+Cena od: <input name=cenaod title="Cena od Kč" maxlength="12" size="5" value=""> - do: <input name=cenado title="Cena do Kč" maxlength="12" size="5" value=""> Kč <input type="submit" name="Submit" value="Hledat">
+<input type="hidden" name="order" id="order"><input type="hidden" name="kitx" value="ano"></b>
+</div>
+</div>
+</form>
+<div class="drobky"><a href="https://www.bazos.cz/" title="Inzerce Bazoš">Hlavní stránka</a> > <b>Vyhledávání</b> > <h1 class="nadpiskategorie">gameboy</h1></div><br>
+
+
+
+<div class="flexmain"><div class="menuleft"><div class="nadpismenu">Inzerce</div>
+<div class="barvalmenu">
+<div class="barvaleva">
+<div align="center">
+
+<br>
+<a href="https://auto.bazos.cz/"><b>Auto</b></a>
+Inzeráty Celkem: 394589<br>
+Za 24 hodin: 21018<br><br>
+
+<br>
+<a href="https://deti.bazos.cz/"><b>Děti</b></a>
+Inzeráty Celkem: 167713<br>
+Za 24 hodin: 3142<br><br>
+
+<br>
+<a href="https://dum.bazos.cz/"><b>Dům a zahrada</b></a>
+Inzeráty Celkem: 109738<br>
+Za 24 hodin: 3142<br><br>
+
+<br>
+<a href="https://elektro.bazos.cz/"><b>Elektro</b></a>
+Inzeráty Celkem: 76793<br>
+Za 24 hodin: 2455<br><br>
+
+<br>
+<a href="https://foto.bazos.cz/"><b>Foto</b></a>
+Inzeráty Celkem: 13221<br>
+Za 24 hodin: 527<br><br>
+
+<br>
+<a href="https://hudba.bazos.cz/"><b>Hudba</b></a>
+Inzeráty Celkem: 20665<br>
+Za 24 hodin: 653<br><br>
+
+<br>
+<a href="https://knihy.bazos.cz/"><b>Knihy</b></a>
+Inzeráty Celkem: 42723<br>
+Za 24 hodin: 838<br><br>
+
+<br>
+<a href="https://mobil.bazos.cz/"><b>Mobily</b></a>
+Inzeráty Celkem: 26782<br>
+Za 24 hodin: 1360<br><br>
+
+<br>
+<a href="https://motorky.bazos.cz/"><b>Motorky</b></a>
+Inzeráty Celkem: 65398<br>
+Za 24 hodin: 2164<br><br>
+
+<br>
+<a href="https://nabytek.bazos.cz/"><b>Nábytek</b></a>
+Inzeráty Celkem: 70176<br>
+Za 24 hodin: 2414<br><br>
+
+<br>
+<a href="https://obleceni.bazos.cz/"><b>Oblečení</b></a>
+Inzeráty Celkem: 109511<br>
+Za 24 hodin: 2391<br><br>
+
+<br>
+<a href="https://pc.bazos.cz/"><b>PC</b></a>
+Inzeráty Celkem: 48873<br>
+Za 24 hodin: 2154<br><br>
+
+<br>
+<a href="https://prace.bazos.cz/"><b>Práce</b></a>
+Inzeráty Celkem: 4914<br>
+Za 24 hodin: 775<br><br>
+
+<br>
+<a href="https://reality.bazos.cz/"><b>Reality</b></a>
+Inzeráty Celkem: 41236<br>
+Za 24 hodin: 2653<br><br>
+
+<br>
+<a href="https://sluzby.bazos.cz/"><b>Služby</b></a>
+Inzeráty Celkem: 6706<br>
+Za 24 hodin: 868<br><br>
+
+<br>
+<a href="https://sport.bazos.cz/"><b>Sport</b></a>
+Inzeráty Celkem: 97312<br>
+Za 24 hodin: 3025<br><br>
+
+<br>
+<a href="https://stroje.bazos.cz/"><b>Stroje</b></a>
+Inzeráty Celkem: 70240<br>
+Za 24 hodin: 3472<br><br>
+
+<br>
+<a href="https://vstupenky.bazos.cz/"><b>Vstupenky</b></a>
+Inzeráty Celkem: 2245<br>
+Za 24 hodin: 154<br><br>
+
+<br>
+<a href="https://zvirata.bazos.cz/"><b>Zvířata</b></a>
+Inzeráty Celkem: 37960<br>
+Za 24 hodin: 1884<br><br>
+
+<br>
+<a href="https://ostatni.bazos.cz/"><b>Ostatní</b></a>
+Inzeráty Celkem: 162877<br>
+Za 24 hodin: 3758<br><br>
+
+
+
+</div>
+</div></div>
+<br><br>
+
+
+
+<br><div class="mobilskryt" style="text-align: center;">
+<a style="font-size: 13px;text-decoration: none;color:#000000;" href="https://www.jasminka.cz/kniha/clemens-kuby-na-ceste-do-sousedni-dimenze.html" target="_blank" rel=”nofollow”><b>Knihkupectví Jasmínka</b><br>
+<span style="font-size: 13px;text-decoration: none;color:#ff6600;">
+<span style="color:#000000;">Clemens Kuby:</span> Na cestě do sousední dimenze<br><img src="https://www.jasminka.cz/images/v/dimenzev.jpg" width="100" alt="Knihkupectví Jasmínka" title="Knihkupectví Jasmínka" style="border: 1px solid Black;margin: 4px;">
+<br>
+<img src="https://www.bazos.cz/kosik.svg" alt="Jasminka" height="22" style="border: 0px;"> koupit</span></a></div>
+
+</div><div class="maincontent">
+
+
+<div class="listainzerat inzeratyflex">
+<div class="inzeratynadpis"><img src="https://www.bazos.cz/obrazky/list.gif" width="18" height="16" alt="List inzerátů" class=gallerylista> <form name="formgal" id="formgal" method="post" style="display: inline;"><input type="hidden" name="gal" value="g"><input type="image" alt="Submit" src="https://www.bazos.cz/obrazky/gallery.gif" width="18" height="16" class="gallerylist inputgal"></form> Zobrazeno 1-20 inzerátů z 57</div>
+<div class="inzeratycena"><b><span onclick="document.getElementById('order').value=1;document.forms['formt'].submit();" class="paction">Cena</span></b></div>
+<div class="inzeratylok">Lokalita</div>
+<div class="inzeratyview"><span onclick="document.getElementById('order').value=3;document.forms['formt'].submit();" class="paction">Zobrazeno</span></div>
+</div><form name="formaction" method="post" style="display: inline;"><input type="hidden" id="postaction" name="postaction" value=""><input type="hidden" id="postv1" name="postv1" value=""><input type="hidden" id="postv2" name="postv2" value=""><input type="hidden" id="postv3" name="postv3" value=""></form><button type="button" onclick="odeslatrequest('/agent.php','teloverit=');overlay();">Nové inzeráty e-mailem</button>
+	<div id="overlay">
+     <div></div>
+</div>
+
+<div id="container_one"></div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://sluzby.bazos.cz/inzerat/212916895/servis-konzoli-a-ovladacu-ostrava-ps4ps5-xbox-nintendo.php"><img src="https://www.bazos.cz/img/1t/895/212916895.jpg?t=1769620591" class="obrazek" alt="Servis konzolí a ovládačů Ostrava (PS4/PS5, XBOX, Nintendo)" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://sluzby.bazos.cz/inzerat/212916895/servis-konzoli-a-ovladacu-ostrava-ps4ps5-xbox-nintendo.php">Servis konzolí a ovládačů Ostrava (PS4/PS5, XBOX, Nintendo)</a></h2><span class=velikost10> - <span title="TOP 7x Platí do 3.2. 2026" class="ztop">TOP</span> - [3.2. 2026]</span><br>
+<div class=popis>Nabízím pozáruční servis konzolí a příslušenství XBOX, Playstation a Nintendo v Ostravě.
+
+- Čistění konzole a přepastování GPU/CPU
+- Oprava/výměna HDD/SSD
+- Oprava mechaniky
+- Oprava HDMI portu/čipu
+- Oprava zdroje
+- Oprava ovladače (poškozený analog, výměna tlačítek, oprava napájecího portu  ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   499 Kč</span></b></div>
+<div class="inzeratylok">Ostrava<br>708 00</div>
+<div class="inzeratyview">550 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','212916895');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','212916895');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','5686682','3195460','Servis+Konzol%C3%AD+Ostrava');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','212916895','sluzby');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214385808/gameboy-pocket-ramecek.php"><img src="https://www.bazos.cz/img/1t/808/214385808.jpg" class="obrazek" alt="Gameboy Pocket rámeček" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214385808/gameboy-pocket-ramecek.php">Gameboy Pocket rámeček</a></h2><span class=velikost10> - [1.2. 2026]</span><br>
+<div class=popis>Dobrý den, prodám Nintendo <b>gameboy</b> Pocket v dekorativním rámečku - na přání lze vyrobit i jinou barvu. <b>gameboy</b> není po sestavení funkční - jedná se pouze o dekoraci.
+
+Osobní předání Praha Zličín nebo Loděnice u Berouna nebo můžu zaslat Zásilkovnou.</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  1 850 Kč</span></b></div>
+<div class="inzeratylok">Praha 5<br>155 21</div>
+<div class="inzeratyview">55 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214385808');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214385808');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','3940245','484838','Jan');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214385808','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214381978/gameboy-color-pokemon-ramecek.php"><img src="https://www.bazos.cz/img/1t/978/214381978.jpg" class="obrazek" alt="Gameboy Color + Pokemon rámeček" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214381978/gameboy-color-pokemon-ramecek.php">Gameboy Color + Pokemon rámeček</a></h2><span class=velikost10> - [1.2. 2026]</span><br>
+<div class=popis>Dobrý den, prodám plně funkční herní konzoli Nintendo <b>gameboy</b> Color + hru Pokemon (není originál, ale je plně funkční, včetně ukládání).
+
+Set je v dekoračním rámečku - lze pověsit na zeď i postavit na poličku. Na přání je možné vyrobit všechny různé kombinace GB barev + her Pokemon. Rámeček má sklo  ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  3 390 Kč</span></b></div>
+<div class="inzeratylok">Praha 5<br>155 21</div>
+<div class="inzeratyview">89 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214381978');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214381978');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','3940245','484838','Jan');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214381978','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214367322/nintendo-gameboy-dmg-zeleny.php"><img src="https://www.bazos.cz/img/1t/322/214367322.jpg" class="obrazek" alt="Nintendo Gameboy DMG zelený" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214367322/nintendo-gameboy-dmg-zeleny.php">Nintendo Gameboy DMG zelený</a></h2><span class=velikost10> - [1.2. 2026]</span><br>
+<div class=popis>Dobrý den, prodám Nintendo <b>gameboy</b> 1. generace v zelené barvě. Konzole je plně funkční, kryt není odřený, nové ochranné sklo. Kolečka kontrastu i hlasitosti funguje bez problémů, display nemá vadné pixely.
+
+Osobní převzetí Praha Zličín nebo Loděnice u Berouna, případně zašlu Zásilkovnou.</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  1 990 Kč</span></b></div>
+<div class="inzeratylok">Praha 5<br>155 21</div>
+<div class="inzeratyview">73 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214367322');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214367322');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','3940245','484838','Jan');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214367322','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214367196/nintendo-gameboy-dmg-sedy.php"><img src="https://www.bazos.cz/img/1t/196/214367196.jpg" class="obrazek" alt="Nintendo Gameboy DMG šedý" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214367196/nintendo-gameboy-dmg-sedy.php">Nintendo Gameboy DMG šedý</a></h2><span class=velikost10> - [1.2. 2026]</span><br>
+<div class=popis>Dobrý den, prodám Nintendo <b>gameboy</b> 1. generace v šedé barvě. Konzole je plně funkční, kryt není vybledlý ani odřený, pouze ochranné sklo má škrábance od používání. Kolečka kontrastu i hlasitosti funguje bez problémů, display nemá vadné pixely.
+
+Hra Pokemon Green není součástí.
+
+Osobní převzetí P ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  1 990 Kč</span></b></div>
+<div class="inzeratylok">Praha 5<br>155 21</div>
+<div class="inzeratyview">105 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214367196');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214367196');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','3940245','484838','Jan');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214367196','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214367052/nintendo-gameboy-advance-pokemon-emerald.php"><img src="https://www.bazos.cz/img/1t/052/214367052.jpg" class="obrazek" alt="Nintendo Gameboy Advance + Pokemon Emerald" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214367052/nintendo-gameboy-advance-pokemon-emerald.php">Nintendo Gameboy Advance + Pokemon Emerald</a></h2><span class=velikost10> - [1.2. 2026]</span><br>
+<div class=popis>Dobrý den, prodám Nintendo <b>gameboy</b> Advance v růžové barvě. Konzole je plně funkční, kryt není vybledlý ani odřený, pouze ochranné sklo má škrábance od používání.
+
+Hra Pokemon Emerald je plně funkční, ukládá, RTC funguje, nepoznám zda-li se jedná o originál.
+
+Osobní převzetí Praha Zličín nebo Lod ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  3 000 Kč</span></b></div>
+<div class="inzeratylok">Praha 5<br>155 21</div>
+<div class="inzeratyview">77 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214367052');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214367052');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','3940245','484838','Jan');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214367052','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214365785/gameboy-gameboy-color-cartridge-ruzne.php"><img src="https://www.bazos.cz/img/1t/785/214365785.jpg?t=1770047023" class="obrazek" alt="Gameboy + Gameboy Color Cartridge - Různé" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214365785/gameboy-gameboy-color-cartridge-ruzne.php">Gameboy + Gameboy Color Cartridge - Různé</a></h2><span class=velikost10> - [1.2. 2026]</span><br>
+<div class=popis>Nabízím různé cartridge her z <b>gameboy</b> Color, <b>gameboy</b>.
+
+Seznam her:
+	•	Stranded Kids (Konami) PRODÁNO
+	•	Pinball Arcade (Game Boy Color)
+	•	Midway Arcade Hits PRODÁNO
+	•	Centipede
+	•	David Beckham Soccer (GBC)
+	•	Die Völker / The Nations – Land of Legends (DE verze)</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">Nabídněte</span></b></div>
+<div class="inzeratylok">Ostrava<br>739 32</div>
+<div class="inzeratyview">55 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214365785');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214365785');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','9266287','7378898','M');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214365785','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214357550/nintendo-dsi-ds-flash-card-s-hrami-pokemon.php"><img src="https://www.bazos.cz/img/1t/550/214357550.jpg?t=1770028564" class="obrazek" alt="Nintendo DS Lite + NEW SUPER MARIO BROS –RARITKA–" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214357550/nintendo-dsi-ds-flash-card-s-hrami-pokemon.php">Nintendo DS Lite + NEW SUPER MARIO BROS –RARITKA–</a></h2><span class=velikost10> - [1.2. 2026]</span><br>
+<div class=popis>Prodám tuto již raritní herní konzolku Nintendo DS Lite (jedná se o již hůře dostupný model který umí skrze slot 2 přehrávat také <b>gameboy</b> ADVANCE hry) s
+exkluzivní hrou New Super Mario Bros
+(výtečný restart již kultovní plošinovky
+s Mariem a jeho přáteli). Samotná konzolka je ve velmi dobrém stav ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  2 599 Kč</span></b></div>
+<div class="inzeratylok">Přerov<br>750 02</div>
+<div class="inzeratyview">77 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214357550');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214357550');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','1667902','7223581','ROBERT');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214357550','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214324513/gameboy-pocket-factory-sealed-pal-uk.php"><img src="https://www.bazos.cz/img/1t/513/214324513.jpg" class="obrazek" alt="Gameboy pocket Factory sealed PAL UK" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214324513/gameboy-pocket-factory-sealed-pal-uk.php">Gameboy pocket Factory sealed PAL UK</a></h2><span class=velikost10> - [31.1. 2026]</span><br>
+<div class=popis>Zdravíčko.
+
+Ponúkam na predaj tento továrensky zapečatený nintendo <b>gameboy</b> pocket funtography pak , PAL UK ,
+VGA 75.
+
+Limitované vydanie určené len pre UK trh.
+
+Veľmi ťažké nájsť tento kúsok použitý , nieto ešte takto továrensky zapečatený.
+
+Dôvod predaja, zbieram ps a toto som chcel ako za ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  14 597 Kč</span></b></div>
+<div class="inzeratylok">Slovensko<br>987 65</div>
+<div class="inzeratyview">113 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214324513');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214324513');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','9101530','7158136','Roman');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214324513','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214298951/gamepi43-pro-raspberry-pi.php"><img src="https://www.bazos.cz/img/1t/951/214298951.jpg" class="obrazek" alt="GamePi43 pro Raspberry Pi" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214298951/gamepi43-pro-raspberry-pi.php">GamePi43 pro Raspberry Pi</a></h2><span class=velikost10> - [31.1. 2026]</span><br>
+<div class=popis>Prodam GamePi43 vcetne  Raspberry Pi
+
+GamePi43 je herni konzole pro hrani historickych her, ktere vysli na ZX spectrum, <b>gameboy</b>, playstation atd
+
+baleni obsahuje
+- GamePi43
+- Rasberry PI
+- zdroj 
+- baterie
+- SD karta s predinstalovanym ssystem RetroPie</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  3 500 Kč</span></b></div>
+<div class="inzeratylok">Praha 4<br>142 00</div>
+<div class="inzeratyview">214 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214298951');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214298951');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','2802941','125171','Josef');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214298951','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214298908/nintendo-gameboy-super-mario-land.php"><img src="https://www.bazos.cz/img/1t/908/214298908.jpg" class="obrazek" alt="Nintendo GameBoy Super Mario Land" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214298908/nintendo-gameboy-super-mario-land.php">Nintendo GameBoy Super Mario Land</a></h2><span class=velikost10> - [31.1. 2026]</span><br>
+<div class=popis>Nabízím originální hru super Mario land na Game boy 1 v dobrém pěkném zachovalém stavu</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   400 Kč</span></b></div>
+<div class="inzeratylok">Děčín<br>405 05</div>
+<div class="inzeratyview">193 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214298908');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214298908');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','7671158','2704245','Josef+Hodbo%C4%8F');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214298908','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214275995/cinska-herni-konzole-famiclone-famiklon.php"><img src="https://www.bazos.cz/img/1t/995/214275995.jpg" class="obrazek" alt="Čínská herní konzole famiclone famiklon" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214275995/cinska-herni-konzole-famiclone-famiklon.php">Čínská herní konzole famiclone famiklon</a></h2><span class=velikost10> - [30.1. 2026]</span><br>
+<div class=popis>Prodám tuto čínskou herní konzoli inspirovanou Nintendo <b>gameboy</b>. Přehrává hry pro Nintendo NES.
+
+Šasi je v dobrém stavu, na displeji je stále ochranná fólie. Ma údajně 500 her, ale realisticky jich tam budou nižší desítky.
+
+Na dobírku zašlu pouze po platbě poštovného předem.</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   249 Kč</span></b></div>
+<div class="inzeratylok">Olomouc<br>783 56</div>
+<div class="inzeratyview">85 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214275995');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214275995');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','2829850','24752','PRO+DAL%C5%A0%C3%8D+INZER%C3%81TY+KLIKN%C4%9ATE+ZDE');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214275995','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214233246/top-nintendo-gameboy-color-cgb-001-kompletni.php"><img src="https://www.bazos.cz/img/1t/246/214233246.jpg" class="obrazek" alt="- TOP Nintendo GameBoy Color CGB-001 kompletní -" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214233246/top-nintendo-gameboy-color-cgb-001-kompletni.php">- TOP Nintendo GameBoy Color CGB-001 kompletní -</a></h2><span class=velikost10> - [29.1. 2026]</span><br>
+<div class=popis>- k prodeji <b>gameboy</b> Color v luxusním stavu
+- kompletní balení
+- model CGB-001
+- ideální do sbírky
+
+- osobně lze vyzvednout v Kladně
+- po domluvě lze zaslat Zásilkovnou, PPL, DPD
+- platba na učet +89,-kč
+- při zaplacení poštovného na učet je možná dobírka /159,-kč/</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  3 499 Kč</span></b></div>
+<div class="inzeratylok">Kladno<br>272 01</div>
+<div class="inzeratyview">122 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214233246');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214233246');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','5237405','4932678','MZ');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214233246','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214231476/nintendo-gameboy-dmg-pokemon-ips.php"><img src="https://www.bazos.cz/img/1t/476/214231476.jpg" class="obrazek" alt="Nintendo Gameboy DMG Pokemon IPS" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214231476/nintendo-gameboy-dmg-pokemon-ips.php">Nintendo Gameboy DMG Pokemon IPS</a></h2><span class=velikost10> - [29.1. 2026]</span><br>
+<div class=popis>Predam konzolu Game Boy 001 v uprave s IPS displejom a krytom s motivom Pokemon. Vsetko je nove, len otestovane</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  3 900 Kč</span></b></div>
+<div class="inzeratylok">Slovensko<br>987 65</div>
+<div class="inzeratyview">120 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214231476');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214231476');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','0','3589965','Nintendo');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214231476','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214187706/nintendo-gameboy-color.php"><img src="https://www.bazos.cz/img/1t/706/214187706.jpg" class="obrazek" alt="Nintendo Gameboy Color" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214187706/nintendo-gameboy-color.php">Nintendo Gameboy Color</a></h2><span class=velikost10> - [28.1. 2026]</span><br>
+<div class=popis>Prodám <b>gameboy</b> Color transparent.<b>gameboy</b> funkční jediná věc zlobí zapínací knoflík, nejspíš oxidace stářím, neřešil jsem.plus několik her a obal pokemon blue ke konzoli.</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  2 500 Kč</span></b></div>
+<div class="inzeratylok">Jindřichův Hradec<br>378 73</div>
+<div class="inzeratyview">148 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214187706');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214187706');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','8426858','6387070','Michal');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214187706','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214168342/gameboy-advance-video-cena-za-kus.php"><img src="https://www.bazos.cz/img/1t/342/214168342.jpg" class="obrazek" alt="Gameboy Advance - video (cena za kus)" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214168342/gameboy-advance-video-cena-za-kus.php">Gameboy Advance - video (cena za kus)</a></h2><span class=velikost10> - [28.1. 2026]</span><br>
+<div class=popis>Prodám video cartridge na GBA. 
+Možné osobní převzetí Praha 4 - Modřany</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   400 Kč</span></b></div>
+<div class="inzeratylok">Praha 4<br>143 00</div>
+<div class="inzeratyview">95 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214168342');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214168342');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','3235657','54805','Filip');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214168342','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214168338/gameboy-advance-hry-cena-za-kus.php"><img src="https://www.bazos.cz/img/1t/338/214168338.jpg" class="obrazek" alt="Gameboy Advance hry - cena za kus" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214168338/gameboy-advance-hry-cena-za-kus.php">Gameboy Advance hry - cena za kus</a></h2><span class=velikost10> - [28.1. 2026]</span><br>
+<div class=popis>Prodám hry na GBA, cena za kus. 
+Možné osobní předání Praha 4 - Modřany</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   200 Kč</span></b></div>
+<div class="inzeratylok">Praha 4<br>143 00</div>
+<div class="inzeratyview">117 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214168338');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214168338');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','3235657','54805','Filip');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214168338','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214051666/castlevania-aria-of-sorrow-gameboy-advance.php"><img src="https://www.bazos.cz/img/1t/666/214051666.jpg" class="obrazek" alt="Castlevania: Aria of Sorrow Gameboy Advance" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214051666/castlevania-aria-of-sorrow-gameboy-advance.php">Castlevania: Aria of Sorrow Gameboy Advance</a></h2><span class=velikost10> - [25.1. 2026]</span><br>
+<div class=popis>Prodám hru Castlevania: Aria of Sorrow pro gba, hra není originální, plně funkční, funguje ukládání
+
+pošlu zásilkovnou</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   200 Kč</span></b></div>
+<div class="inzeratylok">Kutná Hora<br>284 01</div>
+<div class="inzeratyview">89 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214051666');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214051666');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','9250918','7361128','Denys');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214051666','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214014787/nintendo-gameboy-advance-hry.php"><img src="https://www.bazos.cz/img/1t/787/214014787.jpg" class="obrazek" alt="Nintendo Gameboy Advance + Hry" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214014787/nintendo-gameboy-advance-hry.php">Nintendo Gameboy Advance + Hry</a></h2><span class=velikost10> - [24.1. 2026]</span><br>
+<div class=popis>Plně funkční <b>gameboy</b> Advance, brašna a 3 originální hry. Chybí krytka od baterií. Stav viz fotky. Osobně, zasilkovna nebo balikovna.</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  2 499 Kč</span></b></div>
+<div class="inzeratylok">Praha 4<br>141 00</div>
+<div class="inzeratyview">141 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214014787');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214014787');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','8832025','6850280','Karlos');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214014787','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214014381/nintendo-gameboy-color-hry.php"><img src="https://www.bazos.cz/img/1t/381/214014381.jpg" class="obrazek" alt="Nintendo Gameboy Color + Hry" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214014381/nintendo-gameboy-color-hry.php">Nintendo Gameboy Color + Hry</a></h2><span class=velikost10> - [24.1. 2026]</span><br>
+<div class=popis>Plně funkční <b>gameboy</b> Color EUR verze a 3 originální japonské hry. Konzole je region free. Osobně, zasilkovna nebo balikovna.</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  2 299 Kč</span></b></div>
+<div class="inzeratylok">Praha 4<br>141 00</div>
+<div class="inzeratyview">167 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214014381');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214014381');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','8832025','6850280','Karlos');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214014381','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+<div id="container_two"></div><br>
+<br><div class="strankovani">Stránka: <b><span class=cisla>1</span></b> <a href="search.php?hledat=gameboy&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=20" rel="nofollow">2</a> <a href="search.php?hledat=gameboy&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=40" rel="nofollow">3</a> <a href="search.php?hledat=gameboy&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=20" rel="nofollow"><b>Další</b></a></div><br><br><br>
+
+
+</div></div><script type="text/javascript" charset="utf-8">
+var pageOptions = {
+  'pubId': 'pub-3645948300403337',
+  'query' : 'gameboy',
+  'channel': '4719857758',
+  'linkTarget' : '_blank',
+  'personalizedAds' : 'false',
+  'ivt': false,
+  'styleId' : '6171314811',  'hl': 'cs'
+};
+
+
+var adblock1 = {
+  'container': 'container_one',
+  'width': 'auto',
+  'maxTop' : 2
+};
+
+var adblock2 = {
+  'container': 'container_two',
+  'width': 'auto',
+  'number' : 2
+};
+
+_googCsa('ads', pageOptions, adblock2);</script>
+<br>
+
+&copy;2026 Bazoš -  <b>Inzerce, Bazar</b><br>
+<a href="https://www.bazos.cz/napoveda.php">Nápověda</a>, <a href="https://www.bazos.cz/dotazy.php">Dotazy</a>, <a href="https://www.bazos.cz/hodnoceni.php">Hodnocení</a>, <a href="https://www.bazos.cz/kontakt.php">Kontakt</a>, <a href="https://www.bazos.cz/reklama.php">Reklama</a>, <a href="https://www.bazos.cz/podminky.php">Podmínky</a>, <a href="https://www.bazos.cz/ochrana-udaju.php">Ochrana údajů</a>, <a href="https://www.bazos.cz/rss.php?humkreis=0&hledat=gameboy">RSS</a>, <form name="formvkm" id="formvkm" method="post" style="display: inline;"><input type="hidden" name="vkm" value="m"><input type="submit" class="vkm" value="Mobilní verze"></form><br>
+Inzeráty celkem:<b>
+1569672</b>, inzerce za 24 hodin: <b>58847</b><br><br>
+<a href="https://www.bazos.cz/mapa-kategorie.php">Mapa kategorií</a>, <a href="https://www.bazos.cz/mapa-search.php">Nejvyhledávanější výrazy</a>, Tmavý motiv: <form name="formdark" action="https://www.bazos.cz" method="post" style="display: inline;"><input type="hidden" name="darkmode" value="1"><input type="submit" class="vkm" value="Vypnuto"></form><br>
+Země: <a href="https://www.bazos.cz">Česká republika</a>, <a href="https://www.bazos.sk">Slovensko</a>, <a href="https://www.bazos.pl">Polsko</a>, <a href="https://www.bazos.at">Rakousko</a>
+<br>
+<br>
+</div>
+
+<script src="https://www.bazos.cz/cookie-consent.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","palette":"light","language":"cs","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false,"cookie_domain": "bazos.cz"});
+});
+</script>
+<a href="#" id="open_preferences_center"> </a>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZW1QTHKBB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', {
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+});
+
+  gtag('config', 'G-NZW1QTHKBB');
+</script>
+</body>
+</html>

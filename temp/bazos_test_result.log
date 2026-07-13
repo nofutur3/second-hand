@@ -1,0 +1,10 @@
+flag provided but not defined: -adapter
+Usage of ./bin/search:
+  -html-file string
+    	HTML output file path (default "results.html")
+  -keyword string
+    	Search keyword (required)
+  -output string
+    	Output format: cli, html (cli, html) (default "cli")
+  -verbose
+    	Verbose output

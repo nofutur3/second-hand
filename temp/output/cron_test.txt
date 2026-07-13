@@ -1,0 +1,1855 @@
+No new migrations to apply
+Checking 5 saved searches for changes...
+
+Checking search: forerunner 255
+Inzeruj: Fetching https://www.inzeruj.cz/search?title=forerunner+255
+Bazos: Fetching https://www.bazos.cz/search.php?hledat=forerunner+255
+Sbazar: Fetching https://www.sbazar.cz/hledej/forerunner-255
+Avizo: Fetching https://www.avizo.cz/inzerce/forerunner-255
+Aukro: Starting search for 'forerunner 255'
+Aukro: Fetching page 1: https://aukro.cz/vysledky-vyhledavani?text=forerunner+255&searchAll=true&subbrand=NOT_SPECIFIED
+Avizo: Got response for page 1, status 200, size 186625 bytes
+Avizo: Saved response to temp/report/avizo_page1_1770125584.html
+Avizo: Page 1 - extracted 27 new products (total: 27)
+Avizo: Found pagination link: https://www.avizo.cz/inzerce/forerunner-255/2/
+Sbazar: Got response for page 1, status 200, size 497866 bytes
+Sbazar: Saved response to temp/report/sbazar_page1_1770125584.html
+Sbazar: Page 1 - extracted 2 new products (total: 2)
+Sbazar: Processing 2 products from 1 page(s)
+  Product 1/2: https://www.sbazar.cz/inzerat/227283004-garmin-forerunner-255
+Inzeruj: Got response, status 200, size 53352 bytes
+Inzeruj: Saved response to temp/report/inzeruj_response_1770125584.html
+Inzeruj: Extracted 0 product links
+Inzeruj: Processing 0 products
+Inzeruj: Found 0 total products
+Found 0 products from inzeruj.cz
+Aukro: Page 1 - Status 200, Size 2073118 bytes
+Aukro: Saved to temp/report/aukro_page1_1770125584.html
+Aukro: Page 1: Found 4 products
+Aukro: Fetching page 2: https://aukro.cz/vysledky-vyhledavani?text=forerunner+255&searchAll=true&subbrand=NOT_SPECIFIED&page=2
+Bazos: Got response, status 200, size 29418 bytes
+Bazos: Saved response to temp/report/bazos_response_1770125584.html
+  Found: Garmin Forerunner 255 grey (3500.00 CZK)
+  Found: Garmin Forerunner 255s (1600.00 CZK)
+  Found: Hodinky Garmin Forerunner 255 Music (4500.00 CZK)
+  Found: Garmin Forerunner 255 Music (4000.00 CZK)
+  Found: Garmin Forerunner 255 – top stav, kompletní balení (4000.00 CZK)
+  Found: Prodám hodinky Garmin Forerunner 255 Tidal Blue (4000.00 CZK)
+  Found: Garmin Forerunner 645 Music (2000.00 CZK)
+  Found: Prodej hodinek Garmin Forerunner 255 music (4000.00 CZK)
+  Found: Garmin Forerunner 255 music (4100.00 CZK)
+Bazos: Found 9 total products across all pages
+Found 9 products from bazos.cz
+  Product 2/2: https://www.sbazar.cz/inzerat/227387569-garmin-forerunner-255-top-stav-kompletni-baleni
+Avizo: Got response for page 2, status 200, size 185257 bytes
+Avizo: Saved response to temp/report/avizo_page2_1770125586.html
+Avizo: Page 2 - extracted 21 new products (total: 48)
+Avizo: Found pagination link: https://www.avizo.cz/inzerce/forerunner-255/3/
+Aukro: Page 2 - Status 200, Size 2105051 bytes
+Aukro: Saved to temp/report/aukro_page2_1770125588.html
+Aukro: Page 2: Found 0 products
+Aukro: TOTAL: 4 products across 2 page(s)
+Found 4 products from aukro.cz
+Failed to create product https://aukro.cz/ochranne-tvrzene-sklo-pro-garmin-forerunner-255s-7055740876: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/ochranny-kryt-na-hodinky-garmin-forerunner-255s-cerny-7044930528: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/ochranny-kryt-na-hodinky-garmin-forerunner-255s-bily-7055739676: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Sbazar: Found 2 total products across 1 page(s)
+Found 2 products from sbazar.cz
+Avizo: Got response for page 3, status 200, size 189365 bytes
+Avizo: Saved response to temp/report/avizo_page3_1770125589.html
+Avizo: Page 3 - extracted 20 new products (total: 68)
+Avizo: Found pagination link: https://www.avizo.cz/inzerce/forerunner-255/4/
+Avizo: Got response for page 4, status 200, size 137535 bytes
+Avizo: Saved response to temp/report/avizo_page4_1770125593.html
+Avizo: Page 4 - extracted 8 new products (total: 76)
+Avizo: Processing 76 products from 4 page(s)
+  Product 1/76: https://www.avizo.cz/autobazar/prodam-1ks-zimnich-pneu-255-55-r18-continental-16122876.html
+  Product 2/76: https://www.avizo.cz/autobazar/2ks-zanovnich-letnich-pneu-255-50-r20-pirelli-109w-19435596.html
+  Product 3/76: https://www.avizo.cz/autobazar/prodam-2ks-letnich-pneu-255-45-r19-nexen-16515592.html
+  Product 4/76: https://www.avizo.cz/stavba-dilna-zahrada/laminatovy-bazen-19722250.html
+  Product 5/76: https://www.avizo.cz/seznamka/hledam-zenu-19683289.html
+  Product 6/76: https://www.avizo.cz/reality/koupim-byt-v-osobnim-vlastnictvi-v-havirove-podlesi-a-mesto-ostrava-poruba-17739061.html
+  Product 7/76: https://www.avizo.cz/prace/vedouci-odboru-stavebni-urad-19705761.html
+  Product 8/76: https://www.avizo.cz/autobazar/elektricka-cestovni-motorka-19716052.html
+  Product 9/76: https://www.avizo.cz/zvirata-rostliny/francouzsky-buldocek-s-pp-fci-19725723.html
+  Product 10/76: https://www.avizo.cz/prace/nabizim-praci-ridice-skupiny-c-19548848.html
+  Product 11/76: https://www.avizo.cz/autobazar/prodam-zimni-pneu-255-45-r20-dunlop-w-sport-5-105v-1-1ks-18189811.html
+  Product 12/76: https://www.avizo.cz/autobazar/sada-zanovnich-zimnich-pneu-255-45-r20-105v-yokohama-19657435.html
+  Product 13/76: https://www.avizo.cz/autobazar/2ks-letnich-suv-pneu-255-55-r19-bridgestone-19458718.html
+  Product 14/76: https://www.avizo.cz/autobazar/2ks-letnich-pneu-255-45-r18-continental-18686148.html
+  Product 15/76: https://www.avizo.cz/pocitace/baterie-hp-oa04-15-250-255-g2-g3-g4-200-300-18680101.html
+  Product 16/76: https://www.avizo.cz/autobazar/prodam-zimni-pneu-255-55r18-dunlop-ws3d-105h-2x-19711179.html
+  Product 17/76: https://www.avizo.cz/autobazar/2x-2ks-letnich-pneu-255-45-r18-18528744.html
+  Product 18/76: https://www.avizo.cz/autobazar/prodam-2ks-letnich-pneu-255-45-r18-99y-pirelli-15664771.html
+  Product 19/76: https://www.avizo.cz/autobazar/prodam-zimni-pneu-255-40r20-bridgestone-lm-001-101v-2x-19608823.html
+  Product 20/76: https://www.avizo.cz/autobazar/prodam-letni-pneu-255-45-r20-michelin-ls3-101w-4ks-jete-18327492.html
+  Product 21/76: https://www.avizo.cz/autobazar/porsche-cayenne-originani-alu-kola-18-zimni-pneu-19629649.html
+  Product 22/76: https://www.avizo.cz/autobazar/koupim-pneu-235-40-r19-nebo-255-35-r19-19549248.html
+  Product 23/76: https://www.avizo.cz/autobazar/prodam-2-x-celorocni-pneu-m-s-znacky-michelin-latitude-19267012.html
+  Product 24/76: https://www.avizo.cz/autobazar/prodam-sady-nebo-2ks-letnich-pneu-vsech-rozmeru-16907704.html
+  Product 25/76: https://www.avizo.cz/autobazar/letni-pneu-pirelli-255-60-r18-14617895.html
+  Product 26/76: https://www.avizo.cz/sport/lyzarske-boty-tecnica-19683243.html
+  Product 27/76: https://www.avizo.cz/stavba-dilna-zahrada/kotouc-husgvarna-18843261.html
+  Product 28/76: https://www.avizo.cz/autobazar/porsche-cayenne-originani-alu-kola-18-zimni-pneu-19513438.html
+  Product 29/76: https://www.avizo.cz/elektronika/adapter-obje-canon-efaef-s-na-telo-sony-bajonet-e-19674924.html
+  Product 30/76: https://www.avizo.cz/autobazar/zimni-pneu-275-35-r19-19697018.html
+  Product 31/76: https://www.avizo.cz/stavba-dilna-zahrada/soustruznicky-nuz-20x20-hladici-kovany-hss-18254796.html
+  Product 32/76: https://www.avizo.cz/stavba-dilna-zahrada/samostatny-unasec-d-13-mm-drzaku-vyhrubniku-csn-241210-1-16967720.html
+  Product 33/76: https://www.avizo.cz/stavba-dilna-zahrada/samostatny-unasec-d-19-mm-drzaku-vyhrubniku-csn-241210-1-16967745.html
+  Product 34/76: https://www.avizo.cz/stavba-dilna-zahrada/samostatny-unasec-d-27mm-drzaku-csn-241210-1-15407654.html
+  Product 35/76: https://www.avizo.cz/reality/prodej-domu-benesov-nad-ploucnici-19172821.html
+  Product 36/76: https://www.avizo.cz/prace/samostatny-pracovnik-pracovnice-pro-serizeni-a-obsluhu-cnc-stroju-19725409.html
+  Product 37/76: https://www.avizo.cz/stavba-dilna-zahrada/samostatny-unasec-d-27-mm-drzaku-vyhrubniku-csn-241210-1-16967765.html
+  Product 38/76: https://www.avizo.cz/autobazar/prodam-po-2ks-letnich-pneu-235-50-r20-17553794.html
+  Product 39/76: https://www.avizo.cz/stavba-dilna-zahrada/samostatny-unasec-d-22-mm-drzaku-vyhrubniku-csn-241210-1-16967755.html
+  Product 40/76: https://www.avizo.cz/prace/obsluha-cnc-obrabecich-stroju-19725319.html
+  Product 41/76: https://www.avizo.cz/autobazar/sady-nebo-2ks-jetych-zimnich-pneu-vsech-rozmeru-18091287.html
+  Product 42/76: https://www.avizo.cz/elektronika/prodam-telo-canon-eos-1ds-mark-iii-19674925.html
+  Product 43/76: https://www.avizo.cz/autobazar/prives-saris-mc-255-133-1350kg-celo-oteviraci-plachta-150cm-19412090.html
+  Product 44/76: https://www.avizo.cz/pocitace/5-5palcova-obrazovka-x9-rucni-herni-konzole-19718266.html
+  Product 45/76: https://www.avizo.cz/prace/agronom-19724902.html
+  Product 46/76: https://www.avizo.cz/nabytek/nabytek-z-prodejny-19704935.html
+  Product 47/76: https://www.avizo.cz/autobazar/nova-zimni-alu-sada-s-enyaq-elroq-235-55-255-50-r19-19704894.html
+  Product 48/76: https://www.avizo.cz/hudba-video-knihy/tj-ostrava-nabor-divek-10901881.html
+  Product 49/76: https://www.avizo.cz/autobazar/ford-transit-custom-2-0-ecoblue-19721397.html
+  Product 50/76: https://www.avizo.cz/hudba-video-knihy/led-par-orlight-18x10-rgbw-hd-metal-powercon-rgbwa-uv-14965398.html
+  Product 51/76: https://www.avizo.cz/autobazar/prives-saris-mc-255-133-1350kg-s-alu-vikem-19412089.html
+  Product 52/76: https://www.avizo.cz/reality/prodej-stavebniho-pozemku-602-m2-kaplice-19692431.html
+  Product 53/76: https://www.avizo.cz/reality/prodej-domu-k-rekonstrukci-s-potencialem-bydleni-i-podnikani-pernarec-okr-plzen-sever-19527212.html
+  Product 54/76: https://www.avizo.cz/stavba-dilna-zahrada/split-system-s-bojlerem-200-300-l-se-dvema-spiralami-19715988.html
+  Product 55/76: https://www.avizo.cz/hudba-video-knihy/led-par-reflektor-orlight-18x10-rgbw-hd-metal-powercon-rgbwa-uv-17438627.html
+  Product 56/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-21-25-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-15523355.html
+  Product 57/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-14-5-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-15523317.html
+  Product 58/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-57-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-14561113.html
+  Product 59/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-47-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-mk4-18745857.html
+  Product 60/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-69-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-mk5-18749209.html
+  Product 61/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-66-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-mk5-18749214.html
+  Product 62/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-17-5-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-16361162.html
+  Product 63/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-67-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-mk5-18735234.html
+  Product 64/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-45-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-mk4-18744817.html
+  Product 65/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-19-5-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-15523340.html
+  Product 66/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-39-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-mk4-18730843.html
+  Product 67/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-60-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-mk5-18735218.html
+  Product 68/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-64-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-mk5-18747477.html
+  Product 69/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-18-5-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-15523323.html
+  Product 70/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-24-5-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-15523361.html
+  Product 71/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-25-5-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-16361154.html
+  Product 72/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-14-75-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-16361169.html
+  Product 73/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-23-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-16361129.html
+  Product 74/76: https://www.avizo.cz/stavba-dilna-zahrada/vrtak-d-11-5-mm-sroubovity-s-kuzel-stopkou-hss-csn-221140-15523306.html
+  Product 75/76: https://www.avizo.cz/reality/prodej-dvougeneracniho-rodinneho-domu-442-m-pozemek-2-875-m-cervenka-19555268.html
+  Product 76/76: https://www.avizo.cz/autobazar/s-elroq-enyaq-karoq-seat-ateca-nove-19-orig-alu-disky-8xr19-5x112-19568225.html
+Avizo: Found 76 total products across 4 page(s)
+Found 76 products from avizo.cz
+Checking search: gameboy
+Inzeruj: Fetching https://www.inzeruj.cz/search?title=gameboy
+Sbazar: Fetching https://www.sbazar.cz/hledej/gameboy
+Avizo: Fetching https://www.avizo.cz/inzerce/gameboy
+Bazos: Fetching https://www.bazos.cz/search.php?hledat=gameboy
+Aukro: Starting search for 'gameboy'
+Aukro: Fetching page 1: https://aukro.cz/vysledky-vyhledavani?text=gameboy&searchAll=true&subbrand=NOT_SPECIFIED
+Inzeruj: Got response, status 200, size 53289 bytes
+Inzeruj: Saved response to temp/report/inzeruj_response_1770125801.html
+Inzeruj: Extracted 0 product links
+Inzeruj: Processing 0 products
+Inzeruj: Found 0 total products
+Found 0 products from inzeruj.cz
+Avizo: Got response for page 1, status 200, size 69246 bytes
+Avizo: Saved response to temp/report/avizo_page1_1770125801.html
+Avizo: Page 1 - extracted 8 new products (total: 8)
+Avizo: Processing 8 products from 1 page(s)
+  Product 1/8: https://www.avizo.cz/autobazar/elektricka-cestovni-motorka-19716052.html
+  Product 2/8: https://www.avizo.cz/seznamka/hledam-zenu-19683289.html
+  Product 3/8: https://www.avizo.cz/hudba-video-knihy/tj-ostrava-nabor-divek-10901881.html
+  Product 4/8: https://www.avizo.cz/stavba-dilna-zahrada/laminatovy-bazen-19722250.html
+  Product 5/8: https://www.avizo.cz/prace/vedouci-odboru-stavebni-urad-19705761.html
+  Product 6/8: https://www.avizo.cz/zvirata-rostliny/francouzsky-buldocek-s-pp-fci-19725723.html
+  Product 7/8: https://www.avizo.cz/prace/nabizim-praci-ridice-skupiny-c-19548848.html
+  Product 8/8: https://www.avizo.cz/reality/koupim-byt-v-osobnim-vlastnictvi-v-havirove-podlesi-a-mesto-ostrava-poruba-17739061.html
+Avizo: Found 8 total products across 1 page(s)
+Found 8 products from avizo.cz
+Bazos: Got response, status 200, size 45589 bytes
+Bazos: Saved response to temp/report/bazos_response_1770125801.html
+  Found: Servis konzolí a ovládačů Ostrava (PS4/PS5, XBOX, Nintendo) (499.00 CZK)
+  Found: Gameboy Pocket rámeček (1850.00 CZK)
+  Found: Gameboy Color + Pokemon rámeček (3390.00 CZK)
+  Found: Nintendo Gameboy DMG zelený (1990.00 CZK)
+  Found: Nintendo Gameboy DMG šedý (1990.00 CZK)
+  Found: Nintendo Gameboy Advance + Pokemon Emerald (3000.00 CZK)
+  Found: Gameboy + Gameboy Color Cartridge - Různé (0.00 CZK)
+  Found: Nintendo DS Lite + NEW SUPER MARIO BROS –RARITKA– (2599.00 CZK)
+  Found: Gameboy pocket Factory sealed PAL UK (14597.00 CZK)
+  Found: GamePi43 pro Raspberry Pi (3500.00 CZK)
+  Found: Nintendo GameBoy Super Mario Land (400.00 CZK)
+  Found: Čínská herní konzole famiclone famiklon (249.00 CZK)
+  Found: - TOP Nintendo GameBoy Color CGB-001 kompletní - (3499.00 CZK)
+  Found: Nintendo Gameboy DMG Pokemon IPS (3900.00 CZK)
+  Found: Nintendo Gameboy Color (2500.00 CZK)
+  Found: Gameboy Advance - video (cena za kus) (400.00 CZK)
+  Found: Gameboy Advance hry - cena za kus (200.00 CZK)
+  Found: Castlevania: Aria of Sorrow Gameboy Advance (200.00 CZK)
+  Found: Nintendo Gameboy Advance + Hry (2499.00 CZK)
+  Found: Nintendo Gameboy Color + Hry (2299.00 CZK)
+Bazos: Following pagination to page 2: https://www.bazos.cz/search.php?hledat=gameboy&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=20
+Sbazar: Got response for page 1, status 200, size 961162 bytes
+Sbazar: Saved response to temp/report/sbazar_page1_1770125802.html
+Sbazar: Page 1 - extracted 56 new products (total: 56)
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/gameboy/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/0
+Aukro: Page 1 - Status 200, Size 2192717 bytes
+Aukro: Saved to temp/report/aukro_page1_1770125802.html
+Aukro: Page 1: Found 4 products
+Aukro: Fetching page 2: https://aukro.cz/vysledky-vyhledavani?text=gameboy&searchAll=true&subbrand=NOT_SPECIFIED&page=2
+Bazos: Got response, status 200, size 44824 bytes
+Bazos: Saved response to temp/report/bazos_response_1770125804.html
+  Found: Kapesni herni konzole (1800.00 CZK)
+  Found: Pokemon Ruby Gameboy (4500.00 CZK)
+  Found: Nintendo Gameboy 1989 (2500.00 CZK)
+  Found: Retro Konzole Anbernic RG40xxV +128gb nová sd karta (3000.00 CZK)
+  Found: Trimui Smart Pro + CFW + 128gb sd karta ( nová ) (2900.00 CZK)
+  Found: Retro konzole miyoo flip v2 + 128gb karta plná her (3000.00 CZK)
+  Found: Pokémon hry na Nintendo Gameboy Advance (299.00 CZK)
+  Found: Nintendo Gameboy Clasic Mario 1 , 2 (333.00 CZK)
+  Found: Gameboy Color Rámeček (1990.00 CZK)
+  Found: GameBoy Advance: Lord of the Rings - Two Towers (1200.00 CZK)
+  Found: Yu-Gi-Oh Das Dunkle Duell... (199.00 CZK)
+  Found: Yu-Gi-Oh Dark Duel Stories... 5 (230.00 CZK)
+  Found: Nintendo Gameboy hra (800.00 CZK)
+  Found: Herní konzole R36S (800.00 CZK)
+  Found: Gameboy hra (400.00 CZK)
+  Found: Gameboy dekorace (0.00 CZK)
+  Found: Playstation psp GT 3004 (3200.00 CZK)
+  Found: Playstation psp 3004 černé (2999.00 CZK)
+  Found: Nintendo Gameboy SP (1999.00 CZK)
+  Found: Hra NINTENDO gameboy advance - šachy + kryt na batérie. (0.00 CZK)
+Bazos: Following pagination to page 3: https://www.bazos.cz/search.php?hledat=gameboy&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=40
+Sbazar error: Status 404, Error: Not Found
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/gameboy/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/2
+Aukro: Page 2 - Status 200, Size 2228378 bytes
+Aukro: Saved to temp/report/aukro_page2_1770125806.html
+Aukro: Page 2: Found 0 products
+Aukro: TOTAL: 4 products across 2 page(s)
+Found 4 products from aukro.cz
+Failed to create product https://aukro.cz/nintendo-game-boy-advance-gameboy-1x-hra-spider-man-pekna-funkcni-7109619051: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/nintendo-game-boy-advance-sp-hra-7109651961: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Sbazar: Got response for page 2, status 200, size 580384 bytes
+Sbazar: Saved response to temp/report/sbazar_page2_1770125808.html
+Sbazar: Page 2 - extracted 12 new products (total: 68)
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/gameboy/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/3
+Bazos: Got response, status 200, size 40494 bytes
+Bazos: Saved response to temp/report/bazos_response_1770125808.html
+  Found: Hry na Gameboy SONIC (400.00 CZK)
+  Found: Konzole R36S purple clear (1000.00 CZK)
+  Found: Nintendo ds lite clear custom (2000.00 CZK)
+  Found: Hry Mario Gameboy advance (500.00 CZK)
+  Found: Hry Gameboy Advance (1700.00 CZK)
+  Found: Gameboy color transparent (2500.00 CZK)
+  Found: The legend of zelda. (1400.00 CZK)
+  Found: Gameboy Micro (4000.00 CZK)
+  Found: Nintendo Gameboy DMG Green + Hry (2199.00 CZK)
+  Found: Nintendo Gameboy hry Game boy (0.00 CZK)
+  Found: Nintendo sbírka 3DS 3DS XXL Gameboy Gamecube Nes 64 Snes (0.00 CZK)
+  Found: Nintendo GameBoy pocket (2600.00 CZK)
+  Found: Nintendo Gameboy hry (0.00 CZK)
+  Found: Playstation PsP 1000 černá (2499.00 CZK)
+  Found: Handheld konzole GAMINJA ANS13 +15000 her (1099.00 CZK)
+  Found: Playstation psp 1000 White (2999.00 CZK)
+  Found: Gameboy advance hra (0.00 CZK)
+Bazos: Following pagination to page 4: https://www.bazos.cz/search.php?hledat=gameboy&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=20
+Bazos: Following pagination to page 5: https://www.bazos.cz/search.php?hledat=gameboy&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=40
+Bazos: Following pagination to page 6: https://www.bazos.cz/search.php?hledat=gameboy&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=40
+Bazos: Found 57 total products across all pages
+Found 57 products from bazos.cz
+Sbazar error: Status 404, Error: Not Found
+Sbazar: Processing 68 products from 2 page(s)
+  Product 1/68: https://www.sbazar.cz/inzerat/227250481-nintendo-gameboy-advance-hry
+  Product 2/68: https://www.sbazar.cz/inzerat/226956991-nintendo-gameboy-dmg-01
+  Product 3/68: https://www.sbazar.cz/inzerat/65376452--eragon-gameboy-advance-
+  Product 4/68: https://www.sbazar.cz/inzerat/227378614--top-nintendo-gameboy-color-cgb-001-kompletni-
+  Product 5/68: https://www.sbazar.cz/inzerat/65818332--720deg-gameboy-color-
+  Product 6/68: https://www.sbazar.cz/inzerat/226709200-nintendo-gameboy-kwirk
+  Product 7/68: https://www.sbazar.cz/inzerat/225854062-nintendo-gameboy-pocket
+  Product 8/68: https://www.sbazar.cz/inzerat/204803226-stojanek-stojan-na-gameboy-advance-nintendo
+  Product 9/68: https://www.sbazar.cz/inzerat/153310810-nintendo-720-gameboy-hra
+  Product 10/68: https://www.sbazar.cz/inzerat/28550349-hra-pro-gameboy-classic
+  Product 11/68: https://www.sbazar.cz/inzerat/28549022-hra-pro-gameboy-classic
+  Product 12/68: https://www.sbazar.cz/inzerat/28548640-hra-pro-gameboy-classic
+  Product 13/68: https://www.sbazar.cz/inzerat/28549142-hra-pro-gameboy-classic
+  Product 14/68: https://www.sbazar.cz/inzerat/28548913-hra-pro-gameboy-classic
+  Product 15/68: https://www.sbazar.cz/inzerat/28549337-hra-pro-gameboy-classic
+  Product 16/68: https://www.sbazar.cz/inzerat/28549847-hra-pro-gameboy-classic
+  Product 17/68: https://www.sbazar.cz/inzerat/28548473-hra-pro-gameboy-classic
+  Product 18/68: https://www.sbazar.cz/inzerat/226708927-nintendo-gameboy-f1-race
+  Product 19/68: https://www.sbazar.cz/inzerat/226707799-nintendo-gameboy-hugo-2
+  Product 20/68: https://www.sbazar.cz/inzerat/226587448-nintendo-gameboy-rescue-of-princess-blobette
+  Product 21/68: https://www.sbazar.cz/inzerat/226346605-nintendo-gameboy-dmg-green-hry
+  Product 22/68: https://www.sbazar.cz/inzerat/226455997-nintendo-gameboy-color-mayhem
+  Product 23/68: https://www.sbazar.cz/inzerat/226453684-nintendo-gameboy-indiana-jones
+  Product 24/68: https://www.sbazar.cz/inzerat/226453339-nintendo-gameboy-terminator-2
+  Product 25/68: https://www.sbazar.cz/inzerat/226708531-nintendo-gameboy-sunsoft-grand-prix
+  Product 26/68: https://www.sbazar.cz/inzerat/226912345-gameboy-colour-1998-tetris-a-3-dalsi-hry
+  Product 27/68: https://www.sbazar.cz/inzerat/26894263-hra-gameboy-olympic-summer-games-atlanta
+  Product 28/68: https://www.sbazar.cz/inzerat/226587478-nintendo-gameboy-game-boy-obaly-na-hry-originalni
+  Product 29/68: https://www.sbazar.cz/inzerat/226455322-nintendo-gameboy-color-mario-golf
+  Product 30/68: https://www.sbazar.cz/inzerat/226452013-nintendo-gameboy-the-castlevania-adventure
+  Product 31/68: https://www.sbazar.cz/inzerat/226451257-nintendo-gameboy-fortress-of-fear
+  Product 32/68: https://www.sbazar.cz/inzerat/226451071-nintendo-gameboy-kung-fu-master
+  Product 33/68: https://www.sbazar.cz/inzerat/226448080-nintendo-game-boy-tetris-gameboy
+  Product 34/68: https://www.sbazar.cz/inzerat/226448074-nintendo-game-boy-paperboy-gameboy
+  Product 35/68: https://www.sbazar.cz/inzerat/28549986-hra-pro-gameboy-classic-toxic-crusaders
+  Product 36/68: https://www.sbazar.cz/inzerat/226448089-nintendo-game-boy-duck-tales-gameboy-paradni-stav
+  Product 37/68: https://www.sbazar.cz/inzerat/52323838-super-nintendo-snes-adapter-pro-hry-na-gameboy
+  Product 38/68: https://www.sbazar.cz/inzerat/67513557-et-the-20th-anniversary-gameboy-advance
+  Product 39/68: https://www.sbazar.cz/inzerat/168754386-hra-gameboy-advance-star-wars
+  Product 40/68: https://www.sbazar.cz/inzerat/226455463-nintendo-gameboy-color-woody-woodpecker-racing
+  Product 41/68: https://www.sbazar.cz/inzerat/226453432-nintendo-gameboy-battletoads-in-ragnaroks-world
+  Product 42/68: https://www.sbazar.cz/inzerat/226448071-nintendo-game-boy-duck-tales-gameboy
+  Product 43/68: https://www.sbazar.cz/inzerat/67061702-the-6-in-1-puzzle-collection-gameboy-color
+  Product 44/68: https://www.sbazar.cz/inzerat/221410685-golf-nintendo-game-boy-gameboy-hra
+  Product 45/68: https://www.sbazar.cz/inzerat/221410580-alleyway-nintendo-game-boy-gameboy-hra
+  Product 46/68: https://www.sbazar.cz/inzerat/193881466-gameboy-advance-lord-of-the-rings-two-towers
+  Product 47/68: https://www.sbazar.cz/inzerat/226708840-nintendo-gameboy-zool-ninja-of-the-nth-dimension
+  Product 48/68: https://www.sbazar.cz/inzerat/226453588-nintendo-gameboy-the-king-of-fighters-95
+  Product 49/68: https://www.sbazar.cz/inzerat/67513587-who-wants-to-be-a-millionaire-junior-gameboy-adv
+  Product 50/68: https://www.sbazar.cz/inzerat/226364008-gameboy-color-nintendo-donkey-kong-super-mario
+  Product 51/68: https://www.sbazar.cz/inzerat/226455985-nintendo-gameboy-color-tom-a-jerry-mouse-hunt
+  Product 52/68: https://www.sbazar.cz/inzerat/224556430-adventure-island-nintendo-game-boy-hra-gameboy
+  Product 53/68: https://www.sbazar.cz/inzerat/224556337-looney-tunes-nintendo-game-boy-hra-gameboy
+  Product 54/68: https://www.sbazar.cz/inzerat/221792600-nintendo-game-boy-dr-mario-manual-gameboy
+  Product 55/68: https://www.sbazar.cz/inzerat/221792357-nintendo-game-boy-f1-race-adapter-gameboy
+  Product 56/68: https://www.sbazar.cz/inzerat/221792330-nintendo-game-boy-donkey-kong-land-gameboy
+  Product 57/68: https://www.sbazar.cz/inzerat/221792234-nintendo-game-boy-fortress-of-fear-gameboy
+  Product 58/68: https://www.sbazar.cz/inzerat/224654197-retro-herni-konzole-400-her-ve-stylu-gameboy
+  Product 59/68: https://www.sbazar.cz/inzerat/221792267-nintendo-game-boy-kirbys-dream-land-gameboy
+  Product 60/68: https://www.sbazar.cz/inzerat/227165809-kapesni-herni-konzole
+  Product 61/68: https://www.sbazar.cz/inzerat/215497420-super-nintendo-snes-2xkonzole-komplet
+  Product 62/68: https://www.sbazar.cz/inzerat/224566924-eragon-nova-gba
+  Product 63/68: https://www.sbazar.cz/inzerat/224566915-et-the-20th-anniversary-gba
+  Product 64/68: https://www.sbazar.cz/inzerat/224566906-robot-wars-advanced-destruction-gba
+  Product 65/68: https://www.sbazar.cz/inzerat/224566897-who-wants-to-be-a-millionaire-junior-gba
+  Product 66/68: https://www.sbazar.cz/inzerat/224566819-robot-wars-advanced-destruction-gba
+  Product 67/68: https://www.sbazar.cz/inzerat/224566798-who-wants-to-be-a-millionaire-junior-gba
+  Product 68/68: https://www.sbazar.cz/inzerat/226375393-trimui-smart-pro-cfw-128gb-sd-karta-nova-
+Sbazar: Found 68 total products across 2 page(s)
+Found 68 products from sbazar.cz
+Checking search: rypadlo
+Bazos: Fetching https://www.bazos.cz/search.php?hledat=rypadlo
+Avizo: Fetching https://www.avizo.cz/inzerce/rypadlo
+Sbazar: Fetching https://www.sbazar.cz/hledej/rypadlo
+Inzeruj: Fetching https://www.inzeruj.cz/search?title=rypadlo
+Aukro: Starting search for 'rypadlo'
+Aukro: Fetching page 1: https://aukro.cz/vysledky-vyhledavani?text=rypadlo&searchAll=true&subbrand=NOT_SPECIFIED
+Inzeruj: Got response, status 200, size 55936 bytes
+Inzeruj: Saved response to temp/report/inzeruj_response_1770126004.html
+Inzeruj: Extracted 2 product links
+Inzeruj: Processing 2 products
+  Product 1/2: https://www.inzeruj.cz/inzerat/stroje/stavebni-stroje/mikro-rypadlo-jansen-r-mb-500-645576.html
+Sbazar: Got response for page 1, status 200, size 961675 bytes
+Sbazar: Saved response to temp/report/sbazar_page1_1770126005.html
+Sbazar: Page 1 - extracted 46 new products (total: 46)
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/rypadlo/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/0
+Aukro: Page 1 - Status 200, Size 2183490 bytes
+Aukro: Saved to temp/report/aukro_page1_1770126005.html
+Aukro: Page 1: Found 4 products
+Aukro: Fetching page 2: https://aukro.cz/vysledky-vyhledavani?text=rypadlo&searchAll=true&subbrand=NOT_SPECIFIED&page=2
+Avizo: Got response for page 1, status 200, size 167424 bytes
+Avizo: Saved response to temp/report/avizo_page1_1770126005.html
+Avizo: Page 1 - extracted 27 new products (total: 27)
+Avizo: Found pagination link: https://www.avizo.cz/inzerce/rypadlo/2/
+Bazos: Got response, status 200, size 49174 bytes
+Bazos: Saved response to temp/report/bazos_response_1770126006.html
+  Found: minibagr, rypadlo,motor Kubota,2 rychlosti, roztah.podvozek (279000.00 CZK)
+  Found: Bagr Takeuchi TB235 + tiltrotátor Rototilt (695000.00 CZK)
+  Found: minirypadlo, minibagr, bagr (689000.00 CZK)
+  Found: minirypadlo, minibagr, bagr (139900.00 CZK)
+  Found: bagr, minibagr, motor Kubota, model Schmidt AR200 (429000.00 CZK)
+  Found: TAKEUCHI TB210R MINIRYPADLO,R.V.2019 (38900.00 CZK)
+  Found: bagr, rypadlo motor Yanmar (589000.00 CZK)
+  Found: Traktorbager JCB 3CX (750000.00 CZK)
+  Found: Minibagr Bobcat E17 Powertilt 2x lžíce pouze1400 Mth (419000.00 CZK)
+  Found: Kráčivé rypadlo Kaiser S10 Telefuss (1845000.00 CZK)
+  Found: minirýpadlo KATO HD35V5 (0.00 CZK)
+  Found: 2021 Liugong 9035E (750000.00 CZK)
+  Found: Prodám starší traktorbagr 4x4. (279000.00 CZK)
+  Found: Hydraulické bourací kladivo Epiroc SB302 (199000.00 CZK)
+  Found: Kolový bagr Volvo EW160E – 2015 – 9.164mth - ENGCON (2350000.00 CZK)
+  Found: Pásový bagr CATERPILLAR CAT 305C (580000.00 CZK)
+  Found: Rypadlo nakladač New Holland B115C pouze 393mth Top stav (1880000.00 CZK)
+  Found: Traktorbagr CAT 432F, r.v. 2013, 7400 mth, 3x lžíce (1190000.00 CZK)
+  Found: rychloupínák JCB 3CX, 4cx traktorbagr + paletizační vidle (0.00 CZK)
+  Found: Kolový bagr Komatsu PW 160, r.v. 2015, 10.859 mth, ROTOTILT (1130000.00 CZK)
+Bazos: Following pagination to page 2: https://www.bazos.cz/search.php?hledat=rypadlo&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=20
+  Product 2/2: https://www.inzeruj.cz/inzerat/stroje/stavebni-stroje/mikro-rypadlo-jansen-r-mb-500-672345.html
+Sbazar error: Status 404, Error: Not Found
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/rypadlo/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/2
+Avizo: Got response for page 2, status 200, size 174110 bytes
+Avizo: Saved response to temp/report/avizo_page2_1770126008.html
+Avizo: Page 2 - extracted 20 new products (total: 47)
+Avizo: Found pagination link: https://www.avizo.cz/inzerce/rypadlo/3/
+Aukro: Page 2 - Status 200, Size 2181097 bytes
+Aukro: Saved to temp/report/aukro_page2_1770126008.html
+Aukro: Page 2: Found 4 products
+Aukro: Fetching page 3: https://aukro.cz/vysledky-vyhledavani?text=rypadlo&searchAll=true&subbrand=NOT_SPECIFIED&page=3
+Bazos: Got response, status 200, size 48903 bytes
+Bazos: Saved response to temp/report/bazos_response_1770126009.html
+  Found: Takeuchi TB210R minirypadlo (389000.00 CZK)
+  Found: Takeuchi TB 138 FR (739000.00 CZK)
+  Found: minirypadlo, minibagr, bagr APS KME 10 (0.00 CZK)
+  Found: APS KMZ 28 bagr, minibagr, rypadlo (0.00 CZK)
+  Found: APS KME18 bagr, minibagr, rypadlo (0.00 CZK)
+  Found: bagr, minibagr, motor Kubota, Schmidt AR 200 (0.00 CZK)
+  Found: minirypadlo, minibagr, bagr Schmidt AR 360 (0.00 CZK)
+  Found: APS KME 12 bagr, minibragr, rypadlo (0.00 CZK)
+  Found: minibagr, bagr, rypadlo Schmidt AR120 (0.00 CZK)
+  Found: minirypadlo, minibagr, bagr APS KME 08 (0.00 CZK)
+  Found: Kolové rypadlo Volvo EWR150E (0.00 CZK)
+  Found: Kolové rypadlo Liebherr A910 (0.00 CZK)
+  Found: Kolové rypadlo Volvo EWR170E (0.00 CZK)
+  Found: Kolový bagr Volvo EW160E s rychloupínačem (0.00 CZK)
+  Found: Kolové rypadlo Volvo EW160E s 3D systémem (0.00 CZK)
+  Found: Kolové rypadlo Takeuchi TB295W s rychloupínačem (0.00 CZK)
+  Found: Kolový bagr Takeuchi TB295W (0.00 CZK)
+  Found: Traktorbagr JCB 3CX (0.00 CZK)
+  Found: Pásové rypadlo JCB 220X LC (0.00 CZK)
+  Found: Kolový bagr Volvo EW160E s rotátorem (0.00 CZK)
+Bazos: Following pagination to page 3: https://www.bazos.cz/search.php?hledat=rypadlo&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=40
+Inzeruj: Found 2 total products
+Found 2 products from inzeruj.cz
+Avizo: Got response for page 3, status 200, size 173062 bytes
+Avizo: Saved response to temp/report/avizo_page3_1770126010.html
+Avizo: Page 3 - extracted 20 new products (total: 67)
+Avizo: Found pagination link: https://www.avizo.cz/inzerce/rypadlo/4/
+Sbazar: Got response for page 2, status 200, size 974128 bytes
+Sbazar: Saved response to temp/report/sbazar_page2_1770126011.html
+Sbazar: Page 2 - extracted 54 new products (total: 100)
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/rypadlo/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/3
+Aukro: Page 3 - Status 200, Size 2056192 bytes
+Aukro: Saved to temp/report/aukro_page3_1770126011.html
+Aukro: Page 3: Found 4 products
+Aukro: Fetching page 4: https://aukro.cz/vysledky-vyhledavani?text=rypadlo&searchAll=true&subbrand=NOT_SPECIFIED&page=4
+Bazos: Got response, status 200, size 49215 bytes
+Bazos: Saved response to temp/report/bazos_response_1770126012.html
+  Found: Kolové rypadlo Volvo EW160E s rotátorem (0.00 CZK)
+  Found: Kolové rypadlo Caterpillar M316F (0.00 CZK)
+  Found: Kolové rypadlo Takeuchi TB295W (0.00 CZK)
+  Found: Pásové rypadlo Volvo ECR50D (0.00 CZK)
+  Found: Kolový bagr Volvo EW160E (0.00 CZK)
+  Found: Kolové rypadlo Wacker Neuson EW100 (0.00 CZK)
+  Found: Kolové rypadlo Volvo EW160E (0.00 CZK)
+  Found: Minibagr SANY SY18C (645000.00 CZK)
+  Found: Minibagr Kubota KX016-4, rok 2016, 2100mth TOP (349000.00 CZK)
+  Found: Minibagr minirypadlo Kubota KX027-4, 2200mth, r.v. 2019 TOP (579000.00 CZK)
+  Found: Kolové rypadlo / nakladač New Holland MH CITY (420000.00 CZK)
+  Found: Minirypadlo VOLVO ECR 40D (670000.00 CZK)
+  Found: Kubota KX018-4 (2015) – minirýpadlo ve výborném stavu (114276.00 CZK)
+  Found: Kolový Bagr O&K MH5 compact (450000.00 CZK)
+  Found: Ripper na traktorbagr , pasove rypadlo 6-10 tun (0.00 CZK)
+  Found: samojízdný teleskopický manipulátor GENIE GTH 4014 r.v.2018 (990000.00 CZK)
+  Found: Minibagr Digger D120 1 J C, bagr (149999.00 CZK)
+  Found: JCB 4CX (0.00 CZK)
+  Found: Minibagr Lonking CDM6020 (510000.00 CZK)
+  Found: Traktor New Holland T4.95 s čelním nakladačem (0.00 CZK)
+Bazos: Following pagination to page 4: https://www.bazos.cz/search.php?hledat=rypadlo&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=20
+Bazos: Following pagination to page 5: https://www.bazos.cz/search.php?hledat=rypadlo&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=60
+Avizo: Got response for page 4, status 200, size 174821 bytes
+Avizo: Saved response to temp/report/avizo_page4_1770126013.html
+Avizo: Page 4 - extracted 21 new products (total: 88)
+Avizo: Found pagination link: https://www.avizo.cz/inzerce/rypadlo/5/
+Sbazar: Got response for page 3, status 200, size 974390 bytes
+Sbazar: Saved response to temp/report/sbazar_page3_1770126014.html
+Sbazar: Page 3 - extracted 58 new products (total: 158)
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/rypadlo/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/4
+Aukro: Page 4 - Status 200, Size 2098917 bytes
+Aukro: Saved to temp/report/aukro_page4_1770126014.html
+Aukro: Page 4: Found 0 products
+Aukro: TOTAL: 12 products across 4 page(s)
+Found 12 products from aukro.cz
+Failed to create product https://aukro.cz/parni-koreckove-rypadlo-620-pq42-7109187422: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/ho-prislusenstvi-lanovy-bagr-do-uhelny-rypadlo-1-87-7109716822: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/lego-technic-42197-zadni-nakladac-7107081990: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/lego-technic-42197-zadni-nakladac-7107697421: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Bazos: Got response, status 200, size 48474 bytes
+Bazos: Saved response to temp/report/bazos_response_1770126016.html
+  Found: mini rypadlo Ortas (95000.00 CZK)
+  Found: Triediaci preosievací kôš MB-S10 S4 (30x30/50x50 mm) (182300.00 CZK)
+  Found: Dlouhodobý pronájem CAT 326 pásové rypadlo (0.00 CZK)
+  Found: Nový gumový pás na rypadlo bagr minirypadlo 400x72,5x74 (17000.00 CZK)
+  Found: hydraulický olej HM46 (0.00 CZK)
+  Found: motorový olej Carline (Mogul) M7ADSIII 15w40 10L (690.00 CZK)
+  Found: super diesel aditiv - VIF zimní 500ml (190.00 CZK)
+  Found: Rypadlo Caterpillar 308E2 (950000.00 CZK)
+  Found: Podkop, mini rypadlo (35000.00 CZK)
+  Found: Kubota KX019-4, 3-válec(11,8 kW)3× výkopová lžíce (121494.00 CZK)
+  Found: 8t bagr guma ofset Wacker Neuson EZ80 mimoosé rypadlo (799000.00 CZK)
+  Found: 33.5t bagr širokopás Volvo EC300DL (2014) rypadlo pásové (1945000.00 CZK)
+  Found: 2008 Terex Elite 970 kladivo svahovka SPZ traktorbagr (745000.00 CZK)
+  Found: KOLOVÉ RÝPADLO CATERPILLAR M 313 D - ROK 2014 (990000.00 CZK)
+  Found: Minibagr Digger D120 3 Y J C, bagr (224999.00 CZK)
+  Found: Minibagr Digger D175 C, bagr, (319999.00 CZK)
+  Found: Minibagr Digger D190, bagr, rypadlo (319999.00 CZK)
+  Found: Minibagr Digger D190 C, bagr, rypadlo (349999.00 CZK)
+  Found: Minibagr Digger D3000, bagr, rypadlo, podkop, minirypadlo (379999.00 CZK)
+  Found: Bagr Kubota KX 080 - 3, hmotnost 8.700 kg (675000.00 CZK)
+Bazos: Following pagination to page 6: https://www.bazos.cz/search.php?hledat=rypadlo&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=20
+Bazos: Found 80 total products across all pages
+Found 80 products from bazos.cz
+Avizo: Got response for page 5, status 200, size 174899 bytes
+Avizo: Saved response to temp/report/avizo_page5_1770126016.html
+Avizo: Page 5 - extracted 20 new products (total: 108)
+Avizo: Found pagination link: https://www.avizo.cz/inzerce/rypadlo/6/
+Sbazar: Got response for page 4, status 200, size 977682 bytes
+Sbazar: Saved response to temp/report/sbazar_page4_1770126017.html
+Sbazar: Page 4 - extracted 58 new products (total: 216)
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/rypadlo/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/5
+Avizo: Got response for page 6, status 200, size 174391 bytes
+Avizo: Saved response to temp/report/avizo_page6_1770126019.html
+Avizo: Page 6 - extracted 20 new products (total: 128)
+Avizo: Processing 128 products from 6 page(s)
+  Product 1/128: https://www.avizo.cz/autobazar/rypadlo-nakladac-jcb-3-cx-19725832.html
+Sbazar: Got response for page 5, status 200, size 976507 bytes
+Sbazar: Saved response to temp/report/sbazar_page5_1770126019.html
+Sbazar: Page 5 - extracted 58 new products (total: 274)
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/rypadlo/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/6
+  Product 2/128: https://www.avizo.cz/prace/strojnik-pasoveho-rypadla-19725372.html
+Sbazar: Got response for page 6, status 200, size 977717 bytes
+Sbazar: Saved response to temp/report/sbazar_page6_1770126022.html
+Sbazar: Page 6 - extracted 58 new products (total: 332)
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/rypadlo/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/7
+  Product 3/128: https://www.avizo.cz/autobazar/prodlouzeni-vylozniku-dosah-rypadla-220cm-5-8t-19329954.html
+Sbazar: Got response for page 7, status 200, size 833728 bytes
+Sbazar: Saved response to temp/report/sbazar_page7_1770126024.html
+Sbazar: Page 7 - extracted 40 new products (total: 372)
+Sbazar: Processing 372 products from 7 page(s)
+  Product 1/372: https://www.sbazar.cz/inzerat/209871841-pasove-rypadlo-bagr-motor-kubota-novy
+  Product 2/372: https://www.sbazar.cz/inzerat/195712420-33t-rypadlo-pasove-komatsu
+  Product 4/128: https://www.avizo.cz/stavba-dilna-zahrada/laminatovy-bazen-19722250.html
+  Product 5/128: https://www.avizo.cz/zvirata-rostliny/francouzsky-buldocek-s-pp-fci-19725723.html
+  Product 6/128: https://www.avizo.cz/autobazar/elektricka-cestovni-motorka-19716052.html
+  Product 7/128: https://www.avizo.cz/reality/koupim-byt-v-osobnim-vlastnictvi-v-havirove-podlesi-a-mesto-ostrava-poruba-17739061.html
+  Product 8/128: https://www.avizo.cz/prace/vedouci-odboru-stavebni-urad-19705761.html
+  Product 9/128: https://www.avizo.cz/prace/nabizim-praci-ridice-skupiny-c-19548848.html
+  Product 10/128: https://www.avizo.cz/seznamka/hledam-zenu-19683289.html
+  Product 11/128: https://www.avizo.cz/autobazar/prodlouzeni-vylozniku-dosah-rypadla-400cm-8-13t-19432474.html
+  Product 3/372: https://www.sbazar.cz/inzerat/218415548-tridici-lopata-hvezdicova-mini-pro-rypadlo-005m3
+  Product 12/128: https://www.avizo.cz/prace/strojnik-bagrista-kolovych-a-pasovych-rypadel-19725035.html
+  Product 4/372: https://www.sbazar.cz/inzerat/209872714-bagr-kmz-28-rypadlo-motor-yanmar
+  Product 13/128: https://www.avizo.cz/autobazar/rypadlo-lopata-35cm-14-5-18t-19467149.html
+  Product 5/372: https://www.sbazar.cz/inzerat/200985499-model-rypadla-revell-mnoho-funkci
+  Product 14/128: https://www.avizo.cz/prace/strojnik-bagrista-ka-kolovych-a-pasovych-rypadel-19725405.html
+  Product 6/372: https://www.sbazar.cz/inzerat/214062328-paletizacni-vidle-rypadla-mecalac
+  Product 15/128: https://www.avizo.cz/prace/strojnik-bagrista-kolovych-a-pasovych-rypadel-s-3d-nivelaci-19725031.html
+  Product 7/372: https://www.sbazar.cz/inzerat/191136370-nakladacbagr-gunter-grossmann-gg-06lx
+  Product 16/128: https://www.avizo.cz/prace/strojnik-bagrista-ka-kolovych-a-pasovych-rypadel-s-3d-nivelaci-19725406.html
+  Product 8/372: https://www.sbazar.cz/inzerat/154025080-paletizacni-vidle-rypadla-mecalac
+  Product 17/128: https://www.avizo.cz/prace/strojnik-bagrista-kolovych-a-pasovych-rypadel-19718089.html
+  Product 9/372: https://www.sbazar.cz/inzerat/227511505-kolovy-bagr-rypadlo-doosan-dx-160-w-3-spz
+  Product 18/128: https://www.avizo.cz/prace/nabizim-praci-19711707.html
+  Product 10/372: https://www.sbazar.cz/inzerat/225286756-traktor-bagr-gg-30bc
+  Product 19/128: https://www.avizo.cz/prace/strojnik-bagrista-kolovych-a-pasovych-rypadel-s-3d-nivelaci-19718091.html
+  Product 11/372: https://www.sbazar.cz/inzerat/226734727-mobilni-opravy-cepovych-der-rypadel-navareni
+  Product 20/128: https://www.avizo.cz/autobazar/rypadlo-lopata-90cm-18-24t-19681213.html
+  Product 12/372: https://www.sbazar.cz/inzerat/227333770-mikro-rypadlo-jansen-mb-500
+  Product 21/128: https://www.avizo.cz/autobazar/rypadlo-lopata-100cm-14-5-18t-19438582.html
+  Product 13/372: https://www.sbazar.cz/inzerat/226207372-gorila-pasovy-minibagr-gorila-gx12-i
+  Product 22/128: https://www.avizo.cz/autobazar/hydraulicky-pritlacny-palec-pro-rypadla-8-12t-19098007.html
+  Product 14/372: https://www.sbazar.cz/inzerat/199960174-16t-pasove-rypadlo-kobelco-sk170
+  Product 23/128: https://www.avizo.cz/prace/strojnik-8189-obsluha-stacionarnich-stroju-a-zarizeni-jinde-neuvedena-19721575.html
+  Product 15/372: https://www.sbazar.cz/inzerat/181094093-lego-technic-42055-tezebni-rypadlo-
+  Product 24/128: https://www.avizo.cz/autobazar/rozryvac-korenu-rozryvac-8-11t-cw10-19342774.html
+  Product 16/372: https://www.sbazar.cz/inzerat/227386132-gorila-mininakladac-gh680x
+  Product 25/128: https://www.avizo.cz/autobazar/nivelacni-nosnik-hydraulicky-grejdr-120cm-1-5-2-5t-19251978.html
+  Product 17/372: https://www.sbazar.cz/inzerat/227319064-rypadlo-nakladac-jcb-1cx
+  Product 18/372: https://www.sbazar.cz/inzerat/217052260-prodlouzeni-vylozniku-dosah-rypadla-220cm-5-8t
+  Product 26/128: https://www.avizo.cz/autobazar/adaptivni-deska-pro-vrtaci-stroj-drapak-kladivo-outlet-19666050.html
+  Product 19/372: https://www.sbazar.cz/inzerat/227385424-gorila-minidumper-g-500l
+  Product 27/128: https://www.avizo.cz/prace/strojnik-8189-obsluha-stacionarnich-stroju-a-zarizeni-jinde-neuvedena-19721585.html
+  Product 20/372: https://www.sbazar.cz/inzerat/213033067-hydraulicky-mulcovac-pro-rypadla
+  Product 28/128: https://www.avizo.cz/autobazar/prolamovana-srovnavaci-lopata-hydraulicke-shrnovani-120-cm-2-6-3-5-t-19625225.html
+  Product 21/372: https://www.sbazar.cz/inzerat/226733821-rypadlo-rypadlo-kubota-u15-bagr
+  Product 29/128: https://www.avizo.cz/autobazar/nivelacni-nosnik-hydraulicky-grejdr-150cm-2-5-4t-19097779.html
+  Product 22/372: https://www.sbazar.cz/inzerat/227385427-gorila-minidumper-g-800l-pro
+  Product 30/128: https://www.avizo.cz/autobazar/prodlouzeni-ramene-120cm-dosah-minibagru-ms03-18857156.html
+  Product 23/372: https://www.sbazar.cz/inzerat/216049738-jcb-8080-pasove-rypadlo
+  Product 31/128: https://www.avizo.cz/autobazar/kabelovy-kbelik-pro-opticka-vlakna-20cm-2-6-3-5t-19567391.html
+  Product 24/372: https://www.sbazar.cz/inzerat/213896092-rypadlo-schmidt-ar200
+  Product 32/128: https://www.avizo.cz/autobazar/kabelovy-kbelik-pro-opticka-vlakna-20cm-3-6-5-5t-19567323.html
+  Product 25/372: https://www.sbazar.cz/inzerat/194574868-mix-na-beton-dalsi-adaptery
+  Product 33/128: https://www.avizo.cz/autobazar/podkopova-lzice-60cm-9-5-14t-19314260.html
+  Product 26/372: https://www.sbazar.cz/inzerat/205783815-nove-rypadlo-aps
+  Product 34/128: https://www.avizo.cz/autobazar/usi-adaptivni-deska-verachtert-cw20-cw30-cw40-outlet-19666054.html
+  Product 27/372: https://www.sbazar.cz/inzerat/205792674-nove-rypadlo-aps
+  Product 35/128: https://www.avizo.cz/autobazar/shrnovac-200-cm-pro-bagr-6-9t-18968732.html
+  Product 28/372: https://www.sbazar.cz/inzerat/176470211-teleskopicky-kloubovy-kolovy-nakladac-motor-kubota
+  Product 36/128: https://www.avizo.cz/autobazar/lzice-hrabe-rozryvac-korenu-130-cm-6-8t-18857257.html
+  Product 29/372: https://www.sbazar.cz/inzerat/213895822-rypadlo-schmidt-ar120
+  Product 37/128: https://www.avizo.cz/autobazar/vidle-bagru-nosnost-2-5t-18857185.html
+  Product 30/372: https://www.sbazar.cz/inzerat/225361588-pasove-rypadlo-gunter-grossmann-gg3000
+  Product 38/128: https://www.avizo.cz/autobazar/rychloupinac-jcb-3cx-4cx-8060-8080-hq-19622499.html
+  Product 31/372: https://www.sbazar.cz/inzerat/172934-specialni-plasticke-mazivo-jcb-hp-modre-na-cepy
+  Product 39/128: https://www.avizo.cz/autobazar/nivelacni-nosnik-grejdr-250cm-11-18t-19340678.html
+  Product 32/372: https://www.sbazar.cz/inzerat/225076723-lego-technic-42055-tezebni-rypadlo
+  Product 40/128: https://www.avizo.cz/autobazar/rozryvac-korenu-rozryvac-3-6-7-5t-18857187.html
+  Product 33/372: https://www.sbazar.cz/inzerat/220095564-prodlouzeni-vylozniku-dosah-rypadla-400cm-8-13t
+  Product 41/128: https://www.avizo.cz/autobazar/podkopova-lzice-50cm-6-9t-mecalac-19620166.html
+  Product 34/372: https://www.sbazar.cz/inzerat/182397782-detske-plastove-pasove-rypadlo
+  Product 35/372: https://www.sbazar.cz/inzerat/211380478-hydraulicky-pritlacny-palec-pro-rypadla-8-12t
+  Product 42/128: https://www.avizo.cz/autobazar/vidlice-bagru-5t-nosnost-14-5-20t-cw40-cw30-cw20-19114616.html
+  Product 36/372: https://www.sbazar.cz/inzerat/226830160-zemni-vrtna-souprava-pro-pasova-rypadla-46-t
+  Product 43/128: https://www.avizo.cz/prace/strojnik-m-z-19716822.html
+  Product 37/372: https://www.sbazar.cz/inzerat/227378197-pasove-rypadlo-wacker-neuson-et-18et-35-pujcovna
+  Product 44/128: https://www.avizo.cz/autobazar/kbelik-lichobeznikovy-90-120cm-7-11t-ms08-19551919.html
+  Product 38/372: https://www.sbazar.cz/inzerat/130288318-lego-technic-42004-mini-rypadlo
+  Product 45/128: https://www.avizo.cz/autobazar/skandinavska-prikopova-lzice-100cm-1-2-7t-19278568.html
+  Product 39/372: https://www.sbazar.cz/inzerat/153668814-lego-technic-42004-mini-rypadlo
+  Product 46/128: https://www.avizo.cz/autobazar/skandinavska-prikopova-lzice-120cm-3-4-8t-19713394.html
+  Product 40/372: https://www.sbazar.cz/inzerat/226828747-drtici-celisti-pro-rypadla-360deg-otevreni-800-mm
+  Product 47/128: https://www.avizo.cz/autobazar/vidle-bagru-9-5-14t-nosnost-3-5t-s60-19255358.html
+  Product 48/128: https://www.avizo.cz/autobazar/hydraulicky-grejdr-vyrovnavaci-nosnik-200cm-6-10t-19484144.html
+  Product 41/372: https://www.sbazar.cz/inzerat/226892899-kolove-rypadlo-komatsu-pw-160-11
+  Product 49/128: https://www.avizo.cz/autobazar/hrabe-pro-bagr-130cm-3-6-5-5t-19410152.html
+  Product 42/372: https://www.sbazar.cz/inzerat/226932229-pasove-rypadlo-liebherr-922-bagr-liebherr-r922lc
+  Product 50/128: https://www.avizo.cz/autobazar/hydraulicky-zaves-pro-svarovani-12-18t-19298835.html
+  Product 43/372: https://www.sbazar.cz/inzerat/160925776-lego-technic-42055-dulni-rypadlo
+  Product 51/128: https://www.avizo.cz/autobazar/prolamovana-lopata-150cm-16-23t-ms10-19600193.html
+  Product 44/372: https://www.sbazar.cz/inzerat/226931869-pasove-rypadlo-liebherr-916-pasovy-liebherr-r916lc
+  Product 52/128: https://www.avizo.cz/autobazar/root-ripper-ripper-1-5-2-5t-18857244.html
+  Product 45/372: https://www.sbazar.cz/inzerat/194414098-tatra-148-uds-110-autobagr-143-modre-rypadlo
+  Product 53/128: https://www.avizo.cz/prace/strojnik-na-buldozer-19725403.html
+  Product 46/372: https://www.sbazar.cz/inzerat/226931896-kolove-rypadlo-liebherr-311-bagr-liebherr-a311
+  Product 54/128: https://www.avizo.cz/autobazar/prodlouzeni-ramene-150cm-ms08-19145947.html
+  Product 47/372: https://www.sbazar.cz/inzerat/226932676-kolove-rypadlo-liebherr-912-bagr-liebherr-a912
+  Product 55/128: https://www.avizo.cz/autobazar/prolamovana-svahova-lopata-hrabe-60cm-0-1-4t-19723738.html
+  Product 48/372: https://www.sbazar.cz/inzerat/226932616-kolove-rypadlo-liebherr-312-bagr-liebherr-a312
+  Product 56/128: https://www.avizo.cz/autobazar/prolamovana-drenazni-spadova-lopata-300cm-11-15t-18829107.html
+  Product 49/372: https://www.sbazar.cz/inzerat/219039365-kolove-rypadlo-poclain-ty45-trojkolka
+  Product 57/128: https://www.avizo.cz/autobazar/prolamovana-svahova-lzice-lopata-200cm-9-5-14t-18646076.html
+  Product 50/372: https://www.sbazar.cz/inzerat/190082469-prodam-kaiser-kracejici-rypadlo-s2
+  Product 58/128: https://www.avizo.cz/autobazar/hrabe-prolamovana-lzice-120cm-2-6-3-5t-18857247.html
+  Product 51/372: https://www.sbazar.cz/inzerat/221391278-kolove-rypadlo-nakladac-new-holland-mh-city-16t
+  Product 59/128: https://www.avizo.cz/autobazar/lzice-manitou-1-5-m3-19112255.html
+  Product 52/372: https://www.sbazar.cz/inzerat/211252279-pasove-rypadlo-bagr-motor-yanmar
+  Product 60/128: https://www.avizo.cz/autobazar/skandinavska-lzice-60cm-1-3-2-5t-19000055.html
+  Product 53/372: https://www.sbazar.cz/inzerat/225941977-aps-kme18-bagr-minibagr-rypadlo
+  Product 61/128: https://www.avizo.cz/autobazar/lzice-lichobeznikova-40-310cm-1-1-5-12-16t-cw20s-19438710.html
+  Product 54/372: https://www.sbazar.cz/inzerat/205792308-pasove-rypadlo-bagr-aps-kme-12
+  Product 62/128: https://www.avizo.cz/autobazar/prolamovana-svahova-lopata-100cm-1-6-2-5t-18975859.html
+  Product 55/372: https://www.sbazar.cz/inzerat/226501048-minibagr-pasovy-bagr-bagrik-rypadlo
+  Product 63/128: https://www.avizo.cz/autobazar/hrabe-prolamovana-lzice-150cm-5-5-7t-19018120.html
+  Product 56/372: https://www.sbazar.cz/inzerat/226932757-pasove-rypadlo-volvo-ec160el-pasovy-bagr-volvo-160
+  Product 64/128: https://www.avizo.cz/autobazar/lzice-pro-bagr-100cm-1-5-2-5t-18965969.html
+  Product 57/372: https://www.sbazar.cz/inzerat/226893985-tehb6000-pro-pasove-rypadlo-46-t-zemni-vrtak
+  Product 65/128: https://www.avizo.cz/autobazar/nivelacni-nosnik-grejdr-150cm-2-5-3-6t-19211706.html
+  Product 58/372: https://www.sbazar.cz/inzerat/226898296-demolicni-drapak-pro-pasove-rypadlo-1217-t-360deg
+  Product 66/128: https://www.avizo.cz/prace/strojnik-ice-obsluha-stavebnich-stroju-19710199.html
+  Product 59/372: https://www.sbazar.cz/inzerat/226282693-lego-technic-42055-tezebni-rypadlo-bwe
+  Product 67/128: https://www.avizo.cz/autobazar/hrabe-na-vykopy-hrabice-300-cm-9-12-t-19274115.html
+  Product 60/372: https://www.sbazar.cz/inzerat/205783746-minibagr-rypadlo-aps-kme-12-novy-stroj
+  Product 68/128: https://www.avizo.cz/autobazar/nivelacni-nosnik-grejdr-200cm-6-10t-19105595.html
+  Product 61/372: https://www.sbazar.cz/inzerat/205792245-pasove-rypadlo-bagr-aps-kme-10
+  Product 69/128: https://www.avizo.cz/autobazar/shrnovac-150cm-pro-bagr-6-9t-19074283.html
+  Product 62/372: https://www.sbazar.cz/inzerat/225150409-cat-325f-l-cr-pasove-rypadlo
+  Product 70/128: https://www.avizo.cz/autobazar/podkopova-lzice-110cm-3-6-5-5t-19620198.html
+  Product 63/372: https://www.sbazar.cz/inzerat/223733446-lego-technic-42055-dulni-rypadlo
+  Product 71/128: https://www.avizo.cz/autobazar/skandinavska-prikopova-lzice-170cm-12-16t-ms10-19341345.html
+  Product 64/372: https://www.sbazar.cz/inzerat/225092839-lego-technic-42055-tezebni-rypadlo
+  Product 72/128: https://www.avizo.cz/autobazar/skandinavska-hydraulicka-prikopova-lopata-160cm-12-16t-19599384.html
+  Product 65/372: https://www.sbazar.cz/inzerat/223850803-65t-jcb-65r-1-rypadlo-pasove
+  Product 73/128: https://www.avizo.cz/autobazar/hlinene-vedro-40cm-2-6-3-5t-19193106.html
+  Product 66/372: https://www.sbazar.cz/inzerat/226678966-rychloupinak-pro-minibagr-pasove-rypadlo-do-2t
+  Product 74/128: https://www.avizo.cz/autobazar/lzice-na-hlinu-40cm-3-6-5-5t-17789866.html
+  Product 67/372: https://www.sbazar.cz/inzerat/222288572-rypadlo-kubota-u17-3-powertilt-3x-lzice
+  Product 75/128: https://www.avizo.cz/autobazar/lichobeznikove-lzice-20-30cm-pro-opticka-vlakna-2-5-3-5t-18857180.html
+  Product 68/372: https://www.sbazar.cz/inzerat/211017934-model-caterpillar
+  Product 76/128: https://www.avizo.cz/autobazar/prolamovana-hydraulicka-svahova-lopata-120cm-1-2-2-5t-19251976.html
+  Product 69/372: https://www.sbazar.cz/inzerat/225793951-minibagr-digger-d175-c-bagr-rypadlo
+  Product 77/128: https://www.avizo.cz/autobazar/skandinavska-lzice-110cm-3-3-4-8t-18857183.html
+  Product 70/372: https://www.sbazar.cz/inzerat/219371183-pasove-rypadlo-bagr-motor-yanmar-kmz-28
+  Product 78/128: https://www.avizo.cz/autobazar/lzice-prolamovany-100cm-3-6-5-5t-19074296.html
+  Product 71/372: https://www.sbazar.cz/inzerat/225942052-aps-kmz-28-bagr-minibagr-rypadlo
+  Product 79/128: https://www.avizo.cz/autobazar/prolamovana-prikopova-lzice-200cm-6-10-5t-19461623.html
+  Product 72/372: https://www.sbazar.cz/inzerat/225941878-aps-kme-12-bagr-minibragr-rypadlo
+  Product 80/128: https://www.avizo.cz/autobazar/prolamovana-prikopova-lzice-170cm-6-9t-19419421.html
+  Product 73/372: https://www.sbazar.cz/inzerat/225799873-minibagr-digger-d955-c-bagr-rypadlo?lokalita=34329121
+  Product 81/128: https://www.avizo.cz/autobazar/lzice-na-hlinu-30cm-2-6-3-5t-19287535.html
+  Product 74/372: https://www.sbazar.cz/inzerat/225591580-minibagr-digger-d700-bagr-podkop-rypadlo-bagrik
+  Product 82/128: https://www.avizo.cz/autobazar/hrabe-prolamovana-lzice-150cm-5-5-7t-19311786.html
+  Product 75/372: https://www.sbazar.cz/inzerat/212822569-minibagr-digger-d905-bagr-podkop-rypadlo-bagrik
+  Product 83/128: https://www.avizo.cz/autobazar/hrabe-prolamovana-lzice-100cm-1-5-2-5t-19166635.html
+  Product 76/372: https://www.sbazar.cz/inzerat/212822485-minibagr-digger-d955-bagr-podkop-rypadlo-bagrik
+  Product 77/372: https://www.sbazar.cz/inzerat/225591763-minibagr-digger-d190-bagr-podkop-rypadlo-bagrik
+  Product 84/128: https://www.avizo.cz/autobazar/kbelik-lichobeznikovy-40-240cm-1-1-13-18t-19406099.html
+  Product 78/372: https://www.sbazar.cz/inzerat/225591688-minibagr-digger-d180-bagr-podkop-rypadlo-bagrik
+  Product 85/128: https://www.avizo.cz/autobazar/lzice-na-hlinu-30cm-3-6-5-5t-ms03-19344144.html
+  Product 86/128: https://www.avizo.cz/autobazar/podkopova-lzice-60cm-3-6-5-5t-17789860.html
+  Product 79/372: https://www.sbazar.cz/inzerat/226293523-pasove-rypadlo-bobcat-e35-324t-2014-3000mth
+  Product 87/128: https://www.avizo.cz/autobazar/lzice-20-cm-1-2t-minibagr-17789796.html
+  Product 80/372: https://www.sbazar.cz/inzerat/169341491-minibagr-digger-d800-bagrik-rypadlo-bagr-podkop
+  Product 81/372: https://www.sbazar.cz/inzerat/224982370-5t-minibagr-drapak-5lopat-volvo-ecr50-rypadlo-pas
+  Product 88/128: https://www.avizo.cz/hudba-video-knihy/tj-ostrava-nabor-divek-10901881.html
+  Product 89/128: https://www.avizo.cz/autobazar/podkopova-lzice-30cm-2-6-3-5t-17789940.html
+  Product 82/372: https://www.sbazar.cz/inzerat/225592006-minibagr-digger-d955-3v-bagr-podkop-rypadlo-bagrik
+  Product 90/128: https://www.avizo.cz/autobazar/prikopova-lzice-200cm-11-14t-19211688.html
+  Product 83/372: https://www.sbazar.cz/inzerat/221326691-kubota-kx41-3-minibagr-18t-rypadlo-podkop-s-kabin
+  Product 91/128: https://www.avizo.cz/autobazar/prolamovane-vedro-hrabe-130cm-3-6-5-5t-18857252.html
+  Product 84/372: https://www.sbazar.cz/inzerat/227510932-hydraulicky-olej-hm46
+  Product 92/128: https://www.avizo.cz/autobazar/podkopova-lopata-100cm-3cx-4cx-3-6-5-5t-se-zuby-19357773.html
+  Product 85/372: https://www.sbazar.cz/inzerat/227511004-carline-mogul-m7ads-iii-15w-40-10l-motorovy-olej
+  Product 93/128: https://www.avizo.cz/autobazar/lzice-pro-minibagr-50cm-6-9t-s50-19228952.html
+  Product 86/372: https://www.sbazar.cz/inzerat/227492896-prolamovana-svahova-lopata-hrabe-60cm-0-14t
+  Product 94/128: https://www.avizo.cz/autobazar/podkopova-lzice-30cm-bagr-3-6-5-5t-17789941.html
+  Product 87/372: https://www.sbazar.cz/inzerat/206436997-pronajem-minibagru-2t-kratkodobe-i-dlouhodobe?lokalita=17363563
+  Product 95/128: https://www.avizo.cz/autobazar/hydraulicka-prikopova-lopata-200cm-11-14t-19714315.html
+  Product 88/372: https://www.sbazar.cz/inzerat/224101828-prolamovana-svahova-lopata-hrabe-300cm-13-20t
+  Product 96/128: https://www.avizo.cz/autobazar/podkopova-lzice-50cm-3-6-5-5t-18857243.html
+  Product 89/372: https://www.sbazar.cz/inzerat/224128267-prolamovana-lopata-150cm-16-23t-ms10
+  Product 97/128: https://www.avizo.cz/autobazar/lzice-prolamovany-100cm-14-5-18t-19251971.html
+  Product 90/372: https://www.sbazar.cz/inzerat/224094967-skandinavska-hydraulicka-prikopova-lopata-160cm
+  Product 98/128: https://www.avizo.cz/autobazar/prikopova-lzice-200cm-6-10t-s45-s50-19251969.html
+  Product 91/372: https://www.sbazar.cz/inzerat/212901364-lichobeznikove-lzice-30-120cm-3-45t
+  Product 92/372: https://www.sbazar.cz/inzerat/212900356-lichobeznikove-lzice-20-70cm-26-35t
+  Product 99/128: https://www.avizo.cz/autobazar/hydraulicka-prikopova-lopata-180cm-11-14t-19357313.html
+  Product 93/372: https://www.sbazar.cz/inzerat/221105015-rypadlo-lopata-35cm-145-18t
+  Product 100/128: https://www.avizo.cz/autobazar/hydraulicka-prikopova-lopata-180cm-11-14-5t-19228868.html
+  Product 94/372: https://www.sbazar.cz/inzerat/214737952-skandinavska-hydraulicka-lzice-160cm-12-16t-s60
+  Product 101/128: https://www.avizo.cz/autobazar/srovnavaci-lopata-150cm-3-6-5-5t-cw10-19396697.html
+  Product 95/372: https://www.sbazar.cz/inzerat/227399191-sany-sy16c-minibagr-18t-2x-lzice-pouze-308mth
+  Product 102/128: https://www.avizo.cz/autobazar/srovnavaci-lopata-80cm-1-1-5t-19645573.html
+  Product 96/372: https://www.sbazar.cz/inzerat/227416732-hydraulicky-olej-hm46
+  Product 103/128: https://www.avizo.cz/autobazar/prolamovana-svahova-lzice-lopata-250cm-9-14t-18646134.html
+  Product 97/372: https://www.sbazar.cz/inzerat/147825969-31570r225-315-70-225-r225-31570225-31570
+  Product 104/128: https://www.avizo.cz/autobazar/hydraulicky-zaves-pro-6-9t-prikopovou-lopatu-18829140.html
+  Product 105/128: https://www.avizo.cz/autobazar/svahova-lopata-170-cm-6-10-5-t-19622644.html
+  Product 98/372: https://www.sbazar.cz/inzerat/224993911-6t-minibagr-rototilt-2025-novy-podvozek-eurocomac
+  Product 106/128: https://www.avizo.cz/autobazar/prolamovana-svahova-lzice-lopata-250cm-10-15t-18857283.html
+  Product 99/372: https://www.sbazar.cz/inzerat/189323031-tatra-111-d-030-143-lanovy-autobagr-kultovni
+  Product 100/372: https://www.sbazar.cz/inzerat/222427346-jcb-4cx-traktorbagr-spz
+  Product 107/128: https://www.avizo.cz/autobazar/prolamovana-svahova-lzice-lopata-200cm-9-5-13t-18857282.html
+  Product 101/372: https://www.sbazar.cz/inzerat/207690655-bobcat-e50em-4691-motohodin
+  Product 108/128: https://www.avizo.cz/autobazar/srovnavaci-lopata-220cm-18-24t-19645516.html
+  Product 102/372: https://www.sbazar.cz/inzerat/169419808-novy-pasovy-bagr-katana-lx12-9b
+  Product 109/128: https://www.avizo.cz/autobazar/hydraulicka-skandinavska-svahova-lopata-130-cm-5-8-t-19622571.html
+  Product 103/372: https://www.sbazar.cz/inzerat/211246789-lzice-pro-bagr-100cm-15-25t
+  Product 110/128: https://www.avizo.cz/autobazar/prolamovana-srovnavaci-lopata-hydraulicky-shrnovac-130cm-3-6-5-5t-19211722.html
+  Product 104/372: https://www.sbazar.cz/inzerat/227172238-rychloupinak-typ-lehnhoff-ms03-mechanicky
+  Product 111/128: https://www.avizo.cz/autobazar/prikopova-lzice-200cm-14-5-18t-s60-19352477.html
+  Product 105/372: https://www.sbazar.cz/inzerat/220944884-prolamovana-prikopova-lzice-200cm-6-105t
+  Product 112/128: https://www.avizo.cz/autobazar/hrabe-prolamovana-lzice-120cm-2-6-3-5t-18978799.html
+  Product 106/372: https://www.sbazar.cz/inzerat/170693269-podkop-bhm-225
+  Product 113/128: https://www.avizo.cz/autobazar/lopata-lichobeznikova-25-70cm-1-5-2-5t-19420769.html
+  Product 107/372: https://www.sbazar.cz/inzerat/217455227-30cm-lzice-lopata-cat-original-29f4
+  Product 114/128: https://www.avizo.cz/autobazar/podkopova-lzice-30cm-1-3-2-5t-19620083.html
+  Product 108/372: https://www.sbazar.cz/inzerat/219117380-srovnavaci-lopata-150cm-36-55t-cw10
+  Product 115/128: https://www.avizo.cz/autobazar/lzice-hydraulicka-skandinavska-130cm-5-7-5t-18857154.html
+  Product 109/372: https://www.sbazar.cz/inzerat/227310196-hm-46-motorovy-olej
+  Product 116/128: https://www.avizo.cz/autobazar/lzice-13cm-na-kabely-2-5-3-5t-18857178.html
+  Product 110/372: https://www.sbazar.cz/inzerat/222735136-prodame-zajisteni-pro-prepravu-pasovych-stroju
+  Product 117/128: https://www.avizo.cz/autobazar/prolamovana-hydraulicka-svahova-lopata-130cm-3-6-5-5t-19037495.html
+  Product 111/372: https://www.sbazar.cz/inzerat/227172091-rychloupinak-lehnhoff-ms01
+  Product 118/128: https://www.avizo.cz/prace/strojnik-obsluha-stavebnich-stroju-19721707.html
+  Product 112/372: https://www.sbazar.cz/inzerat/227199385-bubnovy-tridic-cz-screen-mds-mini
+  Product 119/128: https://www.avizo.cz/autobazar/hydraulicka-prolamovana-srovnavaci-lopata-hrabe-220-cm-s-prodlouzenim-ramene-9-12t-19164824.html
+  Product 113/372: https://www.sbazar.cz/inzerat/227226964-technicke-kontroly-revize-stroju-pro-zemni-prace
+  Product 120/128: https://www.avizo.cz/autobazar/lzice-hydraulicke-170cm-6-9t-18857151.html
+  Product 114/372: https://www.sbazar.cz/inzerat/225530539-zhutnujici-kola-na-bagr
+  Product 121/128: https://www.avizo.cz/autobazar/lzice-hydraulicke-120cm-2-6t-3-5t-18857135.html
+  Product 115/372: https://www.sbazar.cz/inzerat/186314561-vstrikovaci-cerpadlo-traktor-s-180
+  Product 122/128: https://www.avizo.cz/autobazar/hydraulicka-prikopova-lzice-180cm-6-9t-18857220.html
+  Product 116/372: https://www.sbazar.cz/inzerat/220289285-sada-pro-hydraulicke-tlakove-zkousky-nova
+  Product 123/128: https://www.avizo.cz/autobazar/lzice-hydraulicke-170cm-6-9t-19140126.html
+  Product 117/372: https://www.sbazar.cz/inzerat/227123899-traktorbagr-new-holland-b110c-rv-2019-2689mth
+  Product 124/128: https://www.avizo.cz/autobazar/lzice-prolamovany-100cm-6-9t-19159238.html
+  Product 125/128: https://www.avizo.cz/autobazar/hydraulicka-prikopova-lopata-160cm-6-10-5t-19644663.html
+  Product 118/372: https://www.sbazar.cz/inzerat/225166129-pujcovna-bagru-a-stavebni-mechanizacevelke-porici
+  Product 126/128: https://www.avizo.cz/autobazar/lzice-trapezovy-50-80cm-3-6-5-5t-ms03-18857259.html
+  Product 119/372: https://www.sbazar.cz/inzerat/227173051-hydraulicka-prikopova-lopata-200cm-11-14t
+  Product 127/128: https://www.avizo.cz/autobazar/skandinavska-prikopova-lzice-140cm-9-13t-s45-s50-19098340.html
+  Product 120/372: https://www.sbazar.cz/inzerat/227147947-skandinavska-prikopova-lzice-120cm-3-48t
+  Product 128/128: https://www.avizo.cz/autobazar/lzice-prolamovany-60cm-3-6-5-5t-18996245.html
+  Product 121/372: https://www.sbazar.cz/inzerat/227145127-hydraulicka-skandinavska-svahova-lopata-150-85-11
+Avizo: Found 128 total products across 6 page(s)
+Found 128 products from avizo.cz
+  Product 122/372: https://www.sbazar.cz/inzerat/214697461-lzice-prolamovany-100cm-145-18t
+  Product 123/372: https://www.sbazar.cz/inzerat/214697974-prolamovana-hydraulicka-svahova-lopata-120-12-25
+  Product 124/372: https://www.sbazar.cz/inzerat/214697674-lzice-pro-minibagr-25cm-12t-25t
+  Product 125/372: https://www.sbazar.cz/inzerat/214698601-skandinavska-hydraulicka-srovnavaci-lopata-mecalac
+  Product 126/372: https://www.sbazar.cz/inzerat/219552632-hinova-vt1650-minibagr-16t-3x-lzice
+  Product 127/372: https://www.sbazar.cz/inzerat/214738006-vidle-bagru-95-13t-nosnost-35t-s60
+  Product 128/372: https://www.sbazar.cz/inzerat/206787160-new-holland-b100c
+  Product 129/372: https://www.sbazar.cz/inzerat/216747889-hrabe-prolamovana-lzice-150cm-55-7t
+  Product 130/372: https://www.sbazar.cz/inzerat/225193786-doosan-dh55-minibagr-55t-rok-2007
+  Product 131/372: https://www.sbazar.cz/inzerat/211247080-lzice-pro-minibagr-40cm-13t-25t
+  Product 132/372: https://www.sbazar.cz/inzerat/219552386-wacker-neuson-8002-minibagr-8t-2x-lzice
+  Product 133/372: https://www.sbazar.cz/inzerat/225358579-pasovy-bagr-gg800nxc-kabina-zaruka-novy-gunter
+  Product 134/372: https://www.sbazar.cz/inzerat/221078951-pasovy-bagr-jcb-220x-l-rok-vyroby-2018-7486-mth
+  Product 135/372: https://www.sbazar.cz/inzerat/227121670-minibagr-gorila-g16se-i-pro-cab-2026
+  Product 136/372: https://www.sbazar.cz/inzerat/219552068-jcb-8008-minibagr-1t-2x-lzice
+  Product 137/372: https://www.sbazar.cz/inzerat/226919914-prodej-skel-na-stavebni-a-zemni-stroje
+  Product 138/372: https://www.sbazar.cz/inzerat/171498737-14t-bagr-guma-takeuchi-tb1140-pasak
+  Product 139/372: https://www.sbazar.cz/inzerat/214693414-hydraulicka-spadova-lopata-170cm-6-105t
+  Product 140/372: https://www.sbazar.cz/inzerat/211380265-podkopova-lzice-60cm-95-14t
+  Product 141/372: https://www.sbazar.cz/inzerat/219880901-jcb-8045-minibagr-4750kg-rok-2013
+  Product 142/372: https://www.sbazar.cz/inzerat/212333455-lzice-hydraulicke-100cm-16t-25t
+  Product 143/372: https://www.sbazar.cz/inzerat/213926581-tridici-lopaty-hvezdicove
+  Product 144/372: https://www.sbazar.cz/inzerat/208379104-bandenmarkt-bagr-31570r225-315-70-225-r225
+  Product 145/372: https://www.sbazar.cz/inzerat/226900162-cepova-sekacka-krovinorez-dc1200-pro-pasova
+  Product 146/372: https://www.sbazar.cz/inzerat/210224419-lego-technic-42061-nakladac
+  Product 147/372: https://www.sbazar.cz/inzerat/225358690-pasovy-bagr-gunter-grossmann-gg850-kubota-motor
+  Product 148/372: https://www.sbazar.cz/inzerat/217462094-pasovy-bagr-gg4000-motor-yanmar-zaruka-novy
+  Product 149/372: https://www.sbazar.cz/inzerat/213334501-tridici-lopata-mini-005m3
+  Product 150/372: https://www.sbazar.cz/inzerat/225358861-pasovy-bagr-gg850-cab-gunter-grossmann-kubota
+  Product 151/372: https://www.sbazar.cz/inzerat/226828039-minibagr-gorila-g18se-i-pro-2026
+  Product 152/372: https://www.sbazar.cz/inzerat/227025628-2005-minibagr-takeuchi-tb016
+  Product 153/372: https://www.sbazar.cz/inzerat/217461863-pasovy-bagr-gg3500-motor-kubota-zaruka-novy
+  Product 154/372: https://www.sbazar.cz/inzerat/225362365-pasove-kompaktni-bagry-gg1050-v-mlada-boleslav
+  Product 155/372: https://www.sbazar.cz/inzerat/224349493-naklapeci-hlava-powertilt
+  Product 156/372: https://www.sbazar.cz/inzerat/208222465-mini-bagr-zipper-mbgs600-70cm-560kg
+  Product 157/372: https://www.sbazar.cz/inzerat/225358174-pasova-bagr-gg800
+  Product 158/372: https://www.sbazar.cz/inzerat/226829596-minibagr-gorila-g26se-i-pro
+  Product 159/372: https://www.sbazar.cz/inzerat/225553915-minibagr-gorila-g10s-i-lite-2026
+  Product 160/372: https://www.sbazar.cz/inzerat/226827220-minibagr-gorila-g16se-i-pro-cab-2026
+  Product 161/372: https://www.sbazar.cz/inzerat/145180657-zetor-rs0-9-kirovec-praga-prirucky-katalogy
+  Product 162/372: https://www.sbazar.cz/inzerat/225554080-minibagr-g12se-l-pro-2026-joysticky-akce-kubota
+  Product 163/372: https://www.sbazar.cz/inzerat/225554362-minibagr-gorila-g10s-l-lite-2026
+  Product 164/372: https://www.sbazar.cz/inzerat/225554536-minibagr-gorila-g12s-i-lite-2026
+  Product 165/372: https://www.sbazar.cz/inzerat/225554731-minibagr-gorila-g12-pro2-kubota
+  Product 166/372: https://www.sbazar.cz/inzerat/225371635-srovnavaci-lopata-80cm-1-15t
+  Product 167/372: https://www.sbazar.cz/inzerat/225369301-srovnavaci-lopata-220cm-18-24t
+  Product 168/372: https://www.sbazar.cz/inzerat/225367573-hydraulicka-prikopova-lopata-160cm-6-105t
+  Product 169/372: https://www.sbazar.cz/inzerat/198379051-kloubovy-nakladac-crona-nakladac-cr-15
+  Product 170/372: https://www.sbazar.cz/inzerat/205592172-parezova-freza-na-bagry-profi
+  Product 171/372: https://www.sbazar.cz/inzerat/223148557-lego-42055-nove-nerozbalene
+  Product 172/372: https://www.sbazar.cz/inzerat/212125402-hrabe-prolamovana-lzice-100cm-15-25t
+  Product 173/372: https://www.sbazar.cz/inzerat/213922822-lichobeznikove-lzice-40-310cm-12-17t
+  Product 174/372: https://www.sbazar.cz/inzerat/211937410-lzice-prolamovany-100cm-6-9t
+  Product 175/372: https://www.sbazar.cz/inzerat/214161454-kompletni-katalog-vice-jak-200-typu-adapteru
+  Product 176/372: https://www.sbazar.cz/inzerat/226170370-pasovy-minibagr-gorila-g26se-i-pro-cab
+  Product 177/372: https://www.sbazar.cz/inzerat/211904989-podkopova-lzice-80cm-36-55t
+  Product 178/372: https://www.sbazar.cz/inzerat/212100883-skandinavska-hydraulicka-lzice-13-20t
+  Product 179/372: https://www.sbazar.cz/inzerat/226364782-pasovy-minibagr-gorila-g16se-i-pro-2026
+  Product 180/372: https://www.sbazar.cz/inzerat/226364821-pasovy-minibagr-gorila-g20se-i-pro-2026
+  Product 181/372: https://www.sbazar.cz/inzerat/226170343-minibagr-gorila-g20se-i-pro-cab-2026
+  Product 182/372: https://www.sbazar.cz/inzerat/226831501-pasovy-minibagr-gorila-g40s-i-pro-cab
+  Product 183/372: https://www.sbazar.cz/inzerat/226170283-minibagr-gorila-gx12-i-pro-2025
+  Product 184/372: https://www.sbazar.cz/inzerat/226364914-pasovy-minibagr-gorila-g20se-i-pro-cab-2026
+  Product 185/372: https://www.sbazar.cz/inzerat/226915042-motorovy-olej-m7adsiii-15w-40
+  Product 186/372: https://www.sbazar.cz/inzerat/224732977-rychloupinac-jcb-3cx-4cx-8060-8080-hq
+  Product 187/372: https://www.sbazar.cz/inzerat/226829842-demolicni-celisti-gms30-48-t-360deg-rotace
+  Product 188/372: https://www.sbazar.cz/inzerat/194574616-bagr-minirypadlo-motor-kubota
+  Product 189/372: https://www.sbazar.cz/inzerat/225554983-minibagr-g27se-i-pro-cab-motor-kubota
+  Product 190/372: https://www.sbazar.cz/inzerat/226764079-nahradni-dily-pro-traktorbagry
+  Product 191/372: https://www.sbazar.cz/inzerat/216211471-hydraulicky-zaves-pro-svarovani-12-18t
+  Product 192/372: https://www.sbazar.cz/inzerat/211571896-prodlouzeni-ramene-150cm-ms08
+  Product 193/372: https://www.sbazar.cz/inzerat/213516370-nivelacni-nosnik-grejdr-150cm-25-36t
+  Product 194/372: https://www.sbazar.cz/inzerat/211248370-prodlouzeni-ramene-120cm-dosah-minibagru-ms03
+  Product 195/372: https://www.sbazar.cz/inzerat/211380364-nivelacni-nosnik-hydraulicky-grejdr-150cm-25-4t
+  Product 196/372: https://www.sbazar.cz/inzerat/214698337-nivelacni-nosnik-hydraulicky-grejdr-120cm-15-25
+  Product 197/372: https://www.sbazar.cz/inzerat/226849864-motorovy-olej-carline-mogul-m7ads-3-15w-40-10l
+  Product 198/372: https://www.sbazar.cz/inzerat/211378198-prolamovana-hydraulicka-lopata-130cm-36-55t
+  Product 199/372: https://www.sbazar.cz/inzerat/212869957-hlinene-vedro-40cm-26-35t
+  Product 200/372: https://www.sbazar.cz/inzerat/213900844-lzice-pro-minibagr-50cm-6-9t-s50
+  Product 201/372: https://www.sbazar.cz/inzerat/220263551-lzice-lichobeznikova-40-310cm-115-12-16t-cw20s
+  Product 202/372: https://www.sbazar.cz/inzerat/226849774-motorovy-olej-carline-mogul-m7adsiii-15w40
+  Product 203/372: https://www.sbazar.cz/inzerat/219835286-sany-sy26-minibagr-28t-3x-lzice
+  Product 204/372: https://www.sbazar.cz/inzerat/213892765-hydraulicka-prikopova-lopata-180cm-11-145t
+  Product 205/372: https://www.sbazar.cz/inzerat/214697236-prikopova-lzice-200cm-6-10t
+  Product 206/372: https://www.sbazar.cz/inzerat/211352107-lehnhoff-ms-03-mechanicka-rychlospojka
+  Product 207/372: https://www.sbazar.cz/inzerat/223102984-takeuchi-tb2150r
+  Product 208/372: https://www.sbazar.cz/inzerat/211145971-lzice-120-cm-26-35t
+  Product 209/372: https://www.sbazar.cz/inzerat/211351162-hydraulicka-prikopova-lzice-180cm-6-9t
+  Product 210/372: https://www.sbazar.cz/inzerat/213863650-hydraulicka-prikopova-lzice-90cm-16-25t
+  Product 211/372: https://www.sbazar.cz/inzerat/220254110-rypadlo-lopata-100cm-145-18t
+  Product 212/372: https://www.sbazar.cz/inzerat/211563277-lzice-hydraulicke-170cm-6-9t
+  Product 213/372: https://www.sbazar.cz/inzerat/226829710-drtici-celisti-hrp400-611-t-360deg-rotace
+  Product 214/372: https://www.sbazar.cz/inzerat/226824475-demolicni-kladivo-te-100
+  Product 215/372: https://www.sbazar.cz/inzerat/221750096-hyundai-25-9zak-minibagr-28t-3x-lzice
+  Product 216/372: https://www.sbazar.cz/inzerat/222517357-takeuchi-tb216-rok-2018
+  Product 217/372: https://www.sbazar.cz/inzerat/222817867-lego-duplo-10931-nakladak-a-pasovy-bagr
+  Product 218/372: https://www.sbazar.cz/inzerat/205789449-minirypadlo-aps-kme-18
+  Product 219/372: https://www.sbazar.cz/inzerat/211352890-lzice-hrabe-rozryvac-korenu-130-cm-6-9t
+  Product 220/372: https://www.sbazar.cz/inzerat/197915425-zuby-pro-stroje-jcb-3-cx4cx-2-cx-volvo-bl
+  Product 221/372: https://www.sbazar.cz/inzerat/217833407-zub-rovny-pro-stroj-1-5-tun-roztec-60mm-brit-16
+  Product 222/372: https://www.sbazar.cz/inzerat/226682644-sutovy-hakovy-kontejner-avia-vana-375x200x45-cm
+  Product 223/372: https://www.sbazar.cz/inzerat/211350250-root-ripper-ripper-6-9t-rypadlo-nakladac
+  Product 224/372: https://www.sbazar.cz/inzerat/211380679-nivelacni-nosnik-grejdr-200cm-6-10t
+  Product 225/372: https://www.sbazar.cz/inzerat/211377016-shrnovac-150cm-pro-bagr-6-9t
+  Product 226/372: https://www.sbazar.cz/inzerat/221525012-hydraulicky-grejdr-vyrovnavaci-nosnik-200cm-6-10t
+  Product 227/372: https://www.sbazar.cz/inzerat/211382428-vidlice-bagru-35t-nosnost-13-20t-cw40-cw30-cw20
+  Product 228/372: https://www.sbazar.cz/inzerat/223323655-valnikovy-vyztuzeny-kontejner-3m3
+  Product 229/372: https://www.sbazar.cz/inzerat/108023850-zetor-rs-9-belarus-unhz-500-prirucky-katalogy
+  Product 230/372: https://www.sbazar.cz/inzerat/224882590-kontejner-klasicky-sutovy-hakovy
+  Product 231/372: https://www.sbazar.cz/inzerat/211352026-adapterova-deska-ram-s50-volvo-s60
+  Product 232/372: https://www.sbazar.cz/inzerat/211354774-shrnovac-200-cm-pro-bagr-6-9t
+  Product 233/372: https://www.sbazar.cz/inzerat/211350148-vidle-bagru-nosnost-25t
+  Product 234/372: https://www.sbazar.cz/inzerat/223283215-kabelovy-kbelik-pro-opticka-vlakna-20cm-26-35t
+  Product 235/372: https://www.sbazar.cz/inzerat/224882419-kontejnery-velkoobjemove-komunalni
+  Product 236/372: https://www.sbazar.cz/inzerat/224882653-kontejnery-sutove-velke-420-x-220-cm-vnitrek
+  Product 237/372: https://www.sbazar.cz/inzerat/115606035-zetor-rs0-9-kirovec-jcb-prirucky-katalogy
+  Product 238/372: https://www.sbazar.cz/inzerat/211380736-lzice-manitou-15-m3
+  Product 239/372: https://www.sbazar.cz/inzerat/211352404-root-ripper-ripper-15-25t-minibagry-50cm
+  Product 240/372: https://www.sbazar.cz/inzerat/223282009-kabelovy-kbelik-pro-opticka-vlakna-20cm-36-55t
+  Product 241/372: https://www.sbazar.cz/inzerat/213293509-tridicka-tridici-lopata-hvezdicova
+  Product 242/372: https://www.sbazar.cz/inzerat/211354498-prolamovana-svahova-lzice-lopata-250cm-10-15t
+  Product 243/372: https://www.sbazar.cz/inzerat/211354729-hydraulicky-zaves-pro-6-9t-prikopovou-lopatu
+  Product 244/372: https://www.sbazar.cz/inzerat/211147054-lzice-hydraulicka-skandinavska-130cm-5-75t
+  Product 245/372: https://www.sbazar.cz/inzerat/211248682-lzice-13cm-na-kabely-25-35t
+  Product 246/372: https://www.sbazar.cz/inzerat/211350880-skandinavska-prikopova-lzice-140cm-8-11t
+  Product 247/372: https://www.sbazar.cz/inzerat/211377142-prolamovana-svahova-lopata-100cm-16-25t
+  Product 248/372: https://www.sbazar.cz/inzerat/211378018-hrabe-prolamovana-lzice-150cm-36-55t
+  Product 249/372: https://www.sbazar.cz/inzerat/213516271-skandinavska-prikopova-lzice-120cm-5-8t
+  Product 250/372: https://www.sbazar.cz/inzerat/219370349-kbelik-lichobeznikovy-40-240cm-11-13-18t
+  Product 251/372: https://www.sbazar.cz/inzerat/226668292-motorvy-olej-m7ads-iii-15w40
+  Product 252/372: https://www.sbazar.cz/inzerat/164168123-pasovy-bagr-tatrasmalt-rok-1965-cssr
+  Product 253/372: https://www.sbazar.cz/inzerat/211248019-lzice-20-cm-12t-minibagr
+  Product 254/372: https://www.sbazar.cz/inzerat/211248265-lzice-na-hlinu-40cm-36-55t
+  Product 255/372: https://www.sbazar.cz/inzerat/211349929-lichobeznikove-lzice-20-30cm-25-35t
+  Product 256/372: https://www.sbazar.cz/inzerat/211352479-hrabe-prolamovana-lzice-120cm-26-35t
+  Product 257/372: https://www.sbazar.cz/inzerat/211353997-lzice-trapezovy-50-80cm-36-55t-ms03
+  Product 258/372: https://www.sbazar.cz/inzerat/211354426-prolamovana-svahova-lzice-lopata-200cm-95-13t
+  Product 259/372: https://www.sbazar.cz/inzerat/211350040-skandinavska-lzice-110cm-33-48t
+  Product 260/372: https://www.sbazar.cz/inzerat/211354897-prolamovana-drenazni-spadova-lopata-300cm-11-15t
+  Product 261/372: https://www.sbazar.cz/inzerat/211378126-lzice-prolamovany-100cm-36-55t
+  Product 262/372: https://www.sbazar.cz/inzerat/211377331-lzice-pro-minibagr-40cm-13t-25t
+  Product 263/372: https://www.sbazar.cz/inzerat/211380640-skandinavska-prikopova-lzice-140cm-9-13t-s45-s50
+  Product 264/372: https://www.sbazar.cz/inzerat/211377493-skandinavska-lzice-60cm-13-25t
+  Product 265/372: https://www.sbazar.cz/inzerat/211378243-lzice-pro-minibagr-90cm-6-9t
+  Product 266/372: https://www.sbazar.cz/inzerat/211377181-lzice-prolamovany-100cm-95-13t
+  Product 267/372: https://www.sbazar.cz/inzerat/211377436-lzice-pro-minibagr-45cm-13t-25t
+  Product 268/372: https://www.sbazar.cz/inzerat/224734822-skandinavska-svahova-lopata-150-cm-8511-t
+  Product 269/372: https://www.sbazar.cz/inzerat/224800978-prolamovana-srovnavaci-lopata-hydraulicke-shrnovan
+  Product 270/372: https://www.sbazar.cz/inzerat/224942041-top-stav-lego-duplo-10811-nakladac
+  Product 271/372: https://www.sbazar.cz/inzerat/14949491-mazivo-na-prodej-v-kyblech-18-kg-15kg-5-kg
+  Product 272/372: https://www.sbazar.cz/inzerat/211248574-prikopova-lzice-80cm-10-15t
+  Product 273/372: https://www.sbazar.cz/inzerat/211352773-skandinavska-hydraulicka-lzice-100cm-33-48t
+  Product 274/372: https://www.sbazar.cz/inzerat/211352200-skandinavska-prikopova-lzice-100cm-25-35t
+  Product 275/372: https://www.sbazar.cz/inzerat/211351915-prikopova-lzice-200cm-6-9t
+  Product 276/372: https://www.sbazar.cz/inzerat/211354393-lzice-lopata-trapezovy-5-6t
+  Product 277/372: https://www.sbazar.cz/inzerat/211354120-hydraulicka-prikopova-lzice-180cm-8-10t-ms03
+  Product 278/372: https://www.sbazar.cz/inzerat/213516049-prikopova-lzice-200cm-11-14t
+  Product 279/372: https://www.sbazar.cz/inzerat/224736661-hydraulicka-skandinavska-svahova-lopata-130cm-58t
+  Product 280/372: https://www.sbazar.cz/inzerat/152735199-7t-bagr-cat-307-ocel-pasy-2023-kladivo
+  Product 281/372: https://www.sbazar.cz/inzerat/211248496-podkopova-lzice-50cm-13-25t
+  Product 282/372: https://www.sbazar.cz/inzerat/211248436-podkopova-lzice-30cm-26-35t
+  Product 283/372: https://www.sbazar.cz/inzerat/211352596-prolamovane-vedro-hrabe-130cm-36-55t
+  Product 284/372: https://www.sbazar.cz/inzerat/211377088-prolamovana-bagrova-lzice-100-cm-36-55t
+  Product 285/372: https://www.sbazar.cz/inzerat/211452757-lzice-hydraulicke-170cm-6-9t
+  Product 286/372: https://www.sbazar.cz/inzerat/216045916-hydraulicka-spadova-lopata-160-6-105t-ms08-symloc
+  Product 287/372: https://www.sbazar.cz/inzerat/217894160-hydraulicka-prikopova-lopata-180cm-11-14t
+  Product 288/372: https://www.sbazar.cz/inzerat/217924730-podkopova-lopata-100cm-3cx-4cx-36-55t-se-zuby
+  Product 289/372: https://www.sbazar.cz/inzerat/224706439-podkopova-lzice-30cm-13-25t
+  Product 290/372: https://www.sbazar.cz/inzerat/224711194-podkopova-lzice-50cm-6-9t-mecalac
+  Product 291/372: https://www.sbazar.cz/inzerat/224714194-podkopova-lzice-110cm-36-55t
+  Product 292/372: https://www.sbazar.cz/inzerat/211568872-hydraulicka-svahova-lopata-200cm-13-20t-cw40-s60
+  Product 293/372: https://www.sbazar.cz/inzerat/224739139-svahova-lopata-170-cm-6105-t
+  Product 294/372: https://www.sbazar.cz/inzerat/211146946-hydraulicka-prikopova-lopata-150cm-36-55t
+  Product 295/372: https://www.sbazar.cz/inzerat/211146868-lzice-hydraulicke-120cm-26t-35t
+  Product 296/372: https://www.sbazar.cz/inzerat/211352542-podkopova-lzice-30cm-bagr-36-55t
+  Product 297/372: https://www.sbazar.cz/inzerat/211353790-podkopova-lzice-80cm-45-6t-klac
+  Product 298/372: https://www.sbazar.cz/inzerat/211354690-podkopova-lzice-45cm-6-9t
+  Product 299/372: https://www.sbazar.cz/inzerat/211352359-podkopova-lzice-50cm-36-55t
+  Product 300/372: https://www.sbazar.cz/inzerat/211351567-podkopova-lzice-80cm-6-9t
+  Product 301/372: https://www.sbazar.cz/inzerat/217927715-podkopova-lopata-verachtertcw10-40cm-s-cepeli-6-9t
+  Product 302/372: https://www.sbazar.cz/inzerat/213114097-tridici-lopata-mini
+  Product 303/372: https://www.sbazar.cz/inzerat/178593937-pasovy-bagr-doosan-dx140-lcr-3
+  Product 304/372: https://www.sbazar.cz/inzerat/151060717-menzi-muck-5000-t2t
+  Product 305/372: https://www.sbazar.cz/inzerat/175152851-lego-duplo-pasovy-bagr-a-nakladak
+  Product 306/372: https://www.sbazar.cz/inzerat/226405879-detsky-elektricky-bagr
+  Product 307/372: https://www.sbazar.cz/inzerat/211028143-rezac-asfaltu-hardy
+  Product 308/372: https://www.sbazar.cz/inzerat/212604718-nuzky-na-stromy-a-porost-hardy-ts01-180mm-pro-3-5t
+  Product 309/372: https://www.sbazar.cz/inzerat/212605060-nuzky-na-stromy-a-porost-hardy-ts02-250mm-pro5-10t
+  Product 310/372: https://www.sbazar.cz/inzerat/212605174-nuzky-na-stromy-a-porost-hardy-ts06-310mm-10-18t
+  Product 311/372: https://www.sbazar.cz/inzerat/226347154-pasovy-traktor-25hp-7ks-prislusenstvi
+  Product 312/372: https://www.sbazar.cz/inzerat/226380883-rypadlo-lopata-90cm-18-24t
+  Product 313/372: https://www.sbazar.cz/inzerat/57823207-auticka
+  Product 314/372: https://www.sbazar.cz/inzerat/153748585-lzice-na-minibagry-bagry
+  Product 315/372: https://www.sbazar.cz/inzerat/186635879-pujcovna-stavebni-technikyjaromer-okoli-i-vikendy
+  Product 316/372: https://www.sbazar.cz/inzerat/225941701-minirypadlo-minibagr-bagr-schmidt-ar-360
+  Product 317/372: https://www.sbazar.cz/inzerat/219736274-prolamovana-prikopova-lzice-170cm-6-9t
+  Product 318/372: https://www.sbazar.cz/inzerat/222921676-kbelik-lichobeznikovy-90-120cm-7-11t-ms08
+  Product 319/372: https://www.sbazar.cz/inzerat/215782699-lzice-na-hlinu-30cm-26-35t
+  Product 320/372: https://www.sbazar.cz/inzerat/219758129-lopata-lichobeznikova-2575-15-25t
+  Product 321/372: https://www.sbazar.cz/inzerat/153752329-prislusenstvi-pro-minibagr-kleste-na-drevo-hrabe
+  Product 322/372: https://www.sbazar.cz/inzerat/210733846-gumovy-pas-rubberhill-pro-vsechny-stavebni-stroje
+  Product 323/372: https://www.sbazar.cz/inzerat/217757981-prikopova-lzice-200cm-145-18t-s60
+  Product 324/372: https://www.sbazar.cz/inzerat/153751245-pasy-na-bagry-minibagry-lzice-pro-bagr
+  Product 325/372: https://www.sbazar.cz/inzerat/217393562-nivelacni-nosnik-grejdr-250cm-12-18t
+  Product 326/372: https://www.sbazar.cz/inzerat/217475414-rozryvac-korenu-rozryvac-8-11t-cw10
+  Product 327/372: https://www.sbazar.cz/inzerat/226019725-minibagr-takeuchi-tb015-2001-2x-lzice-teleskop
+  Product 328/372: https://www.sbazar.cz/inzerat/219512930-hrabe-pro-bagr-130cm-36-55t
+  Product 329/372: https://www.sbazar.cz/inzerat/226212574-minibagr-digger-d3000-hd?lokalita=34663402
+  Product 330/372: https://www.sbazar.cz/inzerat/222540331-kobelco-sk500
+  Product 331/372: https://www.sbazar.cz/inzerat/217437866-skandinavska-prikopova-lzice-170cm-12-16t-ms10
+  Product 332/372: https://www.sbazar.cz/inzerat/225136135-rypadlo-bagr-ar360-38t-novy-stroj
+  Product 333/372: https://www.sbazar.cz/inzerat/215536822-skandinavska-prikopova-lzice-100cm-1-27t
+  Product 334/372: https://www.sbazar.cz/inzerat/217507064-lzice-na-hlinu-30cm-36-55t-ms03
+  Product 335/372: https://www.sbazar.cz/inzerat/213672913-skandinavska-hydraulicka-lzice-120cm-5-8t
+  Product 336/372: https://www.sbazar.cz/inzerat/217441580-hydraulicka-spadova-lopata-130cm-36-55t-morin-m1
+  Product 337/372: https://www.sbazar.cz/inzerat/215483227-rovne-zuby-pro-bagr-3-8tun-roztec-55mm-brit-20mm
+  Product 338/372: https://www.sbazar.cz/inzerat/213522925-vykopove-a-zemni-prace-bagrem-bobcat-e27-podborany
+  Product 339/372: https://www.sbazar.cz/inzerat/213522331-vykopove-prace-bagrem-bobcat-kralovice
+  Product 340/372: https://www.sbazar.cz/inzerat/213522562-vykopove-a-zemni-prace-zatec
+  Product 341/372: https://www.sbazar.cz/inzerat/213522814-vykopove-a-zemni-prace-bagrem-bobcat-zlutice
+  Product 342/372: https://www.sbazar.cz/inzerat/213523012-vykopove-prace-bagrem-v-rakovniku
+  Product 343/372: https://www.sbazar.cz/inzerat/213522469-vykopove-prace-bagrem-bobcat-e27-kladno
+  Product 344/372: https://www.sbazar.cz/inzerat/213522721-vykopove-a-zemni-prace-bagrem-beroun
+  Product 345/372: https://www.sbazar.cz/inzerat/207055237-bobcat-e50z-top-stavklimabt545-mth
+  Product 346/372: https://www.sbazar.cz/inzerat/211248637-skandinavska-hydraulicka-prikopova-lzice-140cm
+  Product 347/372: https://www.sbazar.cz/inzerat/211377946-lzice-prolamovany-60cm-13-25t
+  Product 348/372: https://www.sbazar.cz/inzerat/221177549-rovne-zuby-pro-bagr-2-6-tun-roztec-50mm-brit-17mm
+  Product 349/372: https://www.sbazar.cz/inzerat/225901897-minibagr-digger-d116-1-c-bagr
+  Product 350/372: https://www.sbazar.cz/inzerat/211248091-lzice-40cm-bagr-36t-55t
+  Product 351/372: https://www.sbazar.cz/inzerat/225590713-minibagr-digger-d4000-bagrik-4t-rypadl-bagr-kubota
+  Product 352/372: https://www.sbazar.cz/inzerat/225125257-minibagr-kubota-kx016-4-rok-2016-2100mth-top
+  Product 353/372: https://www.sbazar.cz/inzerat/225125065-minibagr-kubota-kx016-4-rok-2017-1800mth-top
+  Product 354/372: https://www.sbazar.cz/inzerat/225592099-minibagr-digger-d116-j-g-ii-bagr-podkop-bagrik
+  Product 355/372: https://www.sbazar.cz/inzerat/225592078-minibagr-digger-d116-g-ii-bagr-podkop-bagrik
+  Product 356/372: https://www.sbazar.cz/inzerat/225591595-minibagr-digger-d955-c-3v-bagr-s-kabinou-bagrik
+  Product 357/372: https://www.sbazar.cz/inzerat/225591247-minibagr-digger-d3000-bagrik-3t-roztazitelne-pasy
+  Product 358/372: https://www.sbazar.cz/inzerat/225333136-9t-bagr-powertilt-takeuchi-tb290-bez-adblue
+  Product 359/372: https://www.sbazar.cz/inzerat/212822425-minibagr-digger-d955-c-bagr-s-kabinou-bagrik
+  Product 360/372: https://www.sbazar.cz/inzerat/219119057-podkopova-lzice-80cm-95-14t
+  Product 361/372: https://www.sbazar.cz/inzerat/225591808-minibagr-digger-d190-c-bagr-s-kabinou-rypad-bagrik
+  Product 362/372: https://www.sbazar.cz/inzerat/225591712-minibagr-digger-d180-c-bagr-s-kabinou-rypad-bagrik
+  Product 363/372: https://www.sbazar.cz/inzerat/225591634-minibagr-digger-d175-c-bagr-s-kabinou-rypad-bagrik
+  Product 364/372: https://www.sbazar.cz/inzerat/225125356-minibagr-kubota-kx027-4-2200mth-rv-2019-top
+  Product 365/372: https://www.sbazar.cz/inzerat/204265638-minibagr-digger-d3000-hd-3t-bagr-roztazitelne-pasy
+  Product 366/372: https://www.sbazar.cz/inzerat/9170192-rovne-bocni-zuby-pro-minibagry-roztec-40-45mm
+  Product 367/372: https://www.sbazar.cz/inzerat/11678080-rovne-zuby-do-lopat-pro-minibagry-kolem-15-tun
+  Product 368/372: https://www.sbazar.cz/inzerat/169340831-minibagr-digger-d116-g-d130-hd-g-bagr-bagrik
+  Product 369/372: https://www.sbazar.cz/inzerat/208223176-mini-bagr-minirypadlo-jansen-mb500-akce
+  Product 370/372: https://www.sbazar.cz/inzerat/225941629-bagr-minibagr-motor-kubota-schmidt-ar-200
+  Product 371/372: https://www.sbazar.cz/inzerat/11484896-specialni-mazivo-tigroil-modre-na-cepy-a-loziska
+  Product 372/372: https://www.sbazar.cz/inzerat/223087249-vw-caddy-trendline-4x4-20tdi-7-mist-facelift
+Sbazar: Found 372 total products across 7 page(s)
+Found 372 products from sbazar.cz
+Checking search: hemingway
+Bazos: Fetching https://www.bazos.cz/search.php?hledat=hemingway
+Avizo: Fetching https://www.avizo.cz/inzerce/hemingway
+Aukro: Starting search for 'hemingway'
+Aukro: Fetching page 1: https://aukro.cz/vysledky-vyhledavani?text=hemingway&searchAll=true&subbrand=NOT_SPECIFIED
+Sbazar: Fetching https://www.sbazar.cz/hledej/hemingway
+Inzeruj: Fetching https://www.inzeruj.cz/search?title=hemingway
+Inzeruj: Got response, status 200, size 53307 bytes
+Inzeruj: Saved response to temp/report/inzeruj_response_1770127058.html
+Inzeruj: Extracted 0 product links
+Inzeruj: Processing 0 products
+Inzeruj: Found 0 total products
+Found 0 products from inzeruj.cz
+Aukro: Page 1 - Status 200, Size 2185100 bytes
+Aukro: Saved to temp/report/aukro_page1_1770127058.html
+Aukro: Page 1: Found 4 products
+Aukro: Fetching page 2: https://aukro.cz/vysledky-vyhledavani?text=hemingway&searchAll=true&subbrand=NOT_SPECIFIED&page=2
+Sbazar: Got response for page 1, status 200, size 941244 bytes
+Sbazar: Saved response to temp/report/sbazar_page1_1770127058.html
+Sbazar: Page 1 - extracted 46 new products (total: 46)
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/hemingway/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/0
+Avizo: Got response for page 1, status 200, size 69265 bytes
+Avizo: Saved response to temp/report/avizo_page1_1770127059.html
+Avizo: Page 1 - extracted 7 new products (total: 7)
+Avizo: Processing 7 products from 1 page(s)
+  Product 1/7: https://www.avizo.cz/seznamka/hledam-zenu-19683289.html
+  Product 2/7: https://www.avizo.cz/prace/vedouci-odboru-stavebni-urad-19705761.html
+  Product 3/7: https://www.avizo.cz/autobazar/elektricka-cestovni-motorka-19716052.html
+  Product 4/7: https://www.avizo.cz/zvirata-rostliny/francouzsky-buldocek-s-pp-fci-19725723.html
+  Product 5/7: https://www.avizo.cz/stavba-dilna-zahrada/laminatovy-bazen-19722250.html
+  Product 6/7: https://www.avizo.cz/reality/koupim-byt-v-osobnim-vlastnictvi-v-havirove-podlesi-a-mesto-ostrava-poruba-17739061.html
+  Product 7/7: https://www.avizo.cz/prace/nabizim-praci-ridice-skupiny-c-19548848.html
+Avizo: Found 7 total products across 1 page(s)
+Found 7 products from avizo.cz
+Bazos: Got response, status 200, size 46179 bytes
+Bazos: Saved response to temp/report/bazos_response_1770127059.html
+  Found: starší knihy (0.00 CZK)
+  Found: Povinná četba k maturitě - rozbory (40.00 CZK)
+  Found: Cizojazyčná literatura v AJ (0.00 CZK)
+  Found: Maturitní otázky z ČJ (literatury) - 20 knih (300.00 CZK)
+  Found: Maturitní otázky z ČJ - Lit. rozbory (15.00 CZK)
+  Found: Maturitní otázky z češtiny (=knihy) (7.00 CZK)
+  Found: Maturitní otázky z angličtiny (5.00 CZK)
+  Found: Knihy za 20Kč (20.00 CZK)
+  Found: Maturitní otázky z literatury (30.00 CZK)
+  Found: Knihy (0.00 CZK)
+  Found: Ernest Hemingway - Rajská zahrada (77.00 CZK)
+  Found: E. Hemingway, E. M. Remarque - slovensky (20.00 CZK)
+  Found: Kniha Velký Gatsby (Francis Scott Fitzgerald) (100.00 CZK)
+  Found: Honba za Hemingwayem - Diane Gilbert Madsen (50.00 CZK)
+  Found: Ernest Hemingway - Mít a nemít (50.00 CZK)
+  Found: 2 knihy (100.00 CZK)
+  Found: Čtenářský deník vypracovaný (300.00 CZK)
+  Found: Knížky pro sběratele (0.00 CZK)
+  Found: Učebnice ČJ a literatury + rozbory (0.00 CZK)
+  Found: Zelené pahorky africké / Mít a nemít / Pátá kolona (100.00 CZK)
+Bazos: Following pagination to page 2: https://www.bazos.cz/search.php?hledat=hemingway&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=20
+Sbazar error: Status 404, Error: Not Found
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/hemingway/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/2
+Aukro: Page 2 - Status 200, Size 2165712 bytes
+Aukro: Saved to temp/report/aukro_page2_1770127061.html
+Aukro: Page 2: Found 4 products
+Aukro: Fetching page 3: https://aukro.cz/vysledky-vyhledavani?text=hemingway&searchAll=true&subbrand=NOT_SPECIFIED&page=3
+Bazos: Got response, status 200, size 29091 bytes
+Bazos: Saved response to temp/report/bazos_response_1770127063.html
+  Found: Ernest Hemingway: Svědectví jednoho života (150.00 CZK)
+  Found: HEMINGWAY - zelené pahorky africké, mit a nemit, pátá kolona (100.00 CZK)
+  Found: Daphne du Maurier a Hemingwayové (0.00 CZK)
+  Found: Maturitní otázky LITERATURA - čtenářský deník (15.00 CZK)
+  Found: Kniha Ernest Hemingway: Komu zvoní hrana (0.00 CZK)
+  Found: Ernest Hemingway – 4 knihy (250.00 CZK)
+  Found: Lolita,Pán much,1984,Malý princ,Cizinec,Pěna dní,Golem ad. (0.00 CZK)
+  Found: ERNEST HEMINGWAY - komu zvoni hrana (50.00 CZK)
+  Found: Romány - 10 knih (0.00 CZK)
+Bazos: Following pagination to page 3: https://www.bazos.cz/search.php?hledat=hemingway&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=20
+Bazos: Found 29 total products across all pages
+Found 29 products from bazos.cz
+Sbazar: Got response for page 2, status 200, size 670005 bytes
+Sbazar: Saved response to temp/report/sbazar_page2_1770127063.html
+Sbazar: Page 2 - extracted 19 new products (total: 65)
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/hemingway/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/3
+Aukro: Page 3 - Status 200, Size 2151734 bytes
+Aukro: Saved to temp/report/aukro_page3_1770127065.html
+Aukro: Page 3: Found 4 products
+Aukro: Fetching page 4: https://aukro.cz/vysledky-vyhledavani?text=hemingway&searchAll=true&subbrand=NOT_SPECIFIED&page=4
+Sbazar error: Status 404, Error: Not Found
+Sbazar: Processing 65 products from 2 page(s)
+  Product 1/65: https://www.sbazar.cz/inzerat/183060347-hemingway
+Aukro: Page 4 - Status 200, Size 2185539 bytes
+Aukro: Saved to temp/report/aukro_page4_1770127068.html
+Aukro: Page 4: Found 4 products
+Aukro: Fetching page 5: https://aukro.cz/vysledky-vyhledavani?text=hemingway&searchAll=true&subbrand=NOT_SPECIFIED&page=5
+  Product 2/65: https://www.sbazar.cz/inzerat/25904463-romany-ernesta-hemingwaye
+Aukro: Page 5 - Status 200, Size 2164322 bytes
+Aukro: Saved to temp/report/aukro_page5_1770127071.html
+Aukro: Page 5: Found 4 products
+Aukro: TOTAL: 20 products across 5 page(s)
+Found 20 products from aukro.cz
+  Product 3/65: https://www.sbazar.cz/inzerat/222983821-zelene-pahorky-africke-ernest-hemingway
+  Product 4/65: https://www.sbazar.cz/inzerat/194437219-sbohem-armado-ernest-hemingway
+  Product 5/65: https://www.sbazar.cz/inzerat/211870864-hemingway
+  Product 6/65: https://www.sbazar.cz/inzerat/212002261-daphne-du-maurier-a-hemingwayove
+  Product 7/65: https://www.sbazar.cz/inzerat/216802960-komu-zvoni-hrana-ernest-hemingway
+  Product 8/65: https://www.sbazar.cz/inzerat/174186297-ostrovy-uprostred-proudu-ernest-hemingway
+  Product 9/65: https://www.sbazar.cz/inzerat/155292491-hemingway
+  Product 10/65: https://www.sbazar.cz/inzerat/138965406-povidky-ernest-hemingway
+  Product 11/65: https://www.sbazar.cz/inzerat/153058320-ernest-hemingway-pohyblivy-svatek
+  Product 12/65: https://www.sbazar.cz/inzerat/216483319-ernest-hemingway-ostrovy-uprostred-proudu-1972
+  Product 13/65: https://www.sbazar.cz/inzerat/143861300-knihu-sbohem-armado-ernest-hemingway
+  Product 14/65: https://www.sbazar.cz/inzerat/220746386-kniha-sbohem-armado-ernest-hemingway
+  Product 15/65: https://www.sbazar.cz/inzerat/5452307-nabizim-starsi-knihu-od-ernesta-hemingwaye
+  Product 16/65: https://www.sbazar.cz/inzerat/25583995-smrt-odpoledne-hemingway
+  Product 17/65: https://www.sbazar.cz/inzerat/186401444-ernest-hemingway-pohyblivy-svatek
+  Product 18/65: https://www.sbazar.cz/inzerat/212285035-sbohem-armado-ernest-hemingway-1958
+  Product 19/65: https://www.sbazar.cz/inzerat/222120761-zelene-pahorky-africke-ernest-hemingway?lokalita=31324838
+  Product 20/65: https://www.sbazar.cz/inzerat/205937244-e-hemingway-7-knih
+  Product 21/65: https://www.sbazar.cz/inzerat/117443823-povidky-ernest-hemingway
+  Product 22/65: https://www.sbazar.cz/inzerat/168124056-kniha-sbohem-armado-ernest-hemingway
+  Product 23/65: https://www.sbazar.cz/inzerat/192339196-ernest-hemingway-sbohem-armado
+  Product 24/65: https://www.sbazar.cz/inzerat/207919147-hemingway-zelene-pahorky-africke
+  Product 25/65: https://www.sbazar.cz/inzerat/159081161-ernest-hemingway-sbohem-armado
+  Product 26/65: https://www.sbazar.cz/inzerat/221361857-ernest-hemingway-povidky-1978
+  Product 27/65: https://www.sbazar.cz/inzerat/225589186-lp-ernest-hemingway-starec-a-more-1967
+  Product 28/65: https://www.sbazar.cz/inzerat/209943304-pohyblivy-svatek-ernest-hemingway
+  Product 29/65: https://www.sbazar.cz/inzerat/217121374-kniha-ernest-hemingway-zelene-pahorky-africke
+  Product 30/65: https://www.sbazar.cz/inzerat/10899734-hemingway-ernest-povidky-smrt-odpolednekazda
+  Product 31/65: https://www.sbazar.cz/inzerat/179428040-selected-stories-ernest-hemingway
+  Product 32/65: https://www.sbazar.cz/inzerat/192930678-ernest-hemingway-rajska-zahrada-roman-1991
+  Product 33/65: https://www.sbazar.cz/inzerat/197043328-ernest-hemingway-zelene-pahorky-africke-1979
+  Product 34/65: https://www.sbazar.cz/inzerat/132267076-ernest-hemingway-james-herriot-jane-austen-atd
+  Product 35/65: https://www.sbazar.cz/inzerat/183218717-ernst-hemingway-svedectvi-jednoho-zivota
+  Product 36/65: https://www.sbazar.cz/inzerat/212806243-klasika-hesse-hemingway-zola-aj-kusove
+  Product 37/65: https://www.sbazar.cz/inzerat/226222252-kniha-ernest-hemingway-komu-zvoni-hrana
+  Product 38/65: https://www.sbazar.cz/inzerat/224240761-ehemingway-fiestastarec-a-more
+  Product 39/65: https://www.sbazar.cz/inzerat/101537791-zelene-pahorky-africke-ernest-hemingway
+  Product 40/65: https://www.sbazar.cz/inzerat/157699456-les-neiges-du-kilimandjaroehemingway-francouzsky
+  Product 41/65: https://www.sbazar.cz/inzerat/110396300-ostrovy-uprostred-proudu-e-hemingway
+  Product 42/65: https://www.sbazar.cz/inzerat/106981805-knihy-autoru-hemingway-dumas-ml-wilde-a-dalsi
+  Product 43/65: https://www.sbazar.cz/inzerat/202346086-2x-e-hemingway-rajska-zahradaostrovy-uprostred
+  Product 44/65: https://www.sbazar.cz/inzerat/118281680-341ostrovy-uprostred-proudu-e-hemingway-1972
+  Product 45/65: https://www.sbazar.cz/inzerat/114800680-43-zelene-pahorky-africke-ernest-hemingway-1958
+  Product 46/65: https://www.sbazar.cz/inzerat/71183242-komu-zvoni-hrana-ehemingway-1970-93
+  Product 47/65: https://www.sbazar.cz/inzerat/76351972-maturitni-otazky-z-cj-literatury-20-knih
+  Product 48/65: https://www.sbazar.cz/inzerat/210652678-zelene-pahorky-africke-mit-a-nemit-pata-kolona
+  Product 49/65: https://www.sbazar.cz/inzerat/210225823-kniha
+  Product 50/65: https://www.sbazar.cz/inzerat/227058229-stare-knihy
+  Product 51/65: https://www.sbazar.cz/inzerat/225458425-stephanie-des-hortsova-cartierova-panterice
+  Product 52/65: https://www.sbazar.cz/inzerat/18288107-ostrovy-uprostred-proudu
+  Product 53/65: https://www.sbazar.cz/inzerat/206459251-laska-a-zkaza-paula-mclain
+  Product 54/65: https://www.sbazar.cz/inzerat/134402353-varime-s-bylinkami-robert-fulghum-v-andrewsova
+  Product 55/65: https://www.sbazar.cz/inzerat/187819908-plechovky-50-obaly-100-sacky-od-tabaku-cigaret
+  Product 56/65: https://www.sbazar.cz/inzerat/27299473-cez-reku-a-pod-stromy
+  Product 57/65: https://www.sbazar.cz/inzerat/222121742-stare-dobrodruzne-knihy
+  Product 58/65: https://www.sbazar.cz/inzerat/100997081-biografie-ernest-hamingway
+  Product 59/65: https://www.sbazar.cz/inzerat/102269406-zelene-pahorky-africke
+  Product 60/65: https://www.sbazar.cz/inzerat/202859830-svetovy-pramen-zabavy-a-pouceni-23-1946
+  Product 61/65: https://www.sbazar.cz/inzerat/145327712-prodam-knihy-od-20-kc-do-50-kc-vse-viz-text
+  Product 62/65: https://www.sbazar.cz/inzerat/207099970-manazeri-se-lvickem-kamil-miketa
+  Product 63/65: https://www.sbazar.cz/inzerat/202645276-beletrie-8-cena-25-75-kc
+  Product 64/65: https://www.sbazar.cz/inzerat/216430438-amphora-max-baren-mixture-plumcake-vanilla
+  Product 65/65: https://www.sbazar.cz/inzerat/74387222-stare-knizky-z-z
+Sbazar: Found 65 total products across 2 page(s)
+Found 65 products from sbazar.cz
+Checking search: test
+Inzeruj: Fetching https://www.inzeruj.cz/search?title=test
+Bazos: Fetching https://www.bazos.cz/search.php?hledat=test
+Avizo: Fetching https://www.avizo.cz/inzerce/test
+Aukro: Starting search for 'test'
+Aukro: Fetching page 1: https://aukro.cz/vysledky-vyhledavani?text=test&searchAll=true&subbrand=NOT_SPECIFIED
+Sbazar: Fetching https://www.sbazar.cz/hledej/test
+Avizo: Got response for page 1, status 200, size 188705 bytes
+Avizo: Saved response to temp/report/avizo_page1_1770127249.html
+Avizo: Page 1 - extracted 27 new products (total: 27)
+Avizo: Found pagination link: https://www.avizo.cz/inzerce/test/2/
+Inzeruj: Got response, status 200, size 54463 bytes
+Inzeruj: Saved response to temp/report/inzeruj_response_1770127249.html
+Inzeruj: Extracted 0 product links
+Inzeruj: Processing 0 products
+Inzeruj: Found 0 total products
+Found 0 products from inzeruj.cz
+Bazos: Got response, status 200, size 48905 bytes
+Bazos: Saved response to temp/report/bazos_response_1770127249.html
+  Found: Škoda ENYAQ iV60 MATRIX KAMERA KŮŽE SoH 91,7% (529990.00 CZK)
+  Found: Šteně dalmatina s PP (0.00 CZK)
+  Found: Hyundai Kona elektric, 64 kWh,Style,tepelko,SoH 96,2% (464900.00 CZK)
+  Found: Škoda ENYAQ iV80 MATRIX PANORAMA HEAD-UP 360° SoH 90,4% (619990.00 CZK)
+  Found: Audi A8L D5 3.0 TDI Quattro - odpočet DPH (867769.00 CZK)
+  Found: Samojed stěňátka s PP (0.00 CZK)
+  Found: Agapornis Fischerův (300.00 CZK)
+  Found: Autobaterie Exide 12V 82Ah AGM (1000.00 CZK)
+  Found: Herní PC-Intel Core i5,RX5700XT 8GB(výkon mezi RTX3060-4060) (5990.00 CZK)
+  Found: Tesla Model 3 Long Range AWD (510000.00 CZK)
+  Found: Vw T6 Multivan 2.0 TDI 110 KW DSG 2019 (575000.00 CZK)
+  Found: Ford Ranger 2.2 TDCI- nový motor / STK 4/2027 (500000.00 CZK)
+  Found: Elektrický konvektomat Rational SCC 6x GN 1/1 podestavba (131199.00 CZK)
+  Found: Připouštění QH a PH klisen výjimečným BLUE ROAN hřebcem QH (15000.00 CZK)
+  Found: Tradiční máslo Debic 82%, 10kg (2390.00 CZK)
+  Found: Zela Pastry - Plates 10kg (1070.00 CZK)
+  Found: Hry na XBOX 360 (199.00 CZK)
+  Found: GAINWARD GTX560 1GB DDR5 Phantom (0.00 CZK)
+  Found: 📚 učebnice Tvoje státní maturita 2017 – Český jazyk a liter (30.00 CZK)
+  Found: PC i3-10100F, 16GB RAM, SSD 256GB, GT1030 2GB, Win 11 (4999.00 CZK)
+Bazos: Following pagination to page 2: https://www.bazos.cz/search.php?hledat=test&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=20
+Sbazar: Got response for page 1, status 200, size 961905 bytes
+Sbazar: Saved response to temp/report/sbazar_page1_1770127250.html
+Sbazar: Page 1 - extracted 46 new products (total: 46)
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/test/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/0
+Aukro: Page 1 - Status 200, Size 2222132 bytes
+Aukro: Saved to temp/report/aukro_page1_1770127250.html
+Aukro: Page 1: Found 4 products
+Aukro: Fetching page 2: https://aukro.cz/vysledky-vyhledavani?text=test&searchAll=true&subbrand=NOT_SPECIFIED&page=2
+Avizo: Got response for page 2, status 200, size 186789 bytes
+Avizo: Saved response to temp/report/avizo_page2_1770127252.html
+Avizo: Page 2 - extracted 21 new products (total: 48)
+Avizo: Found pagination link: https://www.avizo.cz/inzerce/test/3/
+Sbazar error: Status 404, Error: Not Found
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/test/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/2
+Bazos: Got response, status 200, size 48393 bytes
+Bazos: Saved response to temp/report/bazos_response_1770127253.html
+  Found: Patriot Viper Steel 32GB (2x16GB) DDR4 3600 CL18 (4500.00 CZK)
+  Found: Grafická karta, MSI N750Ti TF 2GD5/OC Gaming (700.00 CZK)
+  Found: Grafická karta, SAPPHIRE PULSE Radeon RX 550 OC, 4 GB GDDR5 (990.00 CZK)
+  Found: Hřebeček P.R.E. (0.00 CZK)
+  Found: Audiovector SR3 Avantgarde (89999.00 CZK)
+  Found: Akvarijní digitální komplet CO2 set (2990.00 CZK)
+  Found: VW Golf 7 Variant TDI 2018 (200000.00 CZK)
+  Found: Olcit Club 11R - prospekt, serviska, článek SM (490.00 CZK)
+  Found: Disk 500GB (250.00 CZK)
+  Found: 🍏 Apple iPhone 12 MINI 128GB - Red (12m. ZÁRUKA) + DÁRKY (4500.00 CZK)
+  Found: 🍏 Apple iPhone 13 128GB - MIDNIGHT (12m. ZÁRUKA) + DÁRKY (6800.00 CZK)
+  Found: 🍏 Apple iPhone 13 256GB - BLUE (12m. ZÁRUKA) + DÁRKY (7500.00 CZK)
+  Found: 🍏 Apple iPhone 13 128GB - BLUE (12m. ZÁRUKA) + DÁRKY (7000.00 CZK)
+  Found: 🍏 Apple iPhone 12 PRO 128GB - Gray (12m. ZÁRUKA) + DÁRKY (6200.00 CZK)
+  Found: 🍏 Apple iPhone 12 PRO 512GB - Blue (12m. ZÁRUKA) + DÁRKY (7000.00 CZK)
+  Found: VW e-UP odpočet DPH (159999.00 CZK)
+  Found: Test moderních dějin a Hrádek nad Nisou (0.00 CZK)
+  Found: ASUS ROG STRIX B650E-F GAMING WIFI (3200.00 CZK)
+  Found: Montážní výrobní dělník, nástup 9.2.2026 (0.00 CZK)
+  Found: Zinzino balance oil test (600.00 CZK)
+Bazos: Following pagination to page 3: https://www.bazos.cz/search.php?hledat=test&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=40
+Aukro: Page 2 - Status 200, Size 2241710 bytes
+Aukro: Saved to temp/report/aukro_page2_1770127253.html
+Aukro: Page 2: Found 4 products
+Aukro: Fetching page 3: https://aukro.cz/vysledky-vyhledavani?text=test&searchAll=true&subbrand=NOT_SPECIFIED&page=3
+Sbazar: Got response for page 2, status 200, size 957763 bytes
+Sbazar: Saved response to temp/report/sbazar_page2_1770127255.html
+Sbazar: Page 2 - extracted 45 new products (total: 91)
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/test/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/3
+Avizo: Got response for page 3, status 200, size 185933 bytes
+Avizo: Saved response to temp/report/avizo_page3_1770127255.html
+Avizo: Page 3 - extracted 20 new products (total: 68)
+Avizo: Found pagination link: https://www.avizo.cz/inzerce/test/4/
+Aukro: Page 3 - Status 200, Size 2213670 bytes
+Aukro: Saved to temp/report/aukro_page3_1770127256.html
+Aukro: Page 3: Found 4 products
+Aukro: Fetching page 4: https://aukro.cz/vysledky-vyhledavani?text=test&searchAll=true&subbrand=NOT_SPECIFIED&page=4
+Bazos: Got response, status 200, size 48345 bytes
+Bazos: Saved response to temp/report/bazos_response_1770127257.html
+  Found: Herní PC | intel i5 | RX 5600 XT | 16GB | ssd 256GB ARGB (9490.00 CZK)
+  Found: Celoodpruž. elektrokolo CRUSSIS E-FULL 11.7 s motorem BOSCH (69000.00 CZK)
+  Found: Prodám hry na XBOX 360 (199.00 CZK)
+  Found: Nabíjecí LED svítilna MP 27 (130.00 CZK)
+  Found: Nabíjecí LED svítilna COB 219 (150.00 CZK)
+  Found: 🔴Peugeot 605 2.1TD Automat KLIMA, STK 6/26, servis 50.000,- (80000.00 CZK)
+  Found: BMW Kompresor podvozku Wabco / AMK (0.00 CZK)
+  Found: FIAT 125P, DOBOVÝ TEST 1975, 3X DVOJSTRANA 52cmx33cm (89.00 CZK)
+  Found: Německé časopisy Auto Zeitung, Auto Bild, Auto Motor Sport (0.00 CZK)
+  Found: Repasované čerpadlo 0 445 010 102 (6500.00 CZK)
+  Found: Seat Leon Cupra (425000.00 CZK)
+  Found: Lexus LS500h Superior 2018 (799999.00 CZK)
+  Found: Nová originální měřící sonda Megger s ovládáním (1990.00 CZK)
+  Found: Retro nová svítilna se zkoušečkou (prozváněčkou) z NDR (499.00 CZK)
+  Found: Kompresor na vzduchový podvozek vozu Mercedes-Benz (11990.00 CZK)
+  Found: Přední měch Airmatic na Mercedes-Benz ML (11500.00 CZK)
+  Found: Nové přední tlumiče na Mercedes ML (16900.00 CZK)
+  Found: Nové přední tlumiče na Mercedes-Benz S (17990.00 CZK)
+  Found: Nový zadní měch na Mercedes-Benz R (6500.00 CZK)
+  Found: BM-02 Monitor dechu miminka (1500.00 CZK)
+Bazos: Following pagination to page 4: https://www.bazos.cz/search.php?hledat=test&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=20
+Bazos: Following pagination to page 5: https://www.bazos.cz/search.php?hledat=test&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=60
+Avizo: Got response for page 4, status 200, size 194381 bytes
+Avizo: Saved response to temp/report/avizo_page4_1770127258.html
+Avizo: Page 4 - extracted 20 new products (total: 88)
+Avizo: Found pagination link: https://www.avizo.cz/inzerce/test/5/
+Sbazar: Got response for page 3, status 200, size 958440 bytes
+Sbazar: Saved response to temp/report/sbazar_page3_1770127258.html
+Sbazar: Page 3 - extracted 46 new products (total: 137)
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/test/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/4
+Aukro: Page 4 - Status 200, Size 2247653 bytes
+Aukro: Saved to temp/report/aukro_page4_1770127259.html
+Aukro: Page 4: Found 4 products
+Aukro: Fetching page 5: https://aukro.cz/vysledky-vyhledavani?text=test&searchAll=true&subbrand=NOT_SPECIFIED&page=5
+Avizo: Got response for page 5, status 200, size 101921 bytes
+Avizo: Saved response to temp/report/avizo_page5_1770127260.html
+Avizo: Page 5 - extracted 1 new products (total: 89)
+Avizo: Processing 89 products from 5 page(s)
+  Product 1/89: https://www.avizo.cz/pocitace/hdd-seagate-baracuda-500gb-19531650.html
+Bazos: Got response, status 200, size 45034 bytes
+Bazos: Saved response to temp/report/bazos_response_1770127260.html
+  Found: Nokia 6500 classic (500.00 CZK)
+  Found: Nokia 3210 (600.00 CZK)
+  Found: Nokia 3310,3510i,5110 (2000.00 CZK)
+  Found: Nokia 6700 classic Gold (800.00 CZK)
+  Found: Nokia N90 (1800.00 CZK)
+  Found: Nokia N95 8GB (1000.00 CZK)
+  Found: Sony Ericsson W380i pink (1000.00 CZK)
+  Found: Nokia N95 pěkná, funkční (1600.00 CZK)
+  Found: Nokia 7210 (700.00 CZK)
+  Found: Pálka na stolní tenis Stiga (2000.00 CZK)
+  Found: ABREX 1:43 TEST SM ŠKODA FAVORIT LIMITKA 300 KS (3000.00 CZK)
+  Found: Zesilovač Yamaha DSP – A2. (8500.00 CZK)
+  Found: Akrylové fixy - sada 36 kusů (490.00 CZK)
+  Found: Aratinga sluneční (0.00 CZK)
+  Found: Australský honácký pes - s PP (23000.00 CZK)
+  Found: Vstřikovací trysky CONTINENTAL (9990.00 CZK)
+  Found: Shiba Inu s PP FCI (18000.00 CZK)
+  Found: Anglicky Bulterier CHOVNÝ PES (0.00 CZK)
+  Found: Detektor oxidu uhelnatého Kidde K10LLDCO (400.00 CZK)
+  Found: D Test casopisy (0.00 CZK)
+Bazos: Following pagination to page 6: https://www.bazos.cz/search.php?hledat=test&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=20
+Bazos: Found 80 total products across all pages
+Found 80 products from bazos.cz
+Sbazar: Got response for page 4, status 200, size 962358 bytes
+Sbazar: Saved response to temp/report/sbazar_page4_1770127261.html
+Sbazar: Page 4 - extracted 47 new products (total: 184)
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/test/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/5
+Aukro: Page 5 - Status 200, Size 2212844 bytes
+Aukro: Saved to temp/report/aukro_page5_1770127263.html
+Aukro: Page 5: Found 4 products
+Aukro: TOTAL: 20 products across 5 page(s)
+Found 20 products from aukro.cz
+Failed to create product https://aukro.cz/samolepka-abgas-test-84-565-7094694638: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/pc-tropico-retro-2001-test-7100080311: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/pc-wolfenstein-retro-2009-test-7100080947: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/pc-star-wolves-retro-2005-test-7103090503: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/pc-starship-troopers-retro-2005-test-7103090866: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/pc-tribes-vengeance-retro-2004-test-7103099149: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/pc-caesar-3-retro-2001-test-7109904036: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/pc-starsky-a-hutch-retro-2003-test-7076924918: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/pc-sudden-strike-2-retro-2002-test-7076941828: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/pc-dark-star-one-retro-2006-test-7082030237: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/pc-tomb-raider-legend-retro-2006-test-7084957464: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/pc-unreal-tournament-3-retro-2007-test-7084958299: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/pc-tomb-raider-anniversary-retro-2007-test-7086612456: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+Failed to create product https://aukro.cz/pc-caesar-iii-sold-retro-1999-test-7088173410: failed to create product: ERROR: numeric field overflow (SQLSTATE 22003)
+  Product 2/89: https://www.avizo.cz/hudba-video-knihy/maturita-18056746.html
+Sbazar: Got response for page 5, status 200, size 980769 bytes
+Sbazar: Saved response to temp/report/sbazar_page5_1770127264.html
+Sbazar: Page 5 - extracted 58 new products (total: 242)
+Sbazar: Found pagination link: https://www.sbazar.cz/hledej/test/0-vsechny-kategorie/cela-cr/cena-neomezena/nejnovejsi/29
+  Product 3/89: https://www.avizo.cz/zvirata-rostliny/francouzsky-buldocek-stenata-s-pp-19722899.html
+Sbazar: Got response for page 6, status 200, size 803637 bytes
+Sbazar: Saved response to temp/report/sbazar_page6_1770127267.html
+Sbazar: Page 6 - extracted 37 new products (total: 279)
+Sbazar: Processing 279 products from 6 page(s)
+  Product 1/279: https://www.sbazar.cz/inzerat/225103480-test-a-repase-vstrikovacu-boschdensovdodelphi
+  Product 4/89: https://www.avizo.cz/zvirata-rostliny/francouzsky-buldocek-s-pp-fci-19725723.html
+  Product 5/89: https://www.avizo.cz/reality/koupim-byt-v-osobnim-vlastnictvi-v-havirove-podlesi-a-mesto-ostrava-poruba-17739061.html
+  Product 6/89: https://www.avizo.cz/seznamka/hledam-zenu-19683289.html
+  Product 7/89: https://www.avizo.cz/autobazar/elektricka-cestovni-motorka-19716052.html
+  Product 8/89: https://www.avizo.cz/prace/vedouci-odboru-stavebni-urad-19705761.html
+  Product 9/89: https://www.avizo.cz/prace/nabizim-praci-ridice-skupiny-c-19548848.html
+  Product 10/89: https://www.avizo.cz/stavba-dilna-zahrada/laminatovy-bazen-19722250.html
+  Product 11/89: https://www.avizo.cz/pocitace/wd-blue-1tb-7-2k-64mb-sata-iii-3-5-wd10ezex-19550143.html
+  Product 2/279: https://www.sbazar.cz/inzerat/162798306-d-test
+  Product 12/89: https://www.avizo.cz/zvirata-rostliny/lior-kote-kocourek-cca-5-mesicu-19719015.html
+  Product 3/279: https://www.sbazar.cz/inzerat/227448211-casopis-d-test
+  Product 13/89: https://www.avizo.cz/zvirata-rostliny/pinda-kastrovany-kocourek-cca-7-mesicu-19627797.html
+  Product 4/279: https://www.sbazar.cz/inzerat/226320115-stene-nemecky-ovcak-s-pp
+  Product 14/89: https://www.avizo.cz/hudba-video-knihy/gerhard-schmidt-efektivni-mysleni-19627742.html
+  Product 5/279: https://www.sbazar.cz/inzerat/217754666-nemecky-jazyk-v-testech
+  Product 15/89: https://www.avizo.cz/ostatni/krajece-testa-19464134.html
+  Product 16/89: https://www.avizo.cz/hudba-video-knihy/manazerske-dovednosti-16951422.html
+  Product 6/279: https://www.sbazar.cz/inzerat/129910483-test-dept
+  Product 7/279: https://www.sbazar.cz/inzerat/227497927-stenatka-s-pp-fci-maly-kont-spanel-papillon
+  Product 17/89: https://www.avizo.cz/elektro/valecek-na-testo-19579097.html
+  Product 18/89: https://www.avizo.cz/hudba-video-knihy/stare-ucebnice-autoskoly-18144010.html
+  Product 8/279: https://www.sbazar.cz/inzerat/227257426-test-autobaterie
+  Product 9/279: https://www.sbazar.cz/inzerat/227510935-procvicovaci-testy-z-ceskeho-pravopisu-s-klicem?lokalita=35673163
+  Product 19/89: https://www.avizo.cz/pocitace/hdd-ide-seagate-320gb-18511128.html
+  Product 10/279: https://www.sbazar.cz/inzerat/226222108-audi-q4-e-tron-50-220kw-quattro-s-line-edione
+  Product 20/89: https://www.avizo.cz/pocitace/sapphire-ati-radeon-x550-256mb-16903902.html
+  Product 11/279: https://www.sbazar.cz/inzerat/27274162-testy
+  Product 21/89: https://www.avizo.cz/zvirata-rostliny/francouzsky-buldocek-stenata-s-pp-19722551.html
+  Product 12/279: https://www.sbazar.cz/inzerat/226955815-test
+  Product 22/89: https://www.avizo.cz/prace/svareci-kovu-m-z-19713927.html
+  Product 13/279: https://www.sbazar.cz/inzerat/227126071-skoda-enyaq-iv-80-150kw-tepc-matrix-kessy-hud
+  Product 23/89: https://www.avizo.cz/prace/operator-19717694.html
+  Product 14/279: https://www.sbazar.cz/inzerat/218803727-cvicebnice-osp-testu-scio
+  Product 24/89: https://www.avizo.cz/prace/skladnici-obsluha-manipulacnich-voziku-19725015.html
+  Product 15/279: https://www.sbazar.cz/inzerat/227524318-doucovani-matematiky-fyziky-anglictinyzsssvs?lokalita=35683483
+  Product 25/89: https://www.avizo.cz/zvirata-rostliny/miniaturni-americky-ovcak-19701707.html
+  Product 16/279: https://www.sbazar.cz/inzerat/223952566-mercedes-benz-eqa-250-140kw-pano-kamera-tazne
+  Product 26/89: https://www.avizo.cz/zvirata-rostliny/lira-kotatko-kocicka-cca-5-mesicu-19712246.html
+  Product 17/279: https://www.sbazar.cz/inzerat/155446125-antigen-test-covid
+  Product 27/89: https://www.avizo.cz/prace/senior-software-test-engineer-19709890.html
+  Product 18/279: https://www.sbazar.cz/inzerat/192862180-test-iq
+  Product 28/89: https://www.avizo.cz/zvirata-rostliny/kastor-a-kreon-kotata-kocourci-19604398.html
+  Product 19/279: https://www.sbazar.cz/inzerat/223640512-audi-q8-e-tron-quattro-300kw-matrix-hud-tazne
+  Product 29/89: https://www.avizo.cz/autobazar/slick-avon-7-0-22-0-13-19705821.html
+  Product 20/279: https://www.sbazar.cz/inzerat/221806346-zsv-osp-testy
+  Product 30/89: https://www.avizo.cz/zvirata-rostliny/marion-kastrovana-kocicka-19711806.html
+  Product 21/279: https://www.sbazar.cz/inzerat/222825133-mentalni-testy
+  Product 31/89: https://www.avizo.cz/hudba-video-knihy/tj-ostrava-nabor-divek-10901881.html
+  Product 32/89: https://www.avizo.cz/prace/skladnici-obsluha-manipulacnich-voziku-19721903.html
+  Product 22/279: https://www.sbazar.cz/inzerat/226983331-skoda-enyaq-iv-80-150kw-tc-acc-led-pano-tazne
+  Product 33/89: https://www.avizo.cz/prace/montazni-delnik-mechanickych-zarizeni-m-z-19724752.html
+  Product 23/279: https://www.sbazar.cz/inzerat/227246053-katalog-test-ojetin-2001
+  Product 34/89: https://www.avizo.cz/prace/montazni-delnik-mechanickych-zarizeni-m-z-19712627.html
+  Product 24/279: https://www.sbazar.cz/inzerat/218674430-geppart-test
+  Product 35/89: https://www.avizo.cz/elektronika/reprobedny-tannoy-profile-633-19712310.html
+  Product 25/279: https://www.sbazar.cz/inzerat/225741538-volkswagen-id4-150kw-1st-panorama-tazne-hud
+  Product 36/89: https://www.avizo.cz/zvirata-rostliny/stenata-miniaturni-americky-ovcak-19723350.html
+  Product 26/279: https://www.sbazar.cz/inzerat/225672937-auto-diagnosticky-profesionalni-pristroj
+  Product 37/89: https://www.avizo.cz/zvirata-rostliny/benny-kote-7-mesicu-19627791.html
+  Product 27/279: https://www.sbazar.cz/inzerat/90425432-kniha-sex-10-testu-100-otazek-a-odp-ahooperova
+  Product 28/279: https://www.sbazar.cz/inzerat/225006211-volkswagen-id4-150kw-iq-pano-hud-acc-tazne
+  Product 38/89: https://www.avizo.cz/pocitace/graficka-karta-gtx-560se-19333952.html
+  Product 29/279: https://www.sbazar.cz/inzerat/203059153-pripravne-testy-na-viceleta-gymnazia
+  Product 39/89: https://www.avizo.cz/prace/ridic-ka-nakladniho-automobilu-19714033.html
+  Product 30/279: https://www.sbazar.cz/inzerat/121001251-testy-ze-vseobecnych-znalosti
+  Product 40/89: https://www.avizo.cz/prace/sekretarka-personalistka-m-z-19724928.html
+  Product 31/279: https://www.sbazar.cz/inzerat/227500222-audi-e-tron-55-300kw-sline-sportback-pano
+  Product 41/89: https://www.avizo.cz/ostatni/tchibo-forma-na-peceni-19096880.html
+  Product 42/89: https://www.avizo.cz/zvirata-rostliny/arin-kote-kocourek-cca-5-mesicu-19711821.html
+  Product 32/279: https://www.sbazar.cz/inzerat/207708262-testy-z-matematiky-a-ceskeho-jazyka-prijimacky
+  Product 33/279: https://www.sbazar.cz/inzerat/193799665-test-tvrdosti-vody
+  Product 43/89: https://www.avizo.cz/obleceni/damske-hodinky-zn-skagen-skw2384-gitte-17720040.html
+  Product 34/279: https://www.sbazar.cz/inzerat/225418888-bmw-ix3-210kw-msport-hk-hud-360-tazne
+  Product 44/89: https://www.avizo.cz/prace/specialiste-v-oblasti-testovani-sw-senior-nft-automation-engineer-19721586.html
+  Product 45/89: https://www.avizo.cz/elektro/termostat-pt04-prostorovy-15366946.html
+  Product 35/279: https://www.sbazar.cz/inzerat/113334600-testy-inteligence
+  Product 46/89: https://www.avizo.cz/prace/ridic-ka-sk-c-e-mezinarodni-doprava-19725393.html
+  Product 36/279: https://www.sbazar.cz/inzerat/209830570-testy-osobnosti
+  Product 47/89: https://www.avizo.cz/zvirata-rostliny/ve-ky-svajciarsky-salacnicky-pes-steniatka-s-fci-pp-19718503.html
+  Product 37/279: https://www.sbazar.cz/inzerat/215031601-univerzalni-diagnostika-thinkcar-thinkscan-689-bt
+  Product 48/89: https://www.avizo.cz/prace/ostatni-ridici-pracovnici-v-oblasti-vyzkumu-a-vyvoje-19719882.html
+  Product 38/279: https://www.sbazar.cz/inzerat/180640754-rychly-test-konsung-covid-19
+  Product 49/89: https://www.avizo.cz/prace/svareci-m-z-19712680.html
+  Product 39/279: https://www.sbazar.cz/inzerat/223197754-ecdl-pruvodce-pripravou-na-testy?lokalita=32196790
+  Product 50/89: https://www.avizo.cz/prace/lead-scientist-2-materials-science-and-engineering-19724652.html
+  Product 40/279: https://www.sbazar.cz/inzerat/191902849-diagnostika-delphi-202111-jednodeskova-s-bt
+  Product 51/89: https://www.avizo.cz/zvirata-rostliny/entlebussky-salasnicky-pes-steniatka-fci-s-pp-19718502.html
+  Product 52/89: https://www.avizo.cz/prace/mechanical-design-engineer-m-z-19720270.html
+  Product 41/279: https://www.sbazar.cz/inzerat/199160260-commonrail-vstriky-po-testu-pro-volvo-31272690
+  Product 53/89: https://www.avizo.cz/autobazar/vw-t5-t6-6-1-skoro-nove-letni-kola-215-60r17c-goodyear-19536704.html
+  Product 42/279: https://www.sbazar.cz/inzerat/173342302-knizka-testy-z-matematiky
+  Product 54/89: https://www.avizo.cz/prace/audio-lekce-anglictiny-pratelske-diskretni-a-flexibilni-lekce-jen-pres-hlasove-hovory-19562775.html
+  Product 43/279: https://www.sbazar.cz/inzerat/191900224-akce-delphi-ds150-jednodeska-diagnostika-202111
+  Product 55/89: https://www.avizo.cz/prace/technik-pro-elektricke-testovani-m-z-19719999.html
+  Product 44/279: https://www.sbazar.cz/inzerat/207470908-kniha-testu-pro-nejlepsi-kamosky
+  Product 56/89: https://www.avizo.cz/elektronika/zesilovac-yamaha-dsp-a2-19718445.html
+  Product 45/279: https://www.sbazar.cz/inzerat/227245954-auto-katalog-testy-aut-2002
+  Product 57/89: https://www.avizo.cz/prace/delnik-delnice-ve-vyrobe-19724898.html
+  Product 46/279: https://www.sbazar.cz/inzerat/227453587-nemecky-ovcak-fenky
+  Product 58/89: https://www.avizo.cz/prace/misic-delnik-ve-vyrobe-pekarskych-vyrobku-19724464.html
+  Product 47/279: https://www.sbazar.cz/inzerat/197426590-marshmallow-test-
+  Product 59/89: https://www.avizo.cz/ostatni/starozitne-stribrne-hodinky-iwc-schaffhausen-s-krabickou-paskem-navic-zarucni-list-19296565.html
+  Product 48/279: https://www.sbazar.cz/inzerat/227432134-francouzsky-buldocek-stenata-s-pp
+  Product 60/89: https://www.avizo.cz/autobazar/vw-t5-t6-6-1-sada-novych-letnich-kol-215-65r16c-19585960.html
+  Product 49/279: https://www.sbazar.cz/inzerat/227206957-testy-pro-viceleta-gymnazia-set
+  Product 61/89: https://www.avizo.cz/prace/python-developer-se-znalostmi-ai-19707683.html
+  Product 50/279: https://www.sbazar.cz/inzerat/209335153-mc-crash-test-dummies
+  Product 62/89: https://www.avizo.cz/prace/pekar-misic-pekarka-misicka-19698365.html
+  Product 63/89: https://www.avizo.cz/autobazar/nova-zimni-alu-sada-skoda-superb-iii-iv-235-40-r19-bridg-19704895.html
+  Product 51/279: https://www.sbazar.cz/inzerat/213847774-17hezke-celorocni-pneu-22540r-18-maxxis-2-kusy
+  Product 64/89: https://www.avizo.cz/prace/masker-ka-ve-vyrobe-jednosmenny-provoz-s-praci-pod-mikroskopem-19696767.html
+  Product 52/279: https://www.sbazar.cz/inzerat/178530216-vseobecne-testy
+  Product 65/89: https://www.avizo.cz/prace/zapisovatel-ka-19724255.html
+  Product 53/279: https://www.sbazar.cz/inzerat/197235436-jaka-jsi-velka-kniha-testu
+  Product 66/89: https://www.avizo.cz/autobazar/skoda-kamiq-scala-s-arona-nove-16-original-alu-disky-6x16-et35-19442966.html
+  Product 54/279: https://www.sbazar.cz/inzerat/227339950-4x-pevny-disk-hdd-35-wd-1tb
+  Product 67/89: https://www.avizo.cz/autobazar/s-karoq-s-ateca-nove-alu-letni-215-60r16-bridgestone-19443002.html
+  Product 55/279: https://www.sbazar.cz/inzerat/224622553-various-react-test-one-cd
+  Product 68/89: https://www.avizo.cz/autobazar/nova-zimni-alu-sada-s-enyaq-elroq-235-55-255-50-r19-19704894.html
+  Product 69/89: https://www.avizo.cz/autobazar/s-superb-iii-vw-passat-b8-novy-letni-alu-komplet-215-55r17-pirelli-19410257.html
+  Product 56/279: https://www.sbazar.cz/inzerat/178812706-testy-emocialni-inteligence
+  Product 70/89: https://www.avizo.cz/autobazar/vw-tiguan-s-kodiaq-nova-orig-alu-sada-235-55r18-2024-dot-19443004.html
+  Product 57/279: https://www.sbazar.cz/inzerat/226442464-flat-coated-retriever-hnedi-pejskove-s-pp
+  Product 71/89: https://www.avizo.cz/autobazar/novy-zimni-komplet-s-fabia-iv-vw-polo-s-ibiza-185-65r15-19704905.html
+  Product 58/279: https://www.sbazar.cz/inzerat/202606585-krevni-test-jonathan-kellerman
+  Product 72/89: https://www.avizo.cz/autobazar/s-kamiq-scala-vw-taigo-nove-alu-letni-205-60r16-bridgestone-19585962.html
+  Product 59/279: https://www.sbazar.cz/inzerat/166915443-anglicke-testy-n-bakalarova
+  Product 73/89: https://www.avizo.cz/elektro/termostat-pt-32-inteligentni-prostorovy-15366952.html
+  Product 60/279: https://www.sbazar.cz/inzerat/217040560-delphi-ds150e-2021
+  Product 74/89: https://www.avizo.cz/autobazar/skoda-octavia-iv-zanovni-zimni-orig-alu-sada-205-60r16-19704900.html
+  Product 61/279: https://www.sbazar.cz/inzerat/221048309-zinzino-balance-test
+  Product 75/89: https://www.avizo.cz/prace/it-senior-technik-19716297.html
+  Product 62/279: https://www.sbazar.cz/inzerat/224232157-d-test-casopis
+  Product 76/89: https://www.avizo.cz/autobazar/s-kodiaq-2-vw-tiguan-nova-zimni-orig-alu-sada-215-65r17-19651166.html
+  Product 63/279: https://www.sbazar.cz/inzerat/145140115-oprava-renovace-airbagu-bezpecnostnich-pasu
+  Product 77/89: https://www.avizo.cz/autobazar/skoda-fabia-iii-rapid-novy-letni-alu-komplet-215-45-r16-19585964.html
+  Product 64/279: https://www.sbazar.cz/inzerat/227181508-adiel-test-muzske-plodnosti-1ks
+  Product 78/89: https://www.avizo.cz/autobazar/s-rapid-fabia-3-novy-zimni-alu-komplet-215-45r16-19536722.html
+  Product 65/279: https://www.sbazar.cz/inzerat/62252212-testy-u-prijimaciho-pohovoru
+  Product 79/89: https://www.avizo.cz/autobazar/s-fabia-iv-vw-polo-s-ibiza-nova-zimni-alu-sada-195-55r16-19704918.html
+  Product 66/279: https://www.sbazar.cz/inzerat/148103012-testy-studijnich-predpokladu-pro-stredni-skoly
+  Product 80/89: https://www.avizo.cz/elektro/novy-kuchynsky-robot-russell-hobbs-desire-19609213.html
+  Product 67/279: https://www.sbazar.cz/inzerat/153460976-tehotensky-test-1-ks-zdarma-swap
+  Product 81/89: https://www.avizo.cz/autobazar/s-elroq-enyaq-karoq-seat-ateca-nove-19-orig-alu-disky-8xr19-5x112-19568225.html
+  Product 82/89: https://www.avizo.cz/autobazar/s-kodiaq-kodiaq-2-vw-tiguan-nova-zimni-alu-sada-235-55r18-19585968.html
+  Product 68/279: https://www.sbazar.cz/inzerat/221917292-testy-k-prijmackam
+  Product 83/89: https://www.avizo.cz/autobazar/nova-zimni-alu-sada-s-kamiq-scala-195-60r16-bridgestone-19704903.html
+  Product 69/279: https://www.sbazar.cz/inzerat/172461121-new-opportunities-intermediate-test-book
+  Product 84/89: https://www.avizo.cz/autobazar/s-fabia-iv-vw-polo-s-ibiza-nova-zimni-alu-sada-215-45r17-19585974.html
+  Product 70/279: https://www.sbazar.cz/inzerat/226503691-ovulacni-tester-i-testy
+  Product 85/89: https://www.avizo.cz/autobazar/s-kodiaq-kodiaq-2-vw-tiguan-nova-zimni-alu-sada-215-65r17-19568352.html
+  Product 71/279: https://www.sbazar.cz/inzerat/226444276-licovani-kontrolni-testy
+  Product 86/89: https://www.avizo.cz/pocitace/lenovo-ideapad-y500-cpu-i5-2x-gpu-az-6gb-2xssd-288gb-ram-8gb-18565842.html
+  Product 72/279: https://www.sbazar.cz/inzerat/164591986-glukometr-diamond-prima-50-ks-test-prouzky
+  Product 87/89: https://www.avizo.cz/autobazar/s-kodiaq-2-vw-tiguan-nova-zimni-alu-sada-s-tpms-215-65r17-19585967.html
+  Product 73/279: https://www.sbazar.cz/inzerat/227269144-testy-na-prijimaci-zkousky-2008
+  Product 88/89: https://www.avizo.cz/autobazar/s-fabia-iv-vw-polo-s-ibiza-nova-zimni-alu-sada-185-65r15-19704917.html
+  Product 74/279: https://www.sbazar.cz/inzerat/175853071-testy-z-anglickeho-jazyka
+  Product 89/89: https://www.avizo.cz/prace/straznik-ce-mestske-policie-19720217.html
+Avizo: Found 89 total products across 5 page(s)
+Found 89 products from avizo.cz
+  Product 75/279: https://www.sbazar.cz/inzerat/144126565-testy-z-viceletych-gymnazii-2001
+  Product 76/279: https://www.sbazar.cz/inzerat/216618487-albert-lang-testy-inteligence-2
+  Product 77/279: https://www.sbazar.cz/inzerat/226257469-sada-akvarijnich-testu-jbl-testlab-proscape
+  Product 78/279: https://www.sbazar.cz/inzerat/94371557-testy-vseobecne-2005
+  Product 79/279: https://www.sbazar.cz/inzerat/194759812-kniha-zabavnych-testu-jitka-saniova
+  Product 80/279: https://www.sbazar.cz/inzerat/211538089-nemcina-nemecky-jazyk-testy-zkouska
+  Product 81/279: https://www.sbazar.cz/inzerat/205174035-testy-obecnych-studijnich-predpokladu
+  Product 82/279: https://www.sbazar.cz/inzerat/224281174-testy-osobnosti
+  Product 83/279: https://www.sbazar.cz/inzerat/227172946-doucko-i-testy-matematika-statistika-ekonomie
+  Product 84/279: https://www.sbazar.cz/inzerat/124514016-casopis-d-test-2009-2019-mimoradne-prilohy
+  Product 85/279: https://www.sbazar.cz/inzerat/222278870-detailni-test-stavu-baterie-elekromobilu
+  Product 86/279: https://www.sbazar.cz/inzerat/214255792-winx-jaka-jsi-velka-kniha-testu?lokalita=25283833
+  Product 87/279: https://www.sbazar.cz/inzerat/224428744-r-allen-velka-kniha-iq-testu
+  Product 88/279: https://www.sbazar.cz/inzerat/96080287-atari-st-test-driver
+  Product 89/279: https://www.sbazar.cz/inzerat/226642957-test-baterie-elektromobilu-a-hybridu-aviloo
+  Product 90/279: https://www.sbazar.cz/inzerat/206649520-testy-vztahy-mezi-partnery
+  Product 91/279: https://www.sbazar.cz/inzerat/221355179-cvicne-testy-osp-2x-pruvodce-a-testy-navic?lokalita=30703796
+  Product 92/279: https://www.sbazar.cz/inzerat/223422103-detska-autosedacka-cybex-pallas-g-i-size-76-150cm
+  Product 93/279: https://www.sbazar.cz/inzerat/225234697-successful-test-management-lessons-learned-testing
+  Product 94/279: https://www.sbazar.cz/inzerat/200446423-maturita-z-ceskeho-jazyka-didakticky-test
+  Product 95/279: https://www.sbazar.cz/inzerat/49591346-testy-scio-pro-devataky
+  Product 96/279: https://www.sbazar.cz/inzerat/225342607-prijimaci-zkousky-testy-osmileta-gymnazia
+  Product 97/279: https://www.sbazar.cz/inzerat/177703336-nove-testy-z-anglickeho-jazyka
+  Product 98/279: https://www.sbazar.cz/inzerat/213538318-testy-priprava-na-stredni-skoly
+  Product 99/279: https://www.sbazar.cz/inzerat/170818193-hr-na-245t7m-drapak-bez-testu
+  Product 100/279: https://www.sbazar.cz/inzerat/212562637-testy-na-pravnickou-fakultu
+  Product 101/279: https://www.sbazar.cz/inzerat/170088451-testy-pro-zaky-5-a-7-trid-zs
+  Product 102/279: https://www.sbazar.cz/inzerat/170088566-testy-pro-zaky-5-a-7-trid-cestina
+  Product 103/279: https://www.sbazar.cz/inzerat/227417944-stockli-laser-sl-155cm-r-118-model-2425-testy
+  Product 104/279: https://www.sbazar.cz/inzerat/145483189-kniha-winx-club-jaka-jsi-velka-kniha-vilich-testu
+  Product 105/279: https://www.sbazar.cz/inzerat/208214491-odmaturuj-z-literatury-testy
+  Product 106/279: https://www.sbazar.cz/inzerat/227521399-sansui-d-x117hx-vyborny-stereo-tape-deck-
+  Product 107/279: https://www.sbazar.cz/inzerat/227417878-stockli-montero-aw-158cm-r-142-model-2526-testy
+  Product 108/279: https://www.sbazar.cz/inzerat/227522947-skoda-enyaq-iv-80-150kw-tepc-matrix-tazne
+  Product 109/279: https://www.sbazar.cz/inzerat/227521276-onkyo-ta-2520-levny-stereo-tape-deck-
+  Product 110/279: https://www.sbazar.cz/inzerat/227417836-stockli-laser-sc-170cm-r-149-model-2425-testy
+  Product 111/279: https://www.sbazar.cz/inzerat/227094622-resene-testy-nejlepsich-gymnazii-cr
+  Product 112/279: https://www.sbazar.cz/inzerat/202957585-test-drive-ferrari-legends-ps3
+  Product 113/279: https://www.sbazar.cz/inzerat/224592898-casopis-d-test-11ks-2-mimoradne-prilohy
+  Product 114/279: https://www.sbazar.cz/inzerat/145905953-testy-lekarska-fakulta-mu-brno
+  Product 115/279: https://www.sbazar.cz/inzerat/227521186-philips-fc772-vyborny-stereo-tape-deck-
+  Product 116/279: https://www.sbazar.cz/inzerat/190211571-testy-na-lfhk-2005-2019
+  Product 117/279: https://www.sbazar.cz/inzerat/179083447-lyze-z-testu-atomic-doubledeck-172178
+  Product 118/279: https://www.sbazar.cz/inzerat/203355843-testy-priprava-na-viceleta-gymnazia
+  Product 119/279: https://www.sbazar.cz/inzerat/216936607-robin-westen-testy-ktere-vas-odhali-2012
+  Product 120/279: https://www.sbazar.cz/inzerat/224646997-testy-inteligence-2
+  Product 121/279: https://www.sbazar.cz/inzerat/227090878-cimat-turbo-test-pro-cmt-vsr-repase-repas-turba
+  Product 122/279: https://www.sbazar.cz/inzerat/203844576-hra-playstation-2-test-drive
+  Product 123/279: https://www.sbazar.cz/inzerat/111327975-testy-z-matematiky-2006
+  Product 124/279: https://www.sbazar.cz/inzerat/94372087-testy-z-matematiky-2005
+  Product 125/279: https://www.sbazar.cz/inzerat/210904561-testy-z-cj
+  Product 126/279: https://www.sbazar.cz/inzerat/224689315-marshmallow-test-walter-mischel
+  Product 127/279: https://www.sbazar.cz/inzerat/194044126-test-bazenove-vody-ph-kyselost-tvrdost-chlor
+  Product 128/279: https://www.sbazar.cz/inzerat/227520409-dyson-airwrap-id
+  Product 129/279: https://www.sbazar.cz/inzerat/203693808-testy-z-matematikypriprava-na-prijimaci-zkousky
+  Product 130/279: https://www.sbazar.cz/inzerat/216154498-penetracni-testy-a-exploitace
+  Product 131/279: https://www.sbazar.cz/inzerat/222889954-testy-inteligence-2
+  Product 132/279: https://www.sbazar.cz/inzerat/180502145-hitech-reprosoustava-mission-782-vitez-testu
+  Product 133/279: https://www.sbazar.cz/inzerat/194558575-vitez-testu-stereovideo-gramofon-sony-s-usb
+  Product 134/279: https://www.sbazar.cz/inzerat/129476008-policie-cr-alkohol-test-foukaci
+  Product 135/279: https://www.sbazar.cz/inzerat/155313526-lego-technic-8865-test-car
+  Product 136/279: https://www.sbazar.cz/inzerat/225262312-abrex-skoda-130rs-sm-test
+  Product 137/279: https://www.sbazar.cz/inzerat/222316454-testy-z-matematiky-2021-2022-pro-zaky-9-trid
+  Product 138/279: https://www.sbazar.cz/inzerat/227520394-ucebnice-tvoje-statni-maturita-2017
+  Product 139/279: https://www.sbazar.cz/inzerat/224327365-testy-priprava-na-stredni-skoly
+  Product 140/279: https://www.sbazar.cz/inzerat/225674002-sm-porovnavaci-test-17-automob-na-nasem-trhu
+  Product 141/279: https://www.sbazar.cz/inzerat/215648296-retro-hra-elektro-test
+  Product 142/279: https://www.sbazar.cz/inzerat/224327482-scio-testy-z-ceskeho-jazyka
+  Product 143/279: https://www.sbazar.cz/inzerat/218987597-testy-k-prijimacim-zkouskam-na-vicelete-gymnazium
+  Product 144/279: https://www.sbazar.cz/inzerat/218956235-ucebnice-pro-sos-sou-gymnazium-testy
+  Product 145/279: https://www.sbazar.cz/inzerat/154941956-lego-8865-test-car-model-traffic-technic
+  Product 146/279: https://www.sbazar.cz/inzerat/123203721-uv-test-bankovek-7w-220v-stolni
+  Product 147/279: https://www.sbazar.cz/inzerat/226497637-cyclo-test-baby-pocitac-cyklu
+  Product 148/279: https://www.sbazar.cz/inzerat/125293653-prijimaci-zkousky-testy-matematika-9-rocnik
+  Product 149/279: https://www.sbazar.cz/inzerat/225222658-nemecka-gramatika-prehled-cviceni-testy
+  Product 150/279: https://www.sbazar.cz/inzerat/218236961-stara-hra-elektro-test-9042
+  Product 151/279: https://www.sbazar.cz/inzerat/218544467-anglicka-gramatika-cviceni-testy-vyklad-bakalarova
+  Product 152/279: https://www.sbazar.cz/inzerat/220982591-odmaturuj-z-literatury-testy
+  Product 153/279: https://www.sbazar.cz/inzerat/224693257-testy-z-matematiky-didaktis
+  Product 154/279: https://www.sbazar.cz/inzerat/221709365-testy-z-viceletych-gymnazii-2000
+  Product 155/279: https://www.sbazar.cz/inzerat/131700343-ma10-testy-k-maturite
+  Product 156/279: https://www.sbazar.cz/inzerat/218822956-autoskola-pravidla-testy-znacky-o-weigel
+  Product 157/279: https://www.sbazar.cz/inzerat/25704102-priprava-na-testy-studijnich-predpokladu
+  Product 158/279: https://www.sbazar.cz/inzerat/146350422-ecdl-pruvodce-pripravou-na-testy
+  Product 159/279: https://www.sbazar.cz/inzerat/197391235-pruty-2-dilne-mediumlight-spin-270cm-test-5-20g
+  Product 160/279: https://www.sbazar.cz/inzerat/221549780-maturita-z-ceskeho-jazyka-didakticky-test
+  Product 161/279: https://www.sbazar.cz/inzerat/227045356-vstriky-vstrikovace-25-tdi-bnz-070130073r-testy
+  Product 162/279: https://www.sbazar.cz/inzerat/223468411-scio-testy-z-ceskeho-jazyka
+  Product 163/279: https://www.sbazar.cz/inzerat/190727017-prodam-knihu-testy-ze-vseobecnych-znalosti-2001
+  Product 164/279: https://www.sbazar.cz/inzerat/224813236-jawa-350-6345-test-sveta-motoru
+  Product 165/279: https://www.sbazar.cz/inzerat/180500258-hitech-reprosoustava-mission-782-vitez-testu-33tis
+  Product 166/279: https://www.sbazar.cz/inzerat/203288862-cambridge-key-english-test-for-schools-1
+  Product 167/279: https://www.sbazar.cz/inzerat/208496077-zkousecka-fluke-t50
+  Product 168/279: https://www.sbazar.cz/inzerat/187862754-testy-stud-predpokladu-a-zakl-log
+  Product 169/279: https://www.sbazar.cz/inzerat/210126664-kniha-pravidla-silnicniho-provozu-a-zkusebni-testy
+  Product 170/279: https://www.sbazar.cz/inzerat/211380544-sada-na-ovulacni-test-14-ks-nove
+  Product 171/279: https://www.sbazar.cz/inzerat/162772896-odmaturuj-z-literatury-testy
+  Product 172/279: https://www.sbazar.cz/inzerat/211253008-mala-kniha-otazek-pro-nevestu-a-zenicha-unikatni
+  Product 173/279: https://www.sbazar.cz/inzerat/203538294-resene-testy-ke-zkouskam-na-viceleta-gymnazia
+  Product 174/279: https://www.sbazar.cz/inzerat/224298127-ultracitlivy-hcg-tehotensky-test99-presnost10ks
+  Product 175/279: https://www.sbazar.cz/inzerat/149988404-testy-z-matematiky-priprava-k-prijimaci-zkousce
+  Product 176/279: https://www.sbazar.cz/inzerat/19576022-sbirka-testu-z-matematiky-k-prijim-zkouskam
+  Product 177/279: https://www.sbazar.cz/inzerat/213290305-hra-test-drive-deluxe-edition-xbox-series-x
+  Product 178/279: https://www.sbazar.cz/inzerat/60386662-d-test-komplet-rok-201712-vytisku
+  Product 179/279: https://www.sbazar.cz/inzerat/219612104-moodle-testy-statistika-matematika
+  Product 180/279: https://www.sbazar.cz/inzerat/209517460-testy-priprava-na-viceleta-gymnazia
+  Product 181/279: https://www.sbazar.cz/inzerat/227157853-testy-na-viceleta-gymnazia-cj-m-studijni-predp
+  Product 182/279: https://www.sbazar.cz/inzerat/222803593-abrex-limitka-skoda-garde-1982-143-crash-test
+  Product 183/279: https://www.sbazar.cz/inzerat/222804223-limitka-abrex-skoda-garde-1982-143-test-sm
+  Product 184/279: https://www.sbazar.cz/inzerat/169586166-diktaty-a-testy-pro-7-tridu-nove
+  Product 185/279: https://www.sbazar.cz/inzerat/67837237-ucebnice-testy-z-ceskeho-jazyka-2006
+  Product 186/279: https://www.sbazar.cz/inzerat/49591706-testy-scio-pro-devataky-z-ceskeho-jazyka
+  Product 187/279: https://www.sbazar.cz/inzerat/226262062-testy-na-stredni-skoly-cjmatematika
+  Product 188/279: https://www.sbazar.cz/inzerat/224949970-limitka-abrex-skoda-garde-1982-test-sm-91200
+  Product 189/279: https://www.sbazar.cz/inzerat/224950660-limitka-abrex-skoda-garde-1982-143-test-sm
+  Product 190/279: https://www.sbazar.cz/inzerat/220982630-odmaturuj-ze-spolecenskych-ved-testy
+  Product 191/279: https://www.sbazar.cz/inzerat/68153697-prodam-modelove-testy-z-nemciny-na-vs
+  Product 192/279: https://www.sbazar.cz/inzerat/218190149-testy-iq-eamonn-butler-1995-
+  Product 193/279: https://www.sbazar.cz/inzerat/221550041-scio-pruvodce-pripravou-na-test-osp-2024
+  Product 194/279: https://www.sbazar.cz/inzerat/191373319-anglicky-high-end-stereo-zesilovac-nad-vitez-testu
+  Product 195/279: https://www.sbazar.cz/inzerat/41934647-testy-z-matematiky-na-vse
+  Product 196/279: https://www.sbazar.cz/inzerat/15373265-ps3-hry-test-drive-unlimited-2-zavodni-hra
+  Product 197/279: https://www.sbazar.cz/inzerat/226923109-cviceni-a-testy-obratnosti-vytrvalosti-a-sily
+  Product 198/279: https://www.sbazar.cz/inzerat/145599929-autoskola-pravidla-testy-znackyweigel2002
+  Product 199/279: https://www.sbazar.cz/inzerat/155481026-testy-na-prijimaci-zkousky-9-rocnik-cesky-jazyk
+  Product 200/279: https://www.sbazar.cz/inzerat/191620231-zkusebni-testy-a-vyhlaska-c80-prilohy
+  Product 201/279: https://www.sbazar.cz/inzerat/222785446-testy-studijni-predpokladu-pro-stredni-skoly
+  Product 202/279: https://www.sbazar.cz/inzerat/187431372-ucebnice-testy-pro-zaky-5-a-7-trid-zs
+  Product 203/279: https://www.sbazar.cz/inzerat/178513866-numericke-testy-harry-tolley-ken-thomas
+  Product 204/279: https://www.sbazar.cz/inzerat/222059846-financni-trhy-ucebnice-s-cvicnymi-testy
+  Product 205/279: https://www.sbazar.cz/inzerat/218245328-hry-a-testy-na-volny-cas
+  Product 206/279: https://www.sbazar.cz/inzerat/214940287-diktaty-a-testy-pro-9tridy-prijimacky
+  Product 207/279: https://www.sbazar.cz/inzerat/16929340-prijimaci-pohovory-na-vs-testy-z-prava
+  Product 208/279: https://www.sbazar.cz/inzerat/226202095-dimastech-benchtest-table-easyxl-metallic-grey
+  Product 209/279: https://www.sbazar.cz/inzerat/167852486-kniha-testy-z-prirodnich-ved-v-kostce
+  Product 210/279: https://www.sbazar.cz/inzerat/26640166-prodam-novou-nepouzitou-knihu-test-nadani
+  Product 211/279: https://www.sbazar.cz/inzerat/219194423-testy-3-ks-od-didaktis-pro-pripravu-na-ss
+  Product 212/279: https://www.sbazar.cz/inzerat/223367980-testy-z-prirodnich-ved-v-kostce
+  Product 213/279: https://www.sbazar.cz/inzerat/173426069-2lp-thorax-test-of-time-2008-top-stav-
+  Product 214/279: https://www.sbazar.cz/inzerat/170502382-prijimaci-zkousky-na-vysoke-skoly-testy
+  Product 215/279: https://www.sbazar.cz/inzerat/173852982-testy-z-matematiky-na-vse-75-x-5-typovych-prikladu
+  Product 216/279: https://www.sbazar.cz/inzerat/213801799-knizka-testy-na-prijimaci-zkousky-z-matematiky
+  Product 217/279: https://www.sbazar.cz/inzerat/213801742-knizka-testy-na-prijimaci-zkousky-z-cj
+  Product 218/279: https://www.sbazar.cz/inzerat/221531546-ucebnice-skripta-pro-ss-sosgymnazia-testy
+  Product 219/279: https://www.sbazar.cz/inzerat/113260410-prodam-casopis-d-test-2024-az-2019
+  Product 220/279: https://www.sbazar.cz/inzerat/207578683-testy-cj-matematika-stud-pred-priprava-na-ss
+  Product 221/279: https://www.sbazar.cz/inzerat/147372983-testy-z-humanitnich-ved-v-kostce-pro-ss
+  Product 222/279: https://www.sbazar.cz/inzerat/213538462-testy-z-matematiky-a-z-ceskeho-jazyka
+  Product 223/279: https://www.sbazar.cz/inzerat/40847982-ucebnice-pravidla-silnicniho-provozu-a-zkus-testy
+  Product 224/279: https://www.sbazar.cz/inzerat/226336870-pravidla-silnicniho-provozu-a-zkusebni-testy
+  Product 225/279: https://www.sbazar.cz/inzerat/222836551-abrex-limitka-skoda-garde-1982-143-crash-test
+  Product 226/279: https://www.sbazar.cz/inzerat/49082826-zkusebni-testy-a-vyhlaska-c-80-z-roku-1970
+  Product 227/279: https://www.sbazar.cz/inzerat/186422801-ucebnice-pro-autoskoly-testy-znacky-atd
+  Product 228/279: https://www.sbazar.cz/inzerat/155481717-testy-2021-z-ceskeho-jazyka-pro-zaky-9-trid-zs
+  Product 229/279: https://www.sbazar.cz/inzerat/226257364-testy-cviceni-k-prijimackam-na-ss-mf-tabulky
+  Product 230/279: https://www.sbazar.cz/inzerat/112914508-automapy-vyhlasky-zkusebni-testy-r1968-73-99
+  Product 231/279: https://www.sbazar.cz/inzerat/217091401-knihy-na-pripravu-na-testy-na-viceleta-gymnazia
+  Product 232/279: https://www.sbazar.cz/inzerat/226040854-testy-obecnych-studijnich-predpokladu-1-dil
+  Product 233/279: https://www.sbazar.cz/inzerat/74228647-casopis-d-test-rocnik-2013-2014-2015-2016
+  Product 234/279: https://www.sbazar.cz/inzerat/165876616-citankatesty-studijnich-predpokladuzaklady-logik
+  Product 235/279: https://www.sbazar.cz/inzerat/224693320-testy-z-matematiky-pro-9-tridu-didaktis
+  Product 236/279: https://www.sbazar.cz/inzerat/203504994-rozvoj-reci-testy-pro-predskolaky-a-male-skolaky
+  Product 237/279: https://www.sbazar.cz/inzerat/226063642-cd-crash-test-dummies-give-yourself-a-hand-98
+  Product 238/279: https://www.sbazar.cz/inzerat/131213683-2ks-testy-z-ceskeho-jazyka-a-ucebnice-rozboru-vet
+  Product 239/279: https://www.sbazar.cz/inzerat/131217813-3x-ucebnice-matematiky-pro-ss-a-testy-z-matematiky
+  Product 240/279: https://www.sbazar.cz/inzerat/194932429-01-ucebnice-nemciny-s-testy-dve-cd-nova
+  Product 241/279: https://www.sbazar.cz/inzerat/131685508-testy-priprava-na-stredni-skoly-prijimaci-zkousky
+  Product 242/279: https://www.sbazar.cz/inzerat/148004857-testy-z-humanitnich-ved-v-kostce-2001
+  Product 243/279: https://www.sbazar.cz/inzerat/225590014-skoda-fabia-combi-12-47-kw
+  Product 244/279: https://www.sbazar.cz/inzerat/225096295-crussis-e-country-full-1010-720-wh-175-ekolo
+  Product 245/279: https://www.sbazar.cz/inzerat/225010801-crussis-e-largo-1010-720-wh-18-predvadec-ekolo
+  Product 246/279: https://www.sbazar.cz/inzerat/224766988-crussis-one-largo-99-m-22-predvadeci-elektrokolo
+  Product 247/279: https://www.sbazar.cz/inzerat/222251009-univerzalni-nabijecka-xtar-vc8-pro-1-8-clanku
+  Product 248/279: https://www.sbazar.cz/inzerat/224345695-crussis-e-hard-1010-pro-720-wh-20-predvadeci
+  Product 249/279: https://www.sbazar.cz/inzerat/27181274-diagnostika-wow-snooper-plna-verze-online-podpora
+  Product 250/279: https://www.sbazar.cz/inzerat/223744174-crussis-e-cross-78-20-predvadeci-elektrokolo
+  Product 251/279: https://www.sbazar.cz/inzerat/223967860-prodam-celorocni-kontinualni-merice-ph-a-amoniaku?lokalita=32827141
+  Product 252/279: https://www.sbazar.cz/inzerat/214413139-nove-zimni-bundy-reima-vel134-a-140
+  Product 253/279: https://www.sbazar.cz/inzerat/216955681-vw-audi-seat-skoda-tdi-beznin-turbodmychadlo
+  Product 254/279: https://www.sbazar.cz/inzerat/226027600-audi-a6-c7-c8-dl501-0b5-oprava-ridici
+  Product 255/279: https://www.sbazar.cz/inzerat/225196180-sony-playstation-2-slim-scph-90004-upravena-v
+  Product 256/279: https://www.sbazar.cz/inzerat/225165526-2p-reprobedny-canton-garance-stavu?lokalita=33816601
+  Product 257/279: https://www.sbazar.cz/inzerat/171525696-sleva-50-bowers-wilkins-684-s2-reprobedny-1maj
+  Product 258/279: https://www.sbazar.cz/inzerat/224014249-crussis-e-fionna-910-720-wh-18-predvadec-ekolo
+  Product 259/279: https://www.sbazar.cz/inzerat/223928485-crussis-e-largo-710-720-wh-18-predvadeci-ekolo
+  Product 260/279: https://www.sbazar.cz/inzerat/121588898-vstrikovac-ford-mondeo-iii-20-16v-di-tddi-tdci
+  Product 261/279: https://www.sbazar.cz/inzerat/226043356-10x-se-nadechnete-a-bude-po-unave-dr-egor-egorov
+  Product 262/279: https://www.sbazar.cz/inzerat/226019161-mutoh-valuejet-1624x-vc-ripu-onyx-a-pc
+  Product 263/279: https://www.sbazar.cz/inzerat/226001584-dq500ridici-jednotka-prevodovkymechatronikavymen
+  Product 264/279: https://www.sbazar.cz/inzerat/226026655-am325065sngt-dsg7-dq200-hydraulicky-blok
+  Product 265/279: https://www.sbazar.cz/inzerat/226026535-0am927769h-dsg-dq200-hybrid-ridici-jednotka
+  Product 266/279: https://www.sbazar.cz/inzerat/226026454-dsg-dq200-ridici-jednotka-oprava-a-vymena
+  Product 267/279: https://www.sbazar.cz/inzerat/226023235-audi-a3-dsg-0am-dq200-ridici-jednotka
+  Product 268/279: https://www.sbazar.cz/inzerat/226000888-dsg-dq250-02e-prevodovka-oprava-ridici-jednotky
+  Product 269/279: https://www.sbazar.cz/inzerat/226000807-dq250-ridici-jednotka-prevodovky-oprava
+  Product 270/279: https://www.sbazar.cz/inzerat/220518149-technics-hifi-vez-jak-britva
+  Product 271/279: https://www.sbazar.cz/inzerat/225932608-audi-a3-16-benzin-nova-stk
+  Product 272/279: https://www.sbazar.cz/inzerat/226026730-dq200-ridici-jednotka-oprava-chyba-p1604
+  Product 273/279: https://www.sbazar.cz/inzerat/226026283-dsg-dq200-ridici-jednotka-oprava
+  Product 274/279: https://www.sbazar.cz/inzerat/226001227-oprava-mechatroniky-dsg-dq381dq380
+  Product 275/279: https://www.sbazar.cz/inzerat/225858037-planetarni-kuchynsky-robot-kenwood
+  Product 276/279: https://www.sbazar.cz/inzerat/225766012-crussis-e-country-1010-720-wh-17-pred-ekolo
+  Product 277/279: https://www.sbazar.cz/inzerat/225764971-crussis-e-atland-1010-720-wh-19-predvadeci-ele
+  Product 278/279: https://www.sbazar.cz/inzerat/225768322-crussis-e-guera-1010-720-wh-17-predvadeci-elek
+  Product 279/279: https://www.sbazar.cz/inzerat/225955624-osobni-vaha-mi-body-composition-scale-2
+Sbazar: Found 279 total products across 6 page(s)
+Found 279 products from sbazar.cz
+
+Total changes: 27
+
+
+=== Changes for 'hemingway' ===
+
+=== Found 15 changes ===
+
+❌ REMOVED PRODUCTS (15):
+1. Snehy Kilimandžára - Ernest Hemingway
+   Last Price: 100292.00 CZK | Shop: aukro.cz
+
+2. Hemingway Ernest - Sbohem armádo
+   Last Price: 991522.00 CZK | Shop: aukro.cz
+
+3. Tj Ostrava Nabor Divek
+   Last Price: 0.00 CZK | Shop: avizo.cz
+
+4. hemingway - Product 4 from mock-sbazar
+   Last Price: 720.89 CZK | Shop: mock-sbazar
+
+5. hemingway - Product 3 from mock-sbazar
+   Last Price: 3482.66 CZK | Shop: mock-sbazar
+
+6. hemingway - Product 2 from mock-sbazar
+   Last Price: 886.27 CZK | Shop: mock-sbazar
+
+7. hemingway - Product 1 from mock-sbazar
+   Last Price: 7629.52 CZK | Shop: mock-sbazar
+
+8. hemingway - Product 5 from mock-bazos
+   Last Price: 3004.21 CZK | Shop: mock-bazos
+
+9. hemingway - Product 4 from mock-bazos
+   Last Price: 5355.38 CZK | Shop: mock-bazos
+
+10. hemingway - Product 3 from mock-bazos
+   Last Price: 7354.55 CZK | Shop: mock-bazos
+
+11. hemingway - Product 2 from mock-bazos
+   Last Price: 1769.07 CZK | Shop: mock-bazos
+
+12. hemingway - Product 1 from mock-bazos
+   Last Price: 5346.21 CZK | Shop: mock-bazos
+
+13. hemingway - Product 3 from mock-avizo
+   Last Price: 9152.44 CZK | Shop: mock-avizo
+
+14. hemingway - Product 2 from mock-avizo
+   Last Price: 2579.61 CZK | Shop: mock-avizo
+
+15. hemingway - Product 1 from mock-avizo
+   Last Price: 6147.31 CZK | Shop: mock-avizo
+
+
+=== Changes for 'test' ===
+
+=== Found 7 changes ===
+
+❌ REMOVED PRODUCTS (7):
+1. tehotenske nove testy 12ks
+   Last Price: 300.00 CZK | Shop: sbazar.cz
+
+2. Pc - Lego Creator, revival (retro 2003) Test
+   Last Price: 20035055.00 CZK | Shop: aukro.cz
+
+3. Pc - Republic The Revolution (retro 2003) Test
+   Last Price: 20039955.00 CZK | Shop: aukro.cz
+
+4. Pc - Drome Racers, Lego (retro 2003) Test
+   Last Price: 20039965.00 CZK | Shop: aukro.cz
+
+5. Pc - Lego Stunt Rally (retro 2003) Test
+   Last Price: 20033955.00 CZK | Shop: aukro.cz
+
+6. CD - RUSH - Test For Echo
+   Last Price: 120016.00 CZK | Shop: aukro.cz
+
+7. test
+   Last Price: 1119.00 CZK | Shop: aukro.cz
+
+
+=== Changes for 'gameboy' ===
+
+=== Found 1 changes ===
+
+📉 PRICE DROPS (1):
+1. Tj Ostrava Nabor Divek
+   Price: 199.00 CZK → 2800.00 CZK (-2601.00 CZK)
+   Shop: avizo.cz | URL: https://www.avizo.cz/hudba-video-knihy/tj-ostrava-nabor-divek-10901881.html
+
+
+=== Changes for 'rypadlo' ===
+
+=== Found 4 changes ===
+
+❌ REMOVED PRODUCTS (4):
+1. CESTA ZIMNÍ KRAJINOU - FRANTIŠEK ŠTRAJT
+   Last Price: 2199048.00 CZK | Shop: aukro.cz
+
+2. VESNIČKA V ZIMĚ - FRANTIŠEK ŠTRAJT
+   Last Price: 2199046.00 CZK | Shop: aukro.cz
+
+3. lichoběžníkové lžíce 20-70cm pro optická vlákna 2,6-3,5t
+   Last Price: 8820.00 CZK | Shop: avizo.cz
+
+4. Podkopová lžíce 80cm 4,5-6t KLAC
+   Last Price: 8820.00 CZK | Shop: avizo.cz
+

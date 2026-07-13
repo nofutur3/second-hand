@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<title>Test bazar - Bazos.cz</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Bezplatná inzerce na internetu - vyhledávání inzerátů na Bazoš.cz.">
+<meta name="google-play-app" content="app-id=cz.ackee.bazos">
+<meta name="apple-itunes-app" content="app-id=1195042966">
+<meta property="fb:admins" content="1055875657">
+<meta property="og:image" content="https://www.bazos.cz/obrazky/bazoslogoface.png">
+<meta name="ROBOTS" content="NOINDEX">
+<link rel="stylesheet" href="https://www.bazos.cz/bazos66s.css" type="text/css"><link rel="preload" as="image" href="https://www.bazos.cz/obrazky/bazos.svg">
+<link rel="icon" href="https://www.bazos.cz/favicon.svg" type="image/svg+xml">
+<link rel="icon" HREF="https://www.bazos.cz/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="https://www.bazos.cz/apple-touch-icon.png">
+<link rel="search" type="application/opensearchdescription+xml" href="https://www.bazos.cz/search.xml" title="Bazoš.cz">
+<script async="async" src="https://www.google.com/adsense/search/ads.js"></script>
+<script type="text/javascript" charset="utf-8">
+(function(g,o){g[o]=g[o]||function(){(g[o]['q']=g[o]['q']||[]).push(
+  arguments)},g[o]['t']=1*new Date})(window,'_googCsa');
+</script><script>
+var xhr = new XMLHttpRequest();
+var naseptavac_value = '';
+function naseptavac(value) {
+  if (value=='')  {
+  	naseptavac_value = '';
+  	document.getElementById('vysledek').innerHTML='';
+  	}
+else {
+	if (naseptavac_value == value) {
+		return false;
+	}
+	naseptavac_value = value;
+	setTimeout(function () {
+		if (naseptavac_value != value) {
+			return false;
+		}
+		xhr.onreadystatechange = function() {
+ 		 if (this.readyState == 4 && naseptavac_value == value){
+				document.getElementById('vysledek').innerHTML = this.responseText;
+			}
+ 		 };
+		xhr.open("POST", '/suggest.php');
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.send('rubnas=HP&qnas='+encodeURIComponent(naseptavac_value));
+	}, 250);
+}
+}
+
+var naseptavacpsc_value = '';
+function naseptavacpsc(value) {
+  if (value=='')  {
+  	naseptavacpsc_value = '';
+  	document.getElementById('vysledekpsc').innerHTML='<table cellpadding=\"3\" cellspacing=\"0\" class=\"tablenaspsc\"><tr><td class=\"act\" onclick=\"getLocation();\"><b>Inzeráty v okolí</b></td></tr></table>';
+  	}
+else {
+	if (naseptavacpsc_value == value) {
+		return false;
+	}
+	naseptavacpsc_value = value;
+	setTimeout(function () {
+		if (naseptavacpsc_value != value) {
+			return false;
+		}
+		xhr.onreadystatechange = function() {
+ 		 if (this.readyState == 4 && naseptavacpsc_value == value){
+				document.getElementById('vysledekpsc').innerHTML = this.responseText;
+			}
+ 		 };
+		xhr.open("POST", '/suggestpsc.php');
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.send('qnaspsc='+encodeURIComponent(naseptavacpsc_value));
+	}, 250);
+}
+}
+
+function getLocation() {
+if (navigator.geolocation) {navigator.geolocation.getCurrentPosition(showPosition);}
+else {document.getElementById('hlokalita').value = '';}
+}
+function showPosition(position) {
+		xhr.onreadystatechange = function() {
+ 		 if (this.readyState == 4){
+				document.getElementById('hlokalita').value = this.responseText;
+				document.forms['formt'].submit();
+			}
+ 		 };
+		xhr.open("POST", '/zip.php');
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.send('latitude='+encodeURIComponent(position.coords.latitude)+'&longitude='+encodeURIComponent(position.coords.longitude));
+}
+
+var agent_value = '';
+function agentclick() {
+  if (document.getElementById('agentmail').value=='')  {
+  	document.getElementById("agentmail").focus();
+    return false;
+  	}
+else {
+agent_value = document.getElementById('agentmail').value;
+xhr.onreadystatechange = function() {
+  if (this.readyState == 4){
+				document.getElementById('overlay').innerHTML = this.responseText;
+			}
+  };
+xhr.open("POST", '/agent.php');
+xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+xhr.send('hledat=test&rubrikav=&hlokalita=&humkreis=0&cenaod=&cenado=&cat=&typ=&agentmail='+encodeURIComponent(agent_value));
+}
+}
+
+function odeslatrequest(value,params) {
+xhr.onreadystatechange = function() {
+  if (this.readyState == 4){
+				document.getElementById('overlay').innerHTML = this.responseText;
+			}
+  };
+xhr.open("POST", value);
+xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+xhr.send(params);
+}
+function overlay() {
+	el = document.getElementById("overlay");
+	el.style.display = (el.style.display == "inline") ? "none" : "inline";
+}
+function odeslatakci(postaction,value1,value2,value3) {
+document.getElementById('postaction').value = postaction;
+document.getElementById("postv1").value = value1;
+document.getElementById("postv2").value = value2;
+document.getElementById("postv3").value = value3;
+document.formaction.submit();
+}
+</script>
+</head>
+
+<body>
+
+<div class="sirka">
+
+
+<div class="listalogor">
+<div class="listalogol"><a href="https://www.bazos.cz/" title="Bazos.cz - Inzerce, bazar"><img src="https://www.bazos.cz/obrazky/bazos.svg" width="199" height="34" alt="Bazos.cz - Inzerce, inzeráty"></a></div>
+<div class="listalogom"> <b>... inzerce pro každého</b></div>
+<div class="listalogop"><a href="https://www.bazos.cz/oblibene.php"><b>Oblíbené inzeráty</b></a> <a href="https://www.bazos.cz/moje-inzeraty.php"><b>Moje inzeráty</b></a> <a href="/pridat-inzerat.php"><b><span class=pridati>Přidat inzerát</span></b></a></div>
+</div>
+
+<form name="formt" id="formt" method=get action="/search.php">
+<div class="listah">
+<div class="rubriky">
+<b>
+Co: <span class=vysokoli><span id="vysledek"></span><input type="search" onkeyup="naseptavac(this.value);" id=hledat name=hledat size="17" maxlength="256" value="test" autocomplete="off" title="Co? Vyhledávaný výraz" ></span>
+
+<select name="rubriky" onchange='this.form.submit();' title="Vyber rubriku">
+<option value="www" selected>Všechny rubriky</option>
+<option value="auto">Auto</option>
+<option value="deti">Děti</option>
+<option value="dum">Dům a zahrada</option>
+<option value="elektro">Elektro</option>
+<option value="foto">Foto</option>
+<option value="hudba">Hudba</option>
+<option value="knihy">Knihy</option>
+<option value="mobil">Mobily</option>
+<option value="motorky">Motorky</option>
+<option value="nabytek">Nábytek</option>
+<option value="obleceni">Oblečení</option>
+<option value="pc">PC</option>
+<option value="prace">Práce</option>
+<option value="reality">Reality</option>
+<option value="sluzby">Služby</option>
+<option value="sport">Sport</option>
+<option value="stroje">Stroje</option>
+<option value="vstupenky">Vstupenky</option>
+<option value="zvirata">Zvířata</option>
+<option value="ostatni">Ostatní</option>
+</select>
+
+Lokalita: <span class=vysokolipsc><span id="vysledekpsc"></span><input type="search" name="hlokalita" id="hlokalita" onkeyup="naseptavacpsc(this.value);" onclick="naseptavacpsc(this.value);" value="" size="4" maxlength="25" autocomplete="off" title="Kde? PSČ (místo)" style="-webkit-appearance: none;"></span>
+Okolí: <input name="humkreis" title="Okolí v km" value="0" size="3" style="width: 25px;"> km
+Cena od: <input name=cenaod title="Cena od Kč" maxlength="12" size="5" value=""> - do: <input name=cenado title="Cena do Kč" maxlength="12" size="5" value=""> Kč <input type="submit" name="Submit" value="Hledat">
+<input type="hidden" name="order" id="order"><input type="hidden" name="kitx" value="ano"></b>
+</div>
+</div>
+</form>
+<div class="drobky"><a href="https://www.bazos.cz/" title="Inzerce Bazoš">Hlavní stránka</a> > <b>Vyhledávání</b> > <h1 class="nadpiskategorie">test</h1></div><br>
+
+
+
+<div class="flexmain"><div class="menuleft"><div class="nadpismenu">Inzerce</div>
+<div class="barvalmenu">
+<div class="barvaleva">
+<div align="center">
+
+<br>
+<a href="https://auto.bazos.cz/"><b>Auto</b></a>
+Inzeráty Celkem: 394787<br>
+Za 24 hodin: 20873<br><br>
+
+<br>
+<a href="https://deti.bazos.cz/"><b>Děti</b></a>
+Inzeráty Celkem: 167837<br>
+Za 24 hodin: 3180<br><br>
+
+<br>
+<a href="https://dum.bazos.cz/"><b>Dům a zahrada</b></a>
+Inzeráty Celkem: 109798<br>
+Za 24 hodin: 3114<br><br>
+
+<br>
+<a href="https://elektro.bazos.cz/"><b>Elektro</b></a>
+Inzeráty Celkem: 76841<br>
+Za 24 hodin: 2407<br><br>
+
+<br>
+<a href="https://foto.bazos.cz/"><b>Foto</b></a>
+Inzeráty Celkem: 13230<br>
+Za 24 hodin: 524<br><br>
+
+<br>
+<a href="https://hudba.bazos.cz/"><b>Hudba</b></a>
+Inzeráty Celkem: 20677<br>
+Za 24 hodin: 649<br><br>
+
+<br>
+<a href="https://knihy.bazos.cz/"><b>Knihy</b></a>
+Inzeráty Celkem: 42747<br>
+Za 24 hodin: 850<br><br>
+
+<br>
+<a href="https://mobil.bazos.cz/"><b>Mobily</b></a>
+Inzeráty Celkem: 26794<br>
+Za 24 hodin: 1349<br><br>
+
+<br>
+<a href="https://motorky.bazos.cz/"><b>Motorky</b></a>
+Inzeráty Celkem: 65414<br>
+Za 24 hodin: 2162<br><br>
+
+<br>
+<a href="https://nabytek.bazos.cz/"><b>Nábytek</b></a>
+Inzeráty Celkem: 70223<br>
+Za 24 hodin: 2396<br><br>
+
+<br>
+<a href="https://obleceni.bazos.cz/"><b>Oblečení</b></a>
+Inzeráty Celkem: 109567<br>
+Za 24 hodin: 2334<br><br>
+
+<br>
+<a href="https://pc.bazos.cz/"><b>PC</b></a>
+Inzeráty Celkem: 48909<br>
+Za 24 hodin: 2150<br><br>
+
+<br>
+<a href="https://prace.bazos.cz/"><b>Práce</b></a>
+Inzeráty Celkem: 4922<br>
+Za 24 hodin: 777<br><br>
+
+<br>
+<a href="https://reality.bazos.cz/"><b>Reality</b></a>
+Inzeráty Celkem: 41270<br>
+Za 24 hodin: 2659<br><br>
+
+<br>
+<a href="https://sluzby.bazos.cz/"><b>Služby</b></a>
+Inzeráty Celkem: 6715<br>
+Za 24 hodin: 887<br><br>
+
+<br>
+<a href="https://sport.bazos.cz/"><b>Sport</b></a>
+Inzeráty Celkem: 97345<br>
+Za 24 hodin: 3009<br><br>
+
+<br>
+<a href="https://stroje.bazos.cz/"><b>Stroje</b></a>
+Inzeráty Celkem: 70278<br>
+Za 24 hodin: 3375<br><br>
+
+<br>
+<a href="https://vstupenky.bazos.cz/"><b>Vstupenky</b></a>
+Inzeráty Celkem: 2248<br>
+Za 24 hodin: 155<br><br>
+
+<br>
+<a href="https://zvirata.bazos.cz/"><b>Zvířata</b></a>
+Inzeráty Celkem: 37987<br>
+Za 24 hodin: 1888<br><br>
+
+<br>
+<a href="https://ostatni.bazos.cz/"><b>Ostatní</b></a>
+Inzeráty Celkem: 163043<br>
+Za 24 hodin: 3751<br><br>
+
+
+
+</div>
+</div></div>
+<br><br>
+
+
+
+<br><div class="mobilskryt" style="text-align: center;">
+<a style="font-size: 13px;text-decoration: none;color:#000000;" href="https://www.jasminka.cz/kniha/clemens-kuby-na-ceste-do-sousedni-dimenze.html" target="_blank" rel=”nofollow”><b>Knihkupectví Jasmínka</b><br>
+<span style="font-size: 13px;text-decoration: none;color:#ff6600;">
+<span style="color:#000000;">Clemens Kuby:</span> Na cestě do sousední dimenze<br><img src="https://www.jasminka.cz/images/v/dimenzev.jpg" width="100" alt="Knihkupectví Jasmínka" title="Knihkupectví Jasmínka" style="border: 1px solid Black;margin: 4px;">
+<br>
+<img src="https://www.bazos.cz/kosik.svg" alt="Jasminka" height="22" style="border: 0px;"> koupit</span></a></div>
+
+</div><div class="maincontent">
+
+
+<div class="listainzerat inzeratyflex">
+<div class="inzeratynadpis"><img src="https://www.bazos.cz/obrazky/list.gif" width="18" height="16" alt="List inzerátů" class=gallerylista> <form name="formgal" id="formgal" method="post" style="display: inline;"><input type="hidden" name="gal" value="g"><input type="image" alt="Submit" src="https://www.bazos.cz/obrazky/gallery.gif" width="18" height="16" class="gallerylist inputgal"></form> Zobrazeno 41-60 inzerátů z 745</div>
+<div class="inzeratycena"><b><span onclick="document.getElementById('order').value=1;document.forms['formt'].submit();" class="paction">Cena</span></b></div>
+<div class="inzeratylok">Lokalita</div>
+<div class="inzeratyview"><span onclick="document.getElementById('order').value=3;document.forms['formt'].submit();" class="paction">Zobrazeno</span></div>
+</div><form name="formaction" method="post" style="display: inline;"><input type="hidden" id="postaction" name="postaction" value=""><input type="hidden" id="postv1" name="postv1" value=""><input type="hidden" id="postv2" name="postv2" value=""><input type="hidden" id="postv3" name="postv3" value=""></form><button type="button" onclick="odeslatrequest('/agent.php','teloverit=');overlay();">Nové inzeráty e-mailem</button>
+	<div id="overlay">
+     <div></div>
+</div>
+
+<div id="container_one"></div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214425277/herni-pc-intel-i5-rx-5600-xt-16gb-ssd-256gb.php"><img src="https://www.bazos.cz/img/1t/277/214425277.jpg?t=1770036264" class="obrazek" alt="Herní PC | intel i5 | RX 5600 XT | 16GB | ssd 256GB ARGB" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214425277/herni-pc-intel-i5-rx-5600-xt-16gb-ssd-256gb.php">Herní PC | intel i5 | RX 5600 XT | 16GB | ssd 256GB ARGB</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>Prodám výkonný herní počítač s ARGB podsvícením.
+
+Specifikace:
+Grafika: SAPPHIRE PULSE Radeon RX 5600 XT podobná výkonově jako RTX 2060
+Procesor: Intel core i5 7400 3.5 Ghz
+Deska: MSI B150M MORTAR
+Ram: 16GB 2x8GB DDR4 3200 Mhz
+Disk: Kingston ssd 256 GB
+Zdroj: Gigabyte P550SS 550 W 80+ Silver ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  9 490 Kč</span></b></div>
+<div class="inzeratylok">Praha 10<br>100 00</div>
+<div class="inzeratyview">62 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214425277');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214425277');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','7130122','7359680','Jakub');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214425277','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://sport.bazos.cz/inzerat/214421789/celoodpruz-elektrokolo-crussis-e-full-117-s-motorem-bosch.php"><img src="https://www.bazos.cz/img/1t/789/214421789.jpg" class="obrazek" alt="Celoodpruž. elektrokolo CRUSSIS E-FULL 11.7 s motorem BOSCH" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://sport.bazos.cz/inzerat/214421789/celoodpruz-elektrokolo-crussis-e-full-117-s-motorem-bosch.php">Celoodpruž. elektrokolo CRUSSIS E-FULL 11.7 s motorem BOSCH</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>Prodám kvalitní, pravidelně odborně servisované elektrokolo CRUSSIS E-FULL 11.7 s  motorem BOSCH, ve výbornm stavu. Původní cena nového kola 119.990,-
+Velikost rámu 20“ , průměr kol 29“. Zdvih 150/140mm.
+Motor BOSCH Performance CX 4 (kroutící moment) 85Nm baterie 625Wh, dojezd až 150km
+Displej BO ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  69 000 Kč</span></b></div>
+<div class="inzeratylok">Třebíč<br>674 01</div>
+<div class="inzeratyview">43 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214421789');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214421789');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','8071679','6721379','Tom%C3%A1%C5%A1');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214421789','sport');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://pc.bazos.cz/inzerat/214418403/prodam-hry-na-xbox-360.php"><img src="https://www.bazos.cz/img/1t/403/214418403.jpg" class="obrazek" alt="Prodám hry na XBOX 360" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://pc.bazos.cz/inzerat/214418403/prodam-hry-na-xbox-360.php">Prodám hry na XBOX 360</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>Prodám hry na XBOX 360
+
+
+AKCE (5+1) kupte 5 her + šestou máte zdarma dle vašeho výběru z her za 199kč
+
+
+Minecraft
+1ks 699kč
+
+
+The amazing spider man
+Angry Birds Trilogy
+Angry Birds Star wars
+Super star kartz
+1ks 499kč
+
+
+Skate 3
+Ride to hell Retribution
+Need for speed Shift 2
+Call ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   199 Kč</span></b></div>
+<div class="inzeratylok">Praha 8<br>180 00</div>
+<div class="inzeratyview">37 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214418403');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214418403');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','8952187','6987608','Lubo%C5%A1');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214418403','pc');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://sport.bazos.cz/inzerat/214417778/nabijeci-led-svitilna-mp-27.php"><img src="https://www.bazos.cz/img/1t/778/214417778.jpg" class="obrazek" alt="Nabíjecí LED svítilna MP 27" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://sport.bazos.cz/inzerat/214417778/nabijeci-led-svitilna-mp-27.php">Nabíjecí LED svítilna MP 27</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>Dosah 50-100 metrů
+Baterie 800 mAh
+Nabíjení přes USB (kabel součástí)
+
+Mrkni na video <b>test</b>
+https://youtube.com/shorts/aZp51acrLD0?si=9Y1cT2xuSAQNLSG9</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   130 Kč</span></b></div>
+<div class="inzeratylok">Hodonín<br>697 01</div>
+<div class="inzeratyview">30 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214417778');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214417778');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','7909168','5803581','Martin+Hula');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214417778','sport');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://dum.bazos.cz/inzerat/214417777/nabijeci-led-svitilna-cob-219.php"><img src="https://www.bazos.cz/img/1t/777/214417777.jpg" class="obrazek" alt="Nabíjecí LED svítilna COB 219" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://dum.bazos.cz/inzerat/214417777/nabijeci-led-svitilna-cob-219.php">Nabíjecí LED svítilna COB 219</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>Dosah 50-100 metrů
+5 režimů svícení
+450 lumenů
+
+Mrkněte na video - <b>test</b> svítilny
+
+https://youtube.com/shorts/FI02kUbi6Lk?si=0Al0FU3K-u2k5QFp</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   150 Kč</span></b></div>
+<div class="inzeratylok">Hodonín<br>697 01</div>
+<div class="inzeratyview">26 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214417777');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214417777');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','7909168','5803581','Martin+Hula');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214417777','dum');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/214409191/peugeot-605-21td-automat-klima-stk-626-servis-50000.php"><img src="https://www.bazos.cz/img/1t/191/214409191.jpg?t=1770111949" class="obrazek" alt="🔴Peugeot 605 2.1TD Automat KLIMA, STK 6/26, servis 50.000,-" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://auto.bazos.cz/inzerat/214409191/peugeot-605-21td-automat-klima-stk-626-servis-50000.php">🔴Peugeot 605 2.1TD Automat KLIMA, STK 6/26, servis 50.000,-</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>Video1 & <b>test</b> automat/servisní jízda = https://www.youtube.com/watch?v=YnmeE7d_hJY
+
+Video2 = https://m.youtube.com/watch?v=2xhG_-DL8cc
+
+¶ Peugeot 605 Facelift
+¶ Design Pininfarina
+
+` Motor 2.1SLDt 80kW spolehlivý nezmar, v mrazech startuje skvěle
+` Převodovka Automatická 4HP18, řadí sametově ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  80 000 Kč</span></b></div>
+<div class="inzeratylok">Praha - západ<br>252 64</div>
+<div class="inzeratyview">80 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214409191');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214409191');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','0','71673','Mirek+1234%2C+Car+sales+%26+Ferrari+purchases');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214409191','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://sluzby.bazos.cz/inzerat/214408775/BMW-Kompresor-podvozku-Wabco--AMK.php"><img src="https://www.bazos.cz/img/1t/775/214408775.jpg" class="obrazek" alt="BMW Kompresor podvozku Wabco / AMK" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://sluzby.bazos.cz/inzerat/214408775/BMW-Kompresor-podvozku-Wabco--AMK.php">BMW Kompresor podvozku Wabco / AMK</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>Nabízíme kompletní regeneraci Vašeho kompresoru vzduchového podvozku.
+
+- do 2 pracovního dne odevzáváme klientovi + <b>test</b>.
+Na opravený / regenerovaný díl se vystavuje záruka !!
+Stav nového kompresoru !!!.
+
+Pro vozy :
+BMW 5 , E61 r.v. 2003-2010, F11 r.v. 2010+
+BMW X5 / X6 , F15 r.v. 2013+, E70 ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">Dohodou</span></b></div>
+<div class="inzeratylok">Ostrava<br>700 30</div>
+<div class="inzeratyview">23 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214408775');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214408775');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','4866966','28985','AutomobillCZ');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214408775','sluzby');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/214405324/fiat-125p-dobovy-test-1975-3x-dvojstrana-52cmx33cm.php"><img src="https://www.bazos.cz/img/1t/324/214405324.jpg" class="obrazek" alt="FIAT 125P, DOBOVÝ TEST 1975, 3X DVOJSTRANA 52cmx33cm" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://auto.bazos.cz/inzerat/214405324/fiat-125p-dobovy-test-1975-3x-dvojstrana-52cmx33cm.php">FIAT 125P, DOBOVÝ TEST 1975, 3X DVOJSTRANA 52cmx33cm</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>FIAT 125P, DOBOVÝ <b>test</b> 1975, 3X DVOJSTRANA 52cmx33cm, ODESÍLÁM CELÝ ČASOPIS, MRKNI NA DALŠÍ INZERÁTY, ODESÍLÁM ZABALENÉ V KARTONU. ODESLÁNÍ PO PLATBĚ PŘEDEM NA ÚČET 89KČ, ODESLÁNÍ NA SLOVENSKO LZE</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   89 Kč</span></b></div>
+<div class="inzeratylok">Pardubice<br>533 53</div>
+<div class="inzeratyview">13 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214405324');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214405324');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','725011','94093','Petr');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214405324','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://knihy.bazos.cz/inzerat/214402872/Nemecke-casopisy-Auto-Zeitung-Auto-Bild-Auto-Motor-Sport.php"><img src="https://www.bazos.cz/img/1t/872/214402872.jpg" class="obrazek" alt="Německé časopisy Auto Zeitung, Auto Bild, Auto Motor Sport" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://knihy.bazos.cz/inzerat/214402872/Nemecke-casopisy-Auto-Zeitung-Auto-Bild-Auto-Motor-Sport.php">Německé časopisy Auto Zeitung, Auto Bild, Auto Motor Sport</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>Prodám různé časopisy Auto Zeitung, Auto Bild, Auto Bild <b>test</b> & Tuning a Auto, Motor und Sport- viz foto. Všechny perfektní stav. Prodej pouze komplet za uvedenou cenu.
+
+Auto Zeitung: 25/99, 25/2002, 25/2003, 5/2006
+Auto Bild: 46/2006, 48/2006, 17/2004, 22/2010, 14/2010, 23/2013, 34/2004, 51-52/2 ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">Dohodou</span></b></div>
+<div class="inzeratylok">Rokycany<br>337 01</div>
+<div class="inzeratyview">13 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214402872');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214402872');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','561694','76533','Ond%C5%99ej+Brabec');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214402872','knihy');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/214401844/repasovane-cerpadlo-0-445-010-102.php"><img src="https://www.bazos.cz/img/1t/844/214401844.jpg" class="obrazek" alt="Repasované čerpadlo 0 445 010 102" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://auto.bazos.cz/inzerat/214401844/repasovane-cerpadlo-0-445-010-102.php">Repasované čerpadlo 0 445 010 102</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>Nabízíme repasované čerpadlo Bosch 0445 010 102 
+Čerpadlo je po celkové repasi , <b>test</b> přiložen .
+Citroen 1,4 , 1,6 HDi, Fiat scudo 1,6D , Ford 1,6TDCi</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  6 500 Kč</span></b></div>
+<div class="inzeratylok">Frýdek - Místek<br>738 01</div>
+<div class="inzeratyview">22 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214401844');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214401844');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','1985953','97416','Karel');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214401844','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/214400405/seat-leon-cupra.php"><img src="https://www.bazos.cz/img/1t/405/214400405.jpg" class="obrazek" alt="Seat Leon Cupra" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://auto.bazos.cz/inzerat/214400405/seat-leon-cupra.php">Seat Leon Cupra</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>Prodám Seat Leon Cupra 290 ST DSG (5F), rok výroby 2016
+
+bez DPF, verze před faceliftem
+
+Výkon: 213 kW
+
+Obsah: 1984 cm3
+
+Najeto: 150.000 km
+
+Počet majitelů: 3
+
+KOMPLETNÍ SERVISNÍ KNÍŽKA ELEKTRONICKÁ I FYZICKÁ!
+
+Auto je ve výborné kondici. Poslední 3 roky bylo servisováno výhradně v aut ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  425 000 Kč</span></b></div>
+<div class="inzeratylok">Rychnov nad Kněžnou<br>517 50</div>
+<div class="inzeratyview">71 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214400405');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214400405');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','8480112','6447533','Karel+Straka');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214400405','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/214394496/lexus-ls500h-superior.php"><img src="https://www.bazos.cz/img/1t/496/214394496.jpg" class="obrazek" alt="Lexus LS500h Superior 2018" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://auto.bazos.cz/inzerat/214394496/lexus-ls500h-superior.php">Lexus LS500h Superior 2018</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>Prodám velice zachovalý a pravidelně ježděný Lexus LS500h 3.5i V6 + hybridní pohon 4x4 s 264kw. Rok výroby 2018, první registrace Slovensko a já jsem druhý majitel. Po dohodě nechám udělat <b>test</b> hybridního ústrojí v Lexusu jako doložení stavu. Vozidlo má aktuálně najeto 262xxxkm a je stále v provozu. ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  799 999 Kč</span></b></div>
+<div class="inzeratylok">Praha 4<br>140 00</div>
+<div class="inzeratyview">115 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214394496');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214394496');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','8816764','6931983','Lexus');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214394496','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://elektro.bazos.cz/inzerat/214393567/nova-originalni-merici-sonda-megger-s-ovladanim.php"><img src="https://www.bazos.cz/img/1t/567/214393567.jpg" class="obrazek" alt="Nová originální měřící sonda Megger s ovládáním" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://elektro.bazos.cz/inzerat/214393567/nova-originalni-merici-sonda-megger-s-ovladanim.php">Nová originální měřící sonda Megger s ovládáním</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>Typ: Megger 1007-157 SP5 (vyrobeno v Anglii)
+
+Tato nepoužitá sonda dálkového spínače Megger SP5 je navržena pro použití s následujícími multifunkčními <b>test</b>ery Megger a <b>test</b>ery izolace Megger:
+
+MFT1710, MFT1720, MFT1730, MFT1735
+MIT400, MIT410, MIT415, MIT420, MIT430
+MIT480, MIT485
+MIT40X
+Klí ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  1 990 Kč</span></b></div>
+<div class="inzeratylok">České Budějovice<br>370 01</div>
+<div class="inzeratyview">48 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214393567');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214393567');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','6547642','2958524','Mr.+Multimeter');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214393567','elektro');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://elektro.bazos.cz/inzerat/214393564/retro-nova-svitilna-se-zkouseckou-prozvaneckou-z-ndr.php"><img src="https://www.bazos.cz/img/1t/564/214393564.jpg" class="obrazek" alt="Retro nová svítilna se zkoušečkou (prozváněčkou) z NDR" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://elektro.bazos.cz/inzerat/214393564/retro-nova-svitilna-se-zkouseckou-prozvaneckou-z-ndr.php">Retro nová svítilna se zkoušečkou (prozváněčkou) z NDR</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>Nová, nikdy nepoužitá. Vč. baterií (neznámý stav, ale jsou originál německé :-))
+
+Nesmí chybět v žádném veteránu zn. Trabant, Wartburg, Robur, atd.
+
+Vyrobeno v březnu 1989 v Hochohm<b>test</b>er HT20 - Elektro-Anlagenbau Zwickau (Východní Německo, NDR, DDR)
+
+Funkce:
+- svítilna se žárovkou 2,5 V; 0,2 ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">   499 Kč</span></b></div>
+<div class="inzeratylok">České Budějovice<br>370 01</div>
+<div class="inzeratyview">60 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214393564');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214393564');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','6547642','2958524','Mr.+Multimeter');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214393564','elektro');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/214392480/kompresor-na-vzduchovy-podvozek-vozu-mercedes-benz.php"><img src="https://www.bazos.cz/img/1t/480/214392480.jpg" class="obrazek" alt="Kompresor na vzduchový podvozek vozu Mercedes-Benz" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://auto.bazos.cz/inzerat/214392480/kompresor-na-vzduchovy-podvozek-vozu-mercedes-benz.php">Kompresor na vzduchový podvozek vozu Mercedes-Benz</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>Kompresor k podvozku Airmatic pro Mercedes-Benz ML W164 (případně na GL W164 a R W251)U nás nepoužíváme dodavatele asijské, polské ani turecké výroby.
+Po vlastní zkušenosti víme, že vydrží pár měsíců!!!
+Na přání zákazníka montáž, demontáž, elektronická kalibrace, <b>test</b> tlaku kompresoru, kontrola na ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  11 990 Kč</span></b></div>
+<div class="inzeratylok">Havlíčkův Brod<br>582 53</div>
+<div class="inzeratyview">21 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214392480');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214392480');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','918','31612','Mercedes+cars+%26+servis+s.r.o.');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214392480','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/214392479/predni-mech-airmatic-na-mercedes-benz-ml.php"><img src="https://www.bazos.cz/img/1t/479/214392479.jpg" class="obrazek" alt="Přední měch Airmatic na Mercedes-Benz ML" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://auto.bazos.cz/inzerat/214392479/predni-mech-airmatic-na-mercedes-benz-ml.php">Přední měch Airmatic na Mercedes-Benz ML</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>W164 (GL X164, R W251)
+U nás nepoužíváme dodavatele asijské, polské ani turecké výroby.
+Po vlastní zkušenosti víme, že vydrží pár měsíců!!!
+Na přání zákazníka montáž, demontáž, elektronická kalibrace, <b>test</b> tlaku kompresoru, kontrola nastavovačů výšky podvozku, vše za 1500 Kč/ks a na počkání
+Cena ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  11 500 Kč</span></b></div>
+<div class="inzeratylok">Havlíčkův Brod<br>582 53</div>
+<div class="inzeratyview">16 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214392479');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214392479');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','918','31612','Mercedes+cars+%26+servis+s.r.o.');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214392479','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/214392475/nove-predni-tlumice-na-mercedes-ml.php"><img src="https://www.bazos.cz/img/1t/475/214392475.jpg" class="obrazek" alt="Nové přední tlumiče na Mercedes ML" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://auto.bazos.cz/inzerat/214392475/nove-predni-tlumice-na-mercedes-ml.php">Nové přední tlumiče na Mercedes ML</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>W164, GL X164, R W251 AIRMATIC.
+Originální kódy: A1643204313 A1643205813 A1643204613 A1643206013 A1643205913 A1643204413
+U nás nepoužíváme dodavatele asijské, polské ani turecké výroby.
+Po vlastní zkušenosti víme, že vydrží pár měsíců!!!
+Na přání zákazníka montáž, demontáž, elektronická kalibrac ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  16 900 Kč</span></b></div>
+<div class="inzeratylok">Havlíčkův Brod<br>582 53</div>
+<div class="inzeratyview">12 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214392475');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214392475');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','918','31612','Mercedes+cars+%26+servis+s.r.o.');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214392475','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/214392466/nove-predni-tlumice-na-mercedes-benz-s.php"><img src="https://www.bazos.cz/img/1t/466/214392466.jpg" class="obrazek" alt="Nové přední tlumiče na Mercedes-Benz S" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://auto.bazos.cz/inzerat/214392466/nove-predni-tlumice-na-mercedes-benz-s.php">Nové přední tlumiče na Mercedes-Benz S</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>W220 AIRMATIC.
+Originální kódy: A2203202438
+A2203205013
+A2203202338
+A2203204913
+
+U nás nepoužíváme dodavatele asijské, polské ani turecké výroby.
+Po vlastní zkušenosti víme, že vydrží pár měsíců!!!
+
+Na přání zákazníka montáž, demontáž, elektronická kalibrace, <b>test</b> tlaku kompresoru, kontrola ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  17 990 Kč</span></b></div>
+<div class="inzeratylok">Havlíčkův Brod<br>582 53</div>
+<div class="inzeratyview">17 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214392466');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214392466');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','918','31612','Mercedes+cars+%26+servis+s.r.o.');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214392466','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/214392451/novy-zadni-mech-na-mercedes-benz-r.php"><img src="https://www.bazos.cz/img/1t/451/214392451.jpg" class="obrazek" alt="Nový zadní měch na Mercedes-Benz R" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://auto.bazos.cz/inzerat/214392451/novy-zadni-mech-na-mercedes-benz-r.php">Nový zadní měch na Mercedes-Benz R</a></h2><span class=velikost10> - [2.2. 2026]</span><br>
+<div class=popis>W251
+U nás nepoužíváme dodavatele asijské, polské ani turecké výroby.
+Po vlastní zkušenosti víme, že vydrží pár měsíců!!!
+
+Na přání zákazníka montáž, demontáž, elektronická kalibrace, <b>test</b> tlaku kompresoru, kontrola nastavovačů výšky podvozku, práce za 1500 Kč a na počkání.
+
+Mercedes cars & se ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  6 500 Kč</span></b></div>
+<div class="inzeratylok">Havlíčkův Brod<br>582 53</div>
+<div class="inzeratyview">13 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214392451');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214392451');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','918','31612','Mercedes+cars+%26+servis+s.r.o.');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214392451','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://deti.bazos.cz/inzerat/214388001/bm-02-monitor-dechu-miminka.php"><img src="https://www.bazos.cz/img/1t/001/214388001.jpg" class="obrazek" alt="BM-02 Monitor dechu miminka" width="170" height="128"></a>
+<h2 class=nadpis><a href="https://deti.bazos.cz/inzerat/214388001/bm-02-monitor-dechu-miminka.php">BM-02 Monitor dechu miminka</a></h2><span class=velikost10> - [1.2. 2026]</span><br>
+<div class=popis>Prodám BM-02 Monitor dechu miminka, stáří 2 roky, plně funící. Nepoškozeny, krásný stav.
+
+Osobní předání v Českých Budějovicích, Horní Stropnici nebo na této trase. Možné zaslat také přes Zásilkovnu. 
+
+Platba převodem +85Kč
+Dobírka +145Kč
+
+Nanny je certifikovaný zdravotnický prostředek určený ke sle ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  1 500 Kč</span></b></div>
+<div class="inzeratylok">České Budějovice<br>370 01</div>
+<div class="inzeratyview">38 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','214388001');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','214388001');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','7174288','5354259','V%C3%A1clav+Vlk');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','214388001','deti');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+<div id="container_two"></div><br>
+<br><div class="strankovani">Stránka: <a href="search.php?hledat=test&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=20" rel="nofollow"><b>Předchozí</b></a> <a href="search.php?hledat=test&hlokalita=&humkreis=0&cenaod=&cenado=&order=" rel="nofollow">1</a> <a href="search.php?hledat=test&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=20" rel="nofollow">2</a> <b><span class=cisla>3</span></b> <a href="search.php?hledat=test&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=60" rel="nofollow">4</a> <a href="search.php?hledat=test&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=80" rel="nofollow">5</a> <a href="search.php?hledat=test&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=100" rel="nofollow">6</a> <a href="search.php?hledat=test&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=120" rel="nofollow">7</a> <a href="search.php?hledat=test&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=140" rel="nofollow">8</a> <a href="search.php?hledat=test&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=160" rel="nofollow">9</a> <a href="search.php?hledat=test&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=180" rel="nofollow">10</a> <a href="search.php?hledat=test&hlokalita=&humkreis=0&cenaod=&cenado=&order=&crz=60" rel="nofollow"><b>Další</b></a></div><br><br><br>
+
+
+</div></div><script type="text/javascript" charset="utf-8">
+var pageOptions = {
+  'pubId': 'pub-3645948300403337',
+  'query' : 'test',
+  'channel': '4719857758',
+  'linkTarget' : '_blank',
+  'personalizedAds' : 'false',
+  'ivt': false,
+  'styleId' : '6171314811',  'adPage': 3,
+  'hl': 'cs'
+};
+
+
+var adblock1 = {
+  'container': 'container_one',
+  'width': 'auto',
+  'maxTop' : 2
+};
+
+var adblock2 = {
+  'container': 'container_two',
+  'width': 'auto',
+  'number' : 2
+};
+
+_googCsa('ads', pageOptions, adblock2);</script>
+<br>
+
+&copy;2026 Bazoš -  <b>Inzerce, Bazar</b><br>
+<a href="https://www.bazos.cz/napoveda.php">Nápověda</a>, <a href="https://www.bazos.cz/dotazy.php">Dotazy</a>, <a href="https://www.bazos.cz/hodnoceni.php">Hodnocení</a>, <a href="https://www.bazos.cz/kontakt.php">Kontakt</a>, <a href="https://www.bazos.cz/reklama.php">Reklama</a>, <a href="https://www.bazos.cz/podminky.php">Podmínky</a>, <a href="https://www.bazos.cz/ochrana-udaju.php">Ochrana údajů</a>, <a href="https://www.bazos.cz/rss.php?humkreis=0&hledat=test">RSS</a>, <form name="formvkm" id="formvkm" method="post" style="display: inline;"><input type="hidden" name="vkm" value="m"><input type="submit" class="vkm" value="Mobilní verze"></form><br>
+Inzeráty celkem:<b>
+1570632</b>, inzerce za 24 hodin: <b>58489</b><br><br>
+<a href="https://www.bazos.cz/mapa-kategorie.php">Mapa kategorií</a>, <a href="https://www.bazos.cz/mapa-search.php">Nejvyhledávanější výrazy</a>, Tmavý motiv: <form name="formdark" action="https://www.bazos.cz" method="post" style="display: inline;"><input type="hidden" name="darkmode" value="1"><input type="submit" class="vkm" value="Vypnuto"></form><br>
+Země: <a href="https://www.bazos.cz">Česká republika</a>, <a href="https://www.bazos.sk">Slovensko</a>, <a href="https://www.bazos.pl">Polsko</a>, <a href="https://www.bazos.at">Rakousko</a>
+<br>
+<br>
+</div>
+
+<script src="https://www.bazos.cz/cookie-consent.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","palette":"light","language":"cs","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false,"cookie_domain": "bazos.cz"});
+});
+</script>
+<a href="#" id="open_preferences_center"> </a>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZW1QTHKBB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', {
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+});
+
+  gtag('config', 'G-NZW1QTHKBB');
+</script>
+</body>
+</html>

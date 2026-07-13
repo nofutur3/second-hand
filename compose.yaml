@@ -1,0 +1,75 @@
+services:
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgreska
+    environment:
+      POSTGRES_DB: secondhand
+      POSTGRES_USER: secondhand
+      POSTGRES_PASSWORD: secondhand_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U secondhand"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - secondhand_network
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/api/Dockerfile
+    container_name: secondhand_api
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: secondhand
+      DB_PASSWORD: secondhand_dev
+      DB_NAME: secondhand
+      DB_SSLMODE: disable
+      API_PORT: 8091
+    ports:
+      - "8091:8091"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - secondhand_network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: src/frontend
+      dockerfile: docker/frontend/Dockerfile
+    container_name: secondhand_frontend
+    environment:
+      NUXT_PUBLIC_API_BASE: http://api:8091/api/v1
+      HOST: 0.0.0.0
+      PORT: 8092
+    ports:
+      - "8092:8092"
+    depends_on:
+      - api
+    networks:
+      - secondhand_network
+    restart: unless-stopped
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8099:8080
+    networks:
+      - secondhand_network
+
+volumes:
+  postgres_data:
+
+networks:
+  secondhand_network:
+    driver: bridge
+

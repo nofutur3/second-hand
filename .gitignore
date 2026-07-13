@@ -1,0 +1,6 @@
+/src/backend/bin/*
+*.test
+*.out
+.env
+coverage.txt
+*.coverprofile

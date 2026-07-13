@@ -1,0 +1,11 @@
+No new migrations to apply
+Searching for 'hemingway' across 5 shops...
+Aukro scraping error: Bad Request
+Error from aukro.cz: failed to visit aukro: Bad Request
+Found 0 products from bazos.cz
+Found 0 products from sbazar.cz
+Inzeruj scraping error: Internal Server Error
+Error from inzeruj.cz: failed to visit inzeruj: Internal Server Error
+Found 0 products from avizo.cz
+2026/02/03 10:46:06 Search failed: all adapters failed: [failed to visit aukro: Bad Request failed to visit inzeruj: Internal Server Error]
+exit status 1

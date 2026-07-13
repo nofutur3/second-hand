@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:type" content="inzerat">
+    <meta property="og:locale" content="cs_CZ">
+    <meta property="og:site_name" content="Inzeruj">
+    <meta property="og:title" content="Inzeruj.cz - S námi koupíte, či prodáte cokoliv!">
+    
+    <link rel="stylesheet" type="text/css" href="https://www.inzeruj.cz/www/assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="https://www.inzeruj.cz/www/assets/css/awesome.css">
+    <link href="https://www.inzeruj.cz/admin-static/slimselect.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://www.inzeruj.cz/www/assets/css/image-zoom.css">
+    <link rel="stylesheet" type="text/css" href="https://www.inzeruj.cz/www/assets/css/five-buger-menu.css?v=1.0.1">
+    <link rel="stylesheet" type="text/css" href="https://www.inzeruj.cz/www/assets/css/five-popup.css">
+    <link rel="stylesheet" type="text/css" href="https://www.inzeruj.cz/www/assets/css/smartsearch.css?v=1.0.1">
+    <link rel="stylesheet" type="text/css" href="https://www.inzeruj.cz/www/assets/css/styles.css?v=1.0.19">
+    <link rel="stylesheet" type="text/css" href="https://www.inzeruj.cz/www/assets/css/jquery.fiveslider.css?v=1.0.2">
+    <link rel="stylesheet" type="text/css" href="https://www.inzeruj.cz/www/assets/css/mediaq.css?v=1.0.5">
+    
+    <!-- Start cookieyes banner --> <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/c598f08a32dadb51d0ae1808/script.js"></script> <!-- End cookieyes banner -->
+    
+    <link rel="icon" type="image/x-icon" href="https://www.inzeruj.cz/www/assets/img/favicon.ico">
+	<title>Inzeruj | S námi koupíte, či prodáte cokoliv!</title>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){ w[l]=w[l]||[];w[l].push({ 'gtm.start':
+    new Date().getTime(),event:'gtm.js' });var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KKJQXVR');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Google tag (gtag.js) --> 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11359559615"></script>
+    <script> 
+        window.dataLayer = window.dataLayer || []; 
+        function gtag(){ dataLayer.push(arguments); } 
+        gtag('js', new Date()); 
+        gtag('config', 'AW-11359559615'); 
+    </script>
+
+    <style>
+        .loader {
+            background: transparent; // #ffffff;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            opacity: 1;
+            visibility: visible;
+            
+            -webkit-transition: all 0.5s ease-in-out;
+            transition: all 0.5s ease-in-out;
+        }
+        .loader.loaded {
+            opacity: 0;
+            visibility: hidden;
+        }
+		@keyframes ldio-xn75l8zffj {
+            0% { transform: translate(-50%,-50%) rotate(0deg); }
+            100% { transform: translate(-50%,-50%) rotate(360deg); }
+        }
+
+        .ldio-xn75l8zffj div {
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            border: 10px solid var(--bs-primary);
+            border-top-color: #fff;
+            border-radius: 50%;
+        }
+
+        .ldio-xn75l8zffj div {
+            animation: ldio-xn75l8zffj 1s linear infinite;
+            top: 70px;
+            left: 70px;
+        }
+
+        .loadingio-spinner-rolling {
+            width: 140px;
+            height: 140px;
+            position: fixed;
+            transform: translate(-70px, -70px);
+            top: 50%;
+            left: 50%;
+            opacity: 0;
+            visibility: hidden;
+
+            -webkit-transition: opacity visibility 0.5s ease-in-out;
+            transition: opacity visibility 0.5s ease-in-out;
+        }
+
+        .loadingio-spinner-rolling.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 99999;
+        }
+
+        .ldio-xn75l8zffj {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            backface-visibility: hidden;
+            
+            transform: translateZ(0) scale(1);
+            transform-origin: 0 0;
+        }
+
+        .ldio-xn75l8zffj div { 
+            box-sizing: content-box; 
+        }
+	</style>
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KKJQXVR"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div class="loader">
+    <div class="loadingio-spinner-rolling">
+        <div class="ldio-xn75l8zffj"><div></div></div>
+    </div>
+</div>
+<script>
+    FIVEP = new fivePreloader();
+    function fivePreloader() {
+        var self = this;
+
+        this.showPrloader = function() {
+            $(".loadingio-spinner-rolling").addClass("active");
+            $(".loader").removeClass('loaded');
+        }
+
+        this.stopPrloader = function() {
+            $(".loadingio-spinner-rolling").removeClass("active");
+            $(".loader").addClass('loaded');
+        }
+    }
+    
+    function loader(isBackTransparent = true) {
+        setTimeout(function () {
+            FIVEP.stopPrloader();
+            
+            if (isBackTransparent)
+                $(".loader").addClass('loaded');
+        }, 500);
+    }
+    window.addEventListener('load', function load() {
+        //FIVEP.showPrloader();
+        loader();
+    });
+</script>
+<div id="page" class="hfeed site">
+    <header class="  page px-2 px-sm-0 ps-sm-0">
+        <div class="py-3 subheader">
+            <div class="container p-0">
+                <div class="top d-flex py-0 py-sm-3 px-2 px-md-0 align-items-center justify-content-md-between justify-content-lg-between">
+                    <a href="/" class="d-flex align-items-center mb-0 mb-sm-2 text-white text-decoration-none">
+                        <img src="https://www.inzeruj.cz/www/assets/img/logoInzeruj.png" height="30px" class="logo">
+                    </a>
+                    <div class="burger-menu d-block d-sm-none">
+        				<span></span>
+        				<span></span>
+        				<span></span>
+        			</div>
+                    <div class="side-nav">
+                        <div class="menu-wrapper">
+                            <div class="burger-menu d-block d-sm-none">
+                				<span></span>
+                				<span></span>
+                				<span></span>
+                			</div>
+                            <div class="col-12 col-sm-auto mb-3 mb-sm-0 d-sm-block btn-block">
+                                <a href="/oblibene-inzeraty" class="btn btn-light px-3 px-lg-4 m-2 rounded-pill border border-primary text-muted">Oblíbené inzeráty</a>
+                                <a href="/moje-inzeraty#seznam" class="btn btn-light px-3 px-lg-4 m-2 rounded-pill border border-primary text-muted">Moje inzeráty</a>
+                                <a href="/pridat-inzerat" class="btn btn-light px-3 px-lg-4 m-2 rounded-pill border border-primary text-muted">Přidat inzeráty</a>
+                            </div>
+                            <div class="menu-items">
+<div class="col-12 col-md-4 col-lg bg-none bg-sm-light v-100 scrollable pos-r p-2 pe-3 pt-0 cats-list border-end offcanvas-body">
+    <div class="cat-list-block form-section px-3">
+            <h4><a href="/categories">Kategorie</a></h4>
+        
+        <ul>
+        
+            <li class="">
+                <a href="/categories/
+
+
+auto" class=""><span><img src="/uploads/2022/5/4734-auto-icon.svg" width="20" style="margin-right: 10px;"></span>Auto</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+deti" class=""><span><img src="/uploads/2022/5/6267-deti-icon.svg" width="20" style="margin-right: 10px;"></span>Děti</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+dum-a-zahrada" class=""><span><img src="/uploads/2022/5/4510-dum-icon.svg" width="20" style="margin-right: 10px;"></span>Dům a zahrada</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+elektro" class=""><span><img src="/uploads/2022/5/9482-elektro-icon.svg" width="20" style="margin-right: 10px;"></span>Elektro</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+foto" class=""><span><img src="/uploads/2022/5/4504-foto-icon.svg" width="20" style="margin-right: 10px;"></span>Foto</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+hudba" class=""><span><img src="/uploads/2022/5/6118-hudba-icon.svg" width="20" style="margin-right: 10px;"></span>Hudba</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+knihy" class=""><span><img src="/uploads/2022/5/8902-knihy-icon.svg" width="20" style="margin-right: 10px;"></span>Knihy</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+mobily" class=""><span><img src="/uploads/2022/5/8322-mobily-icon.svg" width="20" style="margin-right: 10px;"></span>Mobily</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+motorky" class=""><span><img src="/uploads/2022/5/4789-moto-icon.svg" width="20" style="margin-right: 10px;"></span>Motorky</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+nabytek" class=""><span><img src="/uploads/2022/5/9273-nabytek-icon.svg" width="20" style="margin-right: 10px;"></span>Nábytek</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+obleceni" class=""><span><img src="/uploads/2022/5/6337-obleceni-icon.svg" width="20" style="margin-right: 10px;"></span>Oblečení</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+ostatni" class=""><span><img src="/uploads/2022/5/8658-ostatni-icon.svg" width="20" style="margin-right: 10px;"></span>Ostatní</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+pc" class=""><span><img src="/uploads/2022/5/7773-pc-icon.svg" width="20" style="margin-right: 10px;"></span>PC</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+prace" class=""><span><img src="/uploads/2022/5/8951-prace-icon.svg" width="20" style="margin-right: 10px;"></span>Práce</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+reality" class=""><span><img src="/uploads/2022/5/9379-reality-icon.svg" width="20" style="margin-right: 10px;"></span>Reality</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+sluzby" class=""><span><img src="/uploads/2022/5/6201-sluzby-icon.svg" width="20" style="margin-right: 10px;"></span>Služby</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+sport" class=""><span><img src="/uploads/2022/5/4755-sport-icon.svg" width="20" style="margin-right: 10px;"></span>Sport</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+stroje" class=""><span><img src="/uploads/2022/5/5713-stroje-icon.svg" width="20" style="margin-right: 10px;"></span>Stroje</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+vstupenky" class=""><span><img src="/uploads/2022/5/6527-vstupenky-icon.svg" width="20" style="margin-right: 10px;"></span>Vstupenky</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+zvirata" class=""><span><img src="/uploads/2022/5/8709-zvirata-icon.svg" width="20" style="margin-right: 10px;"></span>Zvířata</a>
+            </li>
+        </ul>
+    </div>
+</div>                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 col-sm-auto mb-3 mb-sm-0 d-none d-sm-block">
+                        <a href="/oblibene-inzeraty" class="btn btn-light px-3 px-lg-4 ms-2 rounded-pill border border-primary">Oblíbené inzeráty</a>
+                        <a href="/moje-inzeraty#seznam" class="btn btn-light px-3 px-lg-4 ms-2 rounded-pill border border-primary">Moje inzeráty</a>
+                        <a href="/pridat-inzerat" class="btn btn-primary-invert px-3 px-lg-4 ms-2 rounded-pill border border-primary">Přidat inzeráty</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container pointer-container d-flex flex-wrap py-3 align-items-center justify-content-center justify-content-lg-start">
+            <div class="man-pointer px-2 px-sm-0">
+                <h1>S námi koupíte, <br>či prodáte cokoliv!</h1>
+                <div class="intro">Vítá Vás jeden z prvních<br> inzertních webů v Česku!</div>
+                <a class="btn btn-primary px-4 fs-5 rounded-pill border border-primary d-none d-sm-block" href="/categories">Zobrazit kategorie</a>
+                <a href="/pridat-inzerat" class="btn btn-primary px-2 px-sm-5 fs-5 fs-sm-4 rounded-pill border border-primary d-sm-none d-block">Přidat inzeráty</a>
+            </div>
+        </div>
+    </header>
+
+    <div id="content" class="site-content d-flex flex-column" tabindex="-1">
+        <div class="filters-wrap container px-0 py-3 d-flex flex-column">
+            <div class="filters">
+<form action="/search/" method="post" id="frm-filtersForm">
+	<div class="row gy-2 m-0 align-items-center">
+		<div class="col-12 col-sm-3 px-2 ps-sm-0">
+			<div class="form-group filter-group">
+				<input type="text" name="title" placeholder="Co hledáte?" title="Tooltip on bottom" data-bs-toggle="tooltip" data-bs-placement="bottom" id="frm-filtersForm-title" value="rypadlo" class="form-control rounded-pill border border-primary">
+                <span class="filter-text"><i class="fas fa-search"></i></span>
+                <a href="#" onclick="document.getElementById('frm-filtersForm').submit();" name="_submit" class="btn rounded-pill d-block d-sm-none"><i class="fas fa-search"></i></a>                                                
+			</div>
+		</div>
+        <div class="mob col-12 col-sm-9 p-2 p-sm-0">
+            <div class="row m-0 m-sx-1">
+                <div class="col-10 col-sm col-xl-4 py-4 py-sm-0">
+    				<div class="form-group filter-group">
+    					<select name="category" placeholder="Kategorie" id="frm-filtersForm-category" class="form-control rounded-pill border border-primary"><option value="0" selected>Vyberte si rubriku</option><option value="5">Auto</option><option value="2">Děti</option><option value="8">Dům a zahrada</option><option value="12">Elektro</option><option value="11">Foto</option><option value="14">Hudba</option><option value="16">Knihy</option><option value="10">Mobily</option><option value="6">Motorky</option><option value="17">Nábytek</option><option value="18">Oblečení</option><option value="20">Ostatní</option><option value="9">PC</option><option value="4">Práce</option><option value="3">Reality</option><option value="19">Služby</option><option value="13">Sport</option><option value="7">Stroje</option><option value="15">Vstupenky</option><option value="1">Zvířata</option></select>
+    				</div>
+    			</div>
+    			<div class="col-10 col-sm col-xl-4 ps-sm-0">
+    				<div class="form-group filter-group psc-group">
+                        <input type='text' class="info-search form-control rounded-pill border border-primary" autocomplete="off" value="" placeholder="PSČ">
+<div id="snippet--smartsearch">                            <div class="search-wrap-info ">    
+                                <div class="search-result">
+                                </div>
+                                <div class="search-close"><i class="fam fa-time-thin"></i></div>
+                            </div>
+</div>
+                        <input type="hidden" name="psc" value="" id="psc-id">
+    				</div>
+    			</div>
+    			<!--<div class="col-6 col-sm col-xl ps-sm-0 d-none">
+    				<div class="form-group filter-group">
+    					<input type="hidden" name="perimeter" placeholder="Okolí" value="25" class="form-control rounded-pill border border-primary">
+    				</div>
+    			</div>-->
+                <div class="col-12 col-sm col-xl-3 ps-sm-0 py-4 py-sm-0">
+    				<div class="form-group filter-group">
+                        <div class="form-control rounded-pill border border-primary filter-price-group">
+                            <label class="pe-2">Cena:</label>
+                            <input type="number" name="from" placeholder="od" id="frm-filtersForm-from" data-nette-rules='[{"op":":integer","msg":"Zadejte platné celé číslo."}]' class="form-control p-0"> <input type="number" name="to" placeholder="do" id="frm-filtersForm-to" data-nette-rules='[{"op":":integer","msg":"Zadejte platné celé číslo."}]' class="form-control p-0">
+                        </div>
+    				</div>
+    			</div>
+                <div class="btn-search-wrap col-4 col-sm col-xl-1 ps-sm-0 pe-0 py-4 py-sm-0 d-none d-sm-block">
+                    <div class="form-group filter-group justify-content-end">
+    				   <input type="submit" name="_submit" value="Hledat" class="btn btn-primary rounded-pill border border-primary sbm-search">
+                    </div>
+    			</div>
+            </div>
+        </div>
+	</div>
+<input type="hidden" name="_do" value="filtersForm-submit"></form>
+
+            </div>
+        </div>
+        
+        <div class="container px-3 px-md-0 pb-3 d-flex flex-column flex-fill">  
+<div id="snippet--flashes"></div>
+
+<div class="row desktop-categories">
+<div class="col-12 col-md-4 col-lg bg-none bg-sm-light v-100 scrollable pos-r p-2 pe-3 pt-0 cats-list border-end offcanvas-body">
+    <div class="cat-list-block form-section px-3">
+            <h4><a href="/categories">Kategorie</a></h4>
+        
+        <ul>
+        
+            <li class="">
+                <a href="/categories/
+
+
+auto" class=""><span><img src="/uploads/2022/5/4734-auto-icon.svg" width="20" style="margin-right: 10px;"></span>Auto</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+deti" class=""><span><img src="/uploads/2022/5/6267-deti-icon.svg" width="20" style="margin-right: 10px;"></span>Děti</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+dum-a-zahrada" class=""><span><img src="/uploads/2022/5/4510-dum-icon.svg" width="20" style="margin-right: 10px;"></span>Dům a zahrada</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+elektro" class=""><span><img src="/uploads/2022/5/9482-elektro-icon.svg" width="20" style="margin-right: 10px;"></span>Elektro</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+foto" class=""><span><img src="/uploads/2022/5/4504-foto-icon.svg" width="20" style="margin-right: 10px;"></span>Foto</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+hudba" class=""><span><img src="/uploads/2022/5/6118-hudba-icon.svg" width="20" style="margin-right: 10px;"></span>Hudba</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+knihy" class=""><span><img src="/uploads/2022/5/8902-knihy-icon.svg" width="20" style="margin-right: 10px;"></span>Knihy</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+mobily" class=""><span><img src="/uploads/2022/5/8322-mobily-icon.svg" width="20" style="margin-right: 10px;"></span>Mobily</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+motorky" class=""><span><img src="/uploads/2022/5/4789-moto-icon.svg" width="20" style="margin-right: 10px;"></span>Motorky</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+nabytek" class=""><span><img src="/uploads/2022/5/9273-nabytek-icon.svg" width="20" style="margin-right: 10px;"></span>Nábytek</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+obleceni" class=""><span><img src="/uploads/2022/5/6337-obleceni-icon.svg" width="20" style="margin-right: 10px;"></span>Oblečení</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+ostatni" class=""><span><img src="/uploads/2022/5/8658-ostatni-icon.svg" width="20" style="margin-right: 10px;"></span>Ostatní</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+pc" class=""><span><img src="/uploads/2022/5/7773-pc-icon.svg" width="20" style="margin-right: 10px;"></span>PC</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+prace" class=""><span><img src="/uploads/2022/5/8951-prace-icon.svg" width="20" style="margin-right: 10px;"></span>Práce</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+reality" class=""><span><img src="/uploads/2022/5/9379-reality-icon.svg" width="20" style="margin-right: 10px;"></span>Reality</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+sluzby" class=""><span><img src="/uploads/2022/5/6201-sluzby-icon.svg" width="20" style="margin-right: 10px;"></span>Služby</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+sport" class=""><span><img src="/uploads/2022/5/4755-sport-icon.svg" width="20" style="margin-right: 10px;"></span>Sport</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+stroje" class=""><span><img src="/uploads/2022/5/5713-stroje-icon.svg" width="20" style="margin-right: 10px;"></span>Stroje</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+vstupenky" class=""><span><img src="/uploads/2022/5/6527-vstupenky-icon.svg" width="20" style="margin-right: 10px;"></span>Vstupenky</a>
+            </li>
+
+            <li class="">
+                <a href="/categories/
+
+
+zvirata" class=""><span><img src="/uploads/2022/5/8709-zvirata-icon.svg" width="20" style="margin-right: 10px;"></span>Zvířata</a>
+            </li>
+        </ul>
+    </div>
+</div>    
+<div class="col-12 col-md-8 col-lg px-2 pe-sm-0 ps-sm-2 scrollable in-content">
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="row pe-lg-3 card-list  " id="snippet--postlist">
+        
+    <div data-pid=14968 class="card-wrap col-12 col-sm-6 col-lg-3 px-2 px-xl-2 py-2 p-sm-2 pt-sm-0 " style="">
+            <div class="card mb-0 mb-sm-4 p-2 box-shadow">
+                
+                <div class="card-img ">
+                    <img src="/uploads/2026/2/thumb-detail/6433-vir-014-Jansen-MB-500-profi-www-strojeprodej-cz-zemedelska-technika-baggr-traktor-vlek-damper-dumper-8.jpeg" width="140" alt="MIKRO RYPADLO…" data-holder-rendered="true">
+                </div>
+                <div class="card-body">
+                    <div class="card-title-wrap">
+                        <a class="" href="/inzerat/stroje/stavebni-stroje/mikro-rypadlo-jansen-r-mb-500-645576.html">
+                        <h3 class="card-title mx-1">MIKRO RYPADLO JANSEN ® MB-500</h3>
+                        </a>
+                        <div class="card-text">
+                            Je vybaven s robustním zážehovým motorem 8,5 HP od TRIDENT a přesnou hydraulikou,která zajišťuje max...
+                        </div>
+                        <div class="card-town mt-2">Řevničov</div>
+                    </div>
+                    
+                    <div class="card-price py-1">116 528&nbsp;Kč</div>
+                    
+                </div>
+            </div>
+    </div>
+    <div data-pid=14003 class="card-wrap col-12 col-sm-6 col-lg-3 px-2 px-xl-2 py-2 p-sm-2 pt-sm-0 " style="">
+            <div class="card mb-0 mb-sm-4 p-2 box-shadow">
+                
+                <div class="card-img ">
+                    <img src="/uploads/2025/12/thumb-detail/7083-vir-254-Jansen-MB-500-pudni-freza-www-cz-www-strojeprodej-cz-zemedelska-technika-baggr-splitter-vetve-mulcovac-1.jpeg" width="140" alt="MIKRO RYPADLO…" data-holder-rendered="true">
+                </div>
+                <div class="card-body">
+                    <div class="card-title-wrap">
+                        <a class="" href="/inzerat/stroje/stavebni-stroje/mikro-rypadlo-jansen-r-mb-500-672345.html">
+                        <h3 class="card-title mx-1">MIKRO RYPADLO JANSEN ® MB-500</h3>
+                        </a>
+                        <div class="card-text">
+                            Je vybaven s robustním zážehovým motorem 8,5 HP od TRIDENT a přesnou hydraulikou,která zajišťuje max...
+                        </div>
+                        <div class="card-town mt-2">Řevničov</div>
+                    </div>
+                    
+                    <div class="card-price py-1">116 528&nbsp;Kč</div>
+                    
+                </div>
+            </div>
+    </div>
+<a href="#" class="btn-up" style="display: inline;"><i class="fa fa-arrow-circle-up"></i></a>   </div>
+    
+</div></div>
+        </div>
+    </div>
+
+    <footer class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="block col-lg-3 col-12">
+                    <div class="d-flex flex-wrap py-3 align-items-center justify-content-center justify-content-lg-start">
+                        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                            <img src="https://www.inzeruj.cz/uploads/2022/5/6842-logoInzerujW.png" height="30px">
+                        </a>
+                    </div>
+                </div>
+                <div class="block col-lg-6 col-12 text-center mb-3 mt-sm-0" style="align-self: center;">
+                    <a class="text-white text-decoration-none" href="/categories">Kategorie</a>,
+                    <a href="/obchodni-podminky" class="text-white text-decoration-none">Obchodní podmínky</a>,
+                    <a href="/ochrany-osobnich-udaju" class="text-white text-decoration-none">Zásady ochrany osobních údajů</a>, 
+                    <a class="text-white text-decoration-none" href="/kontakt">Kontakty</a>
+                </div>
+                <div class="block col-lg-3 col-12">
+                    <ul class="nav nav-social col-12 col-lg-auto me-lg-auto mb-2 justify-content-center justify-content-lg-end mb-md-0">
+                        <li class="nav-link"><i class="fab fa-facebook-f"></i></li>
+                        <li class="nav-link"><i class="fab fa-instagram"></i></li>
+                        <li class="nav-link"><i class="fab fa-linkedin-in"></i></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="block col-12 bottom text-center">
+                    ©2026 <a href="inzeruj.cz">inzeruj.cz</a>
+                </div>
+            </div>
+        </div>
+    </footer>	
+</div>
+
+<div class='five-overlay-wrapper'>
+    <div class="five-overlay-body"></div>
+    <div id="five-lightbox-pictures" class="five-lightbox-pictures five-lightbox-pictures-hidden"></div>
+    <div class="five-close-modal" id="five-close-lightbox"><i class="fas fa-times"></i></div>
+</div>
+
+<script type="text/javascript" src="https://www.inzeruj.cz/assets/js/jquery.js"></script>
+<script type="text/javascript" src="https://www.inzeruj.cz/assets/js/jquery-ui.js"></script>
+<script type="text/javascript" src="https://www.inzeruj.cz/assets/js/jquery.ui.touch-punch.min.js"></script>
+<script type="text/javascript" src="https://www.inzeruj.cz/assets/js/bootstrap.js"></script>
+<script type="text/javascript" src="https://www.inzeruj.cz/assets/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://www.inzeruj.cz/assets/js/awesome.js"></script>
+<script type="text/javascript" src="https://www.inzeruj.cz/assets/js/image-zoom.js"></script>
+<script type="text/javascript" src="https://www.inzeruj.cz/bower_components/nette.ajax.js/nette.ajax.js"></script>
+<script src="https://cdn.tiny.cloud/1/d2wy98hnrvg14fda939oemaw9owosh1wriq9e06hizhe3x3p/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript" src="https://www.inzeruj.cz/assets/js/five-burger-menu.js"></script>
+<script type="text/javascript" src="https://www.inzeruj.cz/admin-static/slimselect.js"></script>
+<script type="text/javascript" src="https://www.inzeruj.cz/assets/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="https://www.inzeruj.cz/assets/js/jquery.fiveslider.js"></script>
+<script type="text/javascript" src="https://www.inzeruj.cz/assets/js/netteForms.js"></script>
+
+<script>
+$(function () {
+    $.nette.init();
+    
+    tinymce.init({
+        selector: '.tinymce',
+        plugins: [
+            "advlist autolink lists link image charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste"
+        ],
+		toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link',
+    });
+    
+    if ($("#frm-createAdvForm-choiceprice").length > 0) {
+        new SlimSelect({
+          select: '#frm-createAdvForm-choiceprice',
+          showSearch: false,
+        })
+    }
+    
+    if ($("#snippet--changebysection").length > 0) {
+        var createAdvFormCategory = new SlimSelect({
+          select: '#snippet--changebysection',
+          showSearch: true
+        });
+    }
+    
+    
+    if ($("#frm-createAdvForm-section").length > 0) {
+        var createAdvFormSection = new SlimSelect({
+          select: '#frm-createAdvForm-section',
+          showSearch: false,
+          onChange: (info) => {
+            i_Reload_categories();
+          }
+        }) 
+                
+        i_Reload_categories();
+    }
+    
+    if ($("#frm-filtersForm-category").length > 0) {
+        new SlimSelect({
+          select: '#frm-filtersForm-category',
+          showSearch: true,
+        }) 
+        
+        $("#frm-filtersForm-category").change(function() {
+            $("#frm-filtersForm").submit();
+        })
+    }
+    
+    i_Open_image();
+      
+    i_Filter_main_page();
+    i_SendToInzerent();
+    i_SendReport();
+    
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+    
+    // Overeni uzivatele
+    i_Check_customer();
+    i_Smart_search();
+    i_Post_psc_search();
+    i_Choice_price();
+    i_Post_carousel();
+    
+    i_Form_required_label();
+    i_Post_width_align();
+    
+    if ($("header .subheader").length > 0) {
+        //i_Header_fix();
+    }
+    
+    /*$( "#payment-vouchers" ).accordion({
+      collapsible: true,
+      active: false
+    });*/
+    
+    $("#frm-paymantForm-count").change(function() {
+        console.log($(this).val())
+        $("#frm-paymantForm-total").text($(this).val() * 39);
+    })
+    
+    i_Category_fix();
+    
+    $(window).resize(function() {
+        i_Post_width_align();
+        i_Category_fix();
+    })
+    
+    var clientIDs = {};
+
+	window['g_onRecaptchaLoad'] = function () {
+		$('.g-recaptcha').each(function () {
+			var el = $(this);
+
+			clientIDs[this.id] = grecaptcha.render(this, {
+				size: 'invisible',
+				badge: 'bottomleft',
+				callback: function (token) {
+					el.closest('form').off('submit.recaptcha').trigger('submit');
+				}
+
+			}, true);
+		});
+
+		$(function () {
+			$('form').on('submit.recaptcha', function (event) {
+				event.preventDefault();
+
+				var form = $(this);
+				if (Nette.validateForm(this, true)) {
+				    console.log("recaptcha")
+					// execute only reCAPTCHAs in submitted form
+					$('.g-recaptcha', form).each(function () {
+						grecaptcha.execute(clientIDs[this.id]);
+					});
+				}
+			});
+		});
+	};
+    
+    $(".btn.save").click(function() {
+        var form = document.getElementById('form-adv');
+        if (form.checkValidity())
+            FIVEP.showPrloader();
+    })
+    
+    postAutoLoad();
+    selectedAdv();
+})
+    
+function i_Reload_categories()
+{
+}
+
+function i_Check_customer()
+{
+    $(".check-customer").click(function(event) {
+        event.preventDefault();
+        var $form = $('#frm-customerInForm');
+        var email = $("#frm-customerInForm-email").val();
+        var hash = $("#frm-customerInForm-hash").val();
+        var id = $("#adv-id").text();
+        var pass = $("#frm-customerInForm-password").val();
+
+        if (typeof pass !== 'undefined') {
+            i_CheckCustomerPass(pass);
+            return;
+        }
+        
+        if (!$("#frm-customerInForm-credential").prop('checked') || email == '') {
+            $form[0].reportValidity();
+            return;
+        }
+        
+        if (typeof hash !== 'undefined') {
+            hash = '';
+        }
+        
+        if (email != '' && $("#frm-customerInForm-credential").prop('checked')) {
+            $.nette.ajax({
+                type: "POST", 
+                data: {'email': email, 'hash': hash, 'id': id},
+                url: "/search?title=rypadlo&do=sendhash"
+            }).done(function(response){
+                i_CheckCustomerHash();
+            })                                              
+        }    
+    })
+}
+
+function i_CheckCustomerHash()
+{
+    $(".check-customer-hash").click(function(event) {
+        event.preventDefault();
+        var email = $("#frm-customerInForm-email").val();
+        var hash = $("#frm-customerInForm-hash").val();
+        var pid = $("#adv-id").text();
+        
+        
+        if (email != '') {
+            $.nette.ajax({
+                type: "POST", 
+                data: {'email': email, 'pass': hash, 'pid': pid, 'slug': $("#adv-slug").text()},
+                url: "/search?title=rypadlo&do=sendhashauth"
+            }).done(function(response) {
+                location.reload();
+            })                                             
+        }    
+    })
+}
+
+function i_CheckCustomerPass(pass)
+{
+    var email = $("#frm-customerInForm-email").val();
+    var pid = $("#adv-id").text();
+    
+    if (email != '' && pass != '') {
+        $.nette.ajax({
+            type: "POST", 
+            data: {'email': email, 'pass': pass, 'pid': pid, 'slug': $("#adv-slug").text()},
+            url: "/search?title=rypadlo&do=sendpathauth"
+        });                                              
+    }
+}
+
+function i_Header_fix() {
+    
+    var tPos = $("header .subheader").offset().top;
+    var threshold = ($(".mainpage.page").length == 0 ? 0 : 120)
+    
+    function fix() {
+        if ($(window).scrollTop() > tPos + threshold) {
+            $("header .subheader").addClass("fixed");
+            $(".pointer-container").addClass("fixed");
+            $(".site-content").addClass("fixed");
+        //} else if ($(window).scrollTop() > tPos) {
+            $("header .subheader").addClass("opacity")
+        } else {
+            $(".pointer-container").removeClass("fixed");
+            $("header .subheader").removeClass("fixed")
+            $("header .subheader").removeClass("opacity")
+            $(".site-content").removeClass("fixed");
+        }
+    }
+    
+    fix();
+    $(window).scroll(function () {
+        fix();
+    })
+}
+
+function i_Category_fix() {
+    if ($(".desktop-categories .scrollable.in-content").length == 0) return;
+    
+    var threshold = ($(".mainpage.page").length == 0 ? 0 : 120);
+    var cPos = $(".desktop-categories .scrollable.in-content").offset().top - 40;
+    var parent = $(".desktop-categories .scrollable.cats-list");
+    var parentWidth = parent.width();
+    
+    $("#content .cat-list-block").width(Math.round(parentWidth));
+    function cat_fix() {
+        if ($(window).scrollTop() > cPos) {
+            var height = "100%";
+            if ($(window).scrollTop() + $(window).height() > $("footer").offset().top) {
+                height = $(window).height() - ($(window).scrollTop() + $(window).height() - $("footer").offset().top) - 50
+            }
+            $("#content .cat-list-block.cat-list-fix").width(parentWidth).height(height)
+            $("#content .cat-list-block").addClass("cat-list-fix")
+        } else {
+            $("#content .cat-list-block").removeClass("cat-list-fix")
+        }
+    }
+    
+    cat_fix();
+    $(window).scroll(function () {
+        cat_fix();
+    })
+}
+
+function i_Post_set_view() {
+    {}
+}
+
+function i_Smart_search() {
+    $(".search-wrap-info").removeClass("open");
+    
+    $(".info-search").keyup(function() {
+        var self = this;
+        $("#psc-id").val(0);
+        
+        if ($(this).val().length > 2) {
+            var value = $(this).val();
+            $(".smart-search-preloader").addClass('show');
+            
+            $.nette.ajax({
+                type: 'POST',
+                url: "/search?title=rypadlo&do=smartSearch",
+                data: {"search": $(this).val()},
+            }).done(function(data){
+                $(".smart-search-preloader").removeClass('show');
+                
+                $('.search-row').each(function() {
+                    $(this).click(function() {
+                        $(".info-search").val($(this).text());
+                        $("#psc-id").val($(this).attr("data-postid"));
+                        $(".search-result").html('');
+                        $(".search-wrap-info").removeClass("open");
+                    })
+                })
+            })
+        } else {
+            $("#psc-id").val($(this).attr("data-postid"));
+            $(".search-result").html('');
+            $(".search-wrap-info").removeClass("open");
+        }
+    })
+}
+
+function i_Post_psc_search() {
+    $(".post-pst-search").keyup(function() {
+        var self = this;
+        $("#psc-id2").val(0);
+        
+        {}
+    })
+}
+
+function i_Post_carousel() {
+    //if ( $(window).width() < 576 ) {
+        if ($(".media-carousel-wrapper").length > 0) {
+            
+            new Fiveslider(".media-carousel-wrapper", {
+                slider:'.media-items',
+                animateTime: 0,
+                autoTimer: 15000,
+                bullets: true,
+                margin: 12,
+                border: 0,
+                arrows: true,
+                auto: false,
+                number: 1,
+                carousel: true,
+                fade: true,
+                bulletsClass: "media-carousel-bullets",
+                beforeLoad: function() {
+                    $(".media-carousel-bullets.bullets").appendTo($(".media-carousel-wrapper"));
+                },
+                afterLoad: function() {
+                    $(".media-carousel-bullets.bullets").appendTo($(".media-bullets-wrapper"));
+                    var arrowTopPostition = $(".media-items").height() / 2 - 20;
+                    $(".media-carousel-wrapper .five-arrows").css({ top: arrowTopPostition });
+                    i_Open_image();
+                },
+                afterResize: function() {
+                    $(".media-carousel-bullets.bullets").appendTo($(".media-bullets-wrapper"));
+                    var arrowTopPostition = $(".media-items").height() / 2 - 20;
+                    $(".media-carousel-wrapper .five-arrows").css({ top: arrowTopPostition });
+                },
+            })
+        }
+    //}
+}
+
+function i_Form_required_label() {
+    $(".form-create input, .form-create textarea, .form-create select").each(function() {
+        if ($(this).prop('required')) {
+            $("<span class='required'>*</span>").insertBefore($(this));
+        }
+    })
+}
+
+function i_Choice_price() {
+    /*$(".form-create").submit(function(event) {
+        event.preventDefault();
+        
+        console.log(1);
+    });*/
+    
+    $("#frm-createAdvForm-choiceprice").change(function() {
+        var value = $(this).val();
+
+        $("#frm-createAdvForm-price").prop('required', (value == 0 ? true : false));
+        $("#frm-createAdvForm-price").prop('disabled', (value == 0 ? false : true));
+        
+        if (value != 0)
+            $("#frm-createAdvForm-price").val('')
+    })
+}
+
+$.fn.fileUploader = function (filesToUpload, sectionIdentifier) {
+    var fileIdCounter = 0;
+    var self = this;
+    
+    this.removeLink =  function(fileId) {
+        return "<a class=\"removeFile\" href=\"#\" data-fileid=\"" + fileId + "\">Odstranit</a>";
+    }
+    
+    this.init = async function() {
+    }
+    self.init()
+    
+    this.closest(".files").change(function (evt) {
+        var output = [];
+        var files = evt.target.files;
+        var j = 1;
+        var repeatIndex = [];
+        
+        for (var i = 0; i < evt.target.files.length; i++) {
+            fileIdCounter++;
+            var fileId = sectionIdentifier + fileIdCounter;
+            var file = evt.target.files[i];
+            
+            var fileExists = false;
+            
+            for (var k = 0; k < filesToUpload.length; ++k) {
+                if (filesToUpload[k].file.name === file.name) {
+                    fileExists = true;
+                    repeatIndex.push(i);
+                }
+            }
+            
+            if (fileExists)
+                continue;
+            
+
+            file.state = 'new';
+            
+            var fileReader = new FileReader();
+            FIVEP.showPrloader();
+            fileReader.onload = async function (event) {
+                
+                if ( $.inArray(j, repeatIndex) == -1 ) {
+                    var newImage = await self.resizebase64(event.target.result, 1920, 1920);
+                    
+                    await fetch(newImage)
+                        .then((res) => res.blob())
+                        .then((myBlob) => {
+                            const myFile = new File([myBlob], evt.target.files[j-1].name, {
+                                type: myBlob.type,
+                            });
+                            
+                            filesToUpload.push({
+                                id: fileId,
+                                file: myFile
+                            });
+                        })
+                    
+                    $('.fileList').append(
+                        "<div class='col-md-3'><div class='file-wrapper'><span class='file-move'><i class='fas fa-expand-arrows-alt'></i></span><div class='file-target' data-name='" + evt.target.files[j-1].name + "'><img src='"+newImage+"'/></div>"
+                        + "<div class='file-title'>" + evt.target.files[j-1].name + "</div>" 
+                         + self.removeLink(fileId) + "</div></div>");
+                }
+                    
+                if (j == files.length) {
+                    self.removeFile();
+                    self.commit();
+                    evt.target.value = null;
+                    
+                    FIVEP.stopPrloader();
+                }                                                            
+                
+                j++;
+            };
+            fileReader.readAsDataURL(evt.target.files[i]);
+        };        
+    });
+    
+
+    this.removeFile = function() {
+        $(".removeFile").each(function() {
+            $(this).on("click", function (e) {
+                e.preventDefault();
+        
+                var fileId = $(this).parent().children("a").data("fileid");
+        
+                for (var i = 0; i < filesToUpload.length; ++i) {
+                    if (filesToUpload[i].id === fileId)
+                        filesToUpload.splice(i, 1);
+                }
+        
+                self.commit();
+                $(this).parent().parent().remove();
+            });
+        });
+    }
+    
+    this.commit = function () {
+        var dataTransfer = new DataTransfer()
+
+        for(var i = 0; i < filesToUpload.length; i++) {
+            dataTransfer.items.add(filesToUpload[i].file);
+        }
+        $("#post-image").get(0).files = dataTransfer.files
+    }
+    
+    this.sortCommit = function () {
+        var dataTransfer = new DataTransfer()
+
+        $(".fileList .file-target").each(function() {
+            var name = $(this).attr('data-name');
+            
+            for(var i = 0; i < filesToUpload.length; i++) {
+                if (name == filesToUpload[i].file.name)
+                    dataTransfer.items.add(filesToUpload[i].file);
+            }
+        })
+        
+        $("#post-image").get(0).files = dataTransfer.files
+    }
+
+    this.resizebase64 = function(imgBase64, maxWidth, maxHeight){
+    
+        return new Promise((resolve, reject) => {
+    
+            // Create and initialize two canvas
+            var canvas 			= document.createElement("canvas");
+            var ctx 			= canvas.getContext("2d");
+            var canvasCopy 		= document.createElement("canvas");
+            var copyContext 	= canvasCopy.getContext("2d");
+    
+            // Create original image
+            var img = new Image();
+            img.src = imgBase64;
+    
+            img.onload = () => {
+                // Determine new ratio based on max size
+                var ratio = 1;
+                if(img.width > maxWidth)
+                ratio = maxWidth / img.width;
+                else if(img.height > maxHeight)
+                ratio = maxHeight / img.height;
+                
+                // Draw original image in second canvas
+                canvasCopy.width 	= img.width;
+                canvasCopy.height 	= img.height;
+                copyContext.drawImage(img, 0, 0);
+    
+                // Copy and resize second canvas to first canvas
+                canvas.width 	= img.width * ratio;
+                canvas.height 	= img.height * ratio;
+    
+                ctx.drawImage(canvasCopy, 0, 0, canvasCopy.width, canvasCopy.height, 0, 0, canvas.width, canvas.height);
+    
+                resolve(canvas.toDataURL("image/jpeg"));
+            };
+    
+            img.onerror = reject;
+    
+        });
+    
+    }
+
+    return this;
+};
+
+
+function i_Filter_main_page()
+{
+    if ($(window).width() <= 576)
+        $(".mainpage.page .subheader").after($(".filters"));
+}
+
+function i_Post_width_align() 
+{
+    if ($(window).width() <= 576)
+        return;
+        
+    var height = 0;
+    
+    $(".card-title-wrap").each(function(index) {
+        if ($(".card-title-wrap").eq(index).height() > height)
+            height = $(".card-title-wrap").eq(index).height();
+    })
+    
+    //$(".card-title-wrap").height(height);
+}
+
+function ressetMessage(self)
+{
+    console.log(self);
+}
+
+function i_SendToInzerent()
+{
+    var len = 0;
+    
+    $("#frm-customerContactInzerent-form").submit(function(event){
+        event.preventDefault();
+        
+    })
+    
+    $("#frm-customerContactInzerent-answer").keyup(function() {
+        len = $(this).val().length;
+    })
+}
+
+function i_SendReport()
+{
+    var len = 0;
+    
+    $("#frm-customerPostReport-form").submit(function(event){
+        event.preventDefault();
+        data = {'pid': 0, 'cid': ''};
+        
+        
+        
+        if (len == 872)
+        {
+            $.nette.ajax({
+                type: "POST", 
+                data: data,
+                url: "/search?title=rypadlo&do=sendReport"
+            }).done(function(response){
+                $("#frm-customerPostReport-wrapper").remove();
+            })
+        }
+    })
+    
+    $("#frm-customerPostReport-submit").mouseover(function() {
+        len = 872;
+    })
+}
+
+
+function i_Open_image() {
+    
+    var zoom = ($(window).width() < 760 ? 300 : 150);
+    var index = 0;
+    $(".media-items").find("li").each(function(i) {
+        $(this).click(function() {
+            console.log(i)
+            index = i;
+            
+            
+            if ($(window).width() > 759) {
+                $(".five-overlay-wrapper").css({"z-index": "99999", "position": "relative"});
+                $(".five-close-modal").removeClass("five-close-icon-show").appendTo($(".five-overlay-wrapper"));
+                $(".five-lightbox-pictures").html("");
+                $(".five-overlay-body").addClass("display");
+                $("html, body").addClass('lock')
+                
+                var link = $(this).attr("data-link");
+                var popup_wrapper = $("<div />")
+                    .addClass("popup-images-wrapper")
+                    
+                    .appendTo($(".five-lightbox-pictures"));
+                    
+                var slider = $("<ul />")
+                    .addClass("images-item")
+                    /*.css({
+                        "width": "90%",
+                        "height": "98%",
+                        "margin-left": "5%",
+                        "margin-top": "2%"})*/
+                    .appendTo(popup_wrapper);
+                
+                $(".media-items").find("li").each(function() {
+                    var link = $(this).attr("data-link");
+                    var slide = $("<li />")
+                       .css({
+                            "background-image": "url(" + link + ")",
+                            "position": "absolute",
+                            "opacity": 0,
+                            "top": 0,
+                            "left": 0,
+                            "z-index": 1}) 
+                        .appendTo(slider);
+                })
+                $(".popup-images-wrapper").hide();
+                new Fiveslider(".popup-images-wrapper", {
+                        slider:'.images-item',
+                        animateTime: 0,
+                        autoTimer: 15000,
+                        bullets: true,
+                        margin: 12,
+                        border: 0,
+                        arrows: true,
+                        auto: true,
+                        number: 1,
+                        carousel: true,
+                        //index: i,
+                        fade: true,
+                        bulletsClass: "popup-images-bullets",
+                        beforeLoad: function() {
+                            $(".popup-images-bullets.bullets").appendTo($(".popup-images-wrapper"));
+                            $
+                        }
+                    })
+                setTimeout(function() {
+                                $(".popup-images-bullets.bullets li").eq(index).mouseover();  
+                                $(".popup-images-wrapper").show();  
+                            }, 500)
+                //$("<img src='" + link + "' class='zoom-image'>").appendTo(popup_wrapper);
+                
+                
+                    
+                $(".five-lightbox-pictures").removeClass("five-lightbox-pictures-hidden");
+                $(".five-close-modal").addClass("five-close-icon-show").css({"color":"#eee","position":"absolute"}).appendTo($(".five-lightbox-pictures")).click(function() {
+                    $(".five-lightbox-pictures").addClass("five-lightbox-pictures-hidden");
+                    $(".five-close-modal").removeClass("five-close-icon-show").appendTo($(".five-overlay-wrapper")).css({"position":"fixed"});
+                    $(".five-lightbox-pictures").html("");
+                    $(".five-overlay-body").removeClass("display");
+                    $("html, body").removeClass('lock');
+                });
+            }
+        })
+    })
+    
+    
+        
+     
+        /*var zoomImages = $('.zoom-image'); 
+        zoomImages.each(function() {
+            $(this).imageZoom({"zoom": zoom});
+        });*/
+}
+
+if ($("#post-image-temp").length > 0) {
+    var filesToUpload = [];
+    var files1Uploader = $("#post-image-temp").fileUploader(filesToUpload, "files");
+    $( ".fileList" ).sortable({
+        update: function( event, ui ) { files1Uploader.sortCommit() }
+    });
+    $( ".fileList > *" ).disableSelection();
+}
+
+
+function paymentCreate() {
+    $("#comgate-close").click(comgateClose);
+    
+    var count = $("#frm-paymantForm-count").val();
+    var method = $('input[name=paymants]:checked', '#frm-paymantForm-method').val();
+    
+    
+    console.log(count, method)
+    if (method == "") {
+        return;
+    }
+    
+    $.nette.ajax({
+        type: "POST", 
+        data: { count: count, method: method },
+        url: "/search?title=rypadlo&do=payVouchers"
+    }).done(function() {
+        FIVEP.showPrloader();
+        $("#comgate-iframe").attr("src", $("#snippet--paymentUrl").text());
+        var comgateIframe = document.getElementById('comgate-iframe');
+        comgateIframe.addEventListener("load", function() {
+            $("#snippet--paymentUrl").text("");
+            $("#comgate-iframe").contents().find(".cg-bottom-buttons-box").hide();
+            comgateOpen();
+            FIVEP.stopPrloader();
+            $(".loader").addClass("loader-comgate");
+        })
+    })
+}
+
+function comgateOpen() {
+    var comgate_container = document.getElementById("comgate-container");
+    comgate_container.style.display = "block";
+    
+}
+
+function comgateClose() {
+    var comgate_container = document.getElementById("comgate-container");
+    comgate_container.style.display = "none";
+    $(".loader").removeClass("loader-comgate");
+}
+
+function postAutoLoad() {
+    var end = false;
+    
+    $(window).scroll(function() {
+        if($(window).scrollTop() > $(document).height() - $(window).height() - parseInt($("footer").height()) && !end) {
+            if ($(".post-loading").length == 0)
+                return;
+            
+            var info = JSON.parse($(".page-info").text());
+            
+            $(".post-loading").removeClass("loaded");
+        
+            $.nette.ajax({
+                type: "POST", 
+                data: { data: $(".page-info").text() },
+                url: "/search?title=rypadlo&do=postLoad"
+            }).done(function(response) {
+                $(".post-loading").addClass("loaded");
+                var result = JSON.parse(response);
+
+                if (result.hasOwnProperty("form") && result["form"] != "")
+                {
+                    var request = '?page=' + result["page"];
+                    var info = JSON.parse(result["info"]);
+                    if (info.hasOwnProperty("email")) {
+                        request += "&mail=" + info["email"];
+                    }
+                    if (info.hasOwnProperty("phone")) {
+                        request += "&phone=" + info["phone"];
+                    }
+          
+                    window.history.pushState('page2', 'Title', window.location.origin + window.location.pathname + request);
+                    $(result["form"]).appendTo(".card-list");
+                    $(".page-info").text(result["info"]);
+                    $(".current-page").text(result["page"]);
+                }
+            })
+            
+            if (parseInt($(".current-page").eq(0).text()) == parseInt($(".last-page").eq(0).text())) {
+                end = true;
+            }
+        } else {
+            
+        }
+    });
+}
+
+function selectedAdv() {
+    $(".myadv.card-list").children().each(function() {
+        $(this).click(function() {
+            $(".card-list").children().removeClass("active");
+            $(this).addClass("active");
+        })
+    })
+    
+    $(".topping").click(function(event) {
+        event.preventDefault();
+        
+        const id = $(".myadv.card-list").find(".active").attr("data-pid");
+        const voucer = $("#voucer").val();
+        
+        if (id != '' && voucer != '') {
+            $.nette.ajax({
+                type: "POST", 
+                data: {'pid': id, 'voucer': voucer, search: location.search},
+                url: "/search?title=rypadlo&do=topAdv"
+            }).done(function() {
+                
+            });
+        }
+    })
+}
+
+</script>
+
+</body>
+</html>
