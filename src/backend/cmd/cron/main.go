@@ -9,6 +9,7 @@ import (
 	"secondHand/src/backend/internal/adapter"
 	"secondHand/src/backend/internal/config"
 	database2 "secondHand/src/backend/internal/database"
+	domain2 "secondHand/src/backend/internal/domain"
 	output2 "secondHand/src/backend/internal/output"
 	service2 "secondHand/src/backend/internal/service"
 	"time"
@@ -170,5 +171,69 @@ func main() {
 
 	default:
 		log.Fatalf("Unknown output format: %s", *outputFormat)
+	}
+
+	// Good-offer Telegram notifications: independent of -output above, this
+	// runs for every eBay new/price-down diff whose search has a good-offer
+	// threshold configured (see D1/D3 in .agents/plan.md).
+	notifyGoodOffers(ctx, repo, output2.NewTelegramNotifier(&cfg.Telegram), searches, allDiffs)
+}
+
+// notifyGoodOffers evaluates each eBay new/price-down diff against its
+// search's good-offer thresholds and sends a Telegram notification for any
+// match.
+func notifyGoodOffers(
+	ctx context.Context,
+	repo database2.Repository,
+	notifier *output2.TelegramNotifier,
+	searches []domain2.Search,
+	allDiffs map[string][]domain2.ProductDiff,
+) {
+	searchByKeyword := make(map[string]domain2.Search, len(searches))
+	for _, s := range searches {
+		searchByKeyword[s.Keyword] = s
+	}
+
+	for keyword, diffs := range allDiffs {
+		search, ok := searchByKeyword[keyword]
+		if !ok || (search.MaxPrice == nil && search.AvgDiscountPct == nil) {
+			continue
+		}
+
+		var storedProducts []domain2.Product
+		for _, diff := range diffs {
+			if diff.Product.ShopSource != "ebay.com" {
+				continue
+			}
+			if diff.DiffType != domain2.DiffTypeNew && diff.DiffType != domain2.DiffTypePriceDown {
+				continue
+			}
+
+			if storedProducts == nil {
+				var err error
+				storedProducts, err = repo.GetProductsBySearchID(ctx, search.ID)
+				if err != nil {
+					log.Printf("Good-offer check: failed to fetch prior products for '%s': %v\n", keyword, err)
+					break
+				}
+			}
+
+			var priorPrices []float64
+			for _, p := range storedProducts {
+				if p.URL != diff.Product.URL {
+					priorPrices = append(priorPrices, p.Price)
+				}
+			}
+
+			if !service2.EvaluateGoodOffer(search, diff.Product, priorPrices) {
+				continue
+			}
+
+			if err := notifier.SendGoodOffer(diff.Product, search); err != nil {
+				log.Printf("Good offer for '%s' (%s): Telegram send failed: %v\n", keyword, diff.Product.URL, err)
+			} else {
+				fmt.Printf("Good offer! Telegram notification sent for '%s': %s (%.2f %s)\n", keyword, diff.Product.Title, diff.Product.Price, diff.Product.Currency)
+			}
+		}
 	}
 }
