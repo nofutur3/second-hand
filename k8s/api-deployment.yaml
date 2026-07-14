@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secondhand-api
+  namespace: secondhand
+  labels:
+    app: secondhand-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: secondhand-api
+  template:
+    metadata:
+      labels:
+        app: secondhand-api
+    spec:
+      imagePullSecrets:
+        - name: registry-nofutur3
+      containers:
+        - name: api
+          image: registry.nofutur3.com/secondhand-api:latest
+          ports:
+            - containerPort: 8091
+          env:
+            - name: DB_HOST
+              value: secondhand-postgres
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_USER
+              value: secondhand
+            - name: DB_NAME
+              value: secondhand
+            - name: DB_SSLMODE
+              value: disable
+            - name: API_PORT
+              value: "8091"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secondhand-postgres
+                  key: password
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "1000m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: secondhand-api
+  namespace: secondhand
+spec:
+  selector:
+    app: secondhand-api
+  ports:
+    - port: 8091
+      targetPort: 8091

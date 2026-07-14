@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secondhand-frontend
+  namespace: secondhand
+  labels:
+    app: secondhand-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: secondhand-frontend
+  template:
+    metadata:
+      labels:
+        app: secondhand-frontend
+    spec:
+      imagePullSecrets:
+        - name: registry-nofutur3
+      containers:
+        - name: frontend
+          image: registry.nofutur3.com/secondhand-frontend:latest
+          ports:
+            - containerPort: 8092
+          env:
+            - name: NUXT_PUBLIC_API_BASE
+              value: https://snoopy.nofutur3.com/api/v1
+            - name: HOST
+              value: "0.0.0.0"
+            - name: PORT
+              value: "8092"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "1000m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: secondhand-frontend
+  namespace: secondhand
+spec:
+  selector:
+    app: secondhand-frontend
+  ports:
+    - port: 8092
+      targetPort: 8092

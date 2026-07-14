@@ -25,16 +25,16 @@ help:
 
 build:
 	@echo "Building search command..."
-	go build -o bin/search ./cmd/search
+	go build -o bin/search ./src/backend/cmd/search
 	@echo "Building cron command..."
-	go build -o bin/cron ./cmd/cron
+	go build -o bin/cron ./src/backend/cmd/cron
 	@echo "Building API server..."
-	go build -o bin/api ./cmd/api
+	go build -o bin/api ./src/backend/cmd/api
 	@echo "Build complete!"
 
 build-api:
 	@echo "Building API server..."
-	go build -o bin/api ./cmd/api
+	go build -o bin/api ./src/backend/cmd/api
 	@echo "API build complete!"
 
 run-api: build-api
@@ -55,10 +55,10 @@ run-search:
 		echo "Usage: make run-search KEYWORD=laptop"; \
 		exit 1; \
 	fi
-	go run ./cmd/search -keyword="$(KEYWORD)" -verbose=$(VERBOSE)
+	go run ./src/backend/cmd/search -keyword="$(KEYWORD)" -verbose=$(VERBOSE)
 
 run-cron:
-	go run ./cmd/cron -verbose=$(VERBOSE) -output=$(OUTPUT)
+	go run ./src/backend/cmd/cron -verbose=$(VERBOSE) -output=$(OUTPUT)
 
 docker-up:
 	@echo "Starting PostgreSQL..."

@@ -14,7 +14,7 @@ RUN go mod download
 COPY . .
 
 # Build the API
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o api ./cmd/api
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o api ./src/backend/cmd/api
 
 # Runtime stage
 FROM alpine:latest
@@ -26,11 +26,11 @@ WORKDIR /root/
 # Copy the binary from builder
 COPY --from=builder /app/api .
 
-# Copy migrations
-COPY --from=builder /app/migrations ./src/backend/migrations
+# Copy migrations (path is relative to CWD at runtime, see database.Migrate("migrations"))
+COPY --from=builder /app/src/backend/migrations ./migrations
 
-# Copy config file
-COPY --from=builder /app/config.json ./src/backend/config/config.json
+# Copy config file (path is relative to CWD at runtime, see config.Load("config.json"))
+COPY --from=builder /app/src/backend/config/config.json ./config.json
 
 # Expose API port
 EXPOSE 8091

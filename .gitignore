@@ -4,3 +4,4 @@
 .env
 coverage.txt
 *.coverprofile
+/k8s/postgres-secret.yaml
