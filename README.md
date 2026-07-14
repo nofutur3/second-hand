@@ -11,10 +11,11 @@ Real website scraping is challenging due to anti-bot protection, changing HTML s
 
 ## Features
 
-- 🔍 Search across multiple second-hand shops (Bazos, Sbazar, Avizo, Inzeruj, Aukro)
+- 🔍 Search across multiple second-hand shops (Bazos, Sbazar, Avizo, Inzeruj, Aukro, eBay)
 - 💾 Store products in PostgreSQL database
 - 📊 Track price changes and new/removed products
 - 📧 Multiple output formats: CLI, HTML, and Email
+- 📱 eBay Nintendo-parts watcher with Telegram "good offer" alerts (see below)
 - ⚙️ Adapter pattern for easy shop integration
 - 🐳 Docker support for PostgreSQL
 - 🧪 Mock adapters for reliable testing
@@ -157,7 +158,32 @@ SMTP_TO=recipient@example.com
 # Scraping
 SCRAPE_DELAY_MS=2000
 REQUEST_TIMEOUT_SEC=30
+
+# eBay Browse API (OAuth2 client-credentials)
+EBAY_CLIENT_ID=
+EBAY_CLIENT_SECRET=
+EBAY_API_BASE=https://api.ebay.com
+
+# Telegram bot (good-offer notifications)
+TELEGRAM_BOT_TOKEN=
+TELEGRAM_CHAT_ID=
+TELEGRAM_API_BASE=https://api.telegram.org
 ```
+
+## eBay Nintendo-Parts Watcher
+
+`cmd/cron` also runs an eBay-specific watcher alongside its normal
+diffing: for any saved search against the `ebay.com` adapter that has a
+`max_price` and/or `avg_discount_pct` threshold configured (via
+`cmd/search -max-price=... -avg-discount-pct=...`), new or price-dropped
+listings that meet either threshold trigger a Telegram notification via a
+bot (`TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID` above). This is independent
+of the `-output` flag — it always runs, on top of whatever CLI/HTML/email
+output is also requested.
+
+In production this runs as a Kubernetes `CronJob` (`k8s/ebay-cronjob.yaml`,
+every 30 minutes) rather than the ad-hoc crontab example above; see
+`k8s/ebay-secret.yaml.example` for the secret it expects.
 
 ## Project Structure
 

@@ -105,7 +105,7 @@ func main() {
 		if err := repo.SetGoodOfferConfig(ctx, search.ID, maxPricePtr, avgDiscountPtr); err != nil {
 			log.Fatalf("Failed to set good-offer config: %v", err)
 		}
-		fmt.Printf("Good-offer config set for '%s' (max_price=%v, avg_discount_pct=%v)\n", *keyword, maxPricePtr, avgDiscountPtr)
+		fmt.Printf("Good-offer config set for '%s' (max_price=%v, avg_discount_pct=%v)\n", *keyword, *maxPrice, *avgDiscountPct)
 	}
 
 	// Format and output results

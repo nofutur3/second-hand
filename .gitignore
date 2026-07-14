@@ -5,3 +5,4 @@
 coverage.txt
 *.coverprofile
 /k8s/postgres-secret.yaml
+/k8s/ebay-secret.yaml
