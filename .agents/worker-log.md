@@ -89,8 +89,9 @@ has independently testable behavior beyond what compiling/vetting already
 confirms; `EvaluateGoodOffer`'s actual logic (Phase 4) is where the D1
 heuristic gets unit tests.
 
-**Next:** committing Phase 3 as its own commit on `feature/ebay-watcher`,
-pushing, opening a new PR (or updating PR #1 — PR #1 was Phase 1+2 and may
-already be merged/pending; will check `gh pr list` before deciding) with a
-description pointing at plan.md's Phase 3 section. Then starting Phase 4
-(good-offer evaluation + Telegram) once pushed.
+PR #1 (Phase 1+2) was already merged, so this is a new PR rather than an
+update. **PR #2 open**: https://github.com/nofutur3/second-hand/pull/2 —
+Phase 3, ready for review.
+
+**Next:** Phase 4 (good-offer evaluation + Telegram) while awaiting review
+on PR #2.
