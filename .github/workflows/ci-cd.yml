@@ -64,6 +64,18 @@ jobs:
           cache-from: type=registry,ref=registry.nofutur3.com/secondhand-frontend:buildcache
           cache-to: type=registry,ref=registry.nofutur3.com/secondhand-frontend:buildcache,mode=max
 
+      - name: Build and push cron image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/cron/Dockerfile
+          push: true
+          tags: |
+            registry.nofutur3.com/secondhand-cron:latest
+            registry.nofutur3.com/secondhand-cron:sha-${{ github.sha }}
+          cache-from: type=registry,ref=registry.nofutur3.com/secondhand-cron:buildcache
+          cache-to: type=registry,ref=registry.nofutur3.com/secondhand-cron:buildcache,mode=max
+
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
@@ -109,7 +121,8 @@ jobs:
             -f k8s/postgres-deployment.yaml \
             -f k8s/api-deployment.yaml \
             -f k8s/frontend-deployment.yaml \
-            -f k8s/ingress.yaml
+            -f k8s/ingress.yaml \
+            -f k8s/ebay-cronjob.yaml
 
       - name: Update images
         run: |
@@ -118,6 +131,9 @@ jobs:
             --namespace=secondhand
           kubectl set image deployment/secondhand-frontend \
             frontend=registry.nofutur3.com/secondhand-frontend:sha-${{ github.sha }} \
+            --namespace=secondhand
+          kubectl set image cronjob/ebay-watcher \
+            cron=registry.nofutur3.com/secondhand-cron:sha-${{ github.sha }} \
             --namespace=secondhand
 
       - name: Wait for rollout
