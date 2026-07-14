@@ -47,10 +47,12 @@ type Product struct {
 
 // Search represents a saved search query
 type Search struct {
-	ID            int64
-	Keyword       string
-	CreatedAt     time.Time
-	LastCheckedAt *time.Time
+	ID             int64
+	Keyword        string
+	CreatedAt      time.Time
+	LastCheckedAt  *time.Time
+	MaxPrice       *float64
+	AvgDiscountPct *float64
 }
 
 // SearchProduct represents the many-to-many relationship between searches and products
