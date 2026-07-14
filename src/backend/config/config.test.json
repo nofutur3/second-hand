@@ -11,6 +11,10 @@
     {
       "url": "https://www.mock-avizo.cz",
       "name": "mock-avizo"
+    },
+    {
+      "url": "https://www.mock-ebay.com",
+      "name": "mock-ebay"
     }
   ]
 }

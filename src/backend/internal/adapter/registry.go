@@ -10,12 +10,14 @@ import (
 // Registry manages all shop adapters
 type Registry struct {
 	adapters map[string]domain.ShopAdapter
+	cfg      *config.Config
 }
 
 // NewRegistry creates a new adapter registry
 func NewRegistry(cfg *config.Config) *Registry {
 	registry := &Registry{
 		adapters: make(map[string]domain.ShopAdapter),
+		cfg:      cfg,
 	}
 
 	// Initialize adapters based on config
@@ -57,6 +59,8 @@ func (r *Registry) createAdapter(url string, delayMS, timeoutSec int) domain.Sho
 		return NewInzerujAdapter(url, delayMS, timeoutSec)
 	} else if strings.Contains(urlLower, "aukro.cz") {
 		return NewAukroAdapter(url, delayMS, timeoutSec)
+	} else if strings.Contains(urlLower, "ebay.com") {
+		return NewEbayAdapter(url, r.cfg.Ebay, delayMS, timeoutSec)
 	}
 
 	fmt.Printf("Warning: No adapter found for URL: %s\n", url)
