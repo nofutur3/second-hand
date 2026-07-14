@@ -12,6 +12,8 @@ type Config struct {
 	Database DatabaseConfig `json:"-"`
 	SMTP     SMTPConfig     `json:"-"`
 	Scraping ScrapingConfig `json:"-"`
+	Ebay     EbayConfig     `json:"-"`
+	Telegram TelegramConfig `json:"-"`
 }
 
 // ShopConfig represents configuration for a shop
@@ -46,6 +48,20 @@ type SMTPConfig struct {
 type ScrapingConfig struct {
 	DelayMS        int
 	RequestTimeout int
+}
+
+// EbayConfig represents eBay Browse API configuration
+type EbayConfig struct {
+	ClientID     string
+	ClientSecret string
+	APIBase      string
+}
+
+// TelegramConfig represents Telegram bot configuration
+type TelegramConfig struct {
+	BotToken string
+	ChatID   string
+	APIBase  string
 }
 
 // Load loads configuration from file and environment variables
@@ -85,6 +101,18 @@ func Load(configPath string) (*Config, error) {
 	config.Scraping = ScrapingConfig{
 		DelayMS:        getEnvInt("SCRAPE_DELAY_MS", 2000),
 		RequestTimeout: getEnvInt("REQUEST_TIMEOUT_SEC", 30),
+	}
+
+	config.Ebay = EbayConfig{
+		ClientID:     getEnv("EBAY_CLIENT_ID", ""),
+		ClientSecret: getEnv("EBAY_CLIENT_SECRET", ""),
+		APIBase:      getEnv("EBAY_API_BASE", "https://api.ebay.com"),
+	}
+
+	config.Telegram = TelegramConfig{
+		BotToken: getEnv("TELEGRAM_BOT_TOKEN", ""),
+		ChatID:   getEnv("TELEGRAM_CHAT_ID", ""),
+		APIBase:  getEnv("TELEGRAM_API_BASE", "https://api.telegram.org"),
 	}
 
 	// Set default enabled state for shops
