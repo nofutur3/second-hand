@@ -50,7 +50,7 @@ func (r *PostgresRepository) CreateSearch(ctx context.Context, keyword string) (
 		INSERT INTO searches (keyword, created_at)
 		VALUES ($1, $2)
 		ON CONFLICT (keyword) DO UPDATE SET keyword = EXCLUDED.keyword
-		RETURNING id, keyword, created_at, last_checked_at
+		RETURNING id, keyword, created_at, last_checked_at, max_price, avg_discount_pct
 	`
 
 	search := &domain.Search{}
@@ -60,6 +60,8 @@ func (r *PostgresRepository) CreateSearch(ctx context.Context, keyword string) (
 		&search.Keyword,
 		&search.CreatedAt,
 		&search.LastCheckedAt,
+		&search.MaxPrice,
+		&search.AvgDiscountPct,
 	)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create search: %w", err)
@@ -70,7 +72,7 @@ func (r *PostgresRepository) CreateSearch(ctx context.Context, keyword string) (
 
 // GetSearchByID retrieves a search by ID
 func (r *PostgresRepository) GetSearchByID(ctx context.Context, id int64) (*domain.Search, error) {
-	query := `SELECT id, keyword, created_at, last_checked_at FROM searches WHERE id = $1`
+	query := `SELECT id, keyword, created_at, last_checked_at, max_price, avg_discount_pct FROM searches WHERE id = $1`
 
 	search := &domain.Search{}
 	err := r.pool.QueryRow(ctx, query, id).Scan(
@@ -78,6 +80,8 @@ func (r *PostgresRepository) GetSearchByID(ctx context.Context, id int64) (*doma
 		&search.Keyword,
 		&search.CreatedAt,
 		&search.LastCheckedAt,
+		&search.MaxPrice,
+		&search.AvgDiscountPct,
 	)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get search: %w", err)
@@ -88,7 +92,7 @@ func (r *PostgresRepository) GetSearchByID(ctx context.Context, id int64) (*doma
 
 // GetSearchByKeyword retrieves a search by keyword
 func (r *PostgresRepository) GetSearchByKeyword(ctx context.Context, keyword string) (*domain.Search, error) {
-	query := `SELECT id, keyword, created_at, last_checked_at FROM searches WHERE keyword = $1`
+	query := `SELECT id, keyword, created_at, last_checked_at, max_price, avg_discount_pct FROM searches WHERE keyword = $1`
 
 	search := &domain.Search{}
 	err := r.pool.QueryRow(ctx, query, keyword).Scan(
@@ -96,6 +100,8 @@ func (r *PostgresRepository) GetSearchByKeyword(ctx context.Context, keyword str
 		&search.Keyword,
 		&search.CreatedAt,
 		&search.LastCheckedAt,
+		&search.MaxPrice,
+		&search.AvgDiscountPct,
 	)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get search: %w", err)
@@ -106,7 +112,7 @@ func (r *PostgresRepository) GetSearchByKeyword(ctx context.Context, keyword str
 
 // GetAllSearches retrieves all searches
 func (r *PostgresRepository) GetAllSearches(ctx context.Context) ([]domain.Search, error) {
-	query := `SELECT id, keyword, created_at, last_checked_at FROM searches ORDER BY created_at DESC`
+	query := `SELECT id, keyword, created_at, last_checked_at, max_price, avg_discount_pct FROM searches ORDER BY created_at DESC`
 
 	rows, err := r.pool.Query(ctx, query)
 	if err != nil {
@@ -117,7 +123,7 @@ func (r *PostgresRepository) GetAllSearches(ctx context.Context) ([]domain.Searc
 	var searches []domain.Search
 	for rows.Next() {
 		var search domain.Search
-		if err := rows.Scan(&search.ID, &search.Keyword, &search.CreatedAt, &search.LastCheckedAt); err != nil {
+		if err := rows.Scan(&search.ID, &search.Keyword, &search.CreatedAt, &search.LastCheckedAt, &search.MaxPrice, &search.AvgDiscountPct); err != nil {
 			return nil, fmt.Errorf("failed to scan search: %w", err)
 		}
 		searches = append(searches, search)
@@ -132,6 +138,16 @@ func (r *PostgresRepository) UpdateSearchLastChecked(ctx context.Context, search
 	_, err := r.pool.Exec(ctx, query, time.Now(), searchID)
 	if err != nil {
 		return fmt.Errorf("failed to update search: %w", err)
+	}
+	return nil
+}
+
+// SetGoodOfferConfig sets the per-search "good offer" notification thresholds
+func (r *PostgresRepository) SetGoodOfferConfig(ctx context.Context, searchID int64, maxPrice *float64, avgDiscountPct *float64) error {
+	query := `UPDATE searches SET max_price = $1, avg_discount_pct = $2 WHERE id = $3`
+	_, err := r.pool.Exec(ctx, query, maxPrice, avgDiscountPct, searchID)
+	if err != nil {
+		return fmt.Errorf("failed to set good offer config: %w", err)
 	}
 	return nil
 }

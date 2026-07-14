@@ -13,6 +13,7 @@ type Repository interface {
 	GetSearchByKeyword(ctx context.Context, keyword string) (*domain.Search, error)
 	GetAllSearches(ctx context.Context) ([]domain.Search, error)
 	UpdateSearchLastChecked(ctx context.Context, searchID int64) error
+	SetGoodOfferConfig(ctx context.Context, searchID int64, maxPrice *float64, avgDiscountPct *float64) error
 
 	// Product operations
 	CreateProduct(ctx context.Context, product *domain.Product) error

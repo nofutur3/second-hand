@@ -25,6 +25,8 @@ func main() {
 	htmlFile := flag.String("html-file", "results.html", "HTML output file path")
 	configFile := flag.String("config", "config.json", "Configuration file path")
 	adapterName := flag.String("adapter", "", "Search only specific adapter (e.g., bazos.cz)")
+	maxPrice := flag.Float64("max-price", 0, "Good-offer price ceiling for this search (optional; 0 = unset)")
+	avgDiscountPct := flag.Float64("avg-discount-pct", 0, "Good-offer trailing-average discount %% for this search (optional; 0 = unset)")
 	flag.Parse()
 
 	if *keyword == "" {
@@ -85,6 +87,25 @@ func main() {
 	products, err := searchService.SearchWithFilter(ctx, *keyword, *adapterName)
 	if err != nil {
 		log.Fatalf("Search failed: %v", err)
+	}
+
+	// Set good-offer thresholds, if provided
+	if *maxPrice != 0 || *avgDiscountPct != 0 {
+		search, err := repo.GetSearchByKeyword(ctx, *keyword)
+		if err != nil {
+			log.Fatalf("Failed to look up search for good-offer config: %v", err)
+		}
+		var maxPricePtr, avgDiscountPtr *float64
+		if *maxPrice != 0 {
+			maxPricePtr = maxPrice
+		}
+		if *avgDiscountPct != 0 {
+			avgDiscountPtr = avgDiscountPct
+		}
+		if err := repo.SetGoodOfferConfig(ctx, search.ID, maxPricePtr, avgDiscountPtr); err != nil {
+			log.Fatalf("Failed to set good-offer config: %v", err)
+		}
+		fmt.Printf("Good-offer config set for '%s' (max_price=%v, avg_discount_pct=%v)\n", *keyword, maxPricePtr, avgDiscountPtr)
 	}
 
 	// Format and output results
