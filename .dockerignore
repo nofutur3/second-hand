@@ -2,9 +2,13 @@
 bin/
 *.test
 *.out
+*.log
 .env
 coverage.txt
 *.coverprofile
+.idea
+.claude
+.agents
 src/frontend/node_modules/
 src/frontend/.output/
 src/frontend/.nuxt/
