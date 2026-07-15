@@ -7,7 +7,7 @@ A Go application that scrapes multiple Czech second-hand marketplaces, stores re
 Real website scraping is challenging due to anti-bot protection, changing HTML structures, and legal considerations. This application includes **mock adapters** that demonstrate full functionality without accessing real sites.
 
 **For Testing/Demo:** Use `config.test.json` with mock adapters  
-**For Production:** Real sites require legal permission and site-specific configuration (see [TROUBLESHOOTING.md](temp/TROUBLESHOOTING.md))
+**For Production:** Real sites require legal permission and site-specific configuration (see [TROUBLESHOOTING.md](TROUBLESHOOTING.md))
 
 ## Features
 
