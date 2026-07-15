@@ -87,6 +87,84 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - Searches
+      summary: Track a new keyword
+      description: |
+        Saves a new keyword to track. If the keyword is already tracked,
+        returns the existing search rather than erroring (creation is
+        idempotent). Responds as soon as the search is saved - it does not
+        wait for results. Matching listings are fetched in the background
+        right away, and again on every scheduled cron run afterwards.
+      operationId: createSearch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSearchRequest'
+            example:
+              keyword: "joy-con pair"
+      responses:
+        '201':
+          description: Search saved (or already existed)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Search'
+        '400':
+          description: Missing or invalid keyword
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /searches/{searchId}:
+    delete:
+      tags:
+        - Searches
+      summary: Stop tracking a search
+      description: |
+        Deletes a saved search. Previously scraped products are not
+        deleted - only this search's association with them.
+      operationId: deleteSearch
+      parameters:
+        - name: searchId
+          in: path
+          required: true
+          description: ID of the search
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      responses:
+        '204':
+          description: Search deleted
+        '400':
+          description: Invalid search ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Search not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
   /searches/{searchId}/products:
     get:
@@ -159,6 +237,16 @@ components:
           format: date-time
           description: Timestamp when the search was last updated
           example: "2026-02-03T10:00:00Z"
+
+    CreateSearchRequest:
+      type: object
+      required:
+        - keyword
+      properties:
+        keyword:
+          type: string
+          description: The keyword to track, 1-255 characters
+          example: "joy-con pair"
 
     Product:
       type: object

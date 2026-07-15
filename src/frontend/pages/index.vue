@@ -12,6 +12,27 @@
       </p>
     </div>
 
+    <div class="mb-10">
+      <form class="flex items-center gap-3" @submit.prevent="createSearch">
+        <input
+          v-model="newKeyword"
+          type="text"
+          maxlength="255"
+          placeholder="Track a new keyword&hellip;"
+          aria-label="Keyword to track"
+          class="flex-1 rounded-sm border border-line bg-surface px-3 py-2 font-mono text-sm text-ink placeholder:text-faint focus:border-stamp"
+        />
+        <button
+          type="submit"
+          :disabled="creating || !newKeyword.trim()"
+          class="shrink-0 rounded-sm bg-stamp px-4 py-2 font-mono text-sm text-white transition-opacity hover:opacity-90 disabled:opacity-40"
+        >
+          {{ creating ? 'Tracking…' : 'Track' }}
+        </button>
+      </form>
+      <p v-if="createError" class="mt-3 text-sm text-error">{{ createError }}</p>
+    </div>
+
     <!-- Loading -->
     <div v-if="pending" class="space-y-5" aria-hidden="true">
       <div v-for="i in 4" :key="i" class="flex items-center justify-between py-3">
@@ -30,11 +51,9 @@
     <!-- Empty -->
     <div v-else-if="!searches || searches.length === 0" class="py-4">
       <p class="text-[15px] leading-relaxed text-mute">
-        Nothing saved yet. Start tracking a keyword from the command line:
+        Nothing saved yet. Track a keyword above, or from the command line:
       </p>
       <pre class="mt-4 overflow-x-auto rounded-sm border border-line bg-surface px-4 py-3 font-mono text-sm text-ink">search -keyword="joy-con pair"</pre>
-      <p class="mt-4 text-[15px] leading-relaxed text-mute">Or through Docker:</p>
-      <pre class="mt-4 overflow-x-auto rounded-sm border border-line bg-surface px-4 py-3 font-mono text-sm text-ink">docker compose exec api ./search -keyword="joy-con pair"</pre>
     </div>
 
     <!-- List -->
@@ -60,7 +79,31 @@
 <script setup>
 const config = useRuntimeConfig()
 
-const { data: searches, pending, error } = await useFetch(`${config.public.apiBase}/searches`)
+const { data: searches, pending, error, refresh } = await useFetch(`${config.public.apiBase}/searches`)
+
+const newKeyword = ref('')
+const creating = ref(false)
+const createError = ref('')
+
+const createSearch = async () => {
+  const keyword = newKeyword.value.trim()
+  if (!keyword) return
+
+  creating.value = true
+  createError.value = ''
+  try {
+    await $fetch(`${config.public.apiBase}/searches`, {
+      method: 'POST',
+      body: { keyword }
+    })
+    newKeyword.value = ''
+    await refresh()
+  } catch (e) {
+    createError.value = e?.data?.message || e?.message || "Couldn't save this search."
+  } finally {
+    creating.value = false
+  }
+}
 
 const formatDate = (dateString) => {
   const date = new Date(dateString)

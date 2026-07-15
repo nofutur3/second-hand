@@ -2,6 +2,7 @@ package database
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"secondHand/src/backend/internal/config"
 	"secondHand/src/backend/internal/domain"
@@ -9,6 +10,10 @@ import (
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )
+
+// ErrSearchNotFound is returned by DeleteSearch when no search matches the
+// given ID.
+var ErrSearchNotFound = errors.New("search not found")
 
 // PostgresRepository implements the Repository interface using PostgreSQL
 type PostgresRepository struct {
@@ -148,6 +153,21 @@ func (r *PostgresRepository) SetGoodOfferConfig(ctx context.Context, searchID in
 	_, err := r.pool.Exec(ctx, query, maxPrice, avgDiscountPct, searchID)
 	if err != nil {
 		return fmt.Errorf("failed to set good offer config: %w", err)
+	}
+	return nil
+}
+
+// DeleteSearch removes a saved search. search_products rows for it cascade-
+// delete (see 001_initial_schema.up.sql); the underlying products are left
+// alone since another search may still reference them.
+func (r *PostgresRepository) DeleteSearch(ctx context.Context, searchID int64) error {
+	query := `DELETE FROM searches WHERE id = $1`
+	tag, err := r.pool.Exec(ctx, query, searchID)
+	if err != nil {
+		return fmt.Errorf("failed to delete search: %w", err)
+	}
+	if tag.RowsAffected() == 0 {
+		return ErrSearchNotFound
 	}
 	return nil
 }

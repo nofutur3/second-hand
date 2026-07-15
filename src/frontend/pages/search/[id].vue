@@ -23,16 +23,27 @@
     </div>
 
     <template v-else-if="data">
-      <div class="mt-6 border-b border-line pb-6">
-        <h1 class="font-serif text-3xl font-medium leading-tight text-ink">{{ data.search.keyword }}</h1>
-        <p class="mt-2 font-mono text-xs text-faint">
-          tracked since {{ formatDate(data.search.created_at) }}
-          <span class="mx-1.5 text-line">&middot;</span>
-          updated {{ formatDate(data.search.updated_at) }}
-          <span class="mx-1.5 text-line">&middot;</span>
-          {{ data.total }} listing{{ data.total === 1 ? '' : 's' }}
-        </p>
+      <div class="mt-6 flex items-start justify-between gap-4 border-b border-line pb-6">
+        <div>
+          <h1 class="font-serif text-3xl font-medium leading-tight text-ink">{{ data.search.keyword }}</h1>
+          <p class="mt-2 font-mono text-xs text-faint">
+            tracked since {{ formatDate(data.search.created_at) }}
+            <span class="mx-1.5 text-line">&middot;</span>
+            updated {{ formatDate(data.search.updated_at) }}
+            <span class="mx-1.5 text-line">&middot;</span>
+            {{ data.total }} listing{{ data.total === 1 ? '' : 's' }}
+          </p>
+        </div>
+        <button
+          type="button"
+          :disabled="deleting"
+          class="shrink-0 font-mono text-xs uppercase tracking-wide text-mute transition-colors hover:text-error disabled:opacity-40"
+          @click="deleteSearch"
+        >
+          {{ deleting ? 'Removing…' : 'Stop tracking' }}
+        </button>
       </div>
+      <p v-if="deleteError" class="mt-4 text-sm text-error">{{ deleteError }}</p>
 
       <!-- Products -->
       <ul v-if="data.products && data.products.length > 0" class="mt-2">
@@ -92,6 +103,25 @@ const searchId = route.params.id
 const { data, pending, error } = await useFetch(
   `${config.public.apiBase}/searches/${searchId}/products`
 )
+
+const deleting = ref(false)
+const deleteError = ref('')
+
+const deleteSearch = async () => {
+  if (!confirm(`Stop tracking "${data.value.search.keyword}"? Previously found listings stay in the catalog, but this search won't check for new ones again.`)) {
+    return
+  }
+
+  deleting.value = true
+  deleteError.value = ''
+  try {
+    await $fetch(`${config.public.apiBase}/searches/${searchId}`, { method: 'DELETE' })
+    await navigateTo('/')
+  } catch (e) {
+    deleteError.value = e?.data?.message || e?.message || "Couldn't remove this search."
+    deleting.value = false
+  }
+}
 
 const formatDate = (dateString) => {
   const date = new Date(dateString)
