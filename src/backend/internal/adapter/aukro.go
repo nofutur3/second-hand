@@ -95,9 +95,17 @@ func (a *AukroAdapter) Search(_ context.Context, keyword string) ([]domain.Produ
 				}
 			})
 
-			// Extract price
-			priceText := e.Text
-			product.Price = parsePrice(priceText)
+			// Extract price - isolate the dedicated price element rather than
+			// using the whole card's text, which also contains the title,
+			// labels, follower count, and auction countdown; cleanPriceString
+			// has no way to tell "the price" apart from other digits in a
+			// blob, so e.g. a title containing "31313" or a countdown like
+			// "02:27" would get concatenated into the parsed price.
+			e.ForEach("auk-item-card-price", func(_ int, p *colly.HTMLElement) {
+				if price := parsePrice(p.Text); price != 0 && product.Price == 0 {
+					product.Price = price
+				}
+			})
 
 			// Try to determine type and condition from labels
 			fullText := strings.ToLower(e.Text)
