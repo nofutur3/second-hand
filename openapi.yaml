@@ -4,13 +4,14 @@ info:
   description: |
     REST API for searching and retrieving products from Czech second-hand shops.
     
-    This API provides access to search history and product results from multiple 
+    This API provides access to search history and product results from multiple
     Czech second-hand marketplaces including:
     - Bazos.cz
     - Sbazar.cz
     - Avizo.cz
     - Inzeruj.cz
     - Aukro.cz
+    - eBay (Browse API)
 
   version: 1.0.0
   contact:
@@ -218,6 +219,7 @@ components:
             - avizo.cz
             - inzeruj.cz
             - aukro.cz
+            - ebay.com
           example: "bazos.cz"
         auction_type:
           type: string
@@ -232,7 +234,11 @@ components:
           enum:
             - new
             - used
-            - refurbished
+            - like_new
+            - good
+            - fair
+            - poor
+            - damaged
             - unknown
           example: "used"
         ending_time:
