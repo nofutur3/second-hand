@@ -3,6 +3,16 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
+  modules: ['@nuxt/fonts'],
+
+  fonts: {
+    families: [
+      { name: 'IBM Plex Serif', provider: 'google', weights: [500, 600] },
+      { name: 'IBM Plex Sans', provider: 'google', weights: [400, 500, 600] },
+      { name: 'IBM Plex Mono', provider: 'google', weights: [400, 500] }
+    ]
+  },
+
   runtimeConfig: {
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://api:8091/api/v1'
@@ -11,14 +21,14 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'Second-Hand Shop Scraper',
+      title: 'Second Hand — saved searches',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Search and browse products from Czech second-hand marketplaces' }
+        { name: 'description', content: 'Tracked listings from Czech second-hand marketplaces and eBay.' }
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }
       ]
     }
   },

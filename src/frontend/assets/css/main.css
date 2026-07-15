@@ -1,12 +1,59 @@
 @import "tailwindcss";
 
-/* Custom scrollbar */
-@utility scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+@theme {
+  /* Palette — a quiet paper ledger, not a SaaS gradient. */
+  --color-paper: #f6f7f4;
+  --color-surface: #ffffff;
+  --color-ink: #171b1a;
+  --color-mute: #5c6360;
+  --color-faint: #8b918e;
+  --color-line: #dfe3de;
+  --color-stamp: #205c52;
+  --color-stamp-dim: #e8f0ee;
+  --color-tag: #a66b0a;
+  --color-error: #9c4b3b;
+  --color-error-dim: #f5ece9;
 
-  &::-webkit-scrollbar {
-    display: none;
+  --font-serif: "IBM Plex Serif", ui-serif, Georgia, serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+/* Visible keyboard focus everywhere, styled to match the accent rather
+   than the browser default blue. */
+:focus-visible {
+  outline: 2px solid var(--color-stamp);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
 }
 
+/* Signature motif: a perforated tear-line between listing rows, like the
+   stub edge of a price tag or ticket. Used once, as the one structural
+   flourish in an otherwise quiet layout. */
+@utility divider-perforated {
+  border: none;
+  height: 1px;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-line) 0,
+    var(--color-line) 4px,
+    transparent 4px,
+    transparent 9px
+  );
+}

@@ -1,36 +1,36 @@
-# Build stage
-FROM node:22-alpine AS builder
+# syntax=docker/dockerfile:1
 
+# Shared base: dependency cache. Both the dev and build stages branch
+# from here so `npm ci` only ever runs once.
+FROM node:22-alpine AS base
 WORKDIR /app
+COPY src/frontend/package.json src/frontend/package-lock.json ./
+RUN npm ci
 
-# Copy package files
-COPY src/frontend/package*.json ./
+# ---- development ----
+# No source copied in - bind-mount src/frontend at /app at runtime (see
+# compose.yaml's `frontend-dev` service) and this runs the Nuxt dev
+# server with HMR against it.
+FROM base AS dev
+ENV HOST=0.0.0.0
+EXPOSE 8092
+CMD ["npm", "run", "dev", "--", "--port", "8092", "--host", "0.0.0.0"]
 
-# Install dependencies
-RUN npm install
-
-# Copy source code
+# ---- build ----
+FROM base AS build
 COPY src/frontend .
-
-# Build the application
 RUN npm run build
 
-# Runtime stage
-FROM node:22-alpine
-
+# ---- production ----
+# Nitro's node-server preset (Nuxt's default) bundles the server's own
+# dependencies into .output, so the runtime image needs nothing but
+# Node itself and that directory - no node_modules, no package manager,
+# no shell.
+FROM gcr.io/distroless/nodejs22-debian12 AS production
 WORKDIR /app
-
-# Copy built application
-COPY --from=builder /app/.output ./.output
-COPY --from=builder /app/package*.json ./
-
-# Set environment variables
+COPY --from=build /app/.output ./.output
 ENV HOST=0.0.0.0
 ENV PORT=8092
 ENV NODE_ENV=production
-
-# Expose port
 EXPOSE 8092
-
-# Start the application
-CMD ["node", ".output/server/index.mjs"]
+CMD [".output/server/index.mjs"]
