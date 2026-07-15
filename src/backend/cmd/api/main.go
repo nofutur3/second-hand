@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -174,13 +175,16 @@ func respondError(w http.ResponseWriter, status int, message string, err error) 
 }
 
 func main() {
+	configFile := flag.String("config", "config.json", "Configuration file path")
+	flag.Parse()
+
 	// Load environment variables
 	if err := godotenv.Load(); err != nil {
 		log.Printf("Warning: .env file not found: %v", err)
 	}
 
 	// Load configuration
-	cfg, err := config.Load("config.json")
+	cfg, err := config.Load(*configFile)
 	if err != nil {
 		log.Fatalf("Failed to load config: %v", err)
 	}
