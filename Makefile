@@ -1,4 +1,4 @@
-.PHONY: help build test run-search run-cron run-api docker-up docker-down docker-clean clean build-api deps setup
+.PHONY: help build test run-search run-cron run-api docker-up docker-down docker-clean frontend-dev clean build-api deps setup
 
 BACKEND_DIR := src/backend
 
@@ -13,6 +13,7 @@ help:
 	@echo "  make docker-up    - Start PostgreSQL + API + Frontend via Docker Compose"
 	@echo "  make docker-down  - Stop Docker containers"
 	@echo "  make docker-clean - Stop containers and remove volumes"
+	@echo "  make frontend-dev - Hot-reloading frontend dev server (Docker, no local npm needed)"
 	@echo "  make setup        - Quick start: docker-up + deps"
 	@echo "  make clean        - Clean build artifacts"
 	@echo ""
@@ -78,6 +79,14 @@ docker-down:
 docker-clean:
 	@echo "Stopping and removing Docker containers and volumes..."
 	docker-compose down -v
+
+# Runs Nuxt's own dev server (HMR) inside a container - never needs npm
+# on the host. Source is bind-mounted; node_modules is a named volume
+# (see compose.yaml) so it survives across restarts without needing a
+# host install.
+frontend-dev:
+	@echo "Starting frontend dev server (Docker) on port 8092..."
+	docker-compose --profile dev up --build frontend-dev
 
 clean:
 	@echo "Cleaning build artifacts..."
