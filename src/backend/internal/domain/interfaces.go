@@ -25,6 +25,7 @@ type Repository interface {
 	GetAllSearches(ctx context.Context) ([]Search, error)
 	UpdateSearchLastChecked(ctx context.Context, searchID int64) error
 	SetGoodOfferConfig(ctx context.Context, searchID int64, maxPrice *float64, avgDiscountPct *float64) error
+	DeleteSearch(ctx context.Context, searchID int64) error
 
 	// Product operations
 	CreateProduct(ctx context.Context, product *Product) error
