@@ -96,12 +96,12 @@
 
 <script setup>
 const route = useRoute()
-const config = useRuntimeConfig()
+const apiBase = useApiBase()
 
 const searchId = route.params.id
 
 const { data, pending, error } = await useFetch(
-  `${config.public.apiBase}/searches/${searchId}/products`
+  `${apiBase}/searches/${searchId}/products`
 )
 
 const deleting = ref(false)
@@ -115,7 +115,7 @@ const deleteSearch = async () => {
   deleting.value = true
   deleteError.value = ''
   try {
-    await $fetch(`${config.public.apiBase}/searches/${searchId}`, { method: 'DELETE' })
+    await $fetch(`${apiBase}/searches/${searchId}`, { method: 'DELETE' })
     await navigateTo('/')
   } catch (e) {
     deleteError.value = e?.data?.message || e?.message || "Couldn't remove this search."

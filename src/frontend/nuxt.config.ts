@@ -14,8 +14,14 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    // Server-only: used for requests made during SSR, which run inside the
+    // Docker network and need the internal service hostname.
+    apiBaseServer: process.env.NUXT_API_BASE_SERVER || 'http://api:8091/api/v1',
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://api:8091/api/v1'
+      // Used for requests made from the browser (client-side navigation,
+      // the create/delete forms) - needs a URL the browser can actually
+      // reach, not the Docker-internal one above.
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:8091/api/v1'
     }
   },
 

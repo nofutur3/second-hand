@@ -79,7 +79,9 @@
 <script setup>
 const config = useRuntimeConfig()
 
-const { data: searches, pending, error, refresh } = await useFetch(`${config.public.apiBase}/searches`)
+const apiBase = useApiBase()
+
+const { data: searches, pending, error, refresh } = await useFetch(`${apiBase}/searches`)
 
 const newKeyword = ref('')
 const creating = ref(false)
@@ -92,7 +94,7 @@ const createSearch = async () => {
   creating.value = true
   createError.value = ''
   try {
-    await $fetch(`${config.public.apiBase}/searches`, {
+    await $fetch(`${apiBase}/searches`, {
       method: 'POST',
       body: { keyword }
     })
