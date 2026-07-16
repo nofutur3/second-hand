@@ -1,6 +1,10 @@
 package adapter
 
-import "testing"
+import (
+	"testing"
+
+	"secondHand/src/backend/internal/domain"
+)
 
 func TestTitleMatchesKeyword(t *testing.T) {
 	tests := []struct {
@@ -27,6 +31,30 @@ func TestTitleMatchesKeyword(t *testing.T) {
 			result := titleMatchesKeyword(tt.title, tt.keyword)
 			if result != tt.expected {
 				t.Errorf("titleMatchesKeyword(%q, %q) = %v, want %v", tt.title, tt.keyword, result, tt.expected)
+			}
+		})
+	}
+}
+
+func TestAvizoConditionFromSchema(t *testing.T) {
+	tests := []struct {
+		name      string
+		condition string
+		expected  domain.Condition
+	}{
+		{"New", "https://schema.org/NewCondition", domain.ConditionNew},
+		{"Used", "https://schema.org/UsedCondition", domain.ConditionUsed},
+		{"Refurbished maps to like-new", "https://schema.org/RefurbishedCondition", domain.ConditionLikeNew},
+		{"Damaged", "https://schema.org/DamagedCondition", domain.ConditionDamaged},
+		{"Unknown/empty", "", domain.ConditionUnknown},
+		{"Unrecognized value", "https://schema.org/SomethingElse", domain.ConditionUnknown},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := avizoConditionFromSchema(tt.condition)
+			if result != tt.expected {
+				t.Errorf("avizoConditionFromSchema(%q) = %v, want %v", tt.condition, result, tt.expected)
 			}
 		})
 	}
