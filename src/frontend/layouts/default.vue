@@ -6,7 +6,7 @@
           to="/"
           class="inline-flex items-baseline gap-2 font-mono text-[13px] font-medium uppercase tracking-[0.2em] text-ink hover:text-stamp"
         >
-          Second Hand
+          Snoopy
           <span class="font-sans text-[11px] normal-case tracking-normal text-faint">market watch</span>
         </NuxtLink>
       </div>

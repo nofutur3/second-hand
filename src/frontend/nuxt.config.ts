@@ -27,7 +27,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'Second Hand — saved searches',
+      title: 'Snoopy — saved searches',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
