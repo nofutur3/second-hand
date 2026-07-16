@@ -128,12 +128,26 @@ func (a *AvizoAdapter) Search(ctx context.Context, keyword string) ([]domain.Pro
 	fmt.Printf("Avizo: Processing %d products from %d page(s)\n", len(productLinks), pageCount)
 
 	// Fetch details for each product
+	skipped := 0
 	for i, link := range productLinks {
 		fullURL := strings.TrimSuffix(a.baseURL, "/") + link
 		fmt.Printf("  Product %d/%d: %s\n", i+1, len(productLinks), fullURL)
 
 		// Extract basic info from URL
 		product := a.extractProductFromURL(fullURL)
+
+		// Avizo pads every search's results with paid "TOP" listings from
+		// unrelated categories regardless of the search term (confirmed by
+		// inspecting the real site: a clothing ad shows up in the exact
+		// same markup as a genuine match for "lego mindstorms"). The site
+		// itself never filters these out, so do it here instead of
+		// surfacing obvious spam - and skip the detail fetch entirely for
+		// anything that's clearly irrelevant, since there's no point
+		// fetching a page we're about to discard.
+		if !titleMatchesKeyword(product.Title, keyword) {
+			skipped++
+			continue
+		}
 
 		// Try to fetch more details
 		detailedProduct, err := a.fetchProductDetails(ctx, fullURL)
@@ -144,8 +158,49 @@ func (a *AvizoAdapter) Search(ctx context.Context, keyword string) ([]domain.Pro
 		products = append(products, product)
 	}
 
+	if skipped > 0 {
+		fmt.Printf("Avizo: Skipped %d unrelated result(s) (not matching '%s')\n", skipped, keyword)
+	}
+
 	fmt.Printf("Avizo: Found %d total products across %d page(s)\n", len(products), pageCount)
 	return products, nil
+}
+
+// titleMatchesKeyword reports whether title plausibly relates to keyword -
+// true if any distinctive keyword word (longer than two characters, not
+// purely numeric) appears in the title. Purely-numeric words are excluded
+// from counting on their own (a bare "255" matches tire sizes, apartment
+// sizes, model numbers... across totally unrelated listings), but if
+// that's genuinely the whole keyword, fall back to requiring the literal
+// phrase instead of accepting everything.
+func titleMatchesKeyword(title, keyword string) bool {
+	title = toLower(title)
+	words := strings.Fields(toLower(keyword))
+
+	hasDistinctiveWord := false
+	for _, word := range words {
+		if len(word) <= 2 || isAllDigits(word) {
+			continue
+		}
+		hasDistinctiveWord = true
+		if contains(title, word) {
+			return true
+		}
+	}
+
+	if !hasDistinctiveWord {
+		return contains(title, toLower(keyword))
+	}
+	return false
+}
+
+func isAllDigits(s string) bool {
+	for _, c := range s {
+		if c < '0' || c > '9' {
+			return false
+		}
+	}
+	return true
 }
 
 // extractProductFromURL extracts basic product info from the URL
