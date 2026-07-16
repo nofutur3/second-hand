@@ -42,10 +42,11 @@ type ErrorResponse struct {
 }
 
 type SearchResponse struct {
-	ID        int64     `json:"id"`
-	Keyword   string    `json:"keyword"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	ID           int64     `json:"id"`
+	Keyword      string    `json:"keyword"`
+	CreatedAt    time.Time `json:"created_at"`
+	UpdatedAt    time.Time `json:"updated_at"`
+	ProductCount *int      `json:"product_count,omitempty"`
 }
 
 type ProductResponse struct {
@@ -63,6 +64,12 @@ type ProductResponse struct {
 	EndingTime  *time.Time         `json:"ending_time,omitempty"`
 	CreatedAt   time.Time          `json:"created_at"`
 	UpdatedAt   time.Time          `json:"updated_at"`
+	IsHidden    bool               `json:"is_hidden"`
+	IsActive    bool               `json:"is_active"`
+}
+
+type SetProductHiddenRequest struct {
+	Hidden bool `json:"hidden"`
 }
 
 type SearchWithProductsResponse struct {
@@ -72,7 +79,7 @@ type SearchWithProductsResponse struct {
 }
 
 func (a *API) handleGetSearches(w http.ResponseWriter, r *http.Request) {
-	searches, err := a.repo.GetAllSearches(r.Context())
+	searches, err := a.repo.GetAllSearchesWithCounts(r.Context())
 	if err != nil {
 		respondError(w, http.StatusInternalServerError, "Failed to fetch searches", err)
 		return
@@ -84,11 +91,13 @@ func (a *API) handleGetSearches(w http.ResponseWriter, r *http.Request) {
 		if s.LastCheckedAt != nil {
 			updatedAt = *s.LastCheckedAt
 		}
+		count := s.ProductCount
 		response[i] = SearchResponse{
-			ID:        s.ID,
-			Keyword:   s.Keyword,
-			CreatedAt: s.CreatedAt,
-			UpdatedAt: updatedAt,
+			ID:           s.ID,
+			Keyword:      s.Keyword,
+			CreatedAt:    s.CreatedAt,
+			UpdatedAt:    updatedAt,
+			ProductCount: &count,
 		}
 	}
 
@@ -186,14 +195,17 @@ func (a *API) handleGetSearchProducts(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Get products for this search
-	products, err := a.repo.GetProductsBySearchID(r.Context(), searchID)
+	// Get products for this search, including hidden/inactive ones - the
+	// frontend decides what to display (default view filters them out,
+	// with a toggle to reveal them).
+	products, err := a.repo.GetProductsBySearchIDWithStatus(r.Context(), searchID)
 	if err != nil {
 		respondError(w, http.StatusInternalServerError, "Failed to fetch products", err)
 		return
 	}
 
 	productResponses := make([]ProductResponse, len(products))
+	visible := 0
 	for i, p := range products {
 		productResponses[i] = ProductResponse{
 			ID:          p.ID,
@@ -210,6 +222,11 @@ func (a *API) handleGetSearchProducts(w http.ResponseWriter, r *http.Request) {
 			EndingTime:  p.EndingTime,
 			CreatedAt:   p.CreatedAt,
 			UpdatedAt:   p.UpdatedAt,
+			IsHidden:    p.IsHidden,
+			IsActive:    p.IsActive,
+		}
+		if !p.IsHidden && p.IsActive {
+			visible++
 		}
 	}
 
@@ -226,10 +243,45 @@ func (a *API) handleGetSearchProducts(w http.ResponseWriter, r *http.Request) {
 			UpdatedAt: updatedAt,
 		},
 		Products: productResponses,
-		Total:    len(productResponses),
+		Total:    visible,
 	}
 
 	respondJSON(w, http.StatusOK, response)
+}
+
+// handleSetProductHidden marks a product irrelevant/incorrect for a search
+// (or reverses that). Hidden products stay in the database untouched -
+// cron keeps scraping and diffing them normally - they're just left out of
+// the default view.
+func (a *API) handleSetProductHidden(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	searchID, err := strconv.ParseInt(vars["searchId"], 10, 64)
+	if err != nil {
+		respondError(w, http.StatusBadRequest, "Invalid search ID", err)
+		return
+	}
+	productID, err := strconv.ParseInt(vars["productId"], 10, 64)
+	if err != nil {
+		respondError(w, http.StatusBadRequest, "Invalid product ID", err)
+		return
+	}
+
+	var req SetProductHiddenRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		respondError(w, http.StatusBadRequest, "Invalid request body", err)
+		return
+	}
+
+	if err := a.repo.SetProductHidden(r.Context(), searchID, productID, req.Hidden); err != nil {
+		if errors.Is(err, database2.ErrSearchProductNotFound) {
+			respondError(w, http.StatusNotFound, "Product not found for this search", err)
+			return
+		}
+		respondError(w, http.StatusInternalServerError, "Failed to update product", err)
+		return
+	}
+
+	w.WriteHeader(http.StatusNoContent)
 }
 
 func (a *API) handleHealthCheck(w http.ResponseWriter, r *http.Request) {
@@ -314,11 +366,12 @@ func main() {
 	apiRouter.HandleFunc("/searches", api.handleCreateSearch).Methods("POST")
 	apiRouter.HandleFunc("/searches/{searchId}", api.handleDeleteSearch).Methods("DELETE")
 	apiRouter.HandleFunc("/searches/{searchId}/products", api.handleGetSearchProducts).Methods("GET")
+	apiRouter.HandleFunc("/searches/{searchId}/products/{productId}", api.handleSetProductHidden).Methods("PATCH")
 
 	// Setup CORS
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"},
-		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"*"},
 		AllowCredentials: true,
 	})

@@ -15,6 +15,25 @@ import (
 // given ID.
 var ErrSearchNotFound = errors.New("search not found")
 
+// ErrSearchProductNotFound is returned by SetProductHidden when the given
+// search/product pair isn't linked.
+var ErrSearchProductNotFound = errors.New("product not found for this search")
+
+// SearchWithCount is a saved search plus how many of its products are
+// currently visible (not hidden, still active) - what a list view wants,
+// as opposed to domain.Search's plain fields.
+type SearchWithCount struct {
+	domain.Search
+	ProductCount int
+}
+
+// ProductWithStatus is a product plus its per-search visibility state.
+type ProductWithStatus struct {
+	domain.Product
+	IsHidden bool
+	IsActive bool
+}
+
 // PostgresRepository implements the Repository interface using PostgreSQL
 type PostgresRepository struct {
 	pool *pgxpool.Pool
@@ -129,6 +148,36 @@ func (r *PostgresRepository) GetAllSearches(ctx context.Context) ([]domain.Searc
 	for rows.Next() {
 		var search domain.Search
 		if err := rows.Scan(&search.ID, &search.Keyword, &search.CreatedAt, &search.LastCheckedAt, &search.MaxPrice, &search.AvgDiscountPct); err != nil {
+			return nil, fmt.Errorf("failed to scan search: %w", err)
+		}
+		searches = append(searches, search)
+	}
+
+	return searches, nil
+}
+
+// GetAllSearchesWithCounts retrieves all searches along with how many of
+// each one's products are currently visible (not hidden, still active).
+func (r *PostgresRepository) GetAllSearchesWithCounts(ctx context.Context) ([]SearchWithCount, error) {
+	query := `
+		SELECT s.id, s.keyword, s.created_at, s.last_checked_at, s.max_price, s.avg_discount_pct,
+			COUNT(sp.product_id) FILTER (WHERE sp.is_hidden = FALSE AND sp.is_active = TRUE)
+		FROM searches s
+		LEFT JOIN search_products sp ON sp.search_id = s.id
+		GROUP BY s.id
+		ORDER BY s.created_at DESC
+	`
+
+	rows, err := r.pool.Query(ctx, query)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get searches: %w", err)
+	}
+	defer rows.Close()
+
+	var searches []SearchWithCount
+	for rows.Next() {
+		var search SearchWithCount
+		if err := rows.Scan(&search.ID, &search.Keyword, &search.CreatedAt, &search.LastCheckedAt, &search.MaxPrice, &search.AvgDiscountPct, &search.ProductCount); err != nil {
 			return nil, fmt.Errorf("failed to scan search: %w", err)
 		}
 		searches = append(searches, search)
@@ -326,17 +375,106 @@ func (r *PostgresRepository) GetProductsBySearchID(ctx context.Context, searchID
 	return products, nil
 }
 
-// LinkProductToSearch links a product to a search
+// GetProductsBySearchIDWithStatus retrieves every product ever linked to a
+// search (visible, hidden, or no longer active) along with its per-search
+// visibility state, so callers can decide what to show.
+func (r *PostgresRepository) GetProductsBySearchIDWithStatus(ctx context.Context, searchID int64) ([]ProductWithStatus, error) {
+	query := `
+		SELECT p.id, p.shop_source, p.title, p.description, p.price, p.currency, p.auction_type,
+			p.ending_time, p.condition, p.url, p.image_url, p.location, p.seller_name,
+			p.created_at, p.updated_at, sp.is_hidden, sp.is_active
+		FROM products p
+		INNER JOIN search_products sp ON p.id = sp.product_id
+		WHERE sp.search_id = $1
+		ORDER BY p.created_at DESC
+	`
+
+	rows, err := r.pool.Query(ctx, query, searchID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get products: %w", err)
+	}
+	defer rows.Close()
+
+	var products []ProductWithStatus
+	for rows.Next() {
+		var product ProductWithStatus
+		if err := rows.Scan(
+			&product.ID,
+			&product.ShopSource,
+			&product.Title,
+			&product.Description,
+			&product.Price,
+			&product.Currency,
+			&product.AuctionType,
+			&product.EndingTime,
+			&product.Condition,
+			&product.URL,
+			&product.ImageURL,
+			&product.Location,
+			&product.SellerName,
+			&product.CreatedAt,
+			&product.UpdatedAt,
+			&product.IsHidden,
+			&product.IsActive,
+		); err != nil {
+			return nil, fmt.Errorf("failed to scan product: %w", err)
+		}
+		products = append(products, product)
+	}
+
+	return products, nil
+}
+
+// SetProductHidden marks a product as irrelevant/incorrect for a search (or
+// reverses that). Hidden products are never touched by cron - they simply
+// stay out of the default view.
+func (r *PostgresRepository) SetProductHidden(ctx context.Context, searchID, productID int64, hidden bool) error {
+	query := `UPDATE search_products SET is_hidden = $1 WHERE search_id = $2 AND product_id = $3`
+	tag, err := r.pool.Exec(ctx, query, hidden, searchID, productID)
+	if err != nil {
+		return fmt.Errorf("failed to set product hidden state: %w", err)
+	}
+	if tag.RowsAffected() == 0 {
+		return ErrSearchProductNotFound
+	}
+	return nil
+}
+
+// LinkProductToSearch links a product to a search. Re-linking an already-
+// linked product (found again in a later scrape) reactivates it, in case
+// it had previously been marked inactive after disappearing for a run.
 func (r *PostgresRepository) LinkProductToSearch(ctx context.Context, searchID, productID int64) error {
 	query := `
-		INSERT INTO search_products (search_id, product_id, found_at, is_new)
-		VALUES ($1, $2, $3, TRUE)
-		ON CONFLICT (search_id, product_id) DO NOTHING
+		INSERT INTO search_products (search_id, product_id, found_at, is_new, is_active)
+		VALUES ($1, $2, $3, TRUE, TRUE)
+		ON CONFLICT (search_id, product_id) DO UPDATE SET is_active = TRUE
 	`
 
 	_, err := r.pool.Exec(ctx, query, searchID, productID, time.Now())
 	if err != nil {
 		return fmt.Errorf("failed to link product to search: %w", err)
+	}
+
+	return nil
+}
+
+// MarkProductsInactive flags products as no longer found in the most recent
+// scrape for a search (delisted), without deleting anything. Re-appearing
+// in a later scrape flips this back via LinkProductToSearch.
+func (r *PostgresRepository) MarkProductsInactive(ctx context.Context, searchID int64, productIDs []int64) error {
+	if len(productIDs) == 0 {
+		return nil
+	}
+
+	query := `
+		UPDATE search_products
+		SET is_active = FALSE
+		WHERE search_id = $1 AND product_id = ANY($2)
+	`
+
+	_, err := r.pool.Exec(ctx, query, searchID, productIDs)
+	if err != nil {
+		return fmt.Errorf("failed to mark products inactive: %w", err)
 	}
 
 	return nil

@@ -45,11 +45,24 @@
       </div>
       <p v-if="deleteError" class="mt-4 text-sm text-error">{{ deleteError }}</p>
 
+      <!-- Hidden/delisted toggle -->
+      <label
+        v-if="data.products && data.products.length > 0"
+        class="mt-4 flex w-fit cursor-pointer select-none items-center gap-2 font-mono text-xs uppercase tracking-wide text-mute"
+      >
+        <input v-model="showHidden" type="checkbox" class="accent-stamp" />
+        Show hidden &amp; delisted
+        <span v-if="hiddenCount" class="normal-case tracking-normal text-faint">({{ hiddenCount }})</span>
+      </label>
+
       <!-- Products -->
-      <ul v-if="data.products && data.products.length > 0" class="mt-2">
-        <li v-for="(product, index) in data.products" :key="product.id">
+      <ul v-if="visibleProducts.length > 0" class="mt-2">
+        <li v-for="(product, index) in visibleProducts" :key="product.id">
           <hr v-if="index > 0" class="divider-perforated" aria-hidden="true" />
-          <div class="flex flex-col gap-2 py-5 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+          <div
+            class="flex flex-col gap-2 py-5 sm:flex-row sm:items-start sm:justify-between sm:gap-6"
+            :class="{ 'opacity-50': product.is_hidden || !product.is_active }"
+          >
             <div class="min-w-0">
               <a
                 :href="product.url"
@@ -77,6 +90,18 @@
                   <span class="mx-1 text-line">&middot;</span>
                   ends {{ formatDate(product.ending_time) }}
                 </template>
+                <template v-if="!product.is_active">
+                  <span class="mx-1 text-line">&middot;</span>
+                  <span class="text-error">no longer listed</span>
+                </template>
+                <template v-if="product.is_hidden">
+                  <span class="mx-1 text-line">&middot;</span>
+                  hidden
+                </template>
+                <span class="mx-1 text-line">&middot;</span>
+                <button type="button" class="text-mute hover:text-stamp" @click="toggleHidden(product)">
+                  {{ product.is_hidden ? 'Unhide' : 'Hide' }}
+                </button>
               </p>
             </div>
             <p class="shrink-0 whitespace-nowrap font-mono text-lg font-medium text-tag sm:text-right">
@@ -86,10 +111,18 @@
         </li>
       </ul>
 
-      <!-- Empty products -->
-      <p v-else class="mt-8 text-[15px] leading-relaxed text-mute">
+      <!-- Empty: nothing found at all -->
+      <p v-else-if="!data.products || data.products.length === 0" class="mt-8 text-[15px] leading-relaxed text-mute">
         No listings found yet for this search.
       </p>
+
+      <!-- Empty: everything found so far is hidden or delisted -->
+      <p v-else class="mt-8 text-[15px] leading-relaxed text-mute">
+        Every listing found so far is hidden or no longer listed. Turn on
+        "Show hidden &amp; delisted" above to see them.
+      </p>
+
+      <p v-if="hideError" class="mt-4 text-sm text-error">{{ hideError }}</p>
     </template>
   </main>
 </template>
@@ -120,6 +153,36 @@ const deleteSearch = async () => {
   } catch (e) {
     deleteError.value = e?.data?.message || e?.message || "Couldn't remove this search."
     deleting.value = false
+  }
+}
+
+const showHidden = ref(false)
+const hideError = ref('')
+
+// Default view: hide anything marked irrelevant/incorrect by hand, and
+// anything cron no longer finds when it re-checks (delisted/sold) - both
+// stay in the database untouched, just out of the way until asked for.
+const visibleProducts = computed(() => {
+  const products = data.value?.products ?? []
+  return showHidden.value ? products : products.filter((p) => !p.is_hidden && p.is_active)
+})
+
+const hiddenCount = computed(() => {
+  const products = data.value?.products ?? []
+  return products.filter((p) => p.is_hidden || !p.is_active).length
+})
+
+const toggleHidden = async (product) => {
+  const hidden = !product.is_hidden
+  hideError.value = ''
+  try {
+    await $fetch(`${apiBase}/searches/${searchId}/products/${product.id}`, {
+      method: 'PATCH',
+      body: { hidden }
+    })
+    product.is_hidden = hidden
+  } catch (e) {
+    hideError.value = e?.data?.message || e?.message || "Couldn't update this listing."
   }
 }
 

@@ -67,6 +67,8 @@
             {{ search.keyword }}
           </span>
           <span class="flex shrink-0 items-center gap-3 font-mono text-xs text-faint">
+            {{ search.product_count }} offer{{ search.product_count === 1 ? '' : 's' }}
+            <span class="text-line">&middot;</span>
             {{ formatDate(search.updated_at) }}
             <span class="text-stamp opacity-0 transition-opacity group-hover:opacity-100">&rarr;</span>
           </span>
