@@ -1,4 +1,4 @@
-# Second Hand Shop Scraper
+# Snoopy
 
 A Go application that scrapes multiple Czech second-hand marketplaces, stores results in PostgreSQL, and tracks changes over time.
 
