@@ -67,6 +67,7 @@ func (s *DiffService) GenerateDiff(ctx context.Context, searchID int64, currentP
 	}
 
 	// Find removed products
+	var removedIDs []int64
 	for _, previous := range previousProducts {
 		if _, exists := currentMap[previous.URL]; !exists {
 			diffs = append(diffs, domain2.ProductDiff{
@@ -75,6 +76,16 @@ func (s *DiffService) GenerateDiff(ctx context.Context, searchID int64, currentP
 				OldPrice:     &previous.Price,
 				PriceChanged: false,
 			})
+			removedIDs = append(removedIDs, previous.ID)
+		}
+	}
+
+	// Flag them as no longer listed (not deleted - just hidden from the
+	// default view) so the frontend can stop showing delisted offers
+	// without a human having to notice and remove them by hand.
+	if len(removedIDs) > 0 {
+		if err := s.repo.MarkProductsInactive(ctx, searchID, removedIDs); err != nil {
+			return nil, fmt.Errorf("failed to mark removed products inactive: %w", err)
 		}
 	}
 

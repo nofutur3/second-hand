@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/gocolly/colly/v2"
+	"github.com/gocolly/colly/v2/storage"
 )
 
 // SbazarAdapter is the adapter for sbazar.cz
@@ -43,6 +44,12 @@ func (a *SbazarAdapter) Search(ctx context.Context, keyword string) ([]domain.Pr
 	fmt.Printf("Sbazar: Fetching %s\n", searchURL)
 
 	c := a.collector.Clone()
+	// Clone() shares the parent collector's visited-URL store by design
+	// (colly v2.3.0), which would otherwise make every search after the
+	// first one within this long-lived process fail with "already
+	// visited" for the exact same search URL. Give each call truly
+	// independent storage instead.
+	_ = c.SetStorage(&storage.InMemoryStorage{})
 
 	// Track product IDs we've seen across all pages
 	visitedIDs := make(map[string]bool)
@@ -180,6 +187,7 @@ func (a *SbazarAdapter) fetchProductDetails(ctx context.Context, url string) (do
 	}
 
 	c := a.collector.Clone()
+	_ = c.SetStorage(&storage.InMemoryStorage{}) // see Search()'s comment on why
 
 	// Try to extract what we can from the HTML
 	c.OnHTML("h1", func(e *colly.HTMLElement) {

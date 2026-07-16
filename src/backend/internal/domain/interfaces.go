@@ -37,6 +37,7 @@ type Repository interface {
 	LinkProductToSearch(ctx context.Context, searchID, productID int64) error
 	GetNewProductsSinceLastCheck(ctx context.Context, searchID int64) ([]Product, error)
 	MarkProductsAsChecked(ctx context.Context, searchID int64, productIDs []int64) error
+	MarkProductsInactive(ctx context.Context, searchID int64, productIDs []int64) error
 }
 
 // OutputFormatter defines the interface for different output formats

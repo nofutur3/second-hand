@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/gocolly/colly/v2"
+	"github.com/gocolly/colly/v2/storage"
 )
 
 // BazosAdapter is the adapter for bazos.cz
@@ -42,6 +43,12 @@ func (a *BazosAdapter) Search(ctx context.Context, keyword string) ([]domain.Pro
 	fmt.Printf("Bazos: Fetching %s\n", searchURL)
 
 	c := a.collector.Clone()
+	// Clone() shares the parent collector's visited-URL store by design
+	// (colly v2.3.0), which would otherwise make every search after the
+	// first one within this long-lived process fail with "already
+	// visited" for the exact same search URL. Give each call truly
+	// independent storage instead.
+	_ = c.SetStorage(&storage.InMemoryStorage{})
 
 	// Track visited URLs to avoid duplicates
 	visitedURLs := make(map[string]bool)
