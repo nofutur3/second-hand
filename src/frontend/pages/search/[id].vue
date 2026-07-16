@@ -133,7 +133,7 @@ const apiBase = useApiBase()
 
 const searchId = route.params.id
 
-const { data, pending, error } = await useFetch(
+const { data, pending, error, refresh } = await useFetch(
   `${apiBase}/searches/${searchId}/products`
 )
 
@@ -180,7 +180,10 @@ const toggleHidden = async (product) => {
       method: 'PATCH',
       body: { hidden }
     })
-    product.is_hidden = hidden
+    // Mutating `product` in place isn't reliably reactive here (it's a
+    // plain object nested inside useFetch's payload), so re-pull the
+    // list instead of guessing at Vue's reactivity depth.
+    await refresh()
   } catch (e) {
     hideError.value = e?.data?.message || e?.message || "Couldn't update this listing."
   }
