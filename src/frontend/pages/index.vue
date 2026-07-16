@@ -1,115 +1,119 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <!-- Header -->
-    <header class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 class="text-4xl font-bold mb-2">🔍 Second-Hand Shop Scraper</h1>
-        <p class="text-purple-100 text-lg">Browse products from Czech second-hand marketplaces</p>
+  <main class="mx-auto max-w-3xl px-6 py-12">
+    <div class="mb-10 flex items-end justify-between gap-4 border-b border-line pb-6">
+      <div>
+        <h1 class="font-serif text-3xl font-medium leading-tight text-ink">Saved searches</h1>
+        <p class="mt-2 max-w-md text-[15px] leading-relaxed text-mute">
+          Every keyword tracked across Bazos, Sbazar, Avizo, Inzeruj, Aukro, and eBay.
+        </p>
       </div>
-    </header>
+      <p v-if="searches?.length" class="shrink-0 font-mono text-sm text-faint">
+        {{ searches.length }} tracked
+      </p>
+    </div>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <!-- Loading State -->
-      <div v-if="pending" class="flex items-center justify-center py-12">
-        <div class="text-center">
-          <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
-          <p class="mt-4 text-gray-600 text-lg">Loading searches...</p>
-        </div>
+    <div class="mb-10">
+      <form class="flex items-center gap-3" @submit.prevent="createSearch">
+        <input
+          v-model="newKeyword"
+          type="text"
+          maxlength="255"
+          placeholder="Track a new keyword&hellip;"
+          aria-label="Keyword to track"
+          class="flex-1 rounded-sm border border-line bg-surface px-3 py-2 font-mono text-sm text-ink placeholder:text-faint focus:border-stamp"
+        />
+        <button
+          type="submit"
+          :disabled="creating || !newKeyword.trim()"
+          class="shrink-0 rounded-sm bg-stamp px-4 py-2 font-mono text-sm text-white transition-opacity hover:opacity-90 disabled:opacity-40"
+        >
+          {{ creating ? 'Tracking…' : 'Track' }}
+        </button>
+      </form>
+      <p v-if="createError" class="mt-3 text-sm text-error">{{ createError }}</p>
+    </div>
+
+    <!-- Loading -->
+    <div v-if="pending" class="space-y-5" aria-hidden="true">
+      <div v-for="i in 4" :key="i" class="flex items-center justify-between py-3">
+        <div class="h-4 w-40 animate-pulse rounded-sm bg-line"></div>
+        <div class="h-3 w-24 animate-pulse rounded-sm bg-line"></div>
       </div>
+    </div>
 
-      <!-- Error State -->
-      <div v-else-if="error" class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg shadow-md">
-        <div class="flex items-start">
-          <div class="flex-shrink-0">
-            <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <div class="ml-3">
-            <h3 class="text-lg font-medium text-red-800">Error loading searches</h3>
-            <p class="mt-2 text-red-700">{{ error.message }}</p>
-            <p class="mt-2 text-sm text-red-600">Make sure the API server is running on http://localhost:8091</p>
-          </div>
-        </div>
-      </div>
+    <!-- Error -->
+    <div v-else-if="error" class="border-l-2 border-error bg-error-dim px-5 py-4">
+      <p class="font-medium text-error">Couldn't load saved searches</p>
+      <p class="mt-1 text-[15px] text-ink/80">{{ error.message }}</p>
+      <p class="mt-2 font-mono text-xs text-mute">Make sure the API is reachable at {{ config.public.apiBase }}</p>
+    </div>
 
-      <!-- Empty State -->
-      <div v-else-if="!searches || searches.length === 0" class="bg-white rounded-xl shadow-lg p-12 text-center">
-        <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-purple-100 mb-6">
-          <svg class="h-10 w-10 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-        </div>
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">No searches yet</h2>
-        <p class="text-gray-600 mb-4">Start by running a search from the command line:</p>
-        <div class="bg-gray-50 rounded-lg p-4 mb-4">
-          <code class="text-sm text-gray-800 font-mono">./search -keyword="hemingway"</code>
-        </div>
-        <p class="text-gray-600 mb-2">Or with Docker:</p>
-        <div class="bg-gray-50 rounded-lg p-4">
-          <code class="text-sm text-gray-800 font-mono">docker compose exec api ./search -keyword="hemingway"</code>
-        </div>
-      </div>
+    <!-- Empty -->
+    <div v-else-if="!searches || searches.length === 0" class="py-4">
+      <p class="text-[15px] leading-relaxed text-mute">
+        Nothing saved yet. Track a keyword above, or from the command line:
+      </p>
+      <pre class="mt-4 overflow-x-auto rounded-sm border border-line bg-surface px-4 py-3 font-mono text-sm text-ink">search -keyword="joy-con pair"</pre>
+    </div>
 
-      <!-- Searches List -->
-      <div v-else>
-        <div class="mb-8">
-          <h2 class="text-3xl font-bold text-gray-900">
-            Found {{ searches.length }} search{{ searches.length !== 1 ? 'es' : '' }}
-          </h2>
-          <p class="mt-2 text-gray-600">Click on a search to view products</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <NuxtLink
-            v-for="search in searches"
-            :key="search.id"
-            :to="`/search/${search.id}`"
-            class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1"
-          >
-            <div class="p-6">
-              <div class="flex items-start justify-between mb-4">
-                <h3 class="text-xl font-bold text-purple-600 group-hover:text-purple-700 break-words flex-1">
-                  {{ search.keyword }}
-                </h3>
-                <svg class="h-5 w-5 text-purple-400 group-hover:text-purple-600 transition-colors flex-shrink-0 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-
-              <div class="flex items-center text-sm text-gray-500">
-                <svg class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span>{{ formatDate(search.created_at) }}</span>
-              </div>
-
-              <div class="mt-4">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
-                  View Products →
-                </span>
-              </div>
-            </div>
-          </NuxtLink>
-        </div>
-      </div>
-    </main>
-  </div>
+    <!-- List -->
+    <ul v-else>
+      <li v-for="search in searches" :key="search.id" class="border-b border-line last:border-b-0">
+        <NuxtLink
+          :to="`/search/${search.id}`"
+          class="group flex items-center justify-between gap-4 py-4 transition-colors hover:bg-surface"
+        >
+          <span class="font-serif text-lg text-ink transition-colors group-hover:text-stamp">
+            {{ search.keyword }}
+          </span>
+          <span class="flex shrink-0 items-center gap-3 font-mono text-xs text-faint">
+            {{ search.product_count }} offer{{ search.product_count === 1 ? '' : 's' }}
+            <span class="text-line">&middot;</span>
+            {{ formatDate(search.updated_at) }}
+            <span class="text-stamp opacity-0 transition-opacity group-hover:opacity-100">&rarr;</span>
+          </span>
+        </NuxtLink>
+      </li>
+    </ul>
+  </main>
 </template>
 
 <script setup>
 const config = useRuntimeConfig()
 
-// Fetch searches from API
-const { data: searches, pending, error } = await useFetch(`${config.public.apiBase}/searches`)
+const apiBase = useApiBase()
 
-// Format date helper
+const { data: searches, pending, error, refresh } = await useFetch(`${apiBase}/searches`)
+
+const newKeyword = ref('')
+const creating = ref(false)
+const createError = ref('')
+
+const createSearch = async () => {
+  const keyword = newKeyword.value.trim()
+  if (!keyword) return
+
+  creating.value = true
+  createError.value = ''
+  try {
+    await $fetch(`${apiBase}/searches`, {
+      method: 'POST',
+      body: { keyword }
+    })
+    newKeyword.value = ''
+    await refresh()
+  } catch (e) {
+    createError.value = e?.data?.message || e?.message || "Couldn't save this search."
+  } finally {
+    creating.value = false
+  }
+}
+
 const formatDate = (dateString) => {
   const date = new Date(dateString)
-  return date.toLocaleDateString('cs-CZ', {
-    year: 'numeric',
-    month: 'long',
+  return date.toLocaleDateString('en-GB', {
     day: 'numeric',
+    month: 'short',
     hour: '2-digit',
     minute: '2-digit'
   })

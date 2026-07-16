@@ -1,231 +1,221 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <!-- Header -->
-    <header class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 class="text-4xl font-bold mb-2">🔍 Second-Hand Shop Scraper</h1>
-        <p class="text-purple-100 text-lg">Browse products from Czech second-hand marketplaces</p>
-      </div>
-    </header>
+  <main class="mx-auto max-w-3xl px-6 py-12">
+    <NuxtLink
+      to="/"
+      class="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wide text-mute transition-colors hover:text-stamp"
+    >
+      <span aria-hidden="true">&larr;</span> All searches
+    </NuxtLink>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <!-- Back Button -->
-      <NuxtLink
-        to="/"
-        class="inline-flex items-center px-4 py-2 mb-6 text-purple-600 bg-white border-2 border-purple-600 rounded-lg hover:bg-purple-600 hover:text-white transition-colors duration-200 font-medium"
+    <!-- Loading -->
+    <div v-if="pending" class="mt-8 space-y-6" aria-hidden="true">
+      <div class="h-8 w-56 animate-pulse rounded-sm bg-line"></div>
+      <div v-for="i in 3" :key="i" class="flex items-center justify-between py-4">
+        <div class="h-4 w-64 animate-pulse rounded-sm bg-line"></div>
+        <div class="h-4 w-16 animate-pulse rounded-sm bg-line"></div>
+      </div>
+    </div>
+
+    <!-- Error -->
+    <div v-else-if="error" class="mt-8 border-l-2 border-error bg-error-dim px-5 py-4">
+      <p class="font-medium text-error">Couldn't load this search</p>
+      <p class="mt-1 text-[15px] text-ink/80">{{ error.message }}</p>
+    </div>
+
+    <template v-else-if="data">
+      <div class="mt-6 flex items-start justify-between gap-4 border-b border-line pb-6">
+        <div>
+          <h1 class="font-serif text-3xl font-medium leading-tight text-ink">{{ data.search.keyword }}</h1>
+          <p class="mt-2 font-mono text-xs text-faint">
+            tracked since {{ formatDate(data.search.created_at) }}
+            <span class="mx-1.5 text-line">&middot;</span>
+            updated {{ formatDate(data.search.updated_at) }}
+            <span class="mx-1.5 text-line">&middot;</span>
+            {{ data.total }} listing{{ data.total === 1 ? '' : 's' }}
+          </p>
+        </div>
+        <button
+          type="button"
+          :disabled="deleting"
+          class="shrink-0 font-mono text-xs uppercase tracking-wide text-mute transition-colors hover:text-error disabled:opacity-40"
+          @click="deleteSearch"
+        >
+          {{ deleting ? 'Removing…' : 'Stop tracking' }}
+        </button>
+      </div>
+      <p v-if="deleteError" class="mt-4 text-sm text-error">{{ deleteError }}</p>
+
+      <!-- Hidden/delisted toggle -->
+      <label
+        v-if="data.products && data.products.length > 0"
+        class="mt-4 flex w-fit cursor-pointer select-none items-center gap-2 font-mono text-xs uppercase tracking-wide text-mute"
       >
-        <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-        Back to Searches
-      </NuxtLink>
+        <input v-model="showHidden" type="checkbox" class="accent-stamp" />
+        Show hidden &amp; delisted
+        <span v-if="hiddenCount" class="normal-case tracking-normal text-faint">({{ hiddenCount }})</span>
+      </label>
 
-      <!-- Loading State -->
-      <div v-if="pending" class="flex items-center justify-center py-12">
-        <div class="text-center">
-          <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
-          <p class="mt-4 text-gray-600 text-lg">Loading products...</p>
-        </div>
-      </div>
-
-      <!-- Error State -->
-      <div v-else-if="error" class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg shadow-md">
-        <div class="flex items-start">
-          <div class="flex-shrink-0">
-            <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <div class="ml-3">
-            <h3 class="text-lg font-medium text-red-800">Error loading products</h3>
-            <p class="mt-2 text-red-700">{{ error.message }}</p>
-            <p class="mt-2 text-sm text-red-600">Make sure the API server is running and the search exists</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Content -->
-      <div v-else-if="data">
-        <!-- Search Info Card -->
-        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-          <h2 class="text-3xl font-bold text-purple-600 mb-4">{{ data.search.keyword }}</h2>
-          <div class="flex flex-wrap gap-6 text-sm text-gray-600">
-            <div class="flex items-center">
-              <svg class="h-5 w-5 mr-2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-              </svg>
-              <span><strong class="text-gray-900">Created:</strong> {{ formatDate(data.search.created_at) }}</span>
+      <!-- Products -->
+      <ul v-if="visibleProducts.length > 0" class="mt-2">
+        <li v-for="(product, index) in visibleProducts" :key="product.id">
+          <hr v-if="index > 0" class="divider-perforated" aria-hidden="true" />
+          <div
+            class="flex flex-col gap-2 py-5 sm:flex-row sm:items-start sm:justify-between sm:gap-6"
+            :class="{ 'opacity-50': product.is_hidden || !product.is_active }"
+          >
+            <div class="min-w-0">
+              <a
+                :href="product.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-medium leading-snug text-ink hover:text-stamp"
+              >
+                {{ product.title }}
+                <span class="ml-1 text-faint" aria-hidden="true">&#8599;</span>
+              </a>
+              <p v-if="product.description" class="mt-1.5 line-clamp-2 text-[14px] leading-relaxed text-mute">
+                {{ product.description }}
+              </p>
+              <p class="mt-2 font-mono text-xs text-faint">
+                {{ product.shop_source }}
+                <span class="mx-1 text-line">&middot;</span>
+                {{ formatCondition(product.condition) }}
+                <span class="mx-1 text-line">&middot;</span>
+                {{ product.auction_type === 'auction' ? 'auction' : 'sale' }}
+                <template v-if="product.location">
+                  <span class="mx-1 text-line">&middot;</span>
+                  {{ product.location }}
+                </template>
+                <template v-if="product.ending_time">
+                  <span class="mx-1 text-line">&middot;</span>
+                  ends {{ formatDate(product.ending_time) }}
+                </template>
+                <template v-if="!product.is_active">
+                  <span class="mx-1 text-line">&middot;</span>
+                  <span class="text-error">no longer listed</span>
+                </template>
+                <template v-if="product.is_hidden">
+                  <span class="mx-1 text-line">&middot;</span>
+                  hidden
+                </template>
+                <span class="mx-1 text-line">&middot;</span>
+                <button type="button" class="text-mute hover:text-stamp" @click="toggleHidden(product)">
+                  {{ product.is_hidden ? 'Unhide' : 'Hide' }}
+                </button>
+              </p>
             </div>
-            <div class="flex items-center">
-              <svg class="h-5 w-5 mr-2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-              <span><strong class="text-gray-900">Updated:</strong> {{ formatDate(data.search.updated_at) }}</span>
-            </div>
-            <div class="flex items-center">
-              <svg class="h-5 w-5 mr-2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-              </svg>
-              <span><strong class="text-gray-900">Total Products:</strong> {{ data.total }}</span>
-            </div>
+            <p class="shrink-0 whitespace-nowrap font-mono text-lg font-medium text-tag sm:text-right">
+              {{ formatPrice(product.price) }} <span class="text-sm text-faint">{{ product.currency }}</span>
+            </p>
           </div>
-        </div>
+        </li>
+      </ul>
 
-        <!-- Products Section -->
-        <div v-if="data.products && data.products.length > 0">
-          <div class="flex items-center justify-between mb-6">
-            <h3 class="text-2xl font-bold text-gray-900">Products</h3>
-            <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
-              {{ data.total }} found
-            </span>
-          </div>
+      <!-- Empty: nothing found at all -->
+      <p v-else-if="!data.products || data.products.length === 0" class="mt-8 text-[15px] leading-relaxed text-mute">
+        No listings found yet for this search.
+      </p>
 
-          <div class="space-y-4">
-            <div
-              v-for="product in data.products"
-              :key="product.id"
-              class="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
-            >
-              <div class="p-6">
-                <!-- Product Header -->
-                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                  <div class="flex-1">
-                    <h4 class="text-xl font-bold text-gray-900 mb-2 leading-tight">
-                      <a
-                        :href="product.url"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="text-purple-600 hover:text-purple-700 hover:underline"
-                      >
-                        {{ product.title }}
-                      </a>
-                    </h4>
-                  </div>
-                  <div class="flex-shrink-0">
-                    <div class="inline-flex items-center px-4 py-2 rounded-full text-lg font-bold bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
-                      {{ formatPrice(product.price) }} {{ product.currency }}
-                    </div>
-                  </div>
-                </div>
+      <!-- Empty: everything found so far is hidden or delisted -->
+      <p v-else class="mt-8 text-[15px] leading-relaxed text-mute">
+        Every listing found so far is hidden or no longer listed. Turn on
+        "Show hidden &amp; delisted" above to see them.
+      </p>
 
-                <!-- Description -->
-                <p v-if="product.description" class="text-gray-600 mb-4 line-clamp-2">
-                  {{ product.description }}
-                </p>
-
-                <!-- Product Badges -->
-                <div class="flex flex-wrap gap-2">
-                  <!-- Shop Badge -->
-                  <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                    <svg class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                    {{ product.shop_source }}
-                  </span>
-
-                  <!-- Condition Badge -->
-                  <span
-                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium"
-                    :class="{
-                      'bg-green-100 text-green-800': product.condition === 'new',
-                      'bg-yellow-100 text-yellow-800': product.condition === 'used',
-                      'bg-purple-100 text-purple-800': product.condition === 'refurbished',
-                      'bg-gray-100 text-gray-800': product.condition === 'unknown'
-                    }"
-                  >
-                    {{ formatCondition(product.condition) }}
-                  </span>
-
-                  <!-- Type Badge -->
-                  <span
-                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium"
-                    :class="product.auction_type === 'auction' ? 'bg-pink-100 text-pink-800' : 'bg-indigo-100 text-indigo-800'"
-                  >
-                    {{ formatAuctionType(product.auction_type) }}
-                  </span>
-
-                  <!-- Location Badge -->
-                  <span v-if="product.location" class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-teal-100 text-teal-800">
-                    <svg class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                    {{ product.location }}
-                  </span>
-
-                  <!-- Ending Time Badge -->
-                  <span v-if="product.ending_time" class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                    <svg class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Ends: {{ formatDate(product.ending_time) }}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Empty Products State -->
-        <div v-else class="bg-white rounded-xl shadow-lg p-12 text-center">
-          <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-gray-100 mb-6">
-            <svg class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-            </svg>
-          </div>
-          <h2 class="text-2xl font-bold text-gray-900 mb-2">No products found</h2>
-          <p class="text-gray-600">This search didn't find any products yet.</p>
-        </div>
-      </div>
-    </main>
-  </div>
+      <p v-if="hideError" class="mt-4 text-sm text-error">{{ hideError }}</p>
+    </template>
+  </main>
 </template>
 
 <script setup>
 const route = useRoute()
-const config = useRuntimeConfig()
+const apiBase = useApiBase()
 
-// Get search ID from route
 const searchId = route.params.id
 
-// Fetch search with products from API
-const { data, pending, error } = await useFetch(
-  `${config.public.apiBase}/searches/${searchId}/products`
+const { data, pending, error, refresh } = await useFetch(
+  `${apiBase}/searches/${searchId}/products`
 )
 
-// Format date helper
+const deleting = ref(false)
+const deleteError = ref('')
+
+const deleteSearch = async () => {
+  if (!confirm(`Stop tracking "${data.value.search.keyword}"? Previously found listings stay in the catalog, but this search won't check for new ones again.`)) {
+    return
+  }
+
+  deleting.value = true
+  deleteError.value = ''
+  try {
+    await $fetch(`${apiBase}/searches/${searchId}`, { method: 'DELETE' })
+    await navigateTo('/')
+  } catch (e) {
+    deleteError.value = e?.data?.message || e?.message || "Couldn't remove this search."
+    deleting.value = false
+  }
+}
+
+const showHidden = ref(false)
+const hideError = ref('')
+
+// Default view: hide anything marked irrelevant/incorrect by hand, and
+// anything cron no longer finds when it re-checks (delisted/sold) - both
+// stay in the database untouched, just out of the way until asked for.
+const visibleProducts = computed(() => {
+  const products = data.value?.products ?? []
+  return showHidden.value ? products : products.filter((p) => !p.is_hidden && p.is_active)
+})
+
+const hiddenCount = computed(() => {
+  const products = data.value?.products ?? []
+  return products.filter((p) => p.is_hidden || !p.is_active).length
+})
+
+const toggleHidden = async (product) => {
+  const hidden = !product.is_hidden
+  hideError.value = ''
+  try {
+    await $fetch(`${apiBase}/searches/${searchId}/products/${product.id}`, {
+      method: 'PATCH',
+      body: { hidden }
+    })
+    // Mutating `product` in place isn't reliably reactive here (it's a
+    // plain object nested inside useFetch's payload), so re-pull the
+    // list instead of guessing at Vue's reactivity depth.
+    await refresh()
+  } catch (e) {
+    hideError.value = e?.data?.message || e?.message || "Couldn't update this listing."
+  }
+}
+
 const formatDate = (dateString) => {
   const date = new Date(dateString)
-  return date.toLocaleDateString('cs-CZ', {
-    year: 'numeric',
-    month: 'long',
+  return date.toLocaleDateString('en-GB', {
     day: 'numeric',
+    month: 'short',
     hour: '2-digit',
     minute: '2-digit'
   })
 }
 
-// Format price helper
 const formatPrice = (price) => {
-  return new Intl.NumberFormat('cs-CZ', {
+  return new Intl.NumberFormat('en-GB', {
     minimumFractionDigits: 0,
     maximumFractionDigits: 2
   }).format(price)
 }
 
-// Format condition helper
-const formatCondition = (condition) => {
-  const conditions = {
-    'new': '✨ New',
-    'used': '♻️ Used',
-    'refurbished': '🔧 Refurbished',
-    'unknown': '❓ Unknown'
-  }
-  return conditions[condition] || condition
+const conditionLabels = {
+  new: 'New',
+  used: 'Used',
+  like_new: 'Like new',
+  good: 'Good',
+  fair: 'Fair',
+  poor: 'Poor',
+  damaged: 'Damaged',
+  unknown: 'Condition unknown'
 }
 
-// Format auction type helper
-const formatAuctionType = (type) => {
-  return type === 'auction' ? '🔨 Auction' : '💰 Sale'
-}
+const formatCondition = (condition) => conditionLabels[condition] || condition
 </script>

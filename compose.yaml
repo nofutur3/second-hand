@@ -47,7 +47,12 @@ services:
       dockerfile: docker/frontend/Dockerfile
     container_name: secondhand_frontend
     environment:
-      NUXT_PUBLIC_API_BASE: http://api:8091/api/v1
+      # Server-side (SSR) requests run inside this container and need the
+      # Docker-internal hostname; NUXT_PUBLIC_API_BASE is what the
+      # *browser* fetches from directly (create/delete, client-side nav),
+      # so it needs a URL reachable from the host, not from this network.
+      NUXT_API_BASE_SERVER: http://api:8091/api/v1
+      NUXT_PUBLIC_API_BASE: http://localhost:8091/api/v1
       HOST: 0.0.0.0
       PORT: 8092
     ports:
@@ -57,6 +62,32 @@ services:
     networks:
       - secondhand_network
     restart: unless-stopped
+
+  # Hot-reloading dev server, not started by plain `docker compose up` -
+  # run via `make frontend-dev` (docker compose --profile dev up
+  # --build frontend-dev). Bind-mounts the source so edits take effect
+  # immediately; node_modules is a named volume so the host doesn't need
+  # npm installed at all.
+  frontend-dev:
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+      target: dev
+    container_name: secondhand_frontend_dev
+    profiles: ["dev"]
+    environment:
+      NUXT_API_BASE_SERVER: http://api:8091/api/v1
+      NUXT_PUBLIC_API_BASE: http://localhost:8091/api/v1
+      HOST: 0.0.0.0
+    ports:
+      - "8092:8092"
+    volumes:
+      - ./src/frontend:/app
+      - frontend_node_modules:/app/node_modules
+    depends_on:
+      - api
+    networks:
+      - secondhand_network
 
   adminer:
     image: adminer
@@ -68,6 +99,7 @@ services:
 
 volumes:
   postgres_data:
+  frontend_node_modules:
 
 networks:
   secondhand_network:

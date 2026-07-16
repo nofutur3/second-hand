@@ -3,15 +3,19 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
+	"secondHand/src/backend/internal/adapter"
 	"secondHand/src/backend/internal/config"
 	database2 "secondHand/src/backend/internal/database"
 	"secondHand/src/backend/internal/domain"
+	"secondHand/src/backend/internal/service"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/gorilla/mux"
@@ -20,8 +24,16 @@ import (
 	"github.com/rs/cors"
 )
 
+// maxKeywordLength mirrors the searches.keyword VARCHAR(255) column.
+const maxKeywordLength = 255
+
 type API struct {
-	repo database2.Repository
+	repo          database2.Repository
+	searchService *service.SearchService
+}
+
+type CreateSearchRequest struct {
+	Keyword string `json:"keyword"`
 }
 
 type ErrorResponse struct {
@@ -30,10 +42,11 @@ type ErrorResponse struct {
 }
 
 type SearchResponse struct {
-	ID        int64     `json:"id"`
-	Keyword   string    `json:"keyword"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	ID           int64     `json:"id"`
+	Keyword      string    `json:"keyword"`
+	CreatedAt    time.Time `json:"created_at"`
+	UpdatedAt    time.Time `json:"updated_at"`
+	ProductCount *int      `json:"product_count,omitempty"`
 }
 
 type ProductResponse struct {
@@ -51,6 +64,12 @@ type ProductResponse struct {
 	EndingTime  *time.Time         `json:"ending_time,omitempty"`
 	CreatedAt   time.Time          `json:"created_at"`
 	UpdatedAt   time.Time          `json:"updated_at"`
+	IsHidden    bool               `json:"is_hidden"`
+	IsActive    bool               `json:"is_active"`
+}
+
+type SetProductHiddenRequest struct {
+	Hidden bool `json:"hidden"`
 }
 
 type SearchWithProductsResponse struct {
@@ -60,7 +79,7 @@ type SearchWithProductsResponse struct {
 }
 
 func (a *API) handleGetSearches(w http.ResponseWriter, r *http.Request) {
-	searches, err := a.repo.GetAllSearches(r.Context())
+	searches, err := a.repo.GetAllSearchesWithCounts(r.Context())
 	if err != nil {
 		respondError(w, http.StatusInternalServerError, "Failed to fetch searches", err)
 		return
@@ -72,15 +91,91 @@ func (a *API) handleGetSearches(w http.ResponseWriter, r *http.Request) {
 		if s.LastCheckedAt != nil {
 			updatedAt = *s.LastCheckedAt
 		}
+		count := s.ProductCount
 		response[i] = SearchResponse{
-			ID:        s.ID,
-			Keyword:   s.Keyword,
-			CreatedAt: s.CreatedAt,
-			UpdatedAt: updatedAt,
+			ID:           s.ID,
+			Keyword:      s.Keyword,
+			CreatedAt:    s.CreatedAt,
+			UpdatedAt:    updatedAt,
+			ProductCount: &count,
 		}
 	}
 
 	respondJSON(w, http.StatusOK, response)
+}
+
+// handleCreateSearch saves a new keyword to track. It returns as soon as
+// the search row exists (CreateSearch is idempotent - re-posting an
+// existing keyword just returns it); the actual scrape across adapters
+// runs in the background afterwards, the same way cmd/cron keeps existing
+// searches up to date, so this responds in milliseconds rather than
+// blocking on however long real-site scraping takes.
+func (a *API) handleCreateSearch(w http.ResponseWriter, r *http.Request) {
+	var req CreateSearchRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		respondError(w, http.StatusBadRequest, "Invalid request body", err)
+		return
+	}
+
+	keyword := strings.TrimSpace(req.Keyword)
+	if keyword == "" {
+		respondError(w, http.StatusBadRequest, "Keyword is required", nil)
+		return
+	}
+	if len(keyword) > maxKeywordLength {
+		respondError(w, http.StatusBadRequest, fmt.Sprintf("Keyword must be %d characters or fewer", maxKeywordLength), nil)
+		return
+	}
+
+	search, err := a.repo.CreateSearch(r.Context(), keyword)
+	if err != nil {
+		respondError(w, http.StatusInternalServerError, "Failed to create search", err)
+		return
+	}
+
+	go func() {
+		log.Printf("Fetching initial results for '%s'...", keyword)
+		if _, err := a.searchService.SearchWithFilter(context.Background(), keyword, ""); err != nil {
+			log.Printf("Initial fetch for '%s' failed: %v", keyword, err)
+		} else {
+			log.Printf("Initial fetch for '%s' complete", keyword)
+		}
+	}()
+
+	updatedAt := search.CreatedAt
+	if search.LastCheckedAt != nil {
+		updatedAt = *search.LastCheckedAt
+	}
+
+	respondJSON(w, http.StatusCreated, SearchResponse{
+		ID:        search.ID,
+		Keyword:   search.Keyword,
+		CreatedAt: search.CreatedAt,
+		UpdatedAt: updatedAt,
+	})
+}
+
+// handleDeleteSearch stops tracking a keyword. The search_products join
+// rows cascade-delete with it; previously scraped products stay in the
+// catalog since another search may still reference them.
+func (a *API) handleDeleteSearch(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	searchID, err := strconv.ParseInt(vars["searchId"], 10, 64)
+	if err != nil {
+		respondError(w, http.StatusBadRequest, "Invalid search ID", err)
+		return
+	}
+
+	if err := a.repo.DeleteSearch(r.Context(), searchID); err != nil {
+		if errors.Is(err, database2.ErrSearchNotFound) {
+			respondError(w, http.StatusNotFound, "Search not found", err)
+			return
+		}
+		respondError(w, http.StatusInternalServerError, "Failed to delete search", err)
+		return
+	}
+
+	w.WriteHeader(http.StatusNoContent)
 }
 
 func (a *API) handleGetSearchProducts(w http.ResponseWriter, r *http.Request) {
@@ -100,14 +195,17 @@ func (a *API) handleGetSearchProducts(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Get products for this search
-	products, err := a.repo.GetProductsBySearchID(r.Context(), searchID)
+	// Get products for this search, including hidden/inactive ones - the
+	// frontend decides what to display (default view filters them out,
+	// with a toggle to reveal them).
+	products, err := a.repo.GetProductsBySearchIDWithStatus(r.Context(), searchID)
 	if err != nil {
 		respondError(w, http.StatusInternalServerError, "Failed to fetch products", err)
 		return
 	}
 
 	productResponses := make([]ProductResponse, len(products))
+	visible := 0
 	for i, p := range products {
 		productResponses[i] = ProductResponse{
 			ID:          p.ID,
@@ -124,6 +222,11 @@ func (a *API) handleGetSearchProducts(w http.ResponseWriter, r *http.Request) {
 			EndingTime:  p.EndingTime,
 			CreatedAt:   p.CreatedAt,
 			UpdatedAt:   p.UpdatedAt,
+			IsHidden:    p.IsHidden,
+			IsActive:    p.IsActive,
+		}
+		if !p.IsHidden && p.IsActive {
+			visible++
 		}
 	}
 
@@ -140,10 +243,45 @@ func (a *API) handleGetSearchProducts(w http.ResponseWriter, r *http.Request) {
 			UpdatedAt: updatedAt,
 		},
 		Products: productResponses,
-		Total:    len(productResponses),
+		Total:    visible,
 	}
 
 	respondJSON(w, http.StatusOK, response)
+}
+
+// handleSetProductHidden marks a product irrelevant/incorrect for a search
+// (or reverses that). Hidden products stay in the database untouched -
+// cron keeps scraping and diffing them normally - they're just left out of
+// the default view.
+func (a *API) handleSetProductHidden(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	searchID, err := strconv.ParseInt(vars["searchId"], 10, 64)
+	if err != nil {
+		respondError(w, http.StatusBadRequest, "Invalid search ID", err)
+		return
+	}
+	productID, err := strconv.ParseInt(vars["productId"], 10, 64)
+	if err != nil {
+		respondError(w, http.StatusBadRequest, "Invalid product ID", err)
+		return
+	}
+
+	var req SetProductHiddenRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		respondError(w, http.StatusBadRequest, "Invalid request body", err)
+		return
+	}
+
+	if err := a.repo.SetProductHidden(r.Context(), searchID, productID, req.Hidden); err != nil {
+		if errors.Is(err, database2.ErrSearchProductNotFound) {
+			respondError(w, http.StatusNotFound, "Product not found for this search", err)
+			return
+		}
+		respondError(w, http.StatusInternalServerError, "Failed to update product", err)
+		return
+	}
+
+	w.WriteHeader(http.StatusNoContent)
 }
 
 func (a *API) handleHealthCheck(w http.ResponseWriter, r *http.Request) {
@@ -209,8 +347,14 @@ func main() {
 	}
 	defer repo.Close()
 
+	// Initialize adapter registry + search service (for handleCreateSearch's
+	// background fetch - everything else here reads the repository
+	// directly, per this file's existing convention).
+	adapterRegistry := adapter.NewRegistry(cfg)
+	searchService := service.NewSearchService(repo, adapterRegistry)
+
 	// Initialize API
-	api := &API{repo: repo}
+	api := &API{repo: repo, searchService: searchService}
 
 	// Setup router
 	r := mux.NewRouter()
@@ -219,12 +363,15 @@ func main() {
 	apiRouter := r.PathPrefix("/api/v1").Subrouter()
 	apiRouter.HandleFunc("/health", api.handleHealthCheck).Methods("GET")
 	apiRouter.HandleFunc("/searches", api.handleGetSearches).Methods("GET")
+	apiRouter.HandleFunc("/searches", api.handleCreateSearch).Methods("POST")
+	apiRouter.HandleFunc("/searches/{searchId}", api.handleDeleteSearch).Methods("DELETE")
 	apiRouter.HandleFunc("/searches/{searchId}/products", api.handleGetSearchProducts).Methods("GET")
+	apiRouter.HandleFunc("/searches/{searchId}/products/{productId}", api.handleSetProductHidden).Methods("PATCH")
 
 	// Setup CORS
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"},
-		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"*"},
 		AllowCredentials: true,
 	})

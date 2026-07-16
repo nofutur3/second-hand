@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/gocolly/colly/v2"
+	"github.com/gocolly/colly/v2/storage"
 )
 
 // InzerujAdapter is the adapter for inzeruj.cz
@@ -43,6 +44,12 @@ func (a *InzerujAdapter) Search(ctx context.Context, keyword string) ([]domain.P
 	fmt.Printf("Inzeruj: Fetching %s\n", searchURL)
 
 	c := a.collector.Clone()
+	// Clone() shares the parent collector's visited-URL store by design
+	// (colly v2.3.0), which would otherwise make every search after the
+	// first one within this long-lived process fail with "already
+	// visited" for the exact same search URL. Give each call truly
+	// independent storage instead.
+	_ = c.SetStorage(&storage.InMemoryStorage{})
 
 	// Track product IDs
 	visitedIDs := make(map[string]bool)
@@ -150,6 +157,7 @@ func (a *InzerujAdapter) fetchProductDetails(ctx context.Context, url string) (d
 	}
 
 	c := a.collector.Clone()
+	_ = c.SetStorage(&storage.InMemoryStorage{}) // see Search()'s comment on why
 
 	// Try to extract from HTML if available
 	c.OnHTML("h1", func(e *colly.HTMLElement) {

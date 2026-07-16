@@ -77,10 +77,90 @@ paths:
                   keyword: "hemingway"
                   created_at: "2026-02-03T10:00:00Z"
                   updated_at: "2026-02-03T10:00:00Z"
+                  product_count: 12
                 - id: 2
                   keyword: "rypadlo"
                   created_at: "2026-02-03T11:00:00Z"
                   updated_at: "2026-02-03T11:00:00Z"
+                  product_count: 0
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - Searches
+      summary: Track a new keyword
+      description: |
+        Saves a new keyword to track. If the keyword is already tracked,
+        returns the existing search rather than erroring (creation is
+        idempotent). Responds as soon as the search is saved - it does not
+        wait for results. Matching listings are fetched in the background
+        right away, and again on every scheduled cron run afterwards.
+      operationId: createSearch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSearchRequest'
+            example:
+              keyword: "joy-con pair"
+      responses:
+        '201':
+          description: Search saved (or already existed)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Search'
+        '400':
+          description: Missing or invalid keyword
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /searches/{searchId}:
+    delete:
+      tags:
+        - Searches
+      summary: Stop tracking a search
+      description: |
+        Deletes a saved search. Previously scraped products are not
+        deleted - only this search's association with them.
+      operationId: deleteSearch
+      parameters:
+        - name: searchId
+          in: path
+          required: true
+          description: ID of the search
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      responses:
+        '204':
+          description: Search deleted
+        '400':
+          description: Invalid search ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Search not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '500':
           description: Internal server error
           content:
@@ -130,6 +210,62 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /searches/{searchId}/products/{productId}:
+    patch:
+      tags:
+        - Products
+      summary: Hide or unhide a product for a search
+      description: |
+        Marks a product irrelevant/incorrect for this search (or reverses
+        that). Nothing is deleted - the product stays in the database and
+        cron keeps scraping/diffing it normally; it's just left out of the
+        default product list until unhidden.
+      operationId: setProductHidden
+      parameters:
+        - name: searchId
+          in: path
+          required: true
+          description: ID of the search
+          schema:
+            type: integer
+            format: int64
+            example: 1
+        - name: productId
+          in: path
+          required: true
+          description: ID of the product
+          schema:
+            type: integer
+            format: int64
+            example: 42
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetProductHiddenRequest'
+      responses:
+        '204':
+          description: Updated
+        '400':
+          description: Invalid search or product ID, or invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: This product isn't linked to this search
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 components:
   schemas:
     Search:
@@ -159,6 +295,24 @@ components:
           format: date-time
           description: Timestamp when the search was last updated
           example: "2026-02-03T10:00:00Z"
+        product_count:
+          type: integer
+          description: |
+            Number of currently visible products for this search (excludes
+            ones marked hidden and ones no longer found in the marketplace).
+            Only present when listing searches, not on create/delete
+            responses.
+          example: 12
+
+    CreateSearchRequest:
+      type: object
+      required:
+        - keyword
+      properties:
+        keyword:
+          type: string
+          description: The keyword to track, 1-255 characters
+          example: "joy-con pair"
 
     Product:
       type: object
@@ -257,6 +411,28 @@ components:
           format: date-time
           description: Timestamp when the product was last updated
           example: "2026-02-03T10:00:00Z"
+        is_hidden:
+          type: boolean
+          description: Marked irrelevant/incorrect for this search by hand
+          example: false
+        is_active:
+          type: boolean
+          description: |
+            Still found in the most recent scrape for this search. False
+            means the listing has disappeared from the marketplace
+            (delisted/sold) - set automatically by the scheduled cron run,
+            never by hand.
+          example: true
+
+    SetProductHiddenRequest:
+      type: object
+      required:
+        - hidden
+      properties:
+        hidden:
+          type: boolean
+          description: true to hide (mark irrelevant/incorrect), false to unhide
+          example: true
 
     SearchWithProducts:
       type: object
@@ -273,7 +449,11 @@ components:
             $ref: '#/components/schemas/Product'
         total:
           type: integer
-          description: Total number of products
+          description: |
+            Number of currently visible products (excludes hidden and no-
+            longer-active ones - see Product.is_hidden/is_active). The
+            products array includes all of them regardless, so a client
+            can offer a "show hidden" toggle without a second request.
           example: 29
       example:
         search:

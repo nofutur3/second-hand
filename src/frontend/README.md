@@ -1,4 +1,4 @@
-# Second-Hand Shop Scraper - Frontend
+# Snoopy - Frontend
 
 A modern Nuxt.js frontend application for browsing search results from Czech second-hand marketplaces.
 

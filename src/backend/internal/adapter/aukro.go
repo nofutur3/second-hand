@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/gocolly/colly/v2"
+	"github.com/gocolly/colly/v2/storage"
 )
 
 // AukroAdapter is the adapter for aukro.cz
@@ -56,6 +57,12 @@ func (a *AukroAdapter) Search(_ context.Context, keyword string) ([]domain.Produ
 		fmt.Printf("Aukro: Fetching page %d: %s\n", page, pageURL)
 
 		c := a.collector.Clone()
+		// Clone() shares the parent collector's visited-URL store by
+		// design (colly v2.3.0), which would otherwise make every search
+		// after the first one within this long-lived process fail with
+		// "already visited" for the exact same page URLs. Give each call
+		// truly independent storage instead.
+		_ = c.SetStorage(&storage.InMemoryStorage{})
 		pageProducts := 0
 
 		// Look for all product cards using the custom element name

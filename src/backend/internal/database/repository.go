@@ -12,17 +12,22 @@ type Repository interface {
 	GetSearchByID(ctx context.Context, id int64) (*domain.Search, error)
 	GetSearchByKeyword(ctx context.Context, keyword string) (*domain.Search, error)
 	GetAllSearches(ctx context.Context) ([]domain.Search, error)
+	GetAllSearchesWithCounts(ctx context.Context) ([]SearchWithCount, error)
 	UpdateSearchLastChecked(ctx context.Context, searchID int64) error
 	SetGoodOfferConfig(ctx context.Context, searchID int64, maxPrice *float64, avgDiscountPct *float64) error
+	DeleteSearch(ctx context.Context, searchID int64) error
 
 	// Product operations
 	CreateProduct(ctx context.Context, product *domain.Product) error
 	UpdateProduct(ctx context.Context, product *domain.Product) error
 	GetProductByURL(ctx context.Context, url string) (*domain.Product, error)
 	GetProductsBySearchID(ctx context.Context, searchID int64) ([]domain.Product, error)
+	GetProductsBySearchIDWithStatus(ctx context.Context, searchID int64) ([]ProductWithStatus, error)
 
 	// Search-Product relationship
 	LinkProductToSearch(ctx context.Context, searchID, productID int64) error
+	MarkProductsInactive(ctx context.Context, searchID int64, productIDs []int64) error
+	SetProductHidden(ctx context.Context, searchID, productID int64, hidden bool) error
 
 	// Lifecycle
 	Close()
