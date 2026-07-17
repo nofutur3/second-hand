@@ -312,6 +312,30 @@ func respondError(w http.ResponseWriter, status int, message string, err error) 
 	respondJSON(w, status, response)
 }
 
+// newRouter wires up every route + CORS handling for the API. Split out
+// from main() so tests can exercise the exact routing table (method
+// matching, path params) without a running server or database.
+func newRouter(api *API) http.Handler {
+	r := mux.NewRouter()
+
+	apiRouter := r.PathPrefix("/api/v1").Subrouter()
+	apiRouter.HandleFunc("/health", api.handleHealthCheck).Methods("GET")
+	apiRouter.HandleFunc("/searches", api.handleGetSearches).Methods("GET")
+	apiRouter.HandleFunc("/searches", api.handleCreateSearch).Methods("POST")
+	apiRouter.HandleFunc("/searches/{searchId}", api.handleDeleteSearch).Methods("DELETE")
+	apiRouter.HandleFunc("/searches/{searchId}/products", api.handleGetSearchProducts).Methods("GET")
+	apiRouter.HandleFunc("/searches/{searchId}/products/{productId}", api.handleSetProductHidden).Methods("PATCH")
+
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"*"},
+		AllowCredentials: true,
+	})
+
+	return c.Handler(r)
+}
+
 func main() {
 	configFile := flag.String("config", "config.json", "Configuration file path")
 	flag.Parse()
@@ -355,28 +379,7 @@ func main() {
 
 	// Initialize API
 	api := &API{repo: repo, searchService: searchService}
-
-	// Setup router
-	r := mux.NewRouter()
-
-	// API routes
-	apiRouter := r.PathPrefix("/api/v1").Subrouter()
-	apiRouter.HandleFunc("/health", api.handleHealthCheck).Methods("GET")
-	apiRouter.HandleFunc("/searches", api.handleGetSearches).Methods("GET")
-	apiRouter.HandleFunc("/searches", api.handleCreateSearch).Methods("POST")
-	apiRouter.HandleFunc("/searches/{searchId}", api.handleDeleteSearch).Methods("DELETE")
-	apiRouter.HandleFunc("/searches/{searchId}/products", api.handleGetSearchProducts).Methods("GET")
-	apiRouter.HandleFunc("/searches/{searchId}/products/{productId}", api.handleSetProductHidden).Methods("PATCH")
-
-	// Setup CORS
-	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"*"},
-		AllowedMethods:   []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
-		AllowedHeaders:   []string{"*"},
-		AllowCredentials: true,
-	})
-
-	handler := c.Handler(r)
+	handler := newRouter(api)
 
 	// Get port from environment or use default
 	port := os.Getenv("API_PORT")
