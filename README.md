@@ -7,7 +7,7 @@ A Go application that scrapes multiple Czech second-hand marketplaces, stores re
 Real website scraping is challenging due to anti-bot protection, changing HTML structures, and legal considerations. This application includes **mock adapters** that demonstrate full functionality without accessing real sites.
 
 **For Testing/Demo:** Use `config.test.json` with mock adapters  
-**For Production:** Real sites require legal permission and site-specific configuration (see [TROUBLESHOOTING.md](TROUBLESHOOTING.md))
+**For Production:** Real sites require legal permission and site-specific configuration
 
 ## Features
 
@@ -22,15 +22,14 @@ Real website scraping is challenging due to anti-bot protection, changing HTML s
 
 ## Prerequisites
 
-- Go 1.25+
-- Docker and Docker Compose
-- PostgreSQL (via Docker)
+- Docker and Docker Compose — no local Go or Node toolchain needed, everything
+  (build, test, run) goes through the Makefile into Docker containers
 
 ## Quick Start
 
 1. **Clone and setup:**
    ```bash
-   # Install dependencies and start database
+   # Start the database, install dependencies
    make setup
    ```
 
@@ -42,7 +41,7 @@ Real website scraping is challenging due to anti-bot protection, changing HTML s
 
 3. **Test with mock adapters (recommended):**
    ```bash
-   go run ./cmd/search -config=config.test.json -keyword="hemingway"
+   docker compose run --rm backend-dev sh -c 'cd src/backend && go run ./cmd/search -config=config/config.test.json -keyword="hemingway"'
    ```
 
 4. **Or search real sites (may fail due to anti-bot protection):**
@@ -52,7 +51,7 @@ Real website scraping is challenging due to anti-bot protection, changing HTML s
 
 5. **Check for changes:**
    ```bash
-   go run ./cmd/cron -config=config.test.json -verbose
+   make run-cron VERBOSE=true
    ```
 
 ## Usage
@@ -63,13 +62,13 @@ Use mock adapters to demonstrate functionality without web scraping:
 
 ```bash
 # Search with mock data
-go run ./cmd/search -config=config.test.json -keyword="hemingway"
+docker compose run --rm backend-dev sh -c 'cd src/backend && go run ./cmd/search -config=config/config.test.json -keyword="hemingway"'
 
 # Check for changes
-go run ./cmd/cron -config=config.test.json -verbose
+make run-cron VERBOSE=true
 
 # Generate HTML report
-go run ./cmd/cron -config=config.test.json -output=html
+docker compose run --rm backend-dev sh -c 'cd src/backend && go run ./cmd/cron -config=config/config.test.json -output=html'
 ```
 
 ### Search Command
@@ -78,15 +77,9 @@ Search for products across all configured shops:
 
 ```bash
 # Basic search
-go run ./cmd/search -keyword="laptop"
+make run-search KEYWORD=laptop
 
 # Verbose output
-go run ./cmd/search -keyword="laptop" -verbose
-
-# HTML output
-go run ./cmd/search -keyword="laptop" -output=html -html-file=results.html
-
-# Using Makefile
 make run-search KEYWORD=laptop VERBOSE=true
 ```
 
@@ -96,32 +89,24 @@ Check saved searches for changes (meant for scheduled execution):
 
 ```bash
 # CLI output
-go run ./cmd/cron
+make run-cron
 
 # Verbose CLI output
-go run ./cmd/cron -verbose
+make run-cron VERBOSE=true
 
 # HTML output
-go run ./cmd/cron -output=html -html-file=changes.html
+make run-cron OUTPUT=html
 
 # Email notifications
-go run ./cmd/cron -output=email
-
-# Using Makefile
-make run-cron OUTPUT=html VERBOSE=true
+make run-cron OUTPUT=email
 ```
 
-### Schedule with Cron
-
-Add to your crontab to check for changes every hour:
-
-```bash
-0 * * * * cd /path/to/secondHand && /usr/local/go/bin/go run ./cmd/cron -output=email
-```
+In production this runs as a Kubernetes `CronJob` rather than a plain
+crontab entry — see "eBay Nintendo-Parts Watcher" below.
 
 ## Configuration
 
-### config.json
+### src/backend/config/config.json
 
 Configure which shops to scrape:
 
@@ -182,27 +167,30 @@ of the `-output` flag — it always runs, on top of whatever CLI/HTML/email
 output is also requested.
 
 In production this runs as a Kubernetes `CronJob` (`k8s/ebay-cronjob.yaml`,
-every 30 minutes) rather than the ad-hoc crontab example above; see
-`k8s/ebay-secret.yaml.example` for the secret it expects.
+every 30 minutes); see `k8s/ebay-secret.yaml.example` for the secret it
+expects.
 
 ## Project Structure
 
 ```
-secondHand/
-├── cmd/
-│   ├── search/          # Search CLI command
-│   └── cron/            # Cron CLI command
-├── internal/
-│   ├── adapter/         # Shop-specific adapters
-│   ├── config/          # Configuration management
-│   ├── database/        # Database layer
-│   ├── domain/          # Domain models and interfaces
-│   ├── output/          # Output formatters (CLI, HTML, Email)
-│   └── service/         # Business logic layer
-├── migrations/          # Database migrations
-├── config.json          # Shop configuration
-├── docker-compose.yml   # Docker configuration
-└── Makefile            # Build and run commands
+second-hand/
+├── src/
+│   ├── backend/
+│   │   ├── cmd/{search,cron,api}/   # CLI commands + HTTP API
+│   │   ├── internal/
+│   │   │   ├── adapter/             # Shop-specific adapters
+│   │   │   ├── config/              # Configuration management
+│   │   │   ├── database/            # Database layer
+│   │   │   ├── domain/              # Domain models and interfaces
+│   │   │   ├── output/              # Output formatters (CLI, HTML, Email, Telegram)
+│   │   │   └── service/             # Business logic layer
+│   │   ├── migrations/              # Database migrations
+│   │   └── config/                  # config.json / config.test.json
+│   └── frontend/                    # Nuxt 3 app
+├── docker/{api,backend,cron,frontend}/Dockerfile
+├── k8s/                             # Kubernetes manifests
+├── compose.yaml
+└── Makefile                         # Build and run commands (Docker-wrapped)
 ```
 
 ## Development
@@ -242,12 +230,8 @@ make docker-clean
 
 ### Migrations
 
-Migrations are automatically applied when running commands. Manual migration:
-
-```bash
-# Migrations are in migrations/ directory
-# They run automatically on startup
-```
+Migrations live in `src/backend/migrations/` and run automatically on
+startup of `search`, `cron`, and `api` — nothing to run by hand.
 
 ## Output Formats
 
@@ -269,7 +253,7 @@ Default format with colored output showing product details:
 Styled HTML report with tables and colors:
 
 ```bash
-go run ./cmd/search -keyword=laptop -output=html -html-file=results.html
+docker compose run --rm backend-dev sh -c 'cd src/backend && go run ./cmd/search -config=config/config.json -keyword=laptop -output=html -html-file=results.html'
 ```
 
 ### Email
@@ -277,7 +261,7 @@ go run ./cmd/search -keyword=laptop -output=html -html-file=results.html
 HTML email sent via SMTP:
 
 ```bash
-go run ./cmd/cron -output=email
+make run-cron OUTPUT=email
 ```
 
 ## Testing
@@ -285,15 +269,15 @@ go run ./cmd/cron -output=email
 Run tests with coverage:
 
 ```bash
-go test -v -race -coverprofile=coverage.txt ./...
+make test
 ```
 
 ## Adding New Shops
 
-1. Create new adapter in `internal/adapter/newshop.go`
+1. Create new adapter in `src/backend/internal/adapter/newshop.go`
 2. Implement `ShopAdapter` interface
-3. Register in `internal/adapter/registry.go`
-4. Add to `config.json`
+3. Register in `src/backend/internal/adapter/registry.go`
+4. Add to `src/backend/config/config.json`
 
 Example:
 

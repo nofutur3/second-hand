@@ -6,11 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A Go application that scrapes Czech second-hand marketplaces (Bazos, Sbazar, Avizo, Inzeruj, Aukro), stores listings in PostgreSQL, and tracks price/availability changes over time. Three entry points share the same backend: a `search` CLI, a `cron` change-detector, and an HTTP `api` served by a Nuxt 3 frontend. There's also an eBay-specific watcher (Browse API adapter + Telegram "good offer" notifications) layered on top of the same pipeline — see "eBay watcher" below.
 
-## Important: paths differ from the README
+## Important: module root vs. source layout
 
-The Go module root is the repo root (`module secondHand` in `go.mod`), but all Go source lives under `src/backend/`, not under a top-level `cmd/`/`internal/` as the README describes in places. Use the real paths shown below, e.g. `./src/backend/cmd/search`. The Makefile's targets already use these real paths and build into `./bin/` (gitignored) — `make build`/`make test`/`make run-search` etc. are safe to trust.
-
-`./src/...` and `./...` are equivalent for build/test purposes — the `temp/` directory of scratch/debug artifacts and the root-level `api`/`cron`/`search` binaries that used to break this have been removed.
+The Go module root is the repo root (`module secondHand` in `go.mod`), but all Go source lives under `src/backend/` (e.g. `./src/backend/cmd/search`), not under a top-level `cmd/`/`internal/`. `./src/...` and `./...` are equivalent for build/test purposes. The Makefile's targets already use the real paths and build into `./bin/` (gitignored) — `make build`/`make test`/`make run-search` etc. are safe to trust.
 
 ## Common commands
 
