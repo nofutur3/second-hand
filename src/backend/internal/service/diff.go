@@ -16,14 +16,14 @@ func NewDiffService(repo domain2.Repository) *DiffService {
 	return &DiffService{repo: repo}
 }
 
-// GenerateDiff generates a diff for a search
-func (s *DiffService) GenerateDiff(ctx context.Context, searchID int64, currentProducts []domain2.Product) ([]domain2.ProductDiff, error) {
-	// Get previous products
-	previousProducts, err := s.repo.GetProductsBySearchID(ctx, searchID)
-	if err != nil {
-		return nil, fmt.Errorf("failed to get previous products: %w", err)
-	}
-
+// GenerateDiff compares previousProducts (the search's state as of before
+// this run's scrape) against currentProducts (what this run just found).
+// previousProducts must be fetched by the caller *before* running the
+// scrape that produced currentProducts - GetDiffForAllSearches's
+// SearchService.Search call links every found product into the same
+// search_products rows this would otherwise read, which would make every
+// current product look "previously seen" and erase DiffTypeNew entirely.
+func (s *DiffService) GenerateDiff(ctx context.Context, searchID int64, previousProducts, currentProducts []domain2.Product) ([]domain2.ProductDiff, error) {
 	// Create maps for efficient lookup
 	previousMap := make(map[string]domain2.Product)
 	for _, p := range previousProducts {
@@ -104,6 +104,14 @@ func (s *DiffService) GetDiffForAllSearches(ctx context.Context, searchService *
 	for _, search := range searches {
 		fmt.Printf("Checking search: %s\n", search.Keyword)
 
+		// Snapshot state before the scrape below links newly-found
+		// products into these same rows (see GenerateDiff's comment).
+		previousProducts, err := s.repo.GetProductsBySearchID(ctx, search.ID)
+		if err != nil {
+			fmt.Printf("Failed to get previous products for '%s': %v\n", search.Keyword, err)
+			continue
+		}
+
 		// Perform new search
 		currentProducts, err := searchService.Search(ctx, search.Keyword)
 		if err != nil {
@@ -112,7 +120,7 @@ func (s *DiffService) GetDiffForAllSearches(ctx context.Context, searchService *
 		}
 
 		// Generate diff
-		diffs, err := s.GenerateDiff(ctx, search.ID, currentProducts)
+		diffs, err := s.GenerateDiff(ctx, search.ID, previousProducts, currentProducts)
 		if err != nil {
 			fmt.Printf("Failed to generate diff for '%s': %v\n", search.Keyword, err)
 			continue
