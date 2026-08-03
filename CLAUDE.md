@@ -10,42 +10,42 @@ A Go application that scrapes Czech second-hand marketplaces (Bazos, Sbazar, Avi
 
 The Go module root is the repo root (`module secondHand` in `go.mod`), but all Go source lives under `src/backend/`, not under a top-level `cmd/`/`internal/` as the README describes in places. Use the real paths shown below, e.g. `./src/backend/cmd/search`. The Makefile's targets already use these real paths and build into `./bin/` (gitignored) — `make build`/`make test`/`make run-search` etc. are safe to trust.
 
-`go build ./...` / `go test ./...` from the repo root work fine — the `temp/` directory of scratch/debug artifacts and the root-level `api`/`cron`/`search` binaries that used to break this have been removed. `./src/...` and `./...` are now equivalent for build/test purposes.
+`./src/...` and `./...` are equivalent for build/test purposes — the `temp/` directory of scratch/debug artifacts and the root-level `api`/`cron`/`search` binaries that used to break this have been removed.
 
 ## Common commands
 
-Build and test can run from the repo root. **The three binaries (`search`, `cron`, `api`) must be run with CWD = `src/backend/`** — each hardcodes `"migrations"` as a path relative to the process's working directory (and defaults `-config` to `config.json`), so running them from the repo root will fail once they get past the DB connection step.
+No Go toolchain needs to be installed on the host: every `make` target below runs Go inside the `backend-dev` container (see `compose.yaml`), bind-mounting the repo — call `make <target>`, not `go build`/`go test`/`go run` directly. **The three binaries (`search`, `cron`, `api`) run with CWD = `src/backend/`** — each hardcodes `"migrations"` as a path relative to the process's working directory (and defaults `-config` to `config.json`); the Makefile's `run-*` targets already `cd` into place before invoking them.
 
 ```bash
-# Build (from repo root)
-go build ./src/...
+# Build all three binaries into ./bin/
+make build
 
-# Test everything (from repo root)
-go test ./src/...
-go test -v -race -coverprofile=coverage.txt -covermode=atomic ./src/...
+# Test everything
+make test
 
-# Test a single package / single test
-go test ./src/backend/internal/adapter/...
-go test ./src/backend/internal/adapter/ -run TestName -v
+# Lint (gofmt/goimports check)
+make lint
+
+# Test a single package / single test (drop to the container directly)
+docker compose run --rm --no-deps backend-dev go test ./src/backend/internal/adapter/... -run TestName -v
 
 # Search CLI (mock adapters — no network, no anti-bot issues)
-cd src/backend && go run ./cmd/search -config=config/config.test.json -keyword="hemingway"
+docker compose run --rm backend-dev sh -c 'cd src/backend && go run ./cmd/search -config=config/config.test.json -keyword="hemingway"'
 
 # Search CLI against real shop sites (may fail — anti-bot protection)
-cd src/backend && go run ./cmd/search -config=config/config.json -keyword="laptop"
+make run-search KEYWORD=laptop
 
 # Cron (checks saved searches for changes; output: cli|html|email)
-cd src/backend && go run ./cmd/cron -config=config/config.test.json -verbose -output=cli
+make run-cron OUTPUT=html VERBOSE=true
 
-# API server
-cd src/backend && go run ./cmd/api
+# API server (standalone, not the `api` compose service - useful for iterating without rebuilding its image)
+make run-api
 
-# Frontend (Nuxt 3)
-cd src/frontend && npm install && npm run dev      # http://localhost:3000
-cd src/frontend && npm run build
+# Frontend (Nuxt 3) - hot reload, no host npm needed
+make frontend-dev      # http://localhost:8092
 
 # Full stack via Docker
-docker compose up -d --build   # postgres:5432, api:8091, frontend:8092, adminer:8099
+make up   # postgres:5432, api:8091, frontend:8092, adminer:8099
 ```
 
 Config files live in `src/backend/config/`: `config.json` lists real shop URLs, `config.test.json` lists `mock-*` URLs that route to the in-memory `MockAdapter` (no real HTTP requests — this is the reliable way to exercise the full pipeline). DB/SMTP/scraping settings come from environment variables (`.env`, see `.env.example`), not the JSON config.

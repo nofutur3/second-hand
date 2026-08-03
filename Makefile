@@ -1,21 +1,26 @@
-.PHONY: help build test lint run-search run-cron run-api docker-up docker-down docker-clean frontend-dev clean build-api deps setup
+.PHONY: help build test lint run-search run-cron run-api up down docker-clean frontend-dev clean build-api deps setup
 
-BACKEND_DIR := src/backend
+# --no-deps: build/lint/deps don't touch the database, so don't require
+# postgres to be reachable just to run them. Targets that do need the
+# database (test, run-*) use BACKEND_RUN_DB instead, which lets compose
+# start postgres via backend-dev's depends_on.
+BACKEND_RUN := docker compose run --rm --no-deps backend-dev
+BACKEND_RUN_DB := docker compose run --rm backend-dev
 
 help:
 	@echo "Available commands:"
-	@echo "  make build        - Build search, cron, and API binaries"
-	@echo "  make build-api    - Build API server binary"
+	@echo "  make build        - Build search, cron, and API binaries (Docker)"
+	@echo "  make build-api    - Build API server binary (Docker)"
 	@echo "  make test         - Run tests (scoped to src/..., see CLAUDE.md)"
-	@echo "  make lint         - Vet code (scoped to src/..., see CLAUDE.md)"
+	@echo "  make lint         - Check gofmt/goimports formatting (scoped to src/..., see CLAUDE.md)"
 	@echo "  make run-search   - Run search command (requires KEYWORD variable)"
 	@echo "  make run-cron     - Run cron command"
 	@echo "  make run-api      - Run API server locally"
-	@echo "  make docker-up    - Start PostgreSQL + API + Frontend via Docker Compose"
-	@echo "  make docker-down  - Stop Docker containers"
+	@echo "  make up           - Start PostgreSQL + API + Frontend via Docker Compose"
+	@echo "  make down         - Stop Docker containers"
 	@echo "  make docker-clean - Stop containers and remove volumes"
 	@echo "  make frontend-dev - Hot-reloading frontend dev server (Docker, no local npm needed)"
-	@echo "  make setup        - Quick start: docker-up + deps"
+	@echo "  make setup        - Quick start: up + deps"
 	@echo "  make clean        - Clean build artifacts"
 	@echo ""
 	@echo "Example: make run-search KEYWORD=laptop"
@@ -29,35 +34,40 @@ help:
 
 build:
 	@echo "Building search command..."
-	go build -o bin/search ./src/backend/cmd/search
+	$(BACKEND_RUN) go build -o bin/search ./src/backend/cmd/search
 	@echo "Building cron command..."
-	go build -o bin/cron ./src/backend/cmd/cron
+	$(BACKEND_RUN) go build -o bin/cron ./src/backend/cmd/cron
 	@echo "Building API server..."
-	go build -o bin/api ./src/backend/cmd/api
+	$(BACKEND_RUN) go build -o bin/api ./src/backend/cmd/api
 	@echo "Build complete!"
 
 build-api:
 	@echo "Building API server..."
-	go build -o bin/api ./src/backend/cmd/api
+	$(BACKEND_RUN) go build -o bin/api ./src/backend/cmd/api
 	@echo "API build complete!"
-
-# api/search/cron all hardcode "migrations" relative to the process's
-# working directory, so they must run with CWD=src/backend (see CLAUDE.md)
-# - hence `cd $(BACKEND_DIR) &&` below. Their "-config" default
-# ("config.json") also only resolves from CWD=src/backend if pointed at
-# config/config.json explicitly - the bare default is only correct inside
-# the Docker images, which flatten config.json into the runtime root.
-run-api: build-api
-	@echo "Starting API server on port 8091..."
-	cd $(BACKEND_DIR) && $(CURDIR)/bin/api -config=config/config.json
 
 test:
 	@echo "Running tests..."
-	go test -v -race -coverprofile=coverage.txt -covermode=atomic ./src/...
+	$(BACKEND_RUN_DB) sh -c 'go vet ./src/... && go test -v -race -coverprofile=coverage.txt -covermode=atomic ./src/...'
 
 lint:
-	@echo "Vetting code..."
-	go vet ./src/...
+	@echo "Checking gofmt/goimports formatting..."
+	$(BACKEND_RUN) sh -c '\
+		files=$$(find src -name "*.go"); \
+		bad=$$(gofmt -l $$files; goimports -l $$files); \
+		if [ -n "$$bad" ]; then echo "$$bad"; exit 1; fi'
+
+# api/search/cron all hardcode "migrations" relative to the process's
+# working directory, so they must run with CWD=src/backend (see
+# CLAUDE.md) - hence `cd src/backend &&` below. Their "-config" default
+# ("config.json") also only resolves from CWD=src/backend if pointed at
+# config/config.json explicitly - the bare default is only correct
+# inside the Docker images, which flatten config.json into the runtime
+# root. --service-ports publishes 8091 to the host (docker compose run
+# doesn't by default).
+run-api:
+	@echo "Starting API server on port 8091..."
+	docker compose run --rm --service-ports backend-dev sh -c 'cd src/backend && go run ./cmd/api -config=config/config.json'
 
 run-search:
 	@if [ -z "$(KEYWORD)" ]; then \
@@ -65,25 +75,25 @@ run-search:
 		echo "Usage: make run-search KEYWORD=laptop"; \
 		exit 1; \
 	fi
-	cd $(BACKEND_DIR) && go run ./cmd/search -config=config/config.json -keyword="$(KEYWORD)" $(if $(VERBOSE),-verbose=$(VERBOSE))
+	$(BACKEND_RUN_DB) sh -c 'cd src/backend && go run ./cmd/search -config=config/config.json -keyword="$(KEYWORD)" $(if $(VERBOSE),-verbose=$(VERBOSE))'
 
 run-cron:
-	cd $(BACKEND_DIR) && go run ./cmd/cron -config=config/config.json $(if $(VERBOSE),-verbose=$(VERBOSE)) $(if $(OUTPUT),-output=$(OUTPUT))
+	$(BACKEND_RUN_DB) sh -c 'cd src/backend && go run ./cmd/cron -config=config/config.json $(if $(VERBOSE),-verbose=$(VERBOSE)) $(if $(OUTPUT),-output=$(OUTPUT))'
 
-docker-up:
+up:
 	@echo "Starting PostgreSQL, API, and frontend via Docker Compose..."
-	docker-compose up -d --build
+	docker compose up -d --build
 	@echo "Waiting for services to be ready..."
 	@sleep 3
 	@echo "Up! Frontend: http://localhost:8092  API: http://localhost:8091/api/v1  DB Admin: http://localhost:8099"
 
-docker-down:
+down:
 	@echo "Stopping Docker containers..."
-	docker-compose down
+	docker compose down
 
 docker-clean:
 	@echo "Stopping and removing Docker containers and volumes..."
-	docker-compose down -v
+	docker compose down -v
 
 # Runs Nuxt's own dev server (HMR) inside a container - never needs npm
 # on the host. Source is bind-mounted; node_modules is a named volume
@@ -91,22 +101,22 @@ docker-clean:
 # host install.
 frontend-dev:
 	@echo "Starting frontend dev server (Docker) on port 8092..."
-	docker-compose --profile dev up --build frontend-dev
+	docker compose --profile dev up --build frontend-dev
 
+# Runs in the container (not the host) because build artifacts are
+# owned by the container's root user, which the host user can't delete
+# directly.
 clean:
 	@echo "Cleaning build artifacts..."
-	rm -rf bin/
-	rm -f coverage.txt
-	rm -f *.coverprofile
+	$(BACKEND_RUN) sh -c 'rm -rf bin coverage.txt *.coverprofile'
 	@echo "Clean complete!"
 
 deps:
 	@echo "Downloading dependencies..."
-	go mod download
-	go mod tidy
+	$(BACKEND_RUN) sh -c 'go mod download && go mod tidy'
 
 # Quick start - sets up everything
-setup: docker-up deps
+setup: up deps
 	@echo "Waiting for database to be ready..."
 	@sleep 5
 	@echo "Setup complete! You can now run: make run-search KEYWORD=laptop"

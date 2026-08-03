@@ -1,0 +1,11 @@
+.git/
+bin/
+*.test
+*.out
+.env
+coverage.txt
+*.coverprofile
+src/frontend/node_modules/
+src/frontend/.output/
+src/frontend/.nuxt/
+k8s/*-secret.yaml

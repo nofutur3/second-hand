@@ -6,3 +6,7 @@ coverage.txt
 *.coverprofile
 /k8s/postgres-secret.yaml
 /k8s/ebay-secret.yaml
+
+# Debug HTML dumps written by some scraper adapters when run against
+# real shop sites (see internal/adapter/{bazos,aukro,avizo}.go)
+/src/backend/temp/
