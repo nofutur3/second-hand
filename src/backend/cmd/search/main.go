@@ -17,6 +17,20 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// goodOfferPointers converts the -max-price/-avg-discount-pct flag values
+// into the optional pointers SetGoodOfferConfig expects, where 0 means
+// "flag not set" (there's no valid ceiling or discount % of exactly 0, so
+// it's an unambiguous sentinel).
+func goodOfferPointers(maxPrice, avgDiscountPct float64) (maxPricePtr, avgDiscountPtr *float64) {
+	if maxPrice != 0 {
+		maxPricePtr = &maxPrice
+	}
+	if avgDiscountPct != 0 {
+		avgDiscountPtr = &avgDiscountPct
+	}
+	return maxPricePtr, avgDiscountPtr
+}
+
 func main() {
 	// Command line flags
 	keyword := flag.String("keyword", "", "Search keyword (required)")
@@ -95,13 +109,7 @@ func main() {
 		if err != nil {
 			log.Fatalf("Failed to look up search for good-offer config: %v", err)
 		}
-		var maxPricePtr, avgDiscountPtr *float64
-		if *maxPrice != 0 {
-			maxPricePtr = maxPrice
-		}
-		if *avgDiscountPct != 0 {
-			avgDiscountPtr = avgDiscountPct
-		}
+		maxPricePtr, avgDiscountPtr := goodOfferPointers(*maxPrice, *avgDiscountPct)
 		if err := repo.SetGoodOfferConfig(ctx, search.ID, maxPricePtr, avgDiscountPtr); err != nil {
 			log.Fatalf("Failed to set good-offer config: %v", err)
 		}
