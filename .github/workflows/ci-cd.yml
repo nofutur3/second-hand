@@ -16,11 +16,11 @@ jobs:
         with:
           go-version: '1.25'
 
-      - name: Vet
-        run: go vet ./src/...
+      - name: Lint
+        run: make lint
 
       - name: Test
-        run: go test -v -race -coverprofile=coverage.txt -covermode=atomic ./src/...
+        run: make test
 
   build:
     name: Build & Push

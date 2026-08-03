@@ -1,4 +1,4 @@
-.PHONY: help build test run-search run-cron run-api docker-up docker-down docker-clean frontend-dev clean build-api deps setup
+.PHONY: help build test lint run-search run-cron run-api docker-up docker-down docker-clean frontend-dev clean build-api deps setup
 
 BACKEND_DIR := src/backend
 
@@ -7,6 +7,7 @@ help:
 	@echo "  make build        - Build search, cron, and API binaries"
 	@echo "  make build-api    - Build API server binary"
 	@echo "  make test         - Run tests (scoped to src/..., see CLAUDE.md)"
+	@echo "  make lint         - Vet code (scoped to src/..., see CLAUDE.md)"
 	@echo "  make run-search   - Run search command (requires KEYWORD variable)"
 	@echo "  make run-cron     - Run cron command"
 	@echo "  make run-api      - Run API server locally"
@@ -53,6 +54,10 @@ run-api: build-api
 test:
 	@echo "Running tests..."
 	go test -v -race -coverprofile=coverage.txt -covermode=atomic ./src/...
+
+lint:
+	@echo "Vetting code..."
+	go vet ./src/...
 
 run-search:
 	@if [ -z "$(KEYWORD)" ]; then \
