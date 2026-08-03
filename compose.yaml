@@ -19,6 +19,34 @@ services:
     networks:
       - secondhand_network
 
+  # Dev toolchain container for build/test/lint/run-* (see Makefile) -
+  # never started by plain `docker compose up`, only via
+  # `docker compose run --rm backend-dev <command>`. Bind-mounts the
+  # repo so edits take effect immediately; go module/build caches are
+  # named volumes so the host doesn't need Go installed at all.
+  backend-dev:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    container_name: secondhand_backend_dev
+    working_dir: /app
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: secondhand
+      DB_PASSWORD: secondhand_dev
+      DB_NAME: secondhand
+      DB_SSLMODE: disable
+    volumes:
+      - .:/app
+      - go_mod_cache:/go/pkg/mod
+      - go_build_cache:/root/.cache/go-build
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - secondhand_network
+
   api:
     build:
       context: .
@@ -100,6 +128,8 @@ services:
 volumes:
   postgres_data:
   frontend_node_modules:
+  go_mod_cache:
+  go_build_cache:
 
 networks:
   secondhand_network:

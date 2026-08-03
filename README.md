@@ -222,11 +222,11 @@ make test
 ### Docker Commands
 
 ```bash
-# Start PostgreSQL
-make docker-up
+# Start PostgreSQL, API, and frontend
+make up
 
-# Stop PostgreSQL
-make docker-down
+# Stop containers
+make down
 
 # Clean (remove volumes)
 make docker-clean
