@@ -67,6 +67,17 @@ func (r *Registry) createAdapter(url string, delayMS, timeoutSec int) domain.Sho
 	return nil
 }
 
+// NewRegistryFromAdapters builds a Registry directly from a fixed set of
+// adapters, bypassing config-based construction. Meant for tests that
+// need deterministic adapters without a shop URL/hostname to match.
+func NewRegistryFromAdapters(adapters ...domain.ShopAdapter) *Registry {
+	r := &Registry{adapters: make(map[string]domain.ShopAdapter, len(adapters))}
+	for _, a := range adapters {
+		r.adapters[a.Name()] = a
+	}
+	return r
+}
+
 // GetAdapter returns an adapter by name
 func (r *Registry) GetAdapter(name string) (domain.ShopAdapter, error) {
 	adapter, ok := r.adapters[name]
