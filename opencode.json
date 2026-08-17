@@ -5,6 +5,9 @@
     ".claude/workflow/AGENTS.md",
     ".claude/workflow/rules/*.md"
   ],
+  "skills": {
+    "paths": [".claude/workflow/skills"]
+  },
   "provider": {
     "local": {
       "npm": "@ai-sdk/openai-compatible",
