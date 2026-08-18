@@ -20,7 +20,7 @@ spec:
             - name: registry-nofutur3
           containers:
             - name: cron
-              image: registry.nofutur3.com/secondhand-cron:latest
+              image: registry.nofutur3.com/secondhand-cron:sha-74e68913adf77e6554fc35c2f42701c80bbf9f8f
               env:
                 - name: DB_HOST
                   value: secondhand-postgres
