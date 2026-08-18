@@ -6,9 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A Go application that scrapes Czech second-hand marketplaces (Bazos, Sbazar, Avizo, Inzeruj, Aukro), stores listings in PostgreSQL, and tracks price/availability changes over time. Three entry points share the same backend: a `search` CLI, a `cron` change-detector, and an HTTP `api` served by a Nuxt 3 frontend. There's also an eBay-specific watcher (Browse API adapter + Telegram "good offer" notifications) layered on top of the same pipeline — see "eBay watcher" below.
 
-## Important: module root vs. source layout
+## Important: module root vs. repo root
 
-The Go module root is the repo root (`module secondHand` in `go.mod`), but all Go source lives under `src/backend/` (e.g. `./src/backend/cmd/search`), not under a top-level `cmd/`/`internal/`. `./src/...` and `./...` are equivalent for build/test purposes. The Makefile's targets already use the real paths and build into `./bin/` (gitignored) — `make build`/`make test`/`make run-search` etc. are safe to trust.
+The Go module root is `src/backend/` (`module secondHand` in `src/backend/go.mod`), not the repo root — packages are referenced as `./cmd/search` etc. from within `src/backend/`, not `./src/backend/cmd/search` from the repo root. The Makefile's targets already `cd src/backend` before invoking `go` and build into `../../bin/` (gitignored, so binaries land at repo-root `./bin/`) — `make build`/`make test`/`make run-search` etc. are safe to trust.
 
 ## Common commands
 
@@ -25,7 +25,7 @@ make test
 make lint
 
 # Test a single package / single test (drop to the container directly)
-docker compose run --rm --no-deps backend-dev go test ./src/backend/internal/adapter/... -run TestName -v
+docker compose run --rm --no-deps backend-dev sh -c 'cd src/backend && go test ./internal/adapter/... -run TestName -v'
 
 # Search CLI (mock adapters — no network, no anti-bot issues)
 docker compose run --rm backend-dev sh -c 'cd src/backend && go run ./cmd/search -config=config/config.test.json -keyword="hemingway"'
@@ -66,6 +66,6 @@ Two tables plus a join table, defined in `src/backend/migrations/001_initial_sch
 
 ## eBay watcher
 
-On top of the generic scrape/diff pipeline, `internal/adapter/ebay.go` (`EbayAdapter`, Browse API OAuth2 client-credentials, shop name `ebay.com`) and `internal/output/telegram.go` (`TelegramNotifier`) implement a "good offer" alert: `cmd/cron`, after computing diffs as usual, separately evaluates each new/price-dropped `ebay.com` listing against its search's `max_price`/`avg_discount_pct` (`internal/service/goodoffer.go`'s `EvaluateGoodOffer`, either threshold sufficient, neither configured means silent) and sends a Telegram message on a match — this runs unconditionally, independent of `cmd/cron`'s `-output` flag, not as another output-format case. Thresholds are set per saved search via `cmd/search -max-price=... -avg-discount-pct=...` (not through `config.json`, which only configures which shop *adapters* are active). Config: `EBAY_CLIENT_ID`/`EBAY_CLIENT_SECRET`/`EBAY_API_BASE` and `TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID`/`TELEGRAM_API_BASE` env vars (see `.env.example`). Deployed as its own Kubernetes `CronJob` (`k8s/ebay-cronjob.yaml`, every 30 minutes, dedicated `docker/cron/Dockerfile` image) rather than folded into the `api` deployment; secrets via `k8s/ebay-secret.yaml.example`.
+On top of the generic scrape/diff pipeline, `internal/adapter/ebay.go` (`EbayAdapter`, Browse API OAuth2 client-credentials, shop name `ebay.com`) and `internal/output/telegram.go` (`TelegramNotifier`) implement a "good offer" alert: `cmd/cron`, after computing diffs as usual, separately evaluates each new/price-dropped `ebay.com` listing against its search's `max_price`/`avg_discount_pct` (`internal/service/goodoffer.go`'s `EvaluateGoodOffer`, either threshold sufficient, neither configured means silent) and sends a Telegram message on a match — this runs unconditionally, independent of `cmd/cron`'s `-output` flag, not as another output-format case. Thresholds are set per saved search via `cmd/search -max-price=... -avg-discount-pct=...` (not through `config.json`, which only configures which shop *adapters* are active). Config: `EBAY_CLIENT_ID`/`EBAY_CLIENT_SECRET`/`EBAY_API_BASE` and `TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID`/`TELEGRAM_API_BASE` env vars (see `.env.example`). Deployed as its own Kubernetes `CronJob` (every 30 minutes, dedicated `docker/cron/Dockerfile` image) rather than folded into the `api` deployment; manifests and secret docs live in `nofutur3/osiris-cluster`'s `secondhand/` directory, not in this repo — this repo's CI only builds/pushes images and bumps the image tag there.
 
 @.claude/workflow/CLAUDE.md

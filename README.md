@@ -166,9 +166,9 @@ bot (`TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID` above). This is independent
 of the `-output` flag — it always runs, on top of whatever CLI/HTML/email
 output is also requested.
 
-In production this runs as a Kubernetes `CronJob` (`k8s/ebay-cronjob.yaml`,
-every 30 minutes); see `k8s/ebay-secret.yaml.example` for the secret it
-expects.
+In production this runs as a Kubernetes `CronJob` (every 30 minutes); see
+`nofutur3/osiris-cluster`'s `secondhand/ebay-cronjob.yaml` and
+`secondhand/ebay-secret.yaml.example` for the secret it expects.
 
 ## Project Structure
 
@@ -188,7 +188,6 @@ second-hand/
 │   │   └── config/                  # config.json / config.test.json
 │   └── frontend/                    # Nuxt 3 app
 ├── docker/{api,backend,cron,frontend}/Dockerfile
-├── k8s/                             # Kubernetes manifests
 ├── compose.yaml
 └── Makefile                         # Build and run commands (Docker-wrapped)
 ```
