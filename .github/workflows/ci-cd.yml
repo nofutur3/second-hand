@@ -106,5 +106,9 @@ jobs:
             echo "No image change, nothing to deploy."
             exit 0
           fi
-          git commit -m "deploy: sha-${{ github.sha }} [skip ci]"
+          # No [skip ci]: branch protection requires the "CI" status check to
+          # have run on this exact commit before main will accept the push.
+          # The diff-check above already makes this idempotent, so the CI run
+          # this push triggers will find nothing to deploy and stop there.
+          git commit -m "deploy: sha-${{ github.sha }}"
           git push
