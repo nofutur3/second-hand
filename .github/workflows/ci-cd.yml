@@ -84,13 +84,16 @@ jobs:
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     permissions:
       contents: write
+      pull-requests: write
+    env:
+      GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
 
       # osiris runs Flux (GitOps) watching this repo's k8s/ directory directly
       # (see apps/second-hand/source.yaml in nofutur3/osiris-cluster) - no cluster
-      # credentials here. Bumping the image tag in-repo and pushing is the deploy;
-      # Flux reconciles it onto the cluster within ~1 minute on its own.
+      # credentials here. Bumping the image tag in-repo and landing it on main is
+      # the deploy; Flux reconciles it onto the cluster within ~1 minute on its own.
       - name: Pin manifests to this build's image
         run: |
           SHA=${{ github.sha }}
@@ -98,7 +101,12 @@ jobs:
           sed -i "s#registry.nofutur3.com/secondhand-frontend:.*#registry.nofutur3.com/secondhand-frontend:sha-$SHA#" k8s/frontend-deployment.yaml
           sed -i "s#registry.nofutur3.com/secondhand-cron:.*#registry.nofutur3.com/secondhand-cron:sha-$SHA#" k8s/ebay-cronjob.yaml
 
-      - name: Commit and push
+      # main is protected and requires the "CI" status check to pass before any
+      # ref update - including a direct bot push - so the bot's GITHUB_TOKEN can
+      # never push straight to main (the check can't exist on a commit before
+      # that commit exists). Going through a PR + auto-merge instead: the PR's
+      # own "CI" run satisfies the required check, then GitHub merges it for us.
+      - name: Open deploy PR and enable auto-merge
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -107,9 +115,11 @@ jobs:
             echo "No image change, nothing to deploy."
             exit 0
           fi
-          # No [skip ci]: branch protection requires the "CI" status check to
-          # have run on this exact commit before main will accept the push.
-          # The diff-check above already makes this idempotent, so the CI run
-          # this push triggers will find nothing to deploy and stop there.
+          BRANCH="deploy/sha-${{ github.sha }}"
+          git checkout -b "$BRANCH"
           git commit -m "deploy: sha-${{ github.sha }}"
-          git push
+          git push origin "$BRANCH"
+          gh pr create --base main --head "$BRANCH" \
+            --title "deploy: sha-${{ github.sha }}" \
+            --body "Automated image-tag bump for build ${{ github.sha }}."
+          gh pr merge "$BRANCH" --auto --squash --delete-branch
