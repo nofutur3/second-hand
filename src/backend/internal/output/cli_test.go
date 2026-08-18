@@ -1,7 +1,7 @@
 package output
 
 import (
-	"secondHand/src/backend/internal/domain"
+	"secondHand/internal/domain"
 	"strings"
 	"testing"
 	"time"

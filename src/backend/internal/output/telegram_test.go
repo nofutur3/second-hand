@@ -8,8 +8,8 @@ import (
 	"strings"
 	"testing"
 
-	"secondHand/src/backend/internal/config"
-	"secondHand/src/backend/internal/domain"
+	"secondHand/internal/config"
+	"secondHand/internal/domain"
 )
 
 func TestTelegramNotifier_SendGoodOffer(t *testing.T) {

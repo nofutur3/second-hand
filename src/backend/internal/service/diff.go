@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
-	domain2 "secondHand/src/backend/internal/domain"
+	domain2 "secondHand/internal/domain"
 )
 
 // DiffService handles diff generation between searches

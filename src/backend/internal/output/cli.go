@@ -2,7 +2,7 @@ package output
 
 import (
 	"fmt"
-	"secondHand/src/backend/internal/domain"
+	"secondHand/internal/domain"
 	"strings"
 )
 

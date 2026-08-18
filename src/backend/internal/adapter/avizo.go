@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"os"
 	"regexp"
-	"secondHand/src/backend/internal/domain"
+	"secondHand/internal/domain"
 	"strings"
 	"time"
 

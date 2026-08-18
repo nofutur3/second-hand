@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"secondHand/src/backend/internal/config"
-	"secondHand/src/backend/internal/domain"
+	"secondHand/internal/config"
+	"secondHand/internal/domain"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )

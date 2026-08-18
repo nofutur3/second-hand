@@ -7,10 +7,10 @@ import (
 	"sync"
 	"testing"
 
-	"secondHand/src/backend/internal/config"
-	database2 "secondHand/src/backend/internal/database"
-	domain2 "secondHand/src/backend/internal/domain"
-	output2 "secondHand/src/backend/internal/output"
+	"secondHand/internal/config"
+	database2 "secondHand/internal/database"
+	domain2 "secondHand/internal/domain"
+	output2 "secondHand/internal/output"
 )
 
 // fakeRepo implements database2.Repository. notifyGoodOffers only ever

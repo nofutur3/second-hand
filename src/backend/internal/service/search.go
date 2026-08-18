@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 	"fmt"
-	"secondHand/src/backend/internal/adapter"
-	domain2 "secondHand/src/backend/internal/domain"
+	"secondHand/internal/adapter"
+	domain2 "secondHand/internal/domain"
 	"sync"
 )
 

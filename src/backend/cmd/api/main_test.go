@@ -10,11 +10,11 @@ import (
 	"testing"
 	"time"
 
-	"secondHand/src/backend/internal/adapter"
-	"secondHand/src/backend/internal/config"
-	database2 "secondHand/src/backend/internal/database"
-	"secondHand/src/backend/internal/domain"
-	"secondHand/src/backend/internal/service"
+	"secondHand/internal/adapter"
+	"secondHand/internal/config"
+	database2 "secondHand/internal/database"
+	"secondHand/internal/domain"
+	"secondHand/internal/service"
 )
 
 // fakeRepository is an in-memory stand-in for database2.Repository (and

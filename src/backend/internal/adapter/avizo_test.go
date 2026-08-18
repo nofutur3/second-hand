@@ -3,7 +3,7 @@ package adapter
 import (
 	"testing"
 
-	"secondHand/src/backend/internal/domain"
+	"secondHand/internal/domain"
 )
 
 func TestTitleMatchesKeyword(t *testing.T) {

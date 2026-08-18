@@ -5,8 +5,8 @@
 FROM golang:1.25-alpine AS base
 WORKDIR /app
 RUN apk add --no-cache git ca-certificates tzdata
-COPY go.mod go.sum ./
-RUN go mod download
+COPY src/backend/go.mod src/backend/go.sum src/backend/
+RUN go -C src/backend mod download
 
 # ---- development ----
 # No source is copied in - bind-mount the repo at /app and this just
@@ -21,7 +21,7 @@ CMD ["go", "run", "./cmd/cron", "-config=config/config.json"]
 # below can run it on scratch with no libc at all.
 FROM base AS build
 COPY . .
-RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" -o /out/cron ./src/backend/cmd/cron
+RUN CGO_ENABLED=0 GOOS=linux go -C src/backend build -trimpath -ldflags="-s -w" -o /out/cron ./cmd/cron
 
 # ---- production ----
 # scratch + only what's needed to run: the static binary, CA certs (the

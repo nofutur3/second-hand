@@ -8,8 +8,8 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"secondHand/src/backend/internal/config"
-	"secondHand/src/backend/internal/domain"
+	"secondHand/internal/config"
+	"secondHand/internal/domain"
 )
 
 func newTestEbayServer(t *testing.T, tokenHits *int32) *httptest.Server {

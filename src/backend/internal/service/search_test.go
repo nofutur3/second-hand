@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"secondHand/src/backend/internal/adapter"
-	domain2 "secondHand/src/backend/internal/domain"
+	"secondHand/internal/adapter"
+	domain2 "secondHand/internal/domain"
 )
 
 func TestSearchWithFilter_NewProducts(t *testing.T) {

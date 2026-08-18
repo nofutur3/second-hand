@@ -2,8 +2,8 @@ package adapter
 
 import (
 	"fmt"
-	"secondHand/src/backend/internal/config"
-	"secondHand/src/backend/internal/domain"
+	"secondHand/internal/config"
+	"secondHand/internal/domain"
 	"strings"
 )
 

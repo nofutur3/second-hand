@@ -5,8 +5,8 @@ import (
 	"errors"
 	"testing"
 
-	"secondHand/src/backend/internal/adapter"
-	domain2 "secondHand/src/backend/internal/domain"
+	"secondHand/internal/adapter"
+	domain2 "secondHand/internal/domain"
 )
 
 func diffByType(diffs []domain2.ProductDiff, url string) *domain2.ProductDiff {

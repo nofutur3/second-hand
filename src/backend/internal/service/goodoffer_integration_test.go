@@ -5,10 +5,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"secondHand/src/backend/internal/config"
-	"secondHand/src/backend/internal/domain"
-	"secondHand/src/backend/internal/output"
-	"secondHand/src/backend/internal/service"
+	"secondHand/internal/config"
+	"secondHand/internal/domain"
+	"secondHand/internal/output"
+	"secondHand/internal/service"
 )
 
 // TestGoodOfferTriggersTelegramSend exercises the trigger-to-send path this

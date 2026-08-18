@@ -3,7 +3,7 @@ package output
 import (
 	"fmt"
 	"html/template"
-	"secondHand/src/backend/internal/domain"
+	"secondHand/internal/domain"
 	"strings"
 )
 

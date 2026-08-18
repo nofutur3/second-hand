@@ -1,7 +1,7 @@
 package adapter
 
 import (
-	"secondHand/src/backend/internal/domain"
+	"secondHand/internal/domain"
 	"testing"
 )
 

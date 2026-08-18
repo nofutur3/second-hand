@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"math/rand"
-	"secondHand/src/backend/internal/domain"
+	"secondHand/internal/domain"
 	"time"
 )
 

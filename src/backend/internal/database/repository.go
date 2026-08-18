@@ -2,7 +2,7 @@ package database
 
 import (
 	"context"
-	"secondHand/src/backend/internal/domain"
+	"secondHand/internal/domain"
 )
 
 // Repository defines the interface for data access

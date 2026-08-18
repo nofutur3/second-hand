@@ -3,7 +3,7 @@ package service
 import (
 	"testing"
 
-	"secondHand/src/backend/internal/domain"
+	"secondHand/internal/domain"
 )
 
 func floatPtr(f float64) *float64 { return &f }

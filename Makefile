@@ -34,21 +34,21 @@ help:
 
 build:
 	@echo "Building search command..."
-	$(BACKEND_RUN) go build -o bin/search ./src/backend/cmd/search
+	$(BACKEND_RUN) sh -c 'cd src/backend && go build -o ../../bin/search ./cmd/search'
 	@echo "Building cron command..."
-	$(BACKEND_RUN) go build -o bin/cron ./src/backend/cmd/cron
+	$(BACKEND_RUN) sh -c 'cd src/backend && go build -o ../../bin/cron ./cmd/cron'
 	@echo "Building API server..."
-	$(BACKEND_RUN) go build -o bin/api ./src/backend/cmd/api
+	$(BACKEND_RUN) sh -c 'cd src/backend && go build -o ../../bin/api ./cmd/api'
 	@echo "Build complete!"
 
 build-api:
 	@echo "Building API server..."
-	$(BACKEND_RUN) go build -o bin/api ./src/backend/cmd/api
+	$(BACKEND_RUN) sh -c 'cd src/backend && go build -o ../../bin/api ./cmd/api'
 	@echo "API build complete!"
 
 test:
 	@echo "Running tests..."
-	$(BACKEND_RUN_DB) sh -c 'go vet ./src/... && go test -v -race -coverprofile=coverage.txt -covermode=atomic ./src/...'
+	$(BACKEND_RUN_DB) sh -c 'cd src/backend && go vet ./... && go test -v -race -coverprofile=../../coverage.txt -covermode=atomic ./...'
 
 lint:
 	@echo "Checking gofmt/goimports formatting..."
@@ -113,7 +113,7 @@ clean:
 
 deps:
 	@echo "Downloading dependencies..."
-	$(BACKEND_RUN) sh -c 'go mod download && go mod tidy'
+	$(BACKEND_RUN) sh -c 'cd src/backend && go mod download && go mod tidy'
 
 # Quick start - sets up everything
 setup: up deps

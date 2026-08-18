@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	domain2 "secondHand/src/backend/internal/domain"
+	domain2 "secondHand/internal/domain"
 )
 
 // fakeRepo is an in-memory domain2.Repository for unit-testing

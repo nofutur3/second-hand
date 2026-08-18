@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	"secondHand/src/backend/internal/domain"
+	"secondHand/internal/domain"
 	"strings"
 	"time"
 

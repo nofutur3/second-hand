@@ -2,7 +2,7 @@ package output
 
 import (
 	"fmt"
-	"secondHand/src/backend/internal/config"
+	"secondHand/internal/config"
 
 	"gopkg.in/gomail.v2"
 )

@@ -13,8 +13,8 @@ import (
 	"sync"
 	"time"
 
-	"secondHand/src/backend/internal/config"
-	"secondHand/src/backend/internal/domain"
+	"secondHand/internal/config"
+	"secondHand/internal/domain"
 )
 
 // ebayTokenExpiryBuffer is how long before actual expiry a cached OAuth2 token is treated as stale.

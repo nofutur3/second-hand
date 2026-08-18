@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"secondHand/src/backend/internal/config"
-	"secondHand/src/backend/internal/domain"
+	"secondHand/internal/config"
+	"secondHand/internal/domain"
 )
 
 // TelegramNotifier sends "good offer" notifications via a Telegram bot.

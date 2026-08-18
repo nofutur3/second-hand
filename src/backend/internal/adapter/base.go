@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"secondHand/src/backend/internal/domain"
+	"secondHand/internal/domain"
 	"time"
 
 	"github.com/gocolly/colly/v2"

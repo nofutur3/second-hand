@@ -1,6 +1,6 @@
 package service
 
-import "secondHand/src/backend/internal/domain"
+import "secondHand/internal/domain"
 
 // minPriorPricesForAverage is the minimum number of previously stored
 // products required before the trailing-average discount check is

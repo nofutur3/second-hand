@@ -20,8 +20,8 @@ RUN git config --system --add safe.directory /app
 
 WORKDIR /app
 
-COPY go.mod go.sum ./
-RUN go mod download
+COPY src/backend/go.mod src/backend/go.sum src/backend/
+RUN go -C src/backend mod download
 RUN go install golang.org/x/tools/cmd/goimports@latest
 
 CMD ["sleep", "infinity"]
