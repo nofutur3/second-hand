@@ -41,8 +41,14 @@ type Product struct {
 	ImageURL    string
 	Location    string
 	SellerName  string
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
+	// ShippingCost and BidCount are eBay-specific; nil/zero for every
+	// other shop. ShippingCost is a pointer because "unresolved" (eBay
+	// hasn't calculated it yet) and "confirmed free" (0.0) are different
+	// states worth distinguishing.
+	ShippingCost *float64
+	BidCount     int
+	CreatedAt    time.Time
+	UpdatedAt    time.Time
 }
 
 // Search represents a saved search query

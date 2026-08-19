@@ -103,14 +103,16 @@ func (s *SearchService) SearchWithFilter(ctx context.Context, keyword string, ad
 			// Check if product already exists
 			existing, err := s.repo.GetProductByURL(ctx, product.URL)
 			if err == nil && existing != nil {
-				// Product exists, check if price changed
-				if existing.Price != product.Price {
-					product.ID = existing.ID
-					if err := s.repo.UpdateProduct(ctx, product); err != nil {
-						fmt.Printf("Failed to update product %s: %v\n", product.URL, err)
-					}
-				}
+				// Always refresh the stored row from this scrape - title,
+				// description, shipping cost, bid count, condition etc.
+				// can all change independently of price (e.g. eBay's
+				// title translation depends on request headers, not the
+				// listing itself), so gating the update on price alone
+				// left stale data behind whenever price didn't move.
 				product.ID = existing.ID
+				if err := s.repo.UpdateProduct(ctx, product); err != nil {
+					fmt.Printf("Failed to update product %s: %v\n", product.URL, err)
+				}
 			} else {
 				// New product
 				if err := s.repo.CreateProduct(ctx, product); err != nil {

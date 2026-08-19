@@ -60,6 +60,15 @@ services:
       DB_NAME: secondhand
       DB_SSLMODE: disable
       API_PORT: 8091
+      APP_PASSWORD: ${APP_PASSWORD:-}
+      # Needed for the on-demand /ebay-description endpoint (see
+      # cmd/api's API.ebay) - not required for the rest of the API, which
+      # never talks to eBay directly.
+      EBAY_CLIENT_ID: ${EBAY_CLIENT_ID:-}
+      EBAY_CLIENT_SECRET: ${EBAY_CLIENT_SECRET:-}
+      EBAY_API_BASE: ${EBAY_API_BASE:-https://api.ebay.com}
+      EBAY_SHIP_TO_COUNTRY: ${EBAY_SHIP_TO_COUNTRY:-CZ}
+      EBAY_SHIP_TO_POSTAL_CODE: ${EBAY_SHIP_TO_POSTAL_CODE:-58601}
     ports:
       - "8091:8091"
     depends_on:
@@ -81,6 +90,7 @@ services:
       # so it needs a URL reachable from the host, not from this network.
       NUXT_API_BASE_SERVER: http://api:8091/api/v1
       NUXT_PUBLIC_API_BASE: http://localhost:8091/api/v1
+      APP_PASSWORD: ${APP_PASSWORD:-}
       HOST: 0.0.0.0
       PORT: 8092
     ports:
@@ -106,6 +116,7 @@ services:
     environment:
       NUXT_API_BASE_SERVER: http://api:8091/api/v1
       NUXT_PUBLIC_API_BASE: http://localhost:8091/api/v1
+      APP_PASSWORD: ${APP_PASSWORD:-}
       HOST: 0.0.0.0
     ports:
       - "8092:8092"

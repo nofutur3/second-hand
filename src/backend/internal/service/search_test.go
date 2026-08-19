@@ -44,7 +44,7 @@ func TestSearchWithFilter_NewProducts(t *testing.T) {
 	}
 }
 
-func TestSearchWithFilter_ExistingProductPriceUnchanged(t *testing.T) {
+func TestSearchWithFilter_ExistingProductPriceUnchangedButOtherFieldsRefresh(t *testing.T) {
 	repo := newFakeRepo()
 	ctx := context.Background()
 
@@ -68,8 +68,11 @@ func TestSearchWithFilter_ExistingProductPriceUnchanged(t *testing.T) {
 	if len(products) != 1 || products[0].ID != existing.ID {
 		t.Fatalf("products = %+v, want existing product ID %d reused", products, existing.ID)
 	}
-	if repo.products[existing.ID].Title != "A" {
-		t.Fatalf("unchanged-price product should not be updated, title = %q", repo.products[existing.ID].Title)
+	// A field like title can change on rescrape independent of price (e.g.
+	// eBay's title translation depends on request headers, not the
+	// listing) - the stored row must reflect the latest scrape either way.
+	if repo.products[existing.ID].Title != "A (rescraped)" {
+		t.Fatalf("title should refresh even when price is unchanged, got %q", repo.products[existing.ID].Title)
 	}
 }
 

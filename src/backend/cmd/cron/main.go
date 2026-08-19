@@ -221,12 +221,16 @@ func notifyGoodOffers(
 			var priorPrices []float64
 			for _, p := range storedProducts {
 				if p.URL != diff.Product.URL {
-					priorPrices = append(priorPrices, p.Price)
+					priorPrices = append(priorPrices, service2.PerUnitCost(p))
 				}
 			}
 
 			if !service2.EvaluateGoodOffer(search, diff.Product, priorPrices) {
 				continue
+			}
+
+			if err := repo.SetGoodOffer(ctx, search.ID, diff.Product.ID); err != nil {
+				log.Printf("Good offer for '%s' (%s): failed to persist good-offer flag: %v\n", keyword, diff.Product.URL, err)
 			}
 
 			if err := notifier.SendGoodOffer(diff.Product, search); err != nil {

@@ -185,3 +185,168 @@ func TestEbayAdapter_OAuthTokenRequest(t *testing.T) {
 		t.Errorf("token endpoint hit %d times, want 1", got)
 	}
 }
+
+// newAuctionAndShippingServer serves fixtures shaped exactly like the real
+// Browse API responses captured against the live API while building this:
+// a pure auction (price:null, currentBidPrice+bidCount set), a fixed-price
+// item with a resolved shipping cost, and a fixed-price item whose shipping
+// cost eBay hasn't resolved yet (CALCULATED with no shippingCost value).
+func newAuctionAndShippingServer(t *testing.T) *httptest.Server {
+	t.Helper()
+
+	mux := http.NewServeMux()
+	mux.HandleFunc("/identity/v1/oauth2/token", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(map[string]interface{}{"access_token": "test-token", "expires_in": 7200})
+	})
+	mux.HandleFunc("/buy/browse/v1/item_summary/search", func(w http.ResponseWriter, r *http.Request) {
+		if got := r.Header.Get("X-EBAY-C-ENDUSERCTX"); got != "contextualLocation=country=CZ,zip=58601" {
+			t.Errorf("X-EBAY-C-ENDUSERCTX = %q, want contextualLocation=country=CZ,zip=58601", got)
+		}
+		if got := r.Header.Get("Accept-Language"); got != "en-US" {
+			t.Errorf("Accept-Language = %q, want en-US (otherwise eBay machine-translates titles for a CZ destination)", got)
+		}
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(map[string]interface{}{
+			"itemSummaries": []map[string]interface{}{
+				{
+					"itemWebUrl":      "https://www.ebay.com/itm/10",
+					"title":           "Auction item",
+					"price":           nil,
+					"currentBidPrice": map[string]string{"value": "2068.22", "currency": "CZK"},
+					"bidCount":        35,
+					"buyingOptions":   []string{"AUCTION"},
+					"itemEndDate":     "2026-08-18T14:08:58Z",
+				},
+				{
+					"itemWebUrl":    "https://www.ebay.com/itm/11",
+					"title":         "Fixed price with resolved shipping",
+					"price":         map[string]string{"value": "100.00", "currency": "CZK"},
+					"buyingOptions": []string{"FIXED_PRICE"},
+					"shippingOptions": []map[string]interface{}{
+						{"shippingCostType": "FIXED", "shippingCost": map[string]string{"value": "50.00", "currency": "CZK"}},
+					},
+				},
+				{
+					"itemWebUrl":      "https://www.ebay.com/itm/12",
+					"title":           "Fixed price, shipping not yet resolved",
+					"price":           map[string]string{"value": "200.00", "currency": "CZK"},
+					"buyingOptions":   []string{"FIXED_PRICE"},
+					"shippingOptions": []map[string]interface{}{{"shippingCostType": "CALCULATED"}},
+				},
+			},
+		})
+	})
+
+	return httptest.NewServer(mux)
+}
+
+func TestEbayAdapter_AuctionUsesCurrentBidPrice(t *testing.T) {
+	server := newAuctionAndShippingServer(t)
+	defer server.Close()
+
+	adapter := NewEbayAdapter(server.URL, config.EbayConfig{
+		ClientID: "id", ClientSecret: "secret", APIBase: server.URL,
+		ShipToCountry: "CZ", ShipToPostalCode: "58601",
+	}, 0, 5)
+
+	products, err := adapter.Search(context.Background(), "auction item")
+	if err != nil {
+		t.Fatalf("Search() error: %v", err)
+	}
+
+	auction := products[0]
+	if auction.Price != 2068.22 {
+		t.Errorf("auction Price = %v, want 2068.22 (from currentBidPrice, not the null price field)", auction.Price)
+	}
+	if auction.Currency != "CZK" {
+		t.Errorf("auction Currency = %q, want CZK", auction.Currency)
+	}
+	if auction.BidCount != 35 {
+		t.Errorf("auction BidCount = %d, want 35", auction.BidCount)
+	}
+}
+
+func TestEbayAdapter_ShippingCost(t *testing.T) {
+	server := newAuctionAndShippingServer(t)
+	defer server.Close()
+
+	adapter := NewEbayAdapter(server.URL, config.EbayConfig{
+		ClientID: "id", ClientSecret: "secret", APIBase: server.URL,
+		ShipToCountry: "CZ", ShipToPostalCode: "58601",
+	}, 0, 5)
+
+	products, err := adapter.Search(context.Background(), "shipping test")
+	if err != nil {
+		t.Fatalf("Search() error: %v", err)
+	}
+
+	resolved := products[1]
+	if resolved.ShippingCost == nil || *resolved.ShippingCost != 50.0 {
+		t.Errorf("resolved item ShippingCost = %v, want 50.0", resolved.ShippingCost)
+	}
+
+	unresolved := products[2]
+	if unresolved.ShippingCost != nil {
+		t.Errorf("unresolved CALCULATED item ShippingCost = %v, want nil", *unresolved.ShippingCost)
+	}
+}
+
+func TestEbayAdapter_GetDescription(t *testing.T) {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/identity/v1/oauth2/token", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(map[string]interface{}{"access_token": "test-token", "expires_in": 7200})
+	})
+	mux.HandleFunc("/buy/browse/v1/item/get_item_by_legacy_id", func(w http.ResponseWriter, r *http.Request) {
+		if got := r.URL.Query().Get("legacy_item_id"); got != "147512920592" {
+			t.Errorf("legacy_item_id = %q, want 147512920592", got)
+		}
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(map[string]string{
+			"description": `<p style="margin:0">Selling <b>just the lens</b> &amp; case</p><br>No body included.`,
+		})
+	})
+	server := httptest.NewServer(mux)
+	defer server.Close()
+
+	adapter := NewEbayAdapter(server.URL, config.EbayConfig{
+		ClientID: "id", ClientSecret: "secret", APIBase: server.URL,
+	}, 0, 5)
+
+	desc, err := adapter.GetDescription(context.Background(), "https://www.ebay.com/itm/147512920592?_skw=lens")
+	if err != nil {
+		t.Fatalf("GetDescription() error: %v", err)
+	}
+	if want := "Selling just the lens & case No body included."; desc != want {
+		t.Errorf("GetDescription() = %q, want %q", desc, want)
+	}
+}
+
+func TestEbayAdapter_GetDescription_UnrecognizedURL(t *testing.T) {
+	adapter := NewEbayAdapter("", config.EbayConfig{ClientID: "id", ClientSecret: "secret", APIBase: "https://example.com"}, 0, 5)
+
+	_, err := adapter.GetDescription(context.Background(), "https://www.ebay.com/some-other-page")
+	if err != ErrEbayItemURLNotRecognized {
+		t.Errorf("GetDescription() error = %v, want ErrEbayItemURLNotRecognized", err)
+	}
+}
+
+func TestStripHTML(t *testing.T) {
+	tests := []struct {
+		name  string
+		input string
+		want  string
+	}{
+		{"tags and entities", `<p>Hello &amp; welcome</p>`, "Hello & welcome"},
+		{"collapses whitespace across tags", "<div>a</div>\n<div>b</div>", "a b"},
+		{"plain text unchanged", "just text", "just text"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := stripHTML(tt.input); got != tt.want {
+				t.Errorf("stripHTML(%q) = %q, want %q", tt.input, got, tt.want)
+			}
+		})
+	}
+}

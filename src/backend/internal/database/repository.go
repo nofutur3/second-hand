@@ -28,6 +28,7 @@ type Repository interface {
 	LinkProductToSearch(ctx context.Context, searchID, productID int64) error
 	MarkProductsInactive(ctx context.Context, searchID int64, productIDs []int64) error
 	SetProductHidden(ctx context.Context, searchID, productID int64, hidden bool) error
+	SetGoodOffer(ctx context.Context, searchID, productID int64) error
 
 	// Lifecycle
 	Close()

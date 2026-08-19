@@ -40,8 +40,9 @@ type fakeRepository struct {
 }
 
 type spStatus struct {
-	isHidden bool
-	isActive bool
+	isHidden    bool
+	isActive    bool
+	isGoodOffer bool
 }
 
 func newFakeRepository() *fakeRepository {
@@ -234,7 +235,7 @@ func (f *fakeRepository) GetProductsBySearchIDWithStatus(ctx context.Context, se
 		if !ok {
 			continue
 		}
-		out = append(out, database2.ProductWithStatus{Product: *p, IsHidden: st.isHidden, IsActive: st.isActive})
+		out = append(out, database2.ProductWithStatus{Product: *p, IsHidden: st.isHidden, IsActive: st.isActive, IsGoodOffer: st.isGoodOffer})
 	}
 	return out, nil
 }
@@ -283,6 +284,18 @@ func (f *fakeRepository) SetProductHidden(ctx context.Context, searchID, product
 	return nil
 }
 
+func (f *fakeRepository) SetGoodOffer(ctx context.Context, searchID, productID int64) error {
+	f.mu.Lock()
+	defer f.mu.Unlock()
+
+	st, ok := f.searchProducts[searchID][productID]
+	if !ok {
+		return database2.ErrSearchProductNotFound
+	}
+	st.isGoodOffer = true
+	return nil
+}
+
 func (f *fakeRepository) Close() {}
 
 // seedSearch inserts a search directly (bypassing CreateSearch) so tests
@@ -315,6 +328,18 @@ func (f *fakeRepository) seedProduct(searchID int64, p *domain.Product, hidden, 
 	f.searchProducts[searchID][p.ID] = &spStatus{isHidden: hidden, isActive: active}
 }
 
+// fakeEbayDescriptionProvider is an in-memory stand-in for
+// ebayDescriptionProvider, used to test handleGetEbayDescription without a
+// real eBay adapter.
+type fakeEbayDescriptionProvider struct {
+	description string
+	err         error
+}
+
+func (f *fakeEbayDescriptionProvider) GetDescription(ctx context.Context, itemURL string) (string, error) {
+	return f.description, f.err
+}
+
 // newTestAPI builds an API backed by a fresh fakeRepository and a
 // SearchService with zero configured adapters, so handleCreateSearch's
 // background goroutine completes instantly without touching the network.
@@ -322,7 +347,8 @@ func newTestAPI() (*API, *fakeRepository) {
 	repo := newFakeRepository()
 	registry := adapter.NewRegistry(&config.Config{})
 	searchService := service.NewSearchService(repo, registry)
-	return &API{repo: repo, searchService: searchService}, repo
+	ebay := &fakeEbayDescriptionProvider{description: "a description"}
+	return &API{repo: repo, searchService: searchService, ebay: ebay}, repo
 }
 
 func decodeJSON(t *testing.T, body *bytes.Buffer, v interface{}) {
@@ -334,7 +360,7 @@ func decodeJSON(t *testing.T, body *bytes.Buffer, v interface{}) {
 
 func TestHandleHealthCheck(t *testing.T) {
 	api, _ := newTestAPI()
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	req := httptest.NewRequest(http.MethodGet, "/api/v1/health", nil)
 	rec := httptest.NewRecorder()
@@ -358,7 +384,7 @@ func TestHandleGetSearches(t *testing.T) {
 	repo.seedProduct(1, &domain.Product{ID: 2, Title: "hidden", URL: "https://x/2"}, true, true)
 	repo.seedProduct(1, &domain.Product{ID: 3, Title: "inactive", URL: "https://x/3"}, false, false)
 
-	router := newRouter(api)
+	router := newRouter(api, "")
 	req := httptest.NewRequest(http.MethodGet, "/api/v1/searches", nil)
 	rec := httptest.NewRecorder()
 	router.ServeHTTP(rec, req)
@@ -381,7 +407,7 @@ func TestHandleGetSearches_RepositoryError(t *testing.T) {
 	api, repo := newTestAPI()
 	repo.getAllSearchesWithCountsErr = context.DeadlineExceeded
 
-	router := newRouter(api)
+	router := newRouter(api, "")
 	req := httptest.NewRequest(http.MethodGet, "/api/v1/searches", nil)
 	rec := httptest.NewRecorder()
 	router.ServeHTTP(rec, req)
@@ -393,7 +419,7 @@ func TestHandleGetSearches_RepositoryError(t *testing.T) {
 
 func TestHandleCreateSearch(t *testing.T) {
 	api, repo := newTestAPI()
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	body := `{"keyword":"nintendo switch joycon"}`
 	req := httptest.NewRequest(http.MethodPost, "/api/v1/searches", bytes.NewBufferString(body))
@@ -420,7 +446,7 @@ func TestHandleCreateSearch(t *testing.T) {
 
 func TestHandleCreateSearch_TrimsWhitespace(t *testing.T) {
 	api, _ := newTestAPI()
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	req := httptest.NewRequest(http.MethodPost, "/api/v1/searches", bytes.NewBufferString(`{"keyword":"  spaced out  "}`))
 	rec := httptest.NewRecorder()
@@ -435,7 +461,7 @@ func TestHandleCreateSearch_TrimsWhitespace(t *testing.T) {
 
 func TestHandleCreateSearch_EmptyKeyword(t *testing.T) {
 	api, _ := newTestAPI()
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	req := httptest.NewRequest(http.MethodPost, "/api/v1/searches", bytes.NewBufferString(`{"keyword":"   "}`))
 	rec := httptest.NewRecorder()
@@ -448,7 +474,7 @@ func TestHandleCreateSearch_EmptyKeyword(t *testing.T) {
 
 func TestHandleCreateSearch_TooLong(t *testing.T) {
 	api, _ := newTestAPI()
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	longKeyword := make([]byte, maxKeywordLength+1)
 	for i := range longKeyword {
@@ -470,7 +496,7 @@ func TestHandleCreateSearch_TooLong(t *testing.T) {
 
 func TestHandleCreateSearch_InvalidJSON(t *testing.T) {
 	api, _ := newTestAPI()
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	req := httptest.NewRequest(http.MethodPost, "/api/v1/searches", bytes.NewBufferString(`{not json`))
 	rec := httptest.NewRecorder()
@@ -484,7 +510,7 @@ func TestHandleCreateSearch_InvalidJSON(t *testing.T) {
 func TestHandleCreateSearch_RepositoryError(t *testing.T) {
 	api, repo := newTestAPI()
 	repo.createSearchErr = context.DeadlineExceeded
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	req := httptest.NewRequest(http.MethodPost, "/api/v1/searches", bytes.NewBufferString(`{"keyword":"x"}`))
 	rec := httptest.NewRecorder()
@@ -498,7 +524,7 @@ func TestHandleCreateSearch_RepositoryError(t *testing.T) {
 func TestHandleDeleteSearch(t *testing.T) {
 	api, repo := newTestAPI()
 	repo.seedSearch(&domain.Search{ID: 7, Keyword: "gamecube"})
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	req := httptest.NewRequest(http.MethodDelete, "/api/v1/searches/7", nil)
 	rec := httptest.NewRecorder()
@@ -514,7 +540,7 @@ func TestHandleDeleteSearch(t *testing.T) {
 
 func TestHandleDeleteSearch_NotFound(t *testing.T) {
 	api, _ := newTestAPI()
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	req := httptest.NewRequest(http.MethodDelete, "/api/v1/searches/999", nil)
 	rec := httptest.NewRecorder()
@@ -527,7 +553,7 @@ func TestHandleDeleteSearch_NotFound(t *testing.T) {
 
 func TestHandleDeleteSearch_InvalidID(t *testing.T) {
 	api, _ := newTestAPI()
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	req := httptest.NewRequest(http.MethodDelete, "/api/v1/searches/not-a-number", nil)
 	rec := httptest.NewRecorder()
@@ -544,7 +570,10 @@ func TestHandleGetSearchProducts(t *testing.T) {
 	repo.seedProduct(3, &domain.Product{ID: 10, Title: "visible", URL: "https://x/10"}, false, true)
 	repo.seedProduct(3, &domain.Product{ID: 11, Title: "hidden", URL: "https://x/11"}, true, true)
 	repo.seedProduct(3, &domain.Product{ID: 12, Title: "delisted", URL: "https://x/12"}, false, false)
-	router := newRouter(api)
+	if err := repo.SetGoodOffer(context.Background(), 3, 10); err != nil {
+		t.Fatalf("SetGoodOffer: %v", err)
+	}
+	router := newRouter(api, "")
 
 	req := httptest.NewRequest(http.MethodGet, "/api/v1/searches/3/products", nil)
 	rec := httptest.NewRecorder()
@@ -563,11 +592,18 @@ func TestHandleGetSearchProducts(t *testing.T) {
 	if resp.Total != 1 {
 		t.Fatalf("total = %d, want 1 (only the visible+active product counts)", resp.Total)
 	}
+
+	for _, p := range resp.Products {
+		want := p.ID == 10
+		if p.IsGoodOffer != want {
+			t.Fatalf("product %d IsGoodOffer = %v, want %v", p.ID, p.IsGoodOffer, want)
+		}
+	}
 }
 
 func TestHandleGetSearchProducts_SearchNotFound(t *testing.T) {
 	api, _ := newTestAPI()
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	req := httptest.NewRequest(http.MethodGet, "/api/v1/searches/404/products", nil)
 	rec := httptest.NewRecorder()
@@ -580,7 +616,7 @@ func TestHandleGetSearchProducts_SearchNotFound(t *testing.T) {
 
 func TestHandleGetSearchProducts_InvalidID(t *testing.T) {
 	api, _ := newTestAPI()
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	req := httptest.NewRequest(http.MethodGet, "/api/v1/searches/abc/products", nil)
 	rec := httptest.NewRecorder()
@@ -595,7 +631,7 @@ func TestHandleSetProductHidden(t *testing.T) {
 	api, repo := newTestAPI()
 	repo.seedSearch(&domain.Search{ID: 5, Keyword: "wii"})
 	repo.seedProduct(5, &domain.Product{ID: 20, Title: "spam", URL: "https://x/20"}, false, true)
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	req := httptest.NewRequest(http.MethodPatch, "/api/v1/searches/5/products/20", bytes.NewBufferString(`{"hidden":true}`))
 	rec := httptest.NewRecorder()
@@ -612,7 +648,7 @@ func TestHandleSetProductHidden(t *testing.T) {
 func TestHandleSetProductHidden_NotFound(t *testing.T) {
 	api, repo := newTestAPI()
 	repo.seedSearch(&domain.Search{ID: 5, Keyword: "wii"})
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	req := httptest.NewRequest(http.MethodPatch, "/api/v1/searches/5/products/999", bytes.NewBufferString(`{"hidden":true}`))
 	rec := httptest.NewRecorder()
@@ -626,7 +662,7 @@ func TestHandleSetProductHidden_NotFound(t *testing.T) {
 
 func TestHandleSetProductHidden_InvalidSearchID(t *testing.T) {
 	api, _ := newTestAPI()
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	req := httptest.NewRequest(http.MethodPatch, "/api/v1/searches/abc/products/20", bytes.NewBufferString(`{"hidden":true}`))
 	rec := httptest.NewRecorder()
@@ -639,7 +675,7 @@ func TestHandleSetProductHidden_InvalidSearchID(t *testing.T) {
 
 func TestHandleSetProductHidden_InvalidProductID(t *testing.T) {
 	api, _ := newTestAPI()
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	req := httptest.NewRequest(http.MethodPatch, "/api/v1/searches/5/products/abc", bytes.NewBufferString(`{"hidden":true}`))
 	rec := httptest.NewRecorder()
@@ -654,7 +690,7 @@ func TestHandleSetProductHidden_InvalidBody(t *testing.T) {
 	api, repo := newTestAPI()
 	repo.seedSearch(&domain.Search{ID: 5, Keyword: "wii"})
 	repo.seedProduct(5, &domain.Product{ID: 20, Title: "spam", URL: "https://x/20"}, false, true)
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	req := httptest.NewRequest(http.MethodPatch, "/api/v1/searches/5/products/20", bytes.NewBufferString(`{not json`))
 	rec := httptest.NewRecorder()
@@ -667,7 +703,7 @@ func TestHandleSetProductHidden_InvalidBody(t *testing.T) {
 
 func TestRouter_UnknownRouteReturns404(t *testing.T) {
 	api, _ := newTestAPI()
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	req := httptest.NewRequest(http.MethodGet, "/api/v1/nope", nil)
 	rec := httptest.NewRecorder()
@@ -683,7 +719,7 @@ func TestRouter_UnknownRouteReturns404(t *testing.T) {
 // falls through to the same 404 as an unknown path.
 func TestRouter_WrongMethodReturns404(t *testing.T) {
 	api, _ := newTestAPI()
-	router := newRouter(api)
+	router := newRouter(api, "")
 
 	req := httptest.NewRequest(http.MethodPut, "/api/v1/searches", nil)
 	rec := httptest.NewRecorder()
@@ -691,5 +727,165 @@ func TestRouter_WrongMethodReturns404(t *testing.T) {
 
 	if rec.Code != http.StatusNotFound {
 		t.Fatalf("status = %d, want %d", rec.Code, http.StatusNotFound)
+	}
+}
+
+func TestBasicAuth_DisabledWhenPasswordEmpty(t *testing.T) {
+	api, _ := newTestAPI()
+	router := newRouter(api, "")
+
+	req := httptest.NewRequest(http.MethodGet, "/api/v1/searches", nil)
+	rec := httptest.NewRecorder()
+	router.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("status = %d, want %d (no password configured, no auth required)", rec.Code, http.StatusOK)
+	}
+}
+
+func TestBasicAuth_HealthCheckAlwaysExempt(t *testing.T) {
+	api, _ := newTestAPI()
+	router := newRouter(api, "hunter2")
+
+	req := httptest.NewRequest(http.MethodGet, "/api/v1/health", nil)
+	rec := httptest.NewRecorder()
+	router.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("status = %d, want %d (health check must stay unauthenticated for k8s probes)", rec.Code, http.StatusOK)
+	}
+}
+
+func TestBasicAuth_RejectsMissingCredentials(t *testing.T) {
+	api, _ := newTestAPI()
+	router := newRouter(api, "hunter2")
+
+	req := httptest.NewRequest(http.MethodGet, "/api/v1/searches", nil)
+	rec := httptest.NewRecorder()
+	router.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusUnauthorized {
+		t.Fatalf("status = %d, want %d", rec.Code, http.StatusUnauthorized)
+	}
+	if got := rec.Header().Get("WWW-Authenticate"); got == "" {
+		t.Error("expected a WWW-Authenticate challenge header")
+	}
+}
+
+func TestBasicAuth_RejectsWrongPassword(t *testing.T) {
+	api, _ := newTestAPI()
+	router := newRouter(api, "hunter2")
+
+	req := httptest.NewRequest(http.MethodGet, "/api/v1/searches", nil)
+	req.SetBasicAuth("anyone", "wrong")
+	rec := httptest.NewRecorder()
+	router.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusUnauthorized {
+		t.Fatalf("status = %d, want %d", rec.Code, http.StatusUnauthorized)
+	}
+}
+
+func TestBasicAuth_AcceptsCorrectPasswordAnyUsername(t *testing.T) {
+	api, repo := newTestAPI()
+	repo.seedSearch(&domain.Search{ID: 1, Keyword: "n64"})
+	router := newRouter(api, "hunter2")
+
+	req := httptest.NewRequest(http.MethodGet, "/api/v1/searches", nil)
+	req.SetBasicAuth("whatever", "hunter2")
+	rec := httptest.NewRecorder()
+	router.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("status = %d, want %d", rec.Code, http.StatusOK)
+	}
+}
+
+func TestHandleGetEbayDescription(t *testing.T) {
+	api, _ := newTestAPI()
+	api.ebay = &fakeEbayDescriptionProvider{description: "sold as parts only, no charger included"}
+	router := newRouter(api, "")
+
+	req := httptest.NewRequest(http.MethodGet, "/api/v1/ebay-description?url=https://www.ebay.com/itm/123456", nil)
+	rec := httptest.NewRecorder()
+	router.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("status = %d, want %d, body=%s", rec.Code, http.StatusOK, rec.Body.String())
+	}
+
+	var resp map[string]string
+	decodeJSON(t, rec.Body, &resp)
+	if resp["description"] != "sold as parts only, no charger included" {
+		t.Errorf("description = %q, want the fake provider's text", resp["description"])
+	}
+}
+
+func TestHandleGetEbayDescription_RejectsNonEbayHost(t *testing.T) {
+	api, _ := newTestAPI()
+	router := newRouter(api, "")
+
+	req := httptest.NewRequest(http.MethodGet, "/api/v1/ebay-description?url=https://evil.example.com/itm/123456", nil)
+	rec := httptest.NewRecorder()
+	router.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusBadRequest {
+		t.Fatalf("status = %d, want %d", rec.Code, http.StatusBadRequest)
+	}
+}
+
+func TestHandleGetEbayDescription_MissingURL(t *testing.T) {
+	api, _ := newTestAPI()
+	router := newRouter(api, "")
+
+	req := httptest.NewRequest(http.MethodGet, "/api/v1/ebay-description", nil)
+	rec := httptest.NewRecorder()
+	router.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusBadRequest {
+		t.Fatalf("status = %d, want %d", rec.Code, http.StatusBadRequest)
+	}
+}
+
+func TestHandleGetEbayDescription_NotRecognizedURL(t *testing.T) {
+	api, _ := newTestAPI()
+	api.ebay = &fakeEbayDescriptionProvider{err: adapter.ErrEbayItemURLNotRecognized}
+	router := newRouter(api, "")
+
+	req := httptest.NewRequest(http.MethodGet, "/api/v1/ebay-description?url=https://www.ebay.com/some-page", nil)
+	rec := httptest.NewRecorder()
+	router.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusBadRequest {
+		t.Fatalf("status = %d, want %d", rec.Code, http.StatusBadRequest)
+	}
+}
+
+func TestHandleGetSearchProducts_IncludesShippingCostAndBidCount(t *testing.T) {
+	api, repo := newTestAPI()
+	repo.seedSearch(&domain.Search{ID: 7, Keyword: "ebay auction"})
+	shipping := 250.0
+	repo.seedProduct(7, &domain.Product{
+		ID: 30, Title: "auction item", URL: "https://x/30",
+		ShopSource: "ebay.com", AuctionType: domain.AuctionTypeAuction,
+		ShippingCost: &shipping, BidCount: 4,
+	}, false, true)
+	router := newRouter(api, "")
+
+	req := httptest.NewRequest(http.MethodGet, "/api/v1/searches/7/products", nil)
+	rec := httptest.NewRecorder()
+	router.ServeHTTP(rec, req)
+
+	var resp SearchWithProductsResponse
+	decodeJSON(t, rec.Body, &resp)
+	if len(resp.Products) != 1 {
+		t.Fatalf("len(products) = %d, want 1", len(resp.Products))
+	}
+	p := resp.Products[0]
+	if p.ShippingCost == nil || *p.ShippingCost != 250.0 {
+		t.Errorf("ShippingCost = %v, want 250.0", p.ShippingCost)
+	}
+	if p.BidCount != 4 {
+		t.Errorf("BidCount = %d, want 4", p.BidCount)
 	}
 }

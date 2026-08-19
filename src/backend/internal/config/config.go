@@ -8,12 +8,13 @@ import (
 
 // Config represents the application configuration
 type Config struct {
-	Shops    []ShopConfig   `json:"shops"`
-	Database DatabaseConfig `json:"-"`
-	SMTP     SMTPConfig     `json:"-"`
-	Scraping ScrapingConfig `json:"-"`
-	Ebay     EbayConfig     `json:"-"`
-	Telegram TelegramConfig `json:"-"`
+	Shops       []ShopConfig   `json:"shops"`
+	Database    DatabaseConfig `json:"-"`
+	SMTP        SMTPConfig     `json:"-"`
+	Scraping    ScrapingConfig `json:"-"`
+	Ebay        EbayConfig     `json:"-"`
+	Telegram    TelegramConfig `json:"-"`
+	AppPassword string         `json:"-"`
 }
 
 // ShopConfig represents configuration for a shop
@@ -55,6 +56,12 @@ type EbayConfig struct {
 	ClientID     string
 	ClientSecret string
 	APIBase      string
+	// ShipToCountry/ShipToPostalCode are the buyer's delivery address,
+	// sent on every Browse API request so eBay returns price/shipping
+	// figures resolved (and currency-converted) for that destination
+	// instead of the seller's default marketplace.
+	ShipToCountry    string
+	ShipToPostalCode string
 }
 
 // TelegramConfig represents Telegram bot configuration
@@ -104,9 +111,11 @@ func Load(configPath string) (*Config, error) {
 	}
 
 	config.Ebay = EbayConfig{
-		ClientID:     getEnv("EBAY_CLIENT_ID", ""),
-		ClientSecret: getEnv("EBAY_CLIENT_SECRET", ""),
-		APIBase:      getEnv("EBAY_API_BASE", "https://api.ebay.com"),
+		ClientID:         getEnv("EBAY_CLIENT_ID", ""),
+		ClientSecret:     getEnv("EBAY_CLIENT_SECRET", ""),
+		APIBase:          getEnv("EBAY_API_BASE", "https://api.ebay.com"),
+		ShipToCountry:    getEnv("EBAY_SHIP_TO_COUNTRY", "CZ"),
+		ShipToPostalCode: getEnv("EBAY_SHIP_TO_POSTAL_CODE", "58601"),
 	}
 
 	config.Telegram = TelegramConfig{
@@ -114,6 +123,8 @@ func Load(configPath string) (*Config, error) {
 		ChatID:   getEnv("TELEGRAM_CHAT_ID", ""),
 		APIBase:  getEnv("TELEGRAM_API_BASE", "https://api.telegram.org"),
 	}
+
+	config.AppPassword = getEnv("APP_PASSWORD", "")
 
 	// Set default enabled state for shops
 	for i := range config.Shops {

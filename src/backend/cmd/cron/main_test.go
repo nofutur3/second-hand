@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 	"net/http/httptest"
+	"reflect"
 	"sync"
 	"testing"
 
@@ -14,10 +15,16 @@ import (
 )
 
 // fakeRepo implements database2.Repository. notifyGoodOffers only ever
-// calls GetProductsBySearchID; every other method is an unused stub.
+// calls GetProductsBySearchID and SetGoodOffer; every other method is an
+// unused stub.
 type fakeRepo struct {
 	mu               sync.Mutex
 	productsBySearch map[int64][]domain2.Product
+	goodOfferCalls   []goodOfferCall
+}
+
+type goodOfferCall struct {
+	searchID, productID int64
 }
 
 func (f *fakeRepo) GetProductsBySearchID(ctx context.Context, searchID int64) ([]domain2.Product, error) {
@@ -65,6 +72,12 @@ func (f *fakeRepo) MarkProductsInactive(ctx context.Context, searchID int64, pro
 func (f *fakeRepo) SetProductHidden(ctx context.Context, searchID, productID int64, hidden bool) error {
 	return nil
 }
+func (f *fakeRepo) SetGoodOffer(ctx context.Context, searchID, productID int64) error {
+	f.mu.Lock()
+	defer f.mu.Unlock()
+	f.goodOfferCalls = append(f.goodOfferCalls, goodOfferCall{searchID: searchID, productID: productID})
+	return nil
+}
 func (f *fakeRepo) Close() {}
 
 // countingTelegramServer returns a *output2.TelegramNotifier wired to a
@@ -103,14 +116,18 @@ func TestNotifyGoodOffers_SendsForMatchingNewEbayListing(t *testing.T) {
 
 	diffs := map[string][]domain2.ProductDiff{
 		"joy-con": {
-			{Product: domain2.Product{ShopSource: "ebay.com", Price: 50, URL: "https://ebay.com/1"}, DiffType: domain2.DiffTypeNew},
+			{Product: domain2.Product{ID: 42, ShopSource: "ebay.com", Price: 50, URL: "https://ebay.com/1"}, DiffType: domain2.DiffTypeNew},
 		},
 	}
 
-	notifyGoodOffers(context.Background(), &fakeRepo{}, notifier, []domain2.Search{search}, diffs)
+	repo := &fakeRepo{}
+	notifyGoodOffers(context.Background(), repo, notifier, []domain2.Search{search}, diffs)
 
 	if got := requestCount(); got != 1 {
 		t.Fatalf("Telegram requests = %d, want 1", got)
+	}
+	if want := []goodOfferCall{{searchID: 1, productID: 42}}; !reflect.DeepEqual(repo.goodOfferCalls, want) {
+		t.Fatalf("SetGoodOffer calls = %v, want %v", repo.goodOfferCalls, want)
 	}
 }
 
@@ -124,10 +141,14 @@ func TestNotifyGoodOffers_SkipsSearchWithoutThresholds(t *testing.T) {
 		},
 	}
 
-	notifyGoodOffers(context.Background(), &fakeRepo{}, notifier, []domain2.Search{search}, diffs)
+	repo := &fakeRepo{}
+	notifyGoodOffers(context.Background(), repo, notifier, []domain2.Search{search}, diffs)
 
 	if got := requestCount(); got != 0 {
 		t.Fatalf("Telegram requests = %d, want 0 (no thresholds configured)", got)
+	}
+	if len(repo.goodOfferCalls) != 0 {
+		t.Fatalf("SetGoodOffer calls = %v, want none", repo.goodOfferCalls)
 	}
 }
 
@@ -142,10 +163,14 @@ func TestNotifyGoodOffers_SkipsNonEbayShop(t *testing.T) {
 		},
 	}
 
-	notifyGoodOffers(context.Background(), &fakeRepo{}, notifier, []domain2.Search{search}, diffs)
+	repo := &fakeRepo{}
+	notifyGoodOffers(context.Background(), repo, notifier, []domain2.Search{search}, diffs)
 
 	if got := requestCount(); got != 0 {
 		t.Fatalf("Telegram requests = %d, want 0 (non-ebay shop)", got)
+	}
+	if len(repo.goodOfferCalls) != 0 {
+		t.Fatalf("SetGoodOffer calls = %v, want none", repo.goodOfferCalls)
 	}
 }
 
@@ -161,10 +186,14 @@ func TestNotifyGoodOffers_SkipsUnqualifyingDiffTypes(t *testing.T) {
 		},
 	}
 
-	notifyGoodOffers(context.Background(), &fakeRepo{}, notifier, []domain2.Search{search}, diffs)
+	repo := &fakeRepo{}
+	notifyGoodOffers(context.Background(), repo, notifier, []domain2.Search{search}, diffs)
 
 	if got := requestCount(); got != 0 {
 		t.Fatalf("Telegram requests = %d, want 0 (neither Removed nor PriceUp qualify)", got)
+	}
+	if len(repo.goodOfferCalls) != 0 {
+		t.Fatalf("SetGoodOffer calls = %v, want none", repo.goodOfferCalls)
 	}
 }
 
@@ -175,14 +204,18 @@ func TestNotifyGoodOffers_PriceDownQualifies(t *testing.T) {
 
 	diffs := map[string][]domain2.ProductDiff{
 		"joy-con": {
-			{Product: domain2.Product{ShopSource: "ebay.com", Price: 50, URL: "https://ebay.com/1"}, DiffType: domain2.DiffTypePriceDown},
+			{Product: domain2.Product{ID: 7, ShopSource: "ebay.com", Price: 50, URL: "https://ebay.com/1"}, DiffType: domain2.DiffTypePriceDown},
 		},
 	}
 
-	notifyGoodOffers(context.Background(), &fakeRepo{}, notifier, []domain2.Search{search}, diffs)
+	repo := &fakeRepo{}
+	notifyGoodOffers(context.Background(), repo, notifier, []domain2.Search{search}, diffs)
 
 	if got := requestCount(); got != 1 {
 		t.Fatalf("Telegram requests = %d, want 1", got)
+	}
+	if want := []goodOfferCall{{searchID: 1, productID: 7}}; !reflect.DeepEqual(repo.goodOfferCalls, want) {
+		t.Fatalf("SetGoodOffer calls = %v, want %v", repo.goodOfferCalls, want)
 	}
 }
 
@@ -197,10 +230,14 @@ func TestNotifyGoodOffers_DoesNotMatchAboveCeiling(t *testing.T) {
 		},
 	}
 
-	notifyGoodOffers(context.Background(), &fakeRepo{}, notifier, []domain2.Search{search}, diffs)
+	repo := &fakeRepo{}
+	notifyGoodOffers(context.Background(), repo, notifier, []domain2.Search{search}, diffs)
 
 	if got := requestCount(); got != 0 {
 		t.Fatalf("Telegram requests = %d, want 0 (price above ceiling)", got)
+	}
+	if len(repo.goodOfferCalls) != 0 {
+		t.Fatalf("SetGoodOffer calls = %v, want none", repo.goodOfferCalls)
 	}
 }
 

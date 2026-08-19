@@ -2,12 +2,14 @@ package main
 
 import (
 	"context"
+	"crypto/subtle"
 	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"secondHand/internal/adapter"
 	"secondHand/internal/config"
@@ -27,9 +29,17 @@ import (
 // maxKeywordLength mirrors the searches.keyword VARCHAR(255) column.
 const maxKeywordLength = 255
 
+// ebayDescriptionProvider is satisfied by *adapter.EbayAdapter; narrowed to
+// an interface so handleGetEbayDescription can be tested without a real
+// eBay adapter (see main_test.go's fakeEbayDescriptionProvider).
+type ebayDescriptionProvider interface {
+	GetDescription(ctx context.Context, itemURL string) (string, error)
+}
+
 type API struct {
 	repo          database2.Repository
 	searchService *service.SearchService
+	ebay          ebayDescriptionProvider
 }
 
 type CreateSearchRequest struct {
@@ -50,22 +60,25 @@ type SearchResponse struct {
 }
 
 type ProductResponse struct {
-	ID          int64              `json:"id"`
-	Title       string             `json:"title"`
-	Description string             `json:"description"`
-	Price       float64            `json:"price"`
-	Currency    string             `json:"currency"`
-	URL         string             `json:"url"`
-	ImageURL    string             `json:"image_url,omitempty"`
-	Location    string             `json:"location,omitempty"`
-	ShopSource  string             `json:"shop_source"`
-	AuctionType domain.AuctionType `json:"auction_type"`
-	Condition   domain.Condition   `json:"condition"`
-	EndingTime  *time.Time         `json:"ending_time,omitempty"`
-	CreatedAt   time.Time          `json:"created_at"`
-	UpdatedAt   time.Time          `json:"updated_at"`
-	IsHidden    bool               `json:"is_hidden"`
-	IsActive    bool               `json:"is_active"`
+	ID           int64              `json:"id"`
+	Title        string             `json:"title"`
+	Description  string             `json:"description"`
+	Price        float64            `json:"price"`
+	Currency     string             `json:"currency"`
+	URL          string             `json:"url"`
+	ImageURL     string             `json:"image_url,omitempty"`
+	Location     string             `json:"location,omitempty"`
+	ShopSource   string             `json:"shop_source"`
+	AuctionType  domain.AuctionType `json:"auction_type"`
+	Condition    domain.Condition   `json:"condition"`
+	EndingTime   *time.Time         `json:"ending_time,omitempty"`
+	CreatedAt    time.Time          `json:"created_at"`
+	UpdatedAt    time.Time          `json:"updated_at"`
+	IsHidden     bool               `json:"is_hidden"`
+	IsActive     bool               `json:"is_active"`
+	IsGoodOffer  bool               `json:"is_good_offer"`
+	ShippingCost *float64           `json:"shipping_cost,omitempty"`
+	BidCount     int                `json:"bid_count"`
 }
 
 type SetProductHiddenRequest struct {
@@ -208,22 +221,25 @@ func (a *API) handleGetSearchProducts(w http.ResponseWriter, r *http.Request) {
 	visible := 0
 	for i, p := range products {
 		productResponses[i] = ProductResponse{
-			ID:          p.ID,
-			Title:       p.Title,
-			Description: p.Description,
-			Price:       p.Price,
-			Currency:    p.Currency,
-			URL:         p.URL,
-			ImageURL:    p.ImageURL,
-			Location:    p.Location,
-			ShopSource:  p.ShopSource,
-			AuctionType: p.AuctionType,
-			Condition:   p.Condition,
-			EndingTime:  p.EndingTime,
-			CreatedAt:   p.CreatedAt,
-			UpdatedAt:   p.UpdatedAt,
-			IsHidden:    p.IsHidden,
-			IsActive:    p.IsActive,
+			ID:           p.ID,
+			Title:        p.Title,
+			Description:  p.Description,
+			Price:        p.Price,
+			Currency:     p.Currency,
+			URL:          p.URL,
+			ImageURL:     p.ImageURL,
+			Location:     p.Location,
+			ShopSource:   p.ShopSource,
+			AuctionType:  p.AuctionType,
+			Condition:    p.Condition,
+			EndingTime:   p.EndingTime,
+			CreatedAt:    p.CreatedAt,
+			UpdatedAt:    p.UpdatedAt,
+			IsHidden:     p.IsHidden,
+			IsActive:     p.IsActive,
+			IsGoodOffer:  p.IsGoodOffer,
+			ShippingCost: p.ShippingCost,
+			BidCount:     p.BidCount,
 		}
 		if !p.IsHidden && p.IsActive {
 			visible++
@@ -284,6 +300,39 @@ func (a *API) handleSetProductHidden(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 }
 
+// handleGetEbayDescription fetches an eBay listing's full description on
+// demand (not stored - see EbayAdapter.GetDescription). Takes the product's
+// own URL rather than a database ID: the frontend already has it, and it
+// means this can proxy straight to eBay without needing a repository
+// lookup - the URL is only ever used to regex-extract a numeric item ID,
+// never fetched itself, so there's no server-side-request-forgery surface
+// even though it's caller-supplied.
+func (a *API) handleGetEbayDescription(w http.ResponseWriter, r *http.Request) {
+	itemURL := r.URL.Query().Get("url")
+	if itemURL == "" {
+		respondError(w, http.StatusBadRequest, "url query parameter is required", nil)
+		return
+	}
+
+	parsed, err := url.Parse(itemURL)
+	if err != nil || (parsed.Host != "ebay.com" && !strings.HasSuffix(parsed.Host, ".ebay.com")) {
+		respondError(w, http.StatusBadRequest, "url must be an ebay.com listing", nil)
+		return
+	}
+
+	description, err := a.ebay.GetDescription(r.Context(), itemURL)
+	if err != nil {
+		if errors.Is(err, adapter.ErrEbayItemURLNotRecognized) {
+			respondError(w, http.StatusBadRequest, "Could not recognize an eBay item ID in that URL", err)
+			return
+		}
+		respondError(w, http.StatusBadGateway, "Failed to fetch eBay item description", err)
+		return
+	}
+
+	respondJSON(w, http.StatusOK, map[string]string{"description": description})
+}
+
 func (a *API) handleHealthCheck(w http.ResponseWriter, r *http.Request) {
 	respondJSON(w, http.StatusOK, map[string]string{
 		"status": "ok",
@@ -312,19 +361,46 @@ func respondError(w http.ResponseWriter, status int, message string, err error) 
 	respondJSON(w, status, response)
 }
 
+// basicAuthMiddleware gates every request behind a single shared password
+// (username is accepted but not checked - this isn't a multi-user account
+// system). An empty password disables the check entirely, so local dev
+// (no APP_PASSWORD set) isn't gated by default. /health is exempt so k8s
+// liveness/readiness probes keep working unauthenticated.
+func basicAuthMiddleware(password string) mux.MiddlewareFunc {
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			if password == "" || r.URL.Path == "/api/v1/health" {
+				next.ServeHTTP(w, r)
+				return
+			}
+
+			_, got, ok := r.BasicAuth()
+			if !ok || subtle.ConstantTimeCompare([]byte(got), []byte(password)) != 1 {
+				w.Header().Set("WWW-Authenticate", `Basic realm="snoopy"`)
+				http.Error(w, "Unauthorized", http.StatusUnauthorized)
+				return
+			}
+
+			next.ServeHTTP(w, r)
+		})
+	}
+}
+
 // newRouter wires up every route + CORS handling for the API. Split out
 // from main() so tests can exercise the exact routing table (method
 // matching, path params) without a running server or database.
-func newRouter(api *API) http.Handler {
+func newRouter(api *API, appPassword string) http.Handler {
 	r := mux.NewRouter()
 
 	apiRouter := r.PathPrefix("/api/v1").Subrouter()
+	apiRouter.Use(basicAuthMiddleware(appPassword))
 	apiRouter.HandleFunc("/health", api.handleHealthCheck).Methods("GET")
 	apiRouter.HandleFunc("/searches", api.handleGetSearches).Methods("GET")
 	apiRouter.HandleFunc("/searches", api.handleCreateSearch).Methods("POST")
 	apiRouter.HandleFunc("/searches/{searchId}", api.handleDeleteSearch).Methods("DELETE")
 	apiRouter.HandleFunc("/searches/{searchId}/products", api.handleGetSearchProducts).Methods("GET")
 	apiRouter.HandleFunc("/searches/{searchId}/products/{productId}", api.handleSetProductHidden).Methods("PATCH")
+	apiRouter.HandleFunc("/ebay-description", api.handleGetEbayDescription).Methods("GET")
 
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"},
@@ -377,9 +453,14 @@ func main() {
 	adapterRegistry := adapter.NewRegistry(cfg)
 	searchService := service.NewSearchService(repo, adapterRegistry)
 
+	// Dedicated eBay adapter instance for on-demand description lookups
+	// (handleGetEbayDescription) - separate from the registry above since
+	// that's keyed by configured shop URLs, not needed here.
+	ebayAdapter := adapter.NewEbayAdapter("", cfg.Ebay, cfg.Scraping.DelayMS, cfg.Scraping.RequestTimeout)
+
 	// Initialize API
-	api := &API{repo: repo, searchService: searchService}
-	handler := newRouter(api)
+	api := &API{repo: repo, searchService: searchService, ebay: ebayAdapter}
+	handler := newRouter(api, cfg.AppPassword)
 
 	// Get port from environment or use default
 	port := os.Getenv("API_PORT")

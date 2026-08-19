@@ -17,6 +17,9 @@ export default defineNuxtConfig({
     // Server-only: used for requests made during SSR, which run inside the
     // Docker network and need the internal service hostname.
     apiBaseServer: process.env.NUXT_API_BASE_SERVER || 'http://api:8091/api/v1',
+    // Server-only: gates the whole site behind HTTP Basic Auth (see
+    // server/middleware/auth.ts). Empty/unset disables the check.
+    appPassword: process.env.APP_PASSWORD || '',
     public: {
       // Used for requests made from the browser (client-side navigation,
       // the create/delete forms) - needs a URL the browser can actually

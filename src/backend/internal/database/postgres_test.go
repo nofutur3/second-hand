@@ -278,8 +278,8 @@ func TestPostgresRepository_SearchProductLinking(t *testing.T) {
 		t.Fatalf("GetProductsBySearchIDWithStatus returned %d products, want 2", len(withStatus))
 	}
 	for _, p := range withStatus {
-		if p.IsHidden || !p.IsActive {
-			t.Fatalf("newly linked product has IsHidden=%v IsActive=%v, want false/true", p.IsHidden, p.IsActive)
+		if p.IsHidden || !p.IsActive || p.IsGoodOffer {
+			t.Fatalf("newly linked product has IsHidden=%v IsActive=%v IsGoodOffer=%v, want false/true/false", p.IsHidden, p.IsActive, p.IsGoodOffer)
 		}
 	}
 
@@ -304,6 +304,27 @@ func TestPostgresRepository_SearchProductLinking(t *testing.T) {
 
 	if err := repo.SetProductHidden(ctx, search.ID, 999999999, true); err != ErrSearchProductNotFound {
 		t.Fatalf("SetProductHidden (unlinked pair) = %v, want ErrSearchProductNotFound", err)
+	}
+
+	if err := repo.SetGoodOffer(ctx, search.ID, p2.ID); err != nil {
+		t.Fatalf("SetGoodOffer: %v", err)
+	}
+	withStatus, err = repo.GetProductsBySearchIDWithStatus(ctx, search.ID)
+	if err != nil {
+		t.Fatalf("GetProductsBySearchIDWithStatus after SetGoodOffer: %v", err)
+	}
+	p2GoodOffer := false
+	for _, p := range withStatus {
+		if p.ID == p2.ID {
+			p2GoodOffer = p.IsGoodOffer
+		}
+	}
+	if !p2GoodOffer {
+		t.Fatal("SetGoodOffer did not flag the product as a good offer")
+	}
+
+	if err := repo.SetGoodOffer(ctx, search.ID, 999999999); err != ErrSearchProductNotFound {
+		t.Fatalf("SetGoodOffer (unlinked pair) = %v, want ErrSearchProductNotFound", err)
 	}
 
 	if err := repo.MarkProductsInactive(ctx, search.ID, []int64{p2.ID}); err != nil {

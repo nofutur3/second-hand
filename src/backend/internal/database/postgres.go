@@ -30,8 +30,9 @@ type SearchWithCount struct {
 // ProductWithStatus is a product plus its per-search visibility state.
 type ProductWithStatus struct {
 	domain.Product
-	IsHidden bool
-	IsActive bool
+	IsHidden    bool
+	IsActive    bool
+	IsGoodOffer bool
 }
 
 // PostgresRepository implements the Repository interface using PostgreSQL
@@ -224,9 +225,9 @@ func (r *PostgresRepository) DeleteSearch(ctx context.Context, searchID int64) e
 // CreateProduct creates a new product
 func (r *PostgresRepository) CreateProduct(ctx context.Context, product *domain.Product) error {
 	query := `
-		INSERT INTO products (shop_source, title, description, price, currency, auction_type, 
-			ending_time, condition, url, image_url, location, seller_name, created_at, updated_at)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+		INSERT INTO products (shop_source, title, description, price, currency, auction_type,
+			ending_time, condition, url, image_url, location, seller_name, shipping_cost, bid_count, created_at, updated_at)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
 		RETURNING id, created_at, updated_at
 	`
 
@@ -244,6 +245,8 @@ func (r *PostgresRepository) CreateProduct(ctx context.Context, product *domain.
 		product.ImageURL,
 		product.Location,
 		product.SellerName,
+		product.ShippingCost,
+		product.BidCount,
 		now,
 		now,
 	).Scan(&product.ID, &product.CreatedAt, &product.UpdatedAt)
@@ -269,8 +272,10 @@ func (r *PostgresRepository) UpdateProduct(ctx context.Context, product *domain.
 			image_url = $8,
 			location = $9,
 			seller_name = $10,
-			updated_at = $11
-		WHERE id = $12
+			shipping_cost = $11,
+			bid_count = $12,
+			updated_at = $13
+		WHERE id = $14
 	`
 
 	_, err := r.pool.Exec(ctx, query,
@@ -284,6 +289,8 @@ func (r *PostgresRepository) UpdateProduct(ctx context.Context, product *domain.
 		product.ImageURL,
 		product.Location,
 		product.SellerName,
+		product.ShippingCost,
+		product.BidCount,
 		time.Now(),
 		product.ID,
 	)
@@ -299,7 +306,7 @@ func (r *PostgresRepository) UpdateProduct(ctx context.Context, product *domain.
 func (r *PostgresRepository) GetProductByURL(ctx context.Context, url string) (*domain.Product, error) {
 	query := `
 		SELECT id, shop_source, title, description, price, currency, auction_type,
-			ending_time, condition, url, image_url, location, seller_name, created_at, updated_at
+			ending_time, condition, url, image_url, location, seller_name, shipping_cost, bid_count, created_at, updated_at
 		FROM products WHERE url = $1
 	`
 
@@ -318,6 +325,8 @@ func (r *PostgresRepository) GetProductByURL(ctx context.Context, url string) (*
 		&product.ImageURL,
 		&product.Location,
 		&product.SellerName,
+		&product.ShippingCost,
+		&product.BidCount,
 		&product.CreatedAt,
 		&product.UpdatedAt,
 	)
@@ -333,8 +342,8 @@ func (r *PostgresRepository) GetProductByURL(ctx context.Context, url string) (*
 func (r *PostgresRepository) GetProductsBySearchID(ctx context.Context, searchID int64) ([]domain.Product, error) {
 	query := `
 		SELECT p.id, p.shop_source, p.title, p.description, p.price, p.currency, p.auction_type,
-			p.ending_time, p.condition, p.url, p.image_url, p.location, p.seller_name, 
-			p.created_at, p.updated_at
+			p.ending_time, p.condition, p.url, p.image_url, p.location, p.seller_name,
+			p.shipping_cost, p.bid_count, p.created_at, p.updated_at
 		FROM products p
 		INNER JOIN search_products sp ON p.id = sp.product_id
 		WHERE sp.search_id = $1
@@ -364,6 +373,8 @@ func (r *PostgresRepository) GetProductsBySearchID(ctx context.Context, searchID
 			&product.ImageURL,
 			&product.Location,
 			&product.SellerName,
+			&product.ShippingCost,
+			&product.BidCount,
 			&product.CreatedAt,
 			&product.UpdatedAt,
 		); err != nil {
@@ -382,7 +393,8 @@ func (r *PostgresRepository) GetProductsBySearchIDWithStatus(ctx context.Context
 	query := `
 		SELECT p.id, p.shop_source, p.title, p.description, p.price, p.currency, p.auction_type,
 			p.ending_time, p.condition, p.url, p.image_url, p.location, p.seller_name,
-			p.created_at, p.updated_at, sp.is_hidden, sp.is_active
+			p.shipping_cost, p.bid_count,
+			p.created_at, p.updated_at, sp.is_hidden, sp.is_active, sp.is_good_offer
 		FROM products p
 		INNER JOIN search_products sp ON p.id = sp.product_id
 		WHERE sp.search_id = $1
@@ -412,10 +424,13 @@ func (r *PostgresRepository) GetProductsBySearchIDWithStatus(ctx context.Context
 			&product.ImageURL,
 			&product.Location,
 			&product.SellerName,
+			&product.ShippingCost,
+			&product.BidCount,
 			&product.CreatedAt,
 			&product.UpdatedAt,
 			&product.IsHidden,
 			&product.IsActive,
+			&product.IsGoodOffer,
 		); err != nil {
 			return nil, fmt.Errorf("failed to scan product: %w", err)
 		}
@@ -433,6 +448,21 @@ func (r *PostgresRepository) SetProductHidden(ctx context.Context, searchID, pro
 	tag, err := r.pool.Exec(ctx, query, hidden, searchID, productID)
 	if err != nil {
 		return fmt.Errorf("failed to set product hidden state: %w", err)
+	}
+	if tag.RowsAffected() == 0 {
+		return ErrSearchProductNotFound
+	}
+	return nil
+}
+
+// SetGoodOffer flags a product as having matched a search's good-offer
+// thresholds. One-way (never unset) - it's a historical fact about a past
+// cron run, not a user-editable toggle like is_hidden.
+func (r *PostgresRepository) SetGoodOffer(ctx context.Context, searchID, productID int64) error {
+	query := `UPDATE search_products SET is_good_offer = TRUE WHERE search_id = $1 AND product_id = $2`
+	tag, err := r.pool.Exec(ctx, query, searchID, productID)
+	if err != nil {
+		return fmt.Errorf("failed to set good offer flag: %w", err)
 	}
 	if tag.RowsAffected() == 0 {
 		return ErrSearchProductNotFound

@@ -55,6 +55,24 @@
         <span v-if="hiddenCount" class="normal-case tracking-normal text-faint">({{ hiddenCount }})</span>
       </label>
 
+      <!-- Shop filter, remembered per search -->
+      <div
+        v-if="availableShops.length > 1"
+        class="mt-4 flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-wide text-mute"
+      >
+        <span>Shops</span>
+        <button
+          v-for="shop in availableShops"
+          :key="shop"
+          type="button"
+          class="rounded-sm border px-2 py-0.5 normal-case tracking-normal transition-colors"
+          :class="isShopSelected(shop) ? 'border-stamp text-stamp' : 'border-line text-faint'"
+          @click="toggleShop(shop)"
+        >
+          {{ shop }}
+        </button>
+      </div>
+
       <!-- Products -->
       <ul v-if="visibleProducts.length > 0" class="mt-2">
         <li v-for="(product, index) in visibleProducts" :key="product.id">
@@ -81,7 +99,14 @@
                 <span class="mx-1 text-line">&middot;</span>
                 {{ formatCondition(product.condition) }}
                 <span class="mx-1 text-line">&middot;</span>
-                {{ product.auction_type === 'auction' ? 'auction' : 'sale' }}
+                <template v-if="product.auction_type === 'auction'">
+                  auction &middot; {{ product.bid_count }} bid{{ product.bid_count === 1 ? '' : 's' }}
+                </template>
+                <template v-else>sale</template>
+                <template v-if="product.is_good_offer">
+                  <span class="mx-1 text-line">&middot;</span>
+                  <span class="text-stamp">good offer</span>
+                </template>
                 <template v-if="product.location">
                   <span class="mx-1 text-line">&middot;</span>
                   {{ product.location }}
@@ -92,21 +117,45 @@
                 </template>
                 <template v-if="!product.is_active">
                   <span class="mx-1 text-line">&middot;</span>
-                  <span class="text-error">no longer listed</span>
+                  <span class="text-error">{{ product.auction_type === 'auction' ? 'auction ended · last seen bid' : 'no longer listed' }}</span>
                 </template>
                 <template v-if="product.is_hidden">
                   <span class="mx-1 text-line">&middot;</span>
                   hidden
+                </template>
+                <template v-if="product.shop_source === 'ebay.com'">
+                  <span class="mx-1 text-line">&middot;</span>
+                  <button type="button" class="text-mute hover:text-stamp" @click="toggleDescription(product)">
+                    {{ descriptionState(product).loading ? 'Loading…' : (descriptionState(product).expanded ? 'Hide description' : 'Description') }}
+                  </button>
                 </template>
                 <span class="mx-1 text-line">&middot;</span>
                 <button type="button" class="text-mute hover:text-stamp" @click="toggleHidden(product)">
                   {{ product.is_hidden ? 'Unhide' : 'Hide' }}
                 </button>
               </p>
+              <p
+                v-if="descriptionState(product).expanded && descriptionState(product).text"
+                class="mt-1.5 text-[14px] leading-relaxed text-mute"
+              >
+                {{ descriptionState(product).text }}
+              </p>
+              <p v-if="descriptionState(product).error" class="mt-1.5 text-[14px] text-error">
+                {{ descriptionState(product).error }}
+              </p>
             </div>
-            <p class="shrink-0 whitespace-nowrap font-mono text-lg font-medium text-tag sm:text-right">
-              {{ formatPrice(product.price) }} <span class="text-sm text-faint">{{ product.currency }}</span>
-            </p>
+            <div class="shrink-0 whitespace-nowrap text-right">
+              <template v-if="product.shipping_cost != null">
+                <p class="font-mono text-xs text-faint">{{ formatPrice(product.price) }} {{ product.currency }}</p>
+                <p class="font-mono text-xs text-faint">+ {{ formatPrice(product.shipping_cost) }} {{ product.currency }} shipping</p>
+                <p class="font-mono text-lg font-medium text-tag">
+                  = {{ formatPrice(product.price + product.shipping_cost) }} <span class="text-sm text-faint">{{ product.currency }}</span>
+                </p>
+              </template>
+              <p v-else class="font-mono text-lg font-medium text-tag">
+                {{ formatPrice(product.price) }} <span class="text-sm text-faint">{{ product.currency }}</span>
+              </p>
+            </div>
           </div>
         </li>
       </ul>
@@ -164,8 +213,94 @@ const hideError = ref('')
 // stay in the database untouched, just out of the way until asked for.
 const visibleProducts = computed(() => {
   const products = data.value?.products ?? []
-  return showHidden.value ? products : products.filter((p) => !p.is_hidden && p.is_active)
+  const statusFiltered = showHidden.value ? products : products.filter((p) => !p.is_hidden && p.is_active)
+  if (selectedShops.value === null) return statusFiltered
+  return statusFiltered.filter((p) => selectedShops.value.includes(p.shop_source))
 })
+
+// Shop/adapter filter - remembered per search in localStorage. null means
+// "not loaded from localStorage yet" and is treated as "show every shop",
+// so SSR/initial render never has to guess at client-only storage.
+const shopFilterKey = `snoopy:shopFilter:${searchId}`
+const selectedShops = ref(null)
+
+const availableShops = computed(() => {
+  const products = data.value?.products ?? []
+  return [...new Set(products.map((p) => p.shop_source))].sort()
+})
+
+const isShopSelected = (shop) => selectedShops.value === null || selectedShops.value.includes(shop)
+
+const toggleShop = (shop) => {
+  const current = selectedShops.value === null ? [...availableShops.value] : selectedShops.value
+  selectedShops.value = current.includes(shop) ? current.filter((s) => s !== shop) : [...current, shop]
+}
+
+// Restoring from localStorage needs availableShops to actually be
+// populated - a plain onMounted snapshot can fire before the client has
+// the fetched product list attached (payload hydration doesn't always
+// resolve synchronously before mount), leaving selectedShops stuck at
+// "everything filtered out" forever. Watching (rather than a one-shot
+// mount hook) re-runs this once real data shows up, whenever that is.
+let restoredShopsFromStorage = false
+watch(
+  availableShops,
+  (shops) => {
+    if (restoredShopsFromStorage || shops.length === 0 || !import.meta.client) return
+    restoredShopsFromStorage = true
+
+    let stored = null
+    try {
+      stored = JSON.parse(localStorage.getItem(shopFilterKey))
+    } catch {
+      stored = null
+    }
+    if (Array.isArray(stored)) {
+      const stillValid = stored.filter((s) => shops.includes(s))
+      selectedShops.value = stillValid.length > 0 ? stillValid : [...shops]
+    } else {
+      selectedShops.value = [...shops]
+    }
+  },
+  { immediate: true }
+)
+
+watch(selectedShops, (shops) => {
+  if (shops !== null) localStorage.setItem(shopFilterKey, JSON.stringify(shops))
+})
+
+// eBay descriptions are fetched on demand (see cmd/api's /ebay-description)
+// and cached here per product ID so re-toggling doesn't refetch.
+const descriptionStates = reactive({})
+const descriptionState = (product) =>
+  descriptionStates[product.id] ?? { expanded: false, loading: false, text: '', error: '' }
+
+const toggleDescription = async (product) => {
+  if (!descriptionStates[product.id]) {
+    descriptionStates[product.id] = { expanded: false, loading: false, text: '', error: '' }
+  }
+  // Read back through the reactive proxy (not the plain object literal
+  // above) - mutating the raw object directly wouldn't trigger reactivity.
+  const state = descriptionStates[product.id]
+
+  if (state.expanded) {
+    state.expanded = false
+    return
+  }
+  state.expanded = true
+  if (state.text || state.loading) return
+
+  state.loading = true
+  state.error = ''
+  try {
+    const res = await $fetch(`${apiBase}/ebay-description`, { query: { url: product.url } })
+    state.text = res.description
+  } catch (e) {
+    state.error = e?.data?.message || e?.message || "Couldn't load description."
+  } finally {
+    state.loading = false
+  }
+}
 
 const hiddenCount = computed(() => {
   const products = data.value?.products ?? []
