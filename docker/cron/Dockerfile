@@ -25,7 +25,7 @@ RUN CGO_ENABLED=0 GOOS=linux go -C src/backend build -trimpath -ldflags="-s -w" 
 
 # ---- production ----
 # scratch + only what's needed to run: the static binary, CA certs (the
-# eBay/Telegram adapters make outbound HTTPS calls), tzdata, migrations,
+# eBay/ntfy clients make outbound HTTPS calls), tzdata, migrations,
 # and config. Runs as a non-root numeric UID since scratch has no
 # /etc/passwd to resolve a username against.
 FROM scratch AS production

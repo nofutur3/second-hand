@@ -12,23 +12,23 @@ import (
 	"secondHand/internal/domain"
 )
 
-func TestTelegramNotifier_SendGoodOffer(t *testing.T) {
-	var gotPath string
-	var gotBody map[string]string
+func TestNtfyNotifier_SendGoodOffer(t *testing.T) {
+	var gotPath, gotAuth string
+	var gotBody ntfyMessage
 
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		gotPath = r.URL.Path
+		gotAuth = r.Header.Get("Authorization")
 		raw, _ := io.ReadAll(r.Body)
 		if err := json.Unmarshal(raw, &gotBody); err != nil {
 			t.Errorf("failed to decode request body: %v", err)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(`{"ok":true}`))
 	}))
 	defer server.Close()
 
-	cfg := &config.TelegramConfig{BotToken: "testtoken", ChatID: "12345", APIBase: server.URL}
-	notifier := NewTelegramNotifier(cfg)
+	cfg := &config.NtfyConfig{URL: server.URL + "/", Topic: "snoopy", Token: "tk_test"}
+	notifier := NewNtfyNotifier(cfg)
 
 	product := domain.Product{
 		ShopSource: "ebay.com",
@@ -43,47 +43,53 @@ func TestTelegramNotifier_SendGoodOffer(t *testing.T) {
 		t.Fatalf("unexpected error: %v", err)
 	}
 
-	if gotPath != "/bottesttoken/sendMessage" {
+	if gotPath != "/" && gotPath != "" {
 		t.Errorf("unexpected request path: got %q", gotPath)
 	}
-	if gotBody["chat_id"] != "12345" {
-		t.Errorf("unexpected chat_id: got %q", gotBody["chat_id"])
+	if gotAuth != "Bearer tk_test" {
+		t.Errorf("unexpected Authorization header: got %q", gotAuth)
 	}
-	if !strings.Contains(gotBody["text"], "Joy-Con Pair (Neon)") || !strings.Contains(gotBody["text"], product.URL) {
-		t.Errorf("expected message text to reference product, got %q", gotBody["text"])
+	if gotBody.Topic != "snoopy" {
+		t.Errorf("unexpected topic: got %q", gotBody.Topic)
+	}
+	if !strings.Contains(gotBody.Title, "joy-con pair") {
+		t.Errorf("expected title to reference search, got %q", gotBody.Title)
+	}
+	if !strings.Contains(gotBody.Message, "Joy-Con Pair (Neon)") || gotBody.Click != product.URL {
+		t.Errorf("expected message/click to reference product, got %+v", gotBody)
 	}
 }
 
-func TestTelegramNotifier_NotConfigured(t *testing.T) {
+func TestNtfyNotifier_NotConfigured(t *testing.T) {
 	called := false
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		called = true
 	}))
 	defer server.Close()
 
-	cfg := &config.TelegramConfig{BotToken: "", ChatID: "", APIBase: server.URL}
-	notifier := NewTelegramNotifier(cfg)
+	cfg := &config.NtfyConfig{URL: server.URL, Topic: "snoopy", Token: ""}
+	notifier := NewNtfyNotifier(cfg)
 
 	err := notifier.SendGoodOffer(domain.Product{}, domain.Search{})
 	if err == nil {
-		t.Fatal("expected error for unconfigured Telegram credentials")
+		t.Fatal("expected error for unconfigured ntfy token")
 	}
 	if called {
 		t.Fatal("expected no HTTP request to be made when not configured")
 	}
 }
 
-func TestTelegramNotifier_APIError(t *testing.T) {
+func TestNtfyNotifier_APIError(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusForbidden)
 	}))
 	defer server.Close()
 
-	cfg := &config.TelegramConfig{BotToken: "testtoken", ChatID: "12345", APIBase: server.URL}
-	notifier := NewTelegramNotifier(cfg)
+	cfg := &config.NtfyConfig{URL: server.URL, Topic: "snoopy", Token: "tk_test"}
+	notifier := NewNtfyNotifier(cfg)
 
 	err := notifier.SendGoodOffer(domain.Product{}, domain.Search{})
 	if err == nil {
-		t.Fatal("expected error for non-2xx telegram API response")
+		t.Fatal("expected error for non-2xx ntfy response")
 	}
 }

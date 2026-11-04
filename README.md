@@ -15,7 +15,7 @@ Real website scraping is challenging due to anti-bot protection, changing HTML s
 - 💾 Store products in PostgreSQL database
 - 📊 Track price changes and new/removed products
 - 📧 Multiple output formats: CLI, HTML, and Email
-- 📱 eBay Nintendo-parts watcher with Telegram "good offer" alerts (see below)
+- 📱 eBay Nintendo-parts watcher with ntfy "good offer" alerts (see below)
 - ⚙️ Adapter pattern for easy shop integration
 - 🐳 Docker support for PostgreSQL
 - 🧪 Mock adapters for reliable testing
@@ -149,10 +149,10 @@ EBAY_CLIENT_ID=
 EBAY_CLIENT_SECRET=
 EBAY_API_BASE=https://api.ebay.com
 
-# Telegram bot (good-offer notifications)
-TELEGRAM_BOT_TOKEN=
-TELEGRAM_CHAT_ID=
-TELEGRAM_API_BASE=https://api.telegram.org
+# ntfy (good-offer notifications)
+NTFY_URL=https://ntfy.vyvazil.cz
+NTFY_TOPIC=snoopy
+NTFY_TOKEN=
 ```
 
 ## eBay Nintendo-Parts Watcher
@@ -161,8 +161,8 @@ TELEGRAM_API_BASE=https://api.telegram.org
 diffing: for any saved search against the `ebay.com` adapter that has a
 `max_price` and/or `avg_discount_pct` threshold configured (via
 `cmd/search -max-price=... -avg-discount-pct=...`), new or price-dropped
-listings that meet either threshold trigger a Telegram notification via a
-bot (`TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID` above). This is independent
+listings that meet either threshold trigger an ntfy push notification to
+`NTFY_TOPIC` (`NTFY_URL`/`NTFY_TOKEN` above). This is independent
 of the `-output` flag — it always runs, on top of whatever CLI/HTML/email
 output is also requested.
 
@@ -182,7 +182,7 @@ second-hand/
 │   │   │   ├── config/              # Configuration management
 │   │   │   ├── database/            # Database layer
 │   │   │   ├── domain/              # Domain models and interfaces
-│   │   │   ├── output/              # Output formatters (CLI, HTML, Email, Telegram)
+│   │   │   ├── output/              # Output formatters (CLI, HTML, Email, ntfy)
 │   │   │   └── service/             # Business logic layer
 │   │   ├── migrations/              # Database migrations
 │   │   └── config/                  # config.json / config.test.json

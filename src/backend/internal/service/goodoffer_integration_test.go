@@ -11,16 +11,15 @@ import (
 	"secondHand/internal/service"
 )
 
-// TestGoodOfferTriggersTelegramSend exercises the trigger-to-send path this
+// TestGoodOfferTriggersNtfySend exercises the trigger-to-send path this
 // feature's Definition of Done requires: a mock "good offer" eBay listing
 // evaluates to true, and that true result actually drives an HTTP call to
-// a fake Telegram endpoint - not just the two halves tested in isolation.
-func TestGoodOfferTriggersTelegramSend(t *testing.T) {
+// a fake ntfy endpoint - not just the two halves tested in isolation.
+func TestGoodOfferTriggersNtfySend(t *testing.T) {
 	var requestReceived bool
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		requestReceived = true
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(`{"ok":true}`))
 	}))
 	defer server.Close()
 
@@ -40,10 +39,10 @@ func TestGoodOfferTriggersTelegramSend(t *testing.T) {
 		t.Fatal("expected mock listing to evaluate as a good offer")
 	}
 
-	notifier := output.NewTelegramNotifier(&config.TelegramConfig{
-		BotToken: "testtoken",
-		ChatID:   "12345",
-		APIBase:  server.URL,
+	notifier := output.NewNtfyNotifier(&config.NtfyConfig{
+		URL:   server.URL,
+		Topic: "snoopy",
+		Token: "tk_test",
 	})
 
 	if err := notifier.SendGoodOffer(listing, search); err != nil {
@@ -51,6 +50,6 @@ func TestGoodOfferTriggersTelegramSend(t *testing.T) {
 	}
 
 	if !requestReceived {
-		t.Fatal("expected a Telegram API request to have been made")
+		t.Fatal("expected an ntfy request to have been made")
 	}
 }
