@@ -80,9 +80,9 @@ func (f *fakeRepo) SetGoodOffer(ctx context.Context, searchID, productID int64) 
 }
 func (f *fakeRepo) Close() {}
 
-// countingTelegramServer returns a *output2.TelegramNotifier wired to a
+// countingNtfyServer returns a *output2.NtfyNotifier wired to a
 // test server, plus a function reporting how many requests it received.
-func countingTelegramServer(t *testing.T) (*output2.TelegramNotifier, func() int) {
+func countingNtfyServer(t *testing.T) (*output2.NtfyNotifier, func() int) {
 	t.Helper()
 
 	var mu sync.Mutex
@@ -92,14 +92,13 @@ func countingTelegramServer(t *testing.T) (*output2.TelegramNotifier, func() int
 		count++
 		mu.Unlock()
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(`{"ok":true}`))
 	}))
 	t.Cleanup(server.Close)
 
-	notifier := output2.NewTelegramNotifier(&config.TelegramConfig{
-		BotToken: "testtoken",
-		ChatID:   "12345",
-		APIBase:  server.URL,
+	notifier := output2.NewNtfyNotifier(&config.NtfyConfig{
+		URL:   server.URL,
+		Topic: "snoopy",
+		Token: "tk_test",
 	})
 
 	return notifier, func() int {
@@ -110,7 +109,7 @@ func countingTelegramServer(t *testing.T) (*output2.TelegramNotifier, func() int
 }
 
 func TestNotifyGoodOffers_SendsForMatchingNewEbayListing(t *testing.T) {
-	notifier, requestCount := countingTelegramServer(t)
+	notifier, requestCount := countingNtfyServer(t)
 	maxPrice := 100.0
 	search := domain2.Search{ID: 1, Keyword: "joy-con", MaxPrice: &maxPrice}
 
@@ -124,7 +123,7 @@ func TestNotifyGoodOffers_SendsForMatchingNewEbayListing(t *testing.T) {
 	notifyGoodOffers(context.Background(), repo, notifier, []domain2.Search{search}, diffs)
 
 	if got := requestCount(); got != 1 {
-		t.Fatalf("Telegram requests = %d, want 1", got)
+		t.Fatalf("ntfy requests = %d, want 1", got)
 	}
 	if want := []goodOfferCall{{searchID: 1, productID: 42}}; !reflect.DeepEqual(repo.goodOfferCalls, want) {
 		t.Fatalf("SetGoodOffer calls = %v, want %v", repo.goodOfferCalls, want)
@@ -132,7 +131,7 @@ func TestNotifyGoodOffers_SendsForMatchingNewEbayListing(t *testing.T) {
 }
 
 func TestNotifyGoodOffers_SkipsSearchWithoutThresholds(t *testing.T) {
-	notifier, requestCount := countingTelegramServer(t)
+	notifier, requestCount := countingNtfyServer(t)
 	search := domain2.Search{ID: 1, Keyword: "joy-con"}
 
 	diffs := map[string][]domain2.ProductDiff{
@@ -145,7 +144,7 @@ func TestNotifyGoodOffers_SkipsSearchWithoutThresholds(t *testing.T) {
 	notifyGoodOffers(context.Background(), repo, notifier, []domain2.Search{search}, diffs)
 
 	if got := requestCount(); got != 0 {
-		t.Fatalf("Telegram requests = %d, want 0 (no thresholds configured)", got)
+		t.Fatalf("ntfy requests = %d, want 0 (no thresholds configured)", got)
 	}
 	if len(repo.goodOfferCalls) != 0 {
 		t.Fatalf("SetGoodOffer calls = %v, want none", repo.goodOfferCalls)
@@ -153,7 +152,7 @@ func TestNotifyGoodOffers_SkipsSearchWithoutThresholds(t *testing.T) {
 }
 
 func TestNotifyGoodOffers_SkipsNonEbayShop(t *testing.T) {
-	notifier, requestCount := countingTelegramServer(t)
+	notifier, requestCount := countingNtfyServer(t)
 	maxPrice := 100.0
 	search := domain2.Search{ID: 1, Keyword: "joy-con", MaxPrice: &maxPrice}
 
@@ -167,7 +166,7 @@ func TestNotifyGoodOffers_SkipsNonEbayShop(t *testing.T) {
 	notifyGoodOffers(context.Background(), repo, notifier, []domain2.Search{search}, diffs)
 
 	if got := requestCount(); got != 0 {
-		t.Fatalf("Telegram requests = %d, want 0 (non-ebay shop)", got)
+		t.Fatalf("ntfy requests = %d, want 0 (non-ebay shop)", got)
 	}
 	if len(repo.goodOfferCalls) != 0 {
 		t.Fatalf("SetGoodOffer calls = %v, want none", repo.goodOfferCalls)
@@ -175,7 +174,7 @@ func TestNotifyGoodOffers_SkipsNonEbayShop(t *testing.T) {
 }
 
 func TestNotifyGoodOffers_SkipsUnqualifyingDiffTypes(t *testing.T) {
-	notifier, requestCount := countingTelegramServer(t)
+	notifier, requestCount := countingNtfyServer(t)
 	maxPrice := 100.0
 	search := domain2.Search{ID: 1, Keyword: "joy-con", MaxPrice: &maxPrice}
 
@@ -190,7 +189,7 @@ func TestNotifyGoodOffers_SkipsUnqualifyingDiffTypes(t *testing.T) {
 	notifyGoodOffers(context.Background(), repo, notifier, []domain2.Search{search}, diffs)
 
 	if got := requestCount(); got != 0 {
-		t.Fatalf("Telegram requests = %d, want 0 (neither Removed nor PriceUp qualify)", got)
+		t.Fatalf("ntfy requests = %d, want 0 (neither Removed nor PriceUp qualify)", got)
 	}
 	if len(repo.goodOfferCalls) != 0 {
 		t.Fatalf("SetGoodOffer calls = %v, want none", repo.goodOfferCalls)
@@ -198,7 +197,7 @@ func TestNotifyGoodOffers_SkipsUnqualifyingDiffTypes(t *testing.T) {
 }
 
 func TestNotifyGoodOffers_PriceDownQualifies(t *testing.T) {
-	notifier, requestCount := countingTelegramServer(t)
+	notifier, requestCount := countingNtfyServer(t)
 	maxPrice := 100.0
 	search := domain2.Search{ID: 1, Keyword: "joy-con", MaxPrice: &maxPrice}
 
@@ -212,7 +211,7 @@ func TestNotifyGoodOffers_PriceDownQualifies(t *testing.T) {
 	notifyGoodOffers(context.Background(), repo, notifier, []domain2.Search{search}, diffs)
 
 	if got := requestCount(); got != 1 {
-		t.Fatalf("Telegram requests = %d, want 1", got)
+		t.Fatalf("ntfy requests = %d, want 1", got)
 	}
 	if want := []goodOfferCall{{searchID: 1, productID: 7}}; !reflect.DeepEqual(repo.goodOfferCalls, want) {
 		t.Fatalf("SetGoodOffer calls = %v, want %v", repo.goodOfferCalls, want)
@@ -220,7 +219,7 @@ func TestNotifyGoodOffers_PriceDownQualifies(t *testing.T) {
 }
 
 func TestNotifyGoodOffers_DoesNotMatchAboveCeiling(t *testing.T) {
-	notifier, requestCount := countingTelegramServer(t)
+	notifier, requestCount := countingNtfyServer(t)
 	maxPrice := 10.0
 	search := domain2.Search{ID: 1, Keyword: "joy-con", MaxPrice: &maxPrice}
 
@@ -234,7 +233,7 @@ func TestNotifyGoodOffers_DoesNotMatchAboveCeiling(t *testing.T) {
 	notifyGoodOffers(context.Background(), repo, notifier, []domain2.Search{search}, diffs)
 
 	if got := requestCount(); got != 0 {
-		t.Fatalf("Telegram requests = %d, want 0 (price above ceiling)", got)
+		t.Fatalf("ntfy requests = %d, want 0 (price above ceiling)", got)
 	}
 	if len(repo.goodOfferCalls) != 0 {
 		t.Fatalf("SetGoodOffer calls = %v, want none", repo.goodOfferCalls)
@@ -242,7 +241,7 @@ func TestNotifyGoodOffers_DoesNotMatchAboveCeiling(t *testing.T) {
 }
 
 func TestNotifyGoodOffers_UnknownKeywordIsSkipped(t *testing.T) {
-	notifier, requestCount := countingTelegramServer(t)
+	notifier, requestCount := countingNtfyServer(t)
 
 	diffs := map[string][]domain2.ProductDiff{
 		"no-such-search": {
@@ -253,6 +252,6 @@ func TestNotifyGoodOffers_UnknownKeywordIsSkipped(t *testing.T) {
 	notifyGoodOffers(context.Background(), &fakeRepo{}, notifier, nil, diffs)
 
 	if got := requestCount(); got != 0 {
-		t.Fatalf("Telegram requests = %d, want 0 (keyword not in searches)", got)
+		t.Fatalf("ntfy requests = %d, want 0 (keyword not in searches)", got)
 	}
 }

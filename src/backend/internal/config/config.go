@@ -13,7 +13,7 @@ type Config struct {
 	SMTP        SMTPConfig     `json:"-"`
 	Scraping    ScrapingConfig `json:"-"`
 	Ebay        EbayConfig     `json:"-"`
-	Telegram    TelegramConfig `json:"-"`
+	Ntfy        NtfyConfig     `json:"-"`
 	AppPassword string         `json:"-"`
 }
 
@@ -64,11 +64,11 @@ type EbayConfig struct {
 	ShipToPostalCode string
 }
 
-// TelegramConfig represents Telegram bot configuration
-type TelegramConfig struct {
-	BotToken string
-	ChatID   string
-	APIBase  string
+// NtfyConfig represents ntfy push-notification configuration
+type NtfyConfig struct {
+	URL   string
+	Topic string
+	Token string
 }
 
 // Load loads configuration from file and environment variables
@@ -118,10 +118,10 @@ func Load(configPath string) (*Config, error) {
 		ShipToPostalCode: getEnv("EBAY_SHIP_TO_POSTAL_CODE", "58601"),
 	}
 
-	config.Telegram = TelegramConfig{
-		BotToken: getEnv("TELEGRAM_BOT_TOKEN", ""),
-		ChatID:   getEnv("TELEGRAM_CHAT_ID", ""),
-		APIBase:  getEnv("TELEGRAM_API_BASE", "https://api.telegram.org"),
+	config.Ntfy = NtfyConfig{
+		URL:   getEnv("NTFY_URL", "https://ntfy.vyvazil.cz"),
+		Topic: getEnv("NTFY_TOPIC", "snoopy"),
+		Token: getEnv("NTFY_TOKEN", ""),
 	}
 
 	config.AppPassword = getEnv("APP_PASSWORD", "")

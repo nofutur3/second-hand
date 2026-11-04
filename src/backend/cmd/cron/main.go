@@ -173,19 +173,19 @@ func main() {
 		log.Fatalf("Unknown output format: %s", *outputFormat)
 	}
 
-	// Good-offer Telegram notifications: independent of -output above, this
+	// Good-offer ntfy notifications: independent of -output above, this
 	// runs for every eBay new/price-down diff whose search has a good-offer
 	// threshold configured (see D1/D3 in .agents/plan.md).
-	notifyGoodOffers(ctx, repo, output2.NewTelegramNotifier(&cfg.Telegram), searches, allDiffs)
+	notifyGoodOffers(ctx, repo, output2.NewNtfyNotifier(&cfg.Ntfy), searches, allDiffs)
 }
 
 // notifyGoodOffers evaluates each eBay new/price-down diff against its
-// search's good-offer thresholds and sends a Telegram notification for any
+// search's good-offer thresholds and sends an ntfy notification for any
 // match.
 func notifyGoodOffers(
 	ctx context.Context,
 	repo database2.Repository,
-	notifier *output2.TelegramNotifier,
+	notifier *output2.NtfyNotifier,
 	searches []domain2.Search,
 	allDiffs map[string][]domain2.ProductDiff,
 ) {
@@ -234,9 +234,9 @@ func notifyGoodOffers(
 			}
 
 			if err := notifier.SendGoodOffer(diff.Product, search); err != nil {
-				log.Printf("Good offer for '%s' (%s): Telegram send failed: %v\n", keyword, diff.Product.URL, err)
+				log.Printf("Good offer for '%s' (%s): ntfy send failed: %v\n", keyword, diff.Product.URL, err)
 			} else {
-				fmt.Printf("Good offer! Telegram notification sent for '%s': %s (%.2f %s)\n", keyword, diff.Product.Title, diff.Product.Price, diff.Product.Currency)
+				fmt.Printf("Good offer! ntfy notification sent for '%s': %s (%.2f %s)\n", keyword, diff.Product.Title, diff.Product.Price, diff.Product.Currency)
 			}
 		}
 	}
