@@ -22,6 +22,6 @@ WORKDIR /app
 
 COPY src/backend/go.mod src/backend/go.sum src/backend/
 RUN go -C src/backend mod download
-RUN go install golang.org/x/tools/cmd/goimports@latest
+RUN go install golang.org/x/tools/cmd/goimports@v0.49.0  # v0.50+ requires go 1.26
 
 CMD ["sleep", "infinity"]
