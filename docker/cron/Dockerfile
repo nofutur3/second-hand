@@ -2,7 +2,7 @@
 
 # Shared base: module cache, common system deps. Both the dev and build
 # stages branch from here so `go mod download` is only ever done once.
-FROM golang:1.25-alpine AS base
+FROM golang:1.26.11-alpine AS base
 WORKDIR /app
 RUN apk add --no-cache git ca-certificates tzdata
 COPY src/backend/go.mod src/backend/go.sum src/backend/
