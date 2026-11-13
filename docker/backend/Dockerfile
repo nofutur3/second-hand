@@ -6,7 +6,7 @@
 # bind-mounted over /app at runtime (see compose.yaml's backend-dev
 # service), so the COPY below only exists to warm the module cache
 # into an image layer.
-FROM golang:1.25-alpine
+FROM golang:1.26.11-alpine
 
 # build-base (gcc/musl-dev) is required for cgo, which `go test -race`
 # needs - the production api/cron images disable cgo and don't need it.

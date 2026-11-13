@@ -26,7 +26,7 @@ RUN npm run build
 # dependencies into .output, so the runtime image needs nothing but
 # Node itself and that directory - no node_modules, no package manager,
 # no shell.
-FROM gcr.io/distroless/nodejs22-debian12 AS production
+FROM gcr.io/distroless/nodejs22-debian13 AS production
 WORKDIR /app
 COPY --from=build /app/.output ./.output
 ENV HOST=0.0.0.0
